@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <!--
+    Skunkworks Academy Mandatory Page Head
+    Required for every public HTML page created or modified in this repository.
+    Keep this marker intact: data-skunkworks-head="mandatory-v1"
+  -->
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Skunkworks Academy Labs | On-Demand Virtual Labs & Technical Training</title>
+  <meta name="description" content="Skunkworks Academy Labs provides on-demand virtual labs, instructor-led practical exercises, cloud sandboxes, and technical skills development environments.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#0B1020">
+  <meta name="color-scheme" content="dark light">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/">
+
+  <link rel="icon" href="/assets/favicon.ico" sizes="any">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Skunkworks Academy Labs | On-Demand Virtual Labs">
+  <meta property="og:description" content="Launch browser-based labs, guided technical exercises, and practical skills environments for cloud, cybersecurity, DevOps, infrastructure, and software training.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/">
+  <meta property="og:image" content="https://labs.skunkworksacademy.com/assets/og-labs.jpg">
+  <meta property="og:image:alt" content="Skunkworks Academy Labs on-demand virtual lab platform">
+  <meta property="og:locale" content="en_ZA">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Skunkworks Academy Labs | On-Demand Virtual Labs">
+  <meta name="twitter:description" content="On-demand virtual labs and technical training environments from Skunkworks Academy.">
+  <meta name="twitter:image" content="https://labs.skunkworksacademy.com/assets/og-labs.jpg">
+
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Skunkworks Academy",
+    "url": "https://skunkworksacademy.com/",
+    "sameAs": ["https://www.skunkworks.africa/"],
+    "department": {
+      "@type": "EducationalOrganization",
+      "name": "Skunkworks Academy Labs",
+      "url": "https://labs.skunkworksacademy.com/",
+      "description": "On-demand virtual labs, cloud sandboxes, technical training environments, and practical exercises."
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --muted: #b7c0d8;
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --border: rgba(255, 255, 255, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(124, 58, 237, 0.34), transparent 34rem),
+                  radial-gradient(circle at top right, rgba(6, 182, 212, 0.28), transparent 32rem),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero {
+      padding: 84px 0 64px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      color: #a5f3fc;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.78rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.92;
+      margin: 18px 0;
+      letter-spacing: -0.08em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      max-width: 720px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 750;
+      border: 1px solid var(--border);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      border: 0;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .metric {
+      display: grid;
+      gap: 4px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metric:last-child { border-bottom: 0; }
+    .metric strong { font-size: 2rem; }
+    .metric span { color: var(--muted); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 40px 0 84px;
+    }
+
+    .feature h2 {
+      margin-top: 0;
+      font-size: 1.15rem;
+    }
+
+    .feature p { color: var(--muted); margin-bottom: 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      padding: 24px 0 36px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 820px) {
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; padding-top: 48px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell">
+    <div class="brand">Skunkworks Academy Labs</div>
+    <nav aria-label="Primary navigation">
+      <a href="#platform">Platform</a>
+      <a href="#labs">Labs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero shell" id="platform">
+      <div>
+        <p class="eyebrow">Labs on demand</p>
+        <h1>Launch practical technical labs from anywhere.</h1>
+        <p class="lead">A Skunkworks Academy platform for browser-based lab access, guided exercises, cloud sandboxes, instructor-led delivery, and skills validation across modern IT domains.</p>
+        <div class="actions">
+          <a class="button primary" href="mailto:training@skunkworks.africa?subject=Skunkworks%20Academy%20Labs%20Access">Request lab access</a>
+          <a class="button" href="https://skunkworksacademy.com/">Visit Academy</a>
+        </div>
+      </div>
+      <aside class="card" aria-label="Platform highlights">
+        <div class="metric"><strong>24/7</strong><span>On-demand lab availability roadmap</span></div>
+        <div class="metric"><strong>Cloud</strong><span>Sandbox-ready training environments</span></div>
+        <div class="metric"><strong>Secure</strong><span>Governed access for learners and instructors</span></div>
+      </aside>
+    </section>
+
+    <section class="grid shell" id="labs" aria-label="Lab platform capabilities">
+      <article class="card feature">
+        <h2>Virtual lab hosting</h2>
+        <p>Provision course-aligned environments for cloud, cybersecurity, DevOps, infrastructure, networking, software development, and AI training.</p>
+      </article>
+      <article class="card feature">
+        <h2>Instructor-led delivery</h2>
+        <p>Support structured classroom delivery with repeatable lab guides, controlled access windows, and practical assessment checkpoints.</p>
+      </article>
+      <article class="card feature">
+        <h2>Skills validation</h2>
+        <p>Prepare learners for real-world tasks with lab evidence, practical exercises, challenge scenarios, and certification-aligned outcomes.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="shell" id="contact">
+    © Skunkworks Academy. Dream. Design. Deliver. Contact: training@skunkworks.africa
+  </footer>
+</body>
+</html>

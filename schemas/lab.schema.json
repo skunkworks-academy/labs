@@ -1,0 +1,18 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Skunkworks Academy Lab",
+  "type": "object",
+  "required": ["id", "title", "track", "level", "durationMinutes", "deliveryMode", "environment", "status"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "track": { "type": "string" },
+    "level": { "type": "string", "enum": ["Beginner", "Intermediate", "Advanced"] },
+    "durationMinutes": { "type": "integer", "minimum": 15 },
+    "deliveryMode": { "type": "string", "enum": ["guided", "sandbox", "instructor-led", "assessment"] },
+    "environment": { "type": "string" },
+    "status": { "type": "string", "enum": ["draft", "pilot", "live", "retired"] },
+    "guideRepository": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}

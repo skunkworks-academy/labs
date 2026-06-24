@@ -5,34 +5,6 @@
     "track": "VoIP",
     "level": "Beginner",
     "durationMinutes": 90,
-    "deliveryMode": "guided",
-    "environment": "Linux VM",
-    "status": "draft",
-    "guideRepository": "skunkworks-academy/labs-guides",
-    "tags": ["asterisk", "voip", "pbx", "sip"]
-  },
-  {
-    "id": "LNX-101",
-    "title": "Linux Command Line Fundamentals Lab",
-    "track": "Linux",
-    "level": "Beginner",
-    "durationMinutes": 60,
-    "deliveryMode": "sandbox",
-    "environment": "Linux VM",
-    "status": "draft",
-    "guideRepository": "skunkworks-academy/labs-guides",
-    "tags": ["linux", "shell", "terminal"]
-  },
-  {
-    "id": "CLD-101",
-    "title": "Cloud Sandbox Orientation",
-    "track": "Cloud",
-    "level": "Beginner",
-    "durationMinutes": 60,
-    "deliveryMode": "sandbox",
-    "environment": "Cloud subscription",
-    "status": "draft",
-    "guideRepository": "skunkworks-academy/labs-guides",
-    "tags": ["cloud", "azure", "ibm-cloud", "governance"]
+    "status": "draft"
   }
 ]

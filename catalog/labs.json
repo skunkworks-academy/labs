@@ -2,9 +2,57 @@
   {
     "id": "AST-101",
     "title": "Asterisk PBX Foundations Lab",
-    "track": "VoIP",
+    "track": "VoIP & PBX",
     "level": "Beginner",
     "durationMinutes": 90,
-    "status": "draft"
+    "status": "available",
+    "summary": "Build foundational Asterisk PBX skills through guided setup, extension configuration and basic call-flow validation.",
+    "accessMode": "Guided lab",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://github.com/skunkworks-academy/labs-guides/tree/main/tracks/asterisk/AST-101",
+    "badge": "Asterisk PBX Foundations",
+    "tags": ["Asterisk", "VoIP", "PBX", "Linux"]
+  },
+  {
+    "id": "LNX-101",
+    "title": "Linux Command Line Fundamentals Lab",
+    "track": "Linux",
+    "level": "Beginner",
+    "durationMinutes": 60,
+    "status": "draft",
+    "summary": "Practice essential Linux shell commands, file navigation, permissions and process inspection in a controlled lab environment.",
+    "accessMode": "Browser SSH",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://github.com/skunkworks-academy/labs-guides/tree/main/tracks/linux/LNX-101",
+    "badge": "Linux Command Line Fundamentals",
+    "tags": ["Linux", "CLI", "Shell", "Administration"]
+  },
+  {
+    "id": "CLD-101",
+    "title": "Cloud Sandbox Orientation",
+    "track": "Cloud",
+    "level": "Beginner",
+    "durationMinutes": 60,
+    "status": "draft",
+    "summary": "Learn how to access, use and safely clean up Skunkworks Academy cloud sandbox environments.",
+    "accessMode": "Cloud sandbox",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://github.com/skunkworks-academy/labs-guides/tree/main/tracks/cloud/CLD-101",
+    "badge": "Cloud Sandbox Orientation",
+    "tags": ["Cloud", "Sandbox", "Labs", "DevOps"]
+  },
+  {
+    "id": "SEC-101",
+    "title": "Secure Lab Access Orientation",
+    "track": "Cybersecurity",
+    "level": "Beginner",
+    "durationMinutes": 45,
+    "status": "planned",
+    "summary": "Understand lab access rules, credential handling, MFA, session timing, evidence capture and acceptable-use controls.",
+    "accessMode": "Orientation",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://github.com/skunkworks-academy/labs-guides",
+    "badge": "Secure Lab Access Orientation",
+    "tags": ["Security", "MFA", "Governance", "Evidence"]
   }
 ]

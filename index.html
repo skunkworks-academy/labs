@@ -1,597 +1,219 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en-ZA">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Skunkworks Academy Labs | On-Demand Virtual Labs</title>
-  <meta name="description" content="Skunkworks Academy Labs provides on-demand virtual labs, cloud sandboxes, guided exercises and practical learning environments for technical skills development." />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Skunkworks Academy Labs | Secure Hands-On Lab Environments</title>
+  <meta name="description" content="Skunkworks Academy Labs provides secure on-demand virtual labs, cloud sandboxes, guided exercises, evidence capture, and practical technical learning environments." />
   <meta name="author" content="Skunkworks Academy" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://labs.skunkworksacademy.com/" />
-  <style>
-    :root {
-      --bg: #050505;
-      --surface: #101010;
-      --surface-2: #171717;
-      --text: #f5f5f5;
-      --muted: #a3a3a3;
-      --line: #2a2a2a;
-      --accent: #7c3aed;
-      --accent-2: #06b6d4;
-      --good: #22c55e;
-      --warn: #f59e0b;
-      --planned: #64748b;
-      --radius: 24px;
-      --shadow: 0 24px 80px rgba(0,0,0,.35);
+  <meta name="publisher" content="Skunkworks Academy" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#0B1020" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="canonical" href="https://lab.skunkworksacademy.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Skunkworks Academy Labs" />
+  <meta property="og:title" content="Skunkworks Academy Labs | Secure Hands-On Lab Environments" />
+  <meta property="og:description" content="Launch guided technical labs, cloud sandboxes, and practical learning environments for Academy learners, instructors, and partner cohorts." />
+  <meta property="og:url" content="https://lab.skunkworksacademy.com/" />
+  <meta property="og:image" content="https://lab.skunkworksacademy.com/assets/og-labs.jpg" />
+  <meta property="og:image:alt" content="Skunkworks Academy Labs secure virtual lab platform" />
+  <meta property="og:locale" content="en_ZA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Skunkworks Academy Labs | Secure Hands-On Lab Environments" />
+  <meta name="twitter:description" content="Secure on-demand virtual labs and technical training environments from Skunkworks Academy." />
+  <meta name="twitter:image" content="https://lab.skunkworksacademy.com/assets/og-labs.jpg" />
+
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+
+  <link rel="preconnect" href="https://skunkworksacademy.com" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="dns-prefetch" href="//github.com" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=2026.06.25" />
+  <script src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.06.25" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Skunkworks Academy",
+    "url": "https://skunkworksacademy.com/",
+    "sameAs": [
+      "https://www.skunkworks.africa/",
+      "https://github.com/skunkworks-academy"
+    ],
+    "department": {
+      "@type": "EducationalOrganization",
+      "name": "Skunkworks Academy Labs",
+      "url": "https://lab.skunkworksacademy.com/",
+      "description": "Secure on-demand virtual labs, cloud sandboxes, guided exercises, evidence capture, and technical training environments."
     }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f8fafc;
-        --surface: #ffffff;
-        --surface-2: #f1f5f9;
-        --text: #050505;
-        --muted: #475569;
-        --line: #dbe3ef;
-        --shadow: 0 24px 70px rgba(15,23,42,.12);
-      }
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(124,58,237,.22), transparent 34rem),
-        radial-gradient(circle at top right, rgba(6,182,212,.18), transparent 32rem),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a { color: inherit; }
-
-    .shell {
-      width: min(1180px, calc(100% - 32px));
-      margin-inline: auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 1px solid var(--line);
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(18px);
-    }
-
-    .nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand {
-      font-weight: 900;
-      letter-spacing: -.04em;
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a,
-    .btn {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 10px 14px;
-      color: var(--muted);
-      text-decoration: none;
-      font-weight: 800;
-      font-size: .94rem;
-    }
-
-    .nav-links a:hover,
-    .btn:hover {
-      color: var(--text);
-      border-color: color-mix(in srgb, var(--text) 34%, var(--line));
-    }
-
-    .btn-primary {
-      border: 0;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    }
-
-    .hero {
-      padding: 88px 0 44px;
-      display: grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      color: #a5f3fc;
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    h1 {
-      font-size: clamp(44px, 8vw, 92px);
-      line-height: .9;
-      letter-spacing: -.075em;
-      margin: 14px 0 18px;
-    }
-
-    .lead {
-      color: var(--muted);
-      max-width: 760px;
-      font-size: clamp(18px, 2vw, 23px);
-      line-height: 1.45;
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 28px;
-    }
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.035));
-      box-shadow: var(--shadow);
-      padding: 24px;
-    }
-
-    .metric {
-      padding: 16px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .metric:last-child { border-bottom: 0; }
-
-    .metric strong {
-      display: block;
-      font-size: 34px;
-      line-height: 1;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .section {
-      padding: 34px 0 82px;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(30px, 4vw, 52px);
-      line-height: 1;
-      letter-spacing: -.05em;
-      margin: 0;
-    }
-
-    .section-head p {
-      color: var(--muted);
-      margin: 0;
-      max-width: 620px;
-    }
-
-    .toolbar {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin: 20px 0 24px;
-    }
-
-    .toolbar input,
-    .toolbar select {
-      min-height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--surface);
-      color: var(--text);
-      padding: 0 14px;
-      font: inherit;
-      font-weight: 700;
-    }
-
-    .toolbar input {
-      flex: 1 1 280px;
-    }
-
-    .lab-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .lab-card {
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: var(--surface);
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      min-height: 330px;
-      box-shadow: 0 16px 45px rgba(0,0,0,.13);
-    }
-
-    .lab-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .lab-id {
-      color: var(--muted);
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 12px;
-    }
-
-    .status {
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-weight: 900;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: #fff;
-      background: var(--planned);
-      white-space: nowrap;
-    }
-
-    .status.available { background: var(--good); color: #052e16; }
-    .status.draft { background: var(--warn); color: #422006; }
-    .status.planned { background: var(--planned); }
-
-    .lab-card h3 {
-      font-size: 22px;
-      line-height: 1.15;
-      letter-spacing: -.035em;
-      margin: 0 0 10px;
-    }
-
-    .lab-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .facts {
-      display: grid;
-      gap: 8px;
-      margin: 18px 0;
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .facts span {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 8px;
-    }
-
-    .tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: auto;
-      padding-top: 16px;
-    }
-
-    .tag {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 5px 8px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      background: var(--surface-2);
-    }
-
-    .card-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .card-actions a {
-      text-decoration: none;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      padding: 9px 12px;
-      font-weight: 900;
-      color: var(--text);
-      font-size: 14px;
-    }
-
-    .empty,
-    .error {
-      border: 1px dashed var(--line);
-      border-radius: 20px;
-      padding: 22px;
-      color: var(--muted);
-      background: var(--surface);
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0;
-      color: var(--muted);
-    }
-
-    @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; padding-top: 54px; }
-      .lab-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 680px) {
-      .nav { align-items: flex-start; flex-direction: column; padding: 16px 0; }
-      .lab-grid { grid-template-columns: 1fr; }
-      .section-head { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
+  }
+  </script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="shell nav">
-      <a class="brand" href="https://skunkworksacademy.com/">Skunkworks Academy Labs</a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="https://skunkworksacademy.com/">Home</a>
-        <a href="https://portal.skunkworksacademy.com/">Portal</a>
-        <a href="#labs">Catalogue</a>
-        <a href="https://jobs.skunkworksacademy.com/">Jobs</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="shell hero">
+  <main id="main-content">
+    <section class="labs-shell labs-hero" aria-labelledby="hero-title">
       <div>
-        <div class="eyebrow">On-demand technical labs</div>
-        <h1>Launch practical labs, not just theory.</h1>
-        <p class="lead">
-          Guided virtual labs, cloud sandboxes and hands-on technical environments for Skunkworks Academy learners, instructors and partner cohorts.
+        <div class="labs-eyebrow">Secure technical labs</div>
+        <h1 id="hero-title">Launch practical labs, not just theory.</h1>
+        <p class="labs-lead">
+          Browser-ready lab environments, guided technical exercises, and evidence-driven learning workflows for Skunkworks Academy learners, instructors, and partner cohorts.
         </p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#labs">Browse labs</a>
-          <a class="btn" href="https://portal.skunkworksacademy.com/">Open learner portal</a>
-          <a class="btn" href="https://github.com/skunkworks-academy/labs-guides">View lab guides</a>
+        <div class="labs-actions" aria-label="Primary lab actions">
+          <a class="labs-button labs-button-primary" href="#labs">Browse labs</a>
+          <a class="labs-button" href="https://portal.skunkworksacademy.com/">Open learner portal</a>
+          <a class="labs-button" href="https://github.com/skunkworks-academy/labs-guides" target="_blank" rel="noopener">View lab guides</a>
+        </div>
+        <div class="labs-pill-row" aria-label="Platform controls">
+          <span class="labs-pill">MFA-aware access</span>
+          <span class="labs-pill">Guided exercises</span>
+          <span class="labs-pill">Evidence capture</span>
+          <span class="labs-pill">Partner-ready delivery</span>
         </div>
       </div>
 
-      <aside class="panel" aria-label="Labs summary">
-        <div class="metric">
+      <aside class="labs-panel" aria-label="Labs summary">
+        <div class="labs-panel-header">
+          <h2>Lab catalogue status</h2>
+          <span class="labs-live-dot">Live</span>
+        </div>
+        <div class="labs-metric">
           <strong id="metricTotal">0</strong>
           <span>Total lab records</span>
         </div>
-        <div class="metric">
+        <div class="labs-metric">
           <strong id="metricAvailable">0</strong>
           <span>Available now</span>
         </div>
-        <div class="metric">
+        <div class="labs-metric">
           <strong id="metricTracks">0</strong>
           <span>Learning tracks</span>
         </div>
+        <div class="labs-metric">
+          <strong id="metricMinutes">0</strong>
+          <span>Guided lab minutes</span>
+        </div>
+        <p class="labs-panel-note">Catalogue data is loaded from <code>catalog/labs.json</code> so new labs can be added without redesigning the landing page.</p>
       </aside>
     </section>
 
-    <section class="shell section" id="labs">
-      <div class="section-head">
+    <section class="labs-shell labs-section" aria-labelledby="capabilities-title">
+      <div class="labs-section-head">
         <div>
-          <div class="eyebrow">Catalogue</div>
-          <h2>Available labs</h2>
+          <div class="labs-eyebrow">Platform model</div>
+          <h2 id="capabilities-title" class="labs-section-title">Built for delivery, governance, and scale.</h2>
         </div>
         <p>
-          This catalogue is loaded from <code>catalog/labs.json</code>. Update the JSON file to add, retire or promote labs.
+          The Labs site now follows the Academy global navigation and theme standard while keeping the catalogue portable for GitHub Pages, LMS, and portal workflows.
+        </p>
+      </div>
+      <div class="labs-info-grid">
+        <article class="labs-info-card">
+          <b>01</b>
+          <h3>Secure access</h3>
+          <p>Orient learners through portal access, MFA, session controls, credential handling, and acceptable-use expectations before they enter a lab.</p>
+        </article>
+        <article class="labs-info-card">
+          <b>02</b>
+          <h3>Guided execution</h3>
+          <p>Each lab card maps to a guide, track, level, duration, and badge outcome so instructors can brief delegates consistently.</p>
+        </article>
+        <article class="labs-info-card">
+          <b>03</b>
+          <h3>Evidence-first learning</h3>
+          <p>Labs are structured for screenshots, outputs, command evidence, and assessment artifacts that support practical skills validation.</p>
+        </article>
+        <article class="labs-info-card">
+          <b>04</b>
+          <h3>Partner enablement</h3>
+          <p>Catalogue-driven delivery supports IBM, Microsoft, Cisco, EC-Council, open-source, and custom Skunkworks Academy cohorts.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="labs-shell labs-section" id="labs" aria-labelledby="labs-title">
+      <div class="labs-section-head">
+        <div>
+          <div class="labs-eyebrow">Catalogue</div>
+          <h2 id="labs-title" class="labs-section-title">Available labs</h2>
+        </div>
+        <p>
+          Search by title, track, tag, provider, badge, or lab ID. Update <code>catalog/labs.json</code> to add, retire, or promote labs.
         </p>
       </div>
 
-      <div class="toolbar" aria-label="Catalogue filters">
-        <input id="searchInput" type="search" placeholder="Search by title, track, tag or lab ID..." />
-        <select id="trackFilter">
+      <div class="labs-toolbar" aria-label="Catalogue filters">
+        <input id="searchInput" type="search" placeholder="Search by title, track, tag, badge or lab ID..." autocomplete="off" />
+        <select id="trackFilter" aria-label="Filter by track">
           <option value="">All tracks</option>
         </select>
-        <select id="statusFilter">
+        <select id="statusFilter" aria-label="Filter by status">
           <option value="">All statuses</option>
           <option value="available">Available</option>
           <option value="draft">Draft</option>
           <option value="planned">Planned</option>
         </select>
+        <button class="labs-reset" id="resetFilters" type="button">Reset filters</button>
       </div>
 
-      <div id="labGrid" class="lab-grid" aria-live="polite"></div>
+      <p class="labs-result-note" id="resultNote" aria-live="polite">Loading catalogue...</p>
+      <div id="labGrid" class="labs-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="labs-shell labs-section" aria-labelledby="journey-title">
+      <div class="labs-section-head">
+        <div>
+          <div class="labs-eyebrow">Learner journey</div>
+          <h2 id="journey-title" class="labs-section-title">From access request to assessed evidence.</h2>
+        </div>
+      </div>
+      <div class="labs-flow-grid">
+        <article class="labs-flow">
+          <span class="labs-step">1</span>
+          <h3>Request access</h3>
+          <p>Learners enter through the Academy portal or an instructor-managed cohort workflow.</p>
+        </article>
+        <article class="labs-flow">
+          <span class="labs-step">2</span>
+          <h3>Launch environment</h3>
+          <p>The lab record points to the correct guide, access mode, duration, and supporting repository.</p>
+        </article>
+        <article class="labs-flow">
+          <span class="labs-step">3</span>
+          <h3>Complete tasks</h3>
+          <p>Delegates execute guided scenarios, capture command output, and validate expected results.</p>
+        </article>
+        <article class="labs-flow">
+          <span class="labs-step">4</span>
+          <h3>Submit evidence</h3>
+          <p>Evidence can feed instructor review, badging, learner records, and practical assessment reporting.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="labs-shell labs-section">
+      <div class="labs-callout">
+        <div>
+          <h2>Need a custom lab track?</h2>
+          <p>Build a practical path for Asterisk, Linux, cloud, cybersecurity, IBM middleware, DataPower, API Connect, Microsoft, or partner-specific delivery.</p>
+        </div>
+        <a class="labs-button labs-button-primary" href="mailto:training@skunkworks.africa?subject=Skunkworks%20Academy%20custom%20lab%20track">Request lab design</a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <div class="shell">
-      © <span id="year"></span> Skunkworks Academy. Dream. Design. Deliver.
+  <footer class="labs-footer">
+    <div class="labs-shell">
+      <span>© <span id="year"></span> Skunkworks Academy. Dream. Design. Deliver.</span>
+      <span>Secure labs • Guided evidence • Partner-ready enablement</span>
     </div>
   </footer>
 
-  <script>
-    const state = {
-      labs: [],
-      query: "",
-      track: "",
-      status: ""
-    };
-
-    const labGrid = document.querySelector("#labGrid");
-    const searchInput = document.querySelector("#searchInput");
-    const trackFilter = document.querySelector("#trackFilter");
-    const statusFilter = document.querySelector("#statusFilter");
-
-    document.querySelector("#year").textContent = new Date().getFullYear();
-
-    function normalise(value) {
-      return String(value || "").trim().toLowerCase();
-    }
-
-    function escapeHtml(value) {
-      return String(value || "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function getStatusClass(status) {
-      return normalise(status).replace(/[^a-z0-9-]/g, "") || "planned";
-    }
-
-    function getSearchText(lab) {
-      return [
-        lab.id,
-        lab.title,
-        lab.track,
-        lab.level,
-        lab.status,
-        lab.summary,
-        lab.accessMode,
-        lab.provider,
-        lab.badge,
-        ...(lab.tags || [])
-      ].join(" ").toLowerCase();
-    }
-
-    function updateMetrics(labs) {
-      const tracks = new Set(labs.map((lab) => lab.track).filter(Boolean));
-      document.querySelector("#metricTotal").textContent = labs.length;
-      document.querySelector("#metricAvailable").textContent = labs.filter((lab) => normalise(lab.status) === "available").length;
-      document.querySelector("#metricTracks").textContent = tracks.size;
-    }
-
-    function populateTrackFilter(labs) {
-      const tracks = [...new Set(labs.map((lab) => lab.track).filter(Boolean))].sort();
-
-      for (const track of tracks) {
-        const option = document.createElement("option");
-        option.value = track;
-        option.textContent = track;
-        trackFilter.appendChild(option);
-      }
-    }
-
-    function renderLabs() {
-      const query = normalise(state.query);
-      const filtered = state.labs.filter((lab) => {
-        const matchesQuery = !query || getSearchText(lab).includes(query);
-        const matchesTrack = !state.track || lab.track === state.track;
-        const matchesStatus = !state.status || normalise(lab.status) === state.status;
-        return matchesQuery && matchesTrack && matchesStatus;
-      });
-
-      if (!filtered.length) {
-        labGrid.innerHTML = '<div class="empty">No labs match the current filters.</div>';
-        return;
-      }
-
-      labGrid.innerHTML = filtered.map((lab) => {
-        const tags = (lab.tags || []).map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
-        const guideUrl = lab.guideUrl || "https://github.com/skunkworks-academy/labs-guides";
-
-        return `
-          <article class="lab-card">
-            <div class="lab-top">
-              <div class="lab-id">${escapeHtml(lab.id)}</div>
-              <div class="status ${getStatusClass(lab.status)}">${escapeHtml(lab.status || "planned")}</div>
-            </div>
-            <h3>${escapeHtml(lab.title)}</h3>
-            <p>${escapeHtml(lab.summary)}</p>
-            <div class="facts">
-              <span><b>Track</b><em>${escapeHtml(lab.track)}</em></span>
-              <span><b>Level</b><em>${escapeHtml(lab.level)}</em></span>
-              <span><b>Duration</b><em>${escapeHtml(lab.durationMinutes)} min</em></span>
-              <span><b>Access</b><em>${escapeHtml(lab.accessMode)}</em></span>
-            </div>
-            <div class="tags">${tags}</div>
-            <div class="card-actions">
-              <a href="${escapeHtml(guideUrl)}">View guide</a>
-              <a href="https://portal.skunkworksacademy.com/">Open portal</a>
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-
-    async function loadLabs() {
-      try {
-        const response = await fetch("catalog/labs.json", { cache: "no-store" });
-
-        if (!response.ok) {
-          throw new Error(`Catalogue request failed with status ${response.status}`);
-        }
-
-        const labs = await response.json();
-
-        if (!Array.isArray(labs)) {
-          throw new Error("catalog/labs.json must contain an array.");
-        }
-
-        state.labs = labs;
-        updateMetrics(labs);
-        populateTrackFilter(labs);
-        renderLabs();
-      } catch (error) {
-        console.error(error);
-        labGrid.innerHTML = `
-          <div class="error">
-            Could not load <code>catalog/labs.json</code>. Confirm the file exists and GitHub Pages is serving the latest commit.
-          </div>
-        `;
-      }
-    }
-
-    searchInput.addEventListener("input", (event) => {
-      state.query = event.target.value;
-      renderLabs();
-    });
-
-    trackFilter.addEventListener("change", (event) => {
-      state.track = event.target.value;
-      renderLabs();
-    });
-
-    statusFilter.addEventListener("change", (event) => {
-      state.status = event.target.value;
-      renderLabs();
-    });
-
-    loadLabs();
-  </script>
+  <script src="/assets/js/labs.js?v=2026.06.25" defer></script>
 </body>
 </html>

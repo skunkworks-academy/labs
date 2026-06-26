@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-ZA">
 <head>
-  <meta charset="utf-8" data-skunkworks-head="mandatory-v1" />
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v2" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Skunkworks Academy Labs | Secure Hands-On Lab Environments</title>
@@ -11,49 +11,26 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#0B1020" />
   <meta name="color-scheme" content="dark light" />
-  <link rel="canonical" href="https://lab.skunkworksacademy.com/" />
-
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Skunkworks Academy Labs" />
   <meta property="og:title" content="Skunkworks Academy Labs | Secure Hands-On Lab Environments" />
   <meta property="og:description" content="Launch guided technical labs, cloud sandboxes, and practical learning environments for Academy learners, instructors, and partner cohorts." />
-  <meta property="og:url" content="https://lab.skunkworksacademy.com/" />
-  <meta property="og:image" content="https://lab.skunkworksacademy.com/assets/og-labs.jpg" />
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/" />
+  <meta property="og:image" content="https://labs.skunkworksacademy.com/assets/og-labs.jpg" />
   <meta property="og:image:alt" content="Skunkworks Academy Labs secure virtual lab platform" />
   <meta property="og:locale" content="en_ZA" />
-
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Skunkworks Academy Labs | Secure Hands-On Lab Environments" />
   <meta name="twitter:description" content="Secure on-demand virtual labs and technical training environments from Skunkworks Academy." />
-  <meta name="twitter:image" content="https://lab.skunkworksacademy.com/assets/og-labs.jpg" />
-
+  <meta name="twitter:image" content="https://labs.skunkworksacademy.com/assets/og-labs.jpg" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
-
   <link rel="preconnect" href="https://skunkworksacademy.com" />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
   <link rel="dns-prefetch" href="//github.com" />
-  <link rel="stylesheet" href="/assets/css/site.css?v=2026.06.25" />
-  <script src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.06.25" defer></script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "EducationalOrganization",
-    "name": "Skunkworks Academy",
-    "url": "https://skunkworksacademy.com/",
-    "sameAs": [
-      "https://www.skunkworks.africa/",
-      "https://github.com/skunkworks-academy"
-    ],
-    "department": {
-      "@type": "EducationalOrganization",
-      "name": "Skunkworks Academy Labs",
-      "url": "https://lab.skunkworksacademy.com/",
-      "description": "Secure on-demand virtual labs, cloud sandboxes, guided exercises, evidence capture, and technical training environments."
-    }
-  }
-  </script>
+  <link rel="stylesheet" href="/assets/css/site.css?v=2026.06.26" />
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.06.26"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"Skunkworks Academy","url":"https://skunkworksacademy.com/","sameAs":["https://www.skunkworks.africa/","https://github.com/skunkworks-academy"],"department":{"@type":"EducationalOrganization","name":"Skunkworks Academy Labs","url":"https://labs.skunkworksacademy.com/","description":"Secure on-demand virtual labs, cloud sandboxes, guided exercises, evidence capture, and technical training environments."}}</script>
 </head>
 <body>
   <main id="main-content">
@@ -61,159 +38,36 @@
       <div>
         <div class="labs-eyebrow">Secure technical labs</div>
         <h1 id="hero-title">Launch practical labs, not just theory.</h1>
-        <p class="labs-lead">
-          Browser-ready lab environments, guided technical exercises, and evidence-driven learning workflows for Skunkworks Academy learners, instructors, and partner cohorts.
-        </p>
+        <p class="labs-lead">Browser-ready lab environments, guided technical exercises, and evidence-driven learning workflows for Skunkworks Academy learners, instructors, and partner cohorts.</p>
         <div class="labs-actions" aria-label="Primary lab actions">
           <a class="labs-button labs-button-primary" href="#labs">Browse labs</a>
           <a class="labs-button" href="https://portal.skunkworksacademy.com/">Open learner portal</a>
           <a class="labs-button" href="https://github.com/skunkworks-academy/labs-guides" target="_blank" rel="noopener">View lab guides</a>
         </div>
-        <div class="labs-pill-row" aria-label="Platform controls">
-          <span class="labs-pill">MFA-aware access</span>
-          <span class="labs-pill">Guided exercises</span>
-          <span class="labs-pill">Evidence capture</span>
-          <span class="labs-pill">Partner-ready delivery</span>
-        </div>
+        <div class="labs-pill-row" aria-label="Platform controls"><span class="labs-pill">MFA-aware access</span><span class="labs-pill">Guided exercises</span><span class="labs-pill">Evidence capture</span><span class="labs-pill">Partner-ready delivery</span></div>
       </div>
-
       <aside class="labs-panel" aria-label="Labs summary">
-        <div class="labs-panel-header">
-          <h2>Lab catalogue status</h2>
-          <span class="labs-live-dot">Live</span>
-        </div>
-        <div class="labs-metric">
-          <strong id="metricTotal">0</strong>
-          <span>Total lab records</span>
-        </div>
-        <div class="labs-metric">
-          <strong id="metricAvailable">0</strong>
-          <span>Available now</span>
-        </div>
-        <div class="labs-metric">
-          <strong id="metricTracks">0</strong>
-          <span>Learning tracks</span>
-        </div>
-        <div class="labs-metric">
-          <strong id="metricMinutes">0</strong>
-          <span>Guided lab minutes</span>
-        </div>
+        <div class="labs-panel-header"><h2>Lab catalogue status</h2><span class="labs-live-dot">Live</span></div>
+        <div class="labs-metric"><strong id="metricTotal">0</strong><span>Total lab records</span></div>
+        <div class="labs-metric"><strong id="metricAvailable">0</strong><span>Available now</span></div>
+        <div class="labs-metric"><strong id="metricTracks">0</strong><span>Learning tracks</span></div>
+        <div class="labs-metric"><strong id="metricMinutes">0</strong><span>Guided lab minutes</span></div>
         <p class="labs-panel-note">Catalogue data is loaded from <code>catalog/labs.json</code> so new labs can be added without redesigning the landing page.</p>
       </aside>
     </section>
-
     <section class="labs-shell labs-section" aria-labelledby="capabilities-title">
-      <div class="labs-section-head">
-        <div>
-          <div class="labs-eyebrow">Platform model</div>
-          <h2 id="capabilities-title" class="labs-section-title">Built for delivery, governance, and scale.</h2>
-        </div>
-        <p>
-          The Labs site now follows the Academy global navigation and theme standard while keeping the catalogue portable for GitHub Pages, LMS, and portal workflows.
-        </p>
-      </div>
-      <div class="labs-info-grid">
-        <article class="labs-info-card">
-          <b>01</b>
-          <h3>Secure access</h3>
-          <p>Orient learners through portal access, MFA, session controls, credential handling, and acceptable-use expectations before they enter a lab.</p>
-        </article>
-        <article class="labs-info-card">
-          <b>02</b>
-          <h3>Guided execution</h3>
-          <p>Each lab card maps to a guide, track, level, duration, and badge outcome so instructors can brief delegates consistently.</p>
-        </article>
-        <article class="labs-info-card">
-          <b>03</b>
-          <h3>Evidence-first learning</h3>
-          <p>Labs are structured for screenshots, outputs, command evidence, and assessment artifacts that support practical skills validation.</p>
-        </article>
-        <article class="labs-info-card">
-          <b>04</b>
-          <h3>Partner enablement</h3>
-          <p>Catalogue-driven delivery supports IBM, Microsoft, Cisco, EC-Council, open-source, and custom Skunkworks Academy cohorts.</p>
-        </article>
-      </div>
+      <div class="labs-section-head"><div><div class="labs-eyebrow">Platform model</div><h2 id="capabilities-title" class="labs-section-title">Built for delivery, governance, and scale.</h2></div><p>The Labs site follows the Academy global navigation and theme standard while keeping the catalogue portable for GitHub Pages, LMS, and portal workflows.</p></div>
+      <div class="labs-info-grid"><article class="labs-info-card"><b>01</b><h3>Secure access</h3><p>Orient learners through portal access, MFA, session controls, credential handling, and acceptable-use expectations before they enter a lab.</p></article><article class="labs-info-card"><b>02</b><h3>Guided execution</h3><p>Each lab card maps to a guide, track, level, duration, and badge outcome so instructors can brief delegates consistently.</p></article><article class="labs-info-card"><b>03</b><h3>Evidence-first learning</h3><p>Labs are structured for screenshots, outputs, command evidence, and assessment artifacts that support practical skills validation.</p></article><article class="labs-info-card"><b>04</b><h3>Partner enablement</h3><p>Catalogue-driven delivery supports IBM, Microsoft, Cisco, EC-Council, open-source, and custom Skunkworks Academy cohorts.</p></article></div>
     </section>
-
     <section class="labs-shell labs-section" id="labs" aria-labelledby="labs-title">
-      <div class="labs-section-head">
-        <div>
-          <div class="labs-eyebrow">Catalogue</div>
-          <h2 id="labs-title" class="labs-section-title">Available labs</h2>
-        </div>
-        <p>
-          Search by title, track, tag, provider, badge, or lab ID. Update <code>catalog/labs.json</code> to add, retire, or promote labs.
-        </p>
-      </div>
-
-      <div class="labs-toolbar" aria-label="Catalogue filters">
-        <input id="searchInput" type="search" placeholder="Search by title, track, tag, badge or lab ID..." autocomplete="off" />
-        <select id="trackFilter" aria-label="Filter by track">
-          <option value="">All tracks</option>
-        </select>
-        <select id="statusFilter" aria-label="Filter by status">
-          <option value="">All statuses</option>
-          <option value="available">Available</option>
-          <option value="draft">Draft</option>
-          <option value="planned">Planned</option>
-        </select>
-        <button class="labs-reset" id="resetFilters" type="button">Reset filters</button>
-      </div>
-
-      <p class="labs-result-note" id="resultNote" aria-live="polite">Loading catalogue...</p>
-      <div id="labGrid" class="labs-grid" aria-live="polite"></div>
+      <div class="labs-section-head"><div><div class="labs-eyebrow">Catalogue</div><h2 id="labs-title" class="labs-section-title">Available labs</h2></div><p>Search by title, track, tag, provider, badge, or lab ID. Update <code>catalog/labs.json</code> to add, retire, or promote labs.</p></div>
+      <div class="labs-toolbar" aria-label="Catalogue filters"><input id="searchInput" type="search" placeholder="Search by title, track, tag, badge or lab ID..." autocomplete="off" /><select id="trackFilter" aria-label="Filter by track"><option value="">All tracks</option></select><select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="available">Available</option><option value="draft">Draft</option><option value="planned">Planned</option></select><button class="labs-reset" id="resetFilters" type="button">Reset filters</button></div>
+      <p class="labs-result-note" id="resultNote" aria-live="polite">Loading catalogue...</p><div id="labGrid" class="labs-grid" aria-live="polite"></div>
     </section>
-
-    <section class="labs-shell labs-section" aria-labelledby="journey-title">
-      <div class="labs-section-head">
-        <div>
-          <div class="labs-eyebrow">Learner journey</div>
-          <h2 id="journey-title" class="labs-section-title">From access request to assessed evidence.</h2>
-        </div>
-      </div>
-      <div class="labs-flow-grid">
-        <article class="labs-flow">
-          <span class="labs-step">1</span>
-          <h3>Request access</h3>
-          <p>Learners enter through the Academy portal or an instructor-managed cohort workflow.</p>
-        </article>
-        <article class="labs-flow">
-          <span class="labs-step">2</span>
-          <h3>Launch environment</h3>
-          <p>The lab record points to the correct guide, access mode, duration, and supporting repository.</p>
-        </article>
-        <article class="labs-flow">
-          <span class="labs-step">3</span>
-          <h3>Complete tasks</h3>
-          <p>Delegates execute guided scenarios, capture command output, and validate expected results.</p>
-        </article>
-        <article class="labs-flow">
-          <span class="labs-step">4</span>
-          <h3>Submit evidence</h3>
-          <p>Evidence can feed instructor review, badging, learner records, and practical assessment reporting.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="labs-shell labs-section">
-      <div class="labs-callout">
-        <div>
-          <h2>Need a custom lab track?</h2>
-          <p>Build a practical path for Asterisk, Linux, cloud, cybersecurity, IBM middleware, DataPower, API Connect, Microsoft, or partner-specific delivery.</p>
-        </div>
-        <a class="labs-button labs-button-primary" href="mailto:training@skunkworks.africa?subject=Skunkworks%20Academy%20custom%20lab%20track">Request lab design</a>
-      </div>
-    </section>
+    <section class="labs-shell labs-section" aria-labelledby="journey-title"><div class="labs-section-head"><div><div class="labs-eyebrow">Learner journey</div><h2 id="journey-title" class="labs-section-title">From access request to assessed evidence.</h2></div></div><div class="labs-flow-grid"><article class="labs-flow"><span class="labs-step">1</span><h3>Request access</h3><p>Learners enter through the Academy portal or an instructor-managed cohort workflow.</p></article><article class="labs-flow"><span class="labs-step">2</span><h3>Launch environment</h3><p>The lab record points to the correct guide, access mode, duration, and supporting repository.</p></article><article class="labs-flow"><span class="labs-step">3</span><h3>Complete tasks</h3><p>Delegates execute guided scenarios, capture command output, and validate expected results.</p></article><article class="labs-flow"><span class="labs-step">4</span><h3>Submit evidence</h3><p>Evidence can feed instructor review, badging, learner records, and practical assessment reporting.</p></article></div></section>
+    <section class="labs-shell labs-section"><div class="labs-callout"><div><h2>Need a custom lab track?</h2><p>Build a practical path for Asterisk, Linux, cloud, cybersecurity, IBM middleware, DataPower, API Connect, Microsoft, or partner-specific delivery.</p></div><a class="labs-button labs-button-primary" href="mailto:training@skunkworks.africa?subject=Skunkworks%20Academy%20custom%20lab%20track">Request lab design</a></div></section>
   </main>
-
-  <footer class="labs-footer">
-    <div class="labs-shell">
-      <span>© <span id="year"></span> Skunkworks Academy. Dream. Design. Deliver.</span>
-      <span>Secure labs • Guided evidence • Partner-ready enablement</span>
-    </div>
-  </footer>
-
-  <script src="/assets/js/labs.js?v=2026.06.25" defer></script>
+  <footer class="labs-footer"><div class="labs-shell"><span>© <span id="year"></span> Skunkworks Academy. Dream. Design. Deliver.</span><span>Secure labs • Guided evidence • Partner-ready enablement</span></div></footer>
+  <script src="/assets/js/labs.js?v=2026.06.26" defer></script>
 </body>
 </html>

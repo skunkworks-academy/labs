@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": "AST-101",
     "title": "Asterisk PBX Foundations Lab",
@@ -54,5 +54,19 @@
     "guideUrl": "https://github.com/skunkworks-academy/labs-guides",
     "badge": "Secure Lab Access Orientation",
     "tags": ["Security", "MFA", "Governance", "Evidence"]
+  },
+  {
+    "id": "SKW-OWASP10-2025",
+    "title": "Skunkworks OWASP Top 10:2025 Web Application Security",
+    "track": "Cybersecurity",
+    "level": "Foundation to Intermediate",
+    "durationMinutes": 1200,
+    "status": "draft",
+    "summary": "Self-paced secure coding course with OWASP Top 10:2025 knowledge checks, a local vulnerable web app, ten practical labs, and a remediation capstone.",
+    "accessMode": "Self-paced lab",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://github.com/skunkworks-academy/labs/tree/main/self-paced/security/skw-owasp-top10-2025",
+    "badge": "OWASP Top 10 Web Security Practitioner",
+    "tags": ["OWASP", "Secure Coding", "Web Security", "DevSecOps", "Application Security"]
   }
 ]

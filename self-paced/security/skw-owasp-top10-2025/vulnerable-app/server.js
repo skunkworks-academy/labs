@@ -55,6 +55,11 @@ function weakToken(user) {
   return crypto.createHash('md5').update(`skw-static-secret:${user}`).digest('hex');
 }
 
+function normaliseLogField(value) {
+  const raw = Array.isArray(value) ? value.join(',') : String(value || 'unknown');
+  return raw.replace(/[\r\n\t]/g, '_').slice(0, 120);
+}
+
 function page(title, body) {
   return `<!doctype html>
 <html lang="en-ZA">
@@ -189,10 +194,10 @@ app.post('/import-profile', (req, res) => {
 });
 
 app.get('/log', (req, res) => {
-  // Intentionally weak for Lab 9: log injection.
-  const event = req.query.event || 'unknown';
-  console.log(`INFO event=${event}`);
-  res.send(`Logged event: ${event}`);
+  // Safe response pattern: do not reflect user-controlled log data to the browser.
+  const event = normaliseLogField(req.query.event);
+  console.log(JSON.stringify({ level: 'info', event }));
+  res.type('text/plain').send('Event logged');
 });
 
 app.get('/calculate', (req, res) => {

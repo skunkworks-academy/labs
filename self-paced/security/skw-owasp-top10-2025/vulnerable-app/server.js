@@ -198,8 +198,8 @@ app.get('/calculate', (req, res) => {
     const total = items.reduce((sum, n) => sum + n, 0);
     res.json({ total });
   } catch (err) {
-    // Intentionally vulnerable for Lab 10: verbose error.
-    res.status(500).send(`<pre>${err.stack}</pre>`);
+    console.error('Calculate endpoint error:', err && err.stack ? err.stack : err);
+    res.status(500).send('Internal server error');
   }
 });
 

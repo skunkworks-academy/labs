@@ -62,10 +62,10 @@
     "level": "Foundation to Intermediate",
     "durationMinutes": 1200,
     "status": "draft",
-    "summary": "Self-paced secure coding course with OWASP Top 10:2025 knowledge checks, a local vulnerable web app, ten practical labs, and a remediation capstone.",
-    "accessMode": "Self-paced lab",
+    "summary": "Interactive self-paced secure coding course with OWASP Top 10:2025 modules, local progress tracking, knowledge checks, ten guided labs, and a remediation capstone.",
+    "accessMode": "Interactive self-paced course",
     "provider": "Skunkworks Academy",
-    "guideUrl": "https://github.com/skunkworks-academy/labs/tree/main/self-paced/security/skw-owasp-top10-2025",
+    "guideUrl": "https://skunkworksacademy.com/self-paced/security/skw-owasp-top10-2025/",
     "badge": "OWASP Top 10 Web Security Practitioner",
     "tags": ["OWASP", "Secure Coding", "Web Security", "DevSecOps", "Application Security"]
   }

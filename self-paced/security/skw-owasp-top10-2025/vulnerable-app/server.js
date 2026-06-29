@@ -139,7 +139,8 @@ app.get('/admin/debug', (req, res) => {
 });
 
 app.get('/orders', (req, res) => {
-  const customer = req.query.customer || '';
+  const rawCustomer = req.query.customer;
+  const customer = typeof rawCustomer === 'string' ? rawCustomer : '';
   const simulatedQuery = `SELECT * FROM orders WHERE customer = '${customer}'`;
   // Intentionally vulnerable simulation for Lab 5.
   if (customer.includes("' OR '1'='1")) {

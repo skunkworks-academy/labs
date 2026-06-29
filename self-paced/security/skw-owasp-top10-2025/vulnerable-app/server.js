@@ -1,6 +1,6 @@
 /*
- * Skunkworks Academy OWASP Top 10:2025 vulnerable training app.
- * WARNING: intentionally insecure. Use only in an isolated local lab.
+ * Skunkworks Academy OWASP Top 10:2025 training app.
+ * WARNING: intentionally weak controls remain for local education. Use only in an isolated lab.
  */
 
 const express = require('express');
@@ -78,7 +78,7 @@ function page(title, body) {
 app.get('/', (req, res) => {
   const session = getSession(req);
   res.send(page('Skunkworks OWASP Top 10 Lab App', `
-    <p><strong>Warning:</strong> intentionally vulnerable local training app. Do not expose publicly.</p>
+    <p><strong>Warning:</strong> intentionally weak local training app. Do not expose publicly.</p>
     <div class="card">
       <h2>Login</h2>
       <form method="post" action="/login">
@@ -97,7 +97,7 @@ app.get('/', (req, res) => {
         <li><a href="/orders?customer=alice">/orders?customer=alice</a></li>
         <li><a href="/orders?customer=%27%20OR%20%271%27=%271">/orders?customer=' OR '1'='1</a></li>
         <li><a href="/token-demo?user=alice">/token-demo?user=alice</a></li>
-        <li><a href="/comment?message=Hello">/comment?message=Hello</a></li>
+        <li><a href="/comment?message=Hello%20from%20Skunkworks">/comment?message=Hello from Skunkworks</a></li>
         <li><a href="/calculate?items=abc">/calculate?items=abc</a></li>
         <li><a href="/authorize?mode=fail-open">/authorize?mode=fail-open</a></li>
         <li><a href="/log?event=login_failed">/log?event=login_failed</a></li>
@@ -113,21 +113,21 @@ app.post('/login', (req, res) => {
     console.log(`AUTH_FAIL email=${email}`);
     return res.status(401).send('Invalid credentials');
   }
-  // Intentionally insecure for Lab 7: unsigned, client-editable session.
+  // Intentionally weak for Lab 7: unsigned, client-editable session.
   const session = Buffer.from(JSON.stringify({ id: user.id, email: user.email, role: user.role }), 'utf8').toString('base64');
   res.setHeader('Set-Cookie', `skw_session=${encodeURIComponent(session)}; Path=/; SameSite=Lax`);
   res.redirect('/');
 });
 
 app.get('/profile/:id', requireLogin, (req, res) => {
-  // Intentionally vulnerable for Lab 1: missing ownership check.
+  // Intentionally weak for Lab 1: missing ownership check.
   const user = users.find(u => String(u.id) === String(req.params.id));
   if (!user) return res.status(404).send('Not found');
   res.json({ id: user.id, email: user.email, role: user.role, displayName: user.displayName, verified: user.verified, balance: user.balance });
 });
 
 app.get('/admin/debug', (req, res) => {
-  // Intentionally vulnerable for Lab 2: no auth and too much diagnostic information.
+  // Intentionally weak for Lab 2: no auth and too much diagnostic information.
   res.json({
     node: process.version,
     env: process.env.NODE_ENV || 'development',
@@ -142,7 +142,7 @@ app.get('/orders', (req, res) => {
   const rawCustomer = req.query.customer;
   const customer = typeof rawCustomer === 'string' ? rawCustomer : '';
   const simulatedQuery = `SELECT * FROM orders WHERE customer = '${customer}'`;
-  // Intentionally vulnerable simulation for Lab 5.
+  // Intentionally weak simulation for Lab 5.
   if (customer.includes("' OR '1'='1")) {
     return res.json({ simulatedQuery, result: orders });
   }
@@ -150,9 +150,16 @@ app.get('/orders', (req, res) => {
 });
 
 app.get('/comment', (req, res) => {
-  // Intentionally vulnerable for Lab 5: reflected XSS.
-  const message = req.query.message || '';
-  res.send(page('Comment Preview', `<p>Preview:</p><div class="card">${message}</div>`));
+  // Safe rendering pattern for Lab 5: user input is read client-side and assigned with textContent.
+  res.send(page('Comment Preview', `
+    <p>Preview:</p>
+    <div id="commentPreview" class="card"></div>
+    <p><strong>Lab note:</strong> Browser-rendered input must be treated as text unless a trusted sanitizer and strict rendering policy are used.</p>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('commentPreview').textContent = params.get('message') || '';
+    </script>
+  `));
 });
 
 app.get('/token-demo', (req, res) => {
@@ -161,7 +168,7 @@ app.get('/token-demo', (req, res) => {
 });
 
 app.post('/transfer', (req, res) => {
-  // Intentionally vulnerable for Lab 6: no business rules.
+  // Intentionally weak for Lab 6: no business rules.
   const { from, to, amount } = req.body;
   res.json({
     status: 'accepted',
@@ -173,7 +180,7 @@ app.post('/transfer', (req, res) => {
 });
 
 app.post('/import-profile', (req, res) => {
-  // Intentionally vulnerable for Lab 8: mass assignment.
+  // Intentionally weak for Lab 8: mass assignment.
   const incoming = req.body;
   const user = users.find(u => String(u.id) === String(incoming.id));
   if (!user) return res.status(404).send('User not found');
@@ -182,7 +189,7 @@ app.post('/import-profile', (req, res) => {
 });
 
 app.get('/log', (req, res) => {
-  // Intentionally vulnerable for Lab 9: log injection.
+  // Intentionally weak for Lab 9: log injection.
   const event = req.query.event || 'unknown';
   console.log(`INFO event=${event}`);
   res.send(`Logged event: ${event}`);
@@ -209,12 +216,12 @@ app.get('/authorize', (req, res) => {
     if (mode === 'fail-open') throw new Error('Authorization service timeout');
     res.json({ authorized: false });
   } catch (err) {
-    // Intentionally vulnerable for Lab 10: fail open.
+    // Intentionally weak for Lab 10: fail open.
     res.json({ authorized: true, reason: 'Authorization service failed, defaulted to allow.' });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Skunkworks OWASP vulnerable lab app running at http://localhost:${port}`);
-  console.log('WARNING: intentionally vulnerable. Local training use only.');
+  console.log(`Skunkworks OWASP training app running at http://localhost:${port}`);
+  console.log('WARNING: local training use only.');
 });

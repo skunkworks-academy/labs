@@ -68,5 +68,19 @@
     "guideUrl": "https://skunkworksacademy.com/self-paced/security/skw-owasp-top10-2025/",
     "badge": "OWASP Top 10 Web Security Practitioner",
     "tags": ["OWASP", "Secure Coding", "Web Security", "DevSecOps", "Application Security"]
+  },
+  {
+    "id": "SKW-JSON-2026",
+    "title": "Learn JSON",
+    "track": "Coding",
+    "level": "Beginner",
+    "durationMinutes": 30,
+    "status": "available",
+    "summary": "Interactive self-paced course that teaches JSON from first principles: objects, arrays, values and types, nesting, common mistakes, and a live playground with instant validation and a structure tree.",
+    "accessMode": "Interactive self-paced course",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://skunkworksacademy.com/self-paced/coding/json/",
+    "badge": "JSON Fundamentals",
+    "tags": ["JSON", "Coding", "Data Formats", "APIs", "Fundamentals"]
   }
 ]

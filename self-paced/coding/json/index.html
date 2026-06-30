@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+<meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Learn JSON | Interactive Self-Paced Course | Skunkworks Academy</title>
+<meta name="description" content="A fully interactive, self-paced Skunkworks Academy course that teaches JSON from first principles: objects, arrays, values, nesting, common mistakes, and a live playground with instant validation and a structure tree.">
+<meta name="author" content="Skunkworks Academy">
+<meta name="publisher" content="Skunkworks Academy">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="theme-color" content="#6B4DFF">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://skunkworksacademy.com/self-paced/coding/json/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skunkworks Academy">
+<meta property="og:title" content="Learn JSON | Interactive Self-Paced Course">
+<meta property="og:description" content="Learn JSON hands-on: read and write objects, arrays and values, avoid common mistakes, and build valid JSON in a live playground with instant feedback.">
+<meta property="og:url" content="https://skunkworksacademy.com/self-paced/coding/json/">
+<meta property="og:locale" content="en_ZA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learn JSON | Interactive Self-Paced Course | Skunkworks Academy">
+<meta name="twitter:description" content="Interactive, self-paced JSON course from Skunkworks Academy with lessons, knowledge checks, and a live JSON playground.">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236B4DFF'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='17' font-weight='700' fill='%23fff' text-anchor='middle'%3E%7B %7D%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Learn JSON","description":"Interactive self-paced course that teaches JSON from first principles: objects, arrays, values and types, nesting, common mistakes, and a live playground with instant validation and a structure tree.","provider":{"@type":"EducationalOrganization","name":"Skunkworks Academy","url":"https://skunkworksacademy.com/"},"url":"https://skunkworksacademy.com/self-paced/coding/json/","educationalLevel":"Beginner","inLanguage":"en","teaches":["JSON","Data formats","Objects and arrays","Data types","API data","Configuration files"],"isAccessibleForFree":true}</script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#E5E1D6;font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+--paper:#F6F3EC;--card:#FFFFFF;--ink:#1C1B17;--muted:#6E6A5C;--faint:#9A9587;
+--line:rgba(28,27,23,.10);--line2:rgba(28,27,23,.055);
+--accent:#6B4DFF;--soft:color-mix(in srgb,#6B4DFF 14%,#fff);
+--amber:#E08A0B;--good:#0E9F6E;--bad:#E0513B}
+h1,h2,h3,p{margin:0}
+textarea{font-family:'JetBrains Mono',monospace}
+button{font-family:inherit}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.16);border-radius:9px}
+::-webkit-scrollbar-track{background:transparent}
+@keyframes slideUp{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes popIn{0%{transform:scale(.85);opacity:0}65%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
+</style>
+</helmet>
+
+<div style="height:100dvh;min-height:560px;display:flex;flex-direction:column;max-width:480px;margin:0 auto;background:var(--paper);position:relative;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 40px 90px -50px rgba(0,0,0,.55);color:var(--ink); {{ accentVar }}">
+
+  <sc-if value="{{ showLesson }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:12px;padding:14px 14px 12px;background:var(--paper);border-bottom:1px solid var(--line2);z-index:3">
+      <button onClick="{{ backOnClick }}" style="flex:none;width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center">←</button>
+      <div style="flex:1;min-width:0">
+        <div style="font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.04em;color:var(--accent);text-transform:uppercase">{{ lessonModuleLabel }}</div>
+        <div style="font:600 15px/1.25 'Space Grotesk',sans-serif;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ lessonTitle }}</div>
+      </div>
+      <div style="flex:none;font:600 12px 'JetBrains Mono',monospace;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 11px">{{ lessonPos }}</div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showMain }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;background:var(--paper);z-index:3">
+      <div style="display:flex;align-items:center;gap:9px">
+        <div style="width:30px;height:30px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font:700 14px 'JetBrains Mono',monospace">{ }</div>
+        <div style="font:700 17px/1 'Space Grotesk',sans-serif">{{ topTitle }}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px;background:var(--soft);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);color:var(--accent);font:700 13px 'Space Grotesk',sans-serif;padding:6px 11px;border-radius:999px">
+        <span style="font-size:13px">★</span>{{ xp }} XP
+      </div>
+    </div>
+  </sc-if>
+
+  <div ref="{{ scrollRef }}" style="flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch">
+
+    <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:8px 16px 124px">
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 14px 30px -26px rgba(0,0,0,.5); {{ appear }}">
+          <div style="display:flex;align-items:center;gap:18px">
+            <div style="position:relative;flex:none;width:84px;height:84px">
+              <svg width="84" height="84" viewBox="0 0 84 84">
+                <circle cx="42" cy="42" r="35" fill="none" stroke="var(--line)" stroke-width="9"></circle>
+                <circle cx="42" cy="42" r="35" fill="none" stroke="var(--accent)" stroke-width="9" stroke-linecap="round" transform="rotate(-90 42 42)" stroke-dasharray="{{ ringC }}" stroke-dashoffset="{{ ringOff }}" style="transition:stroke-dashoffset .7s cubic-bezier(.3,.8,.3,1)"></circle>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <div style="font:700 20px 'Space Grotesk',sans-serif;line-height:1">{{ percent }}%</div>
+              </div>
+            </div>
+            <div style="flex:1;min-width:0">
+              <h1 style="font:700 21px/1.15 'Space Grotesk',sans-serif">Learn JSON</h1>
+              <p style="font-size:13px;color:var(--muted);margin-top:5px;line-height:1.45">{{ progressLine }}</p>
+              <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap">
+                <span style="font:600 11px 'JetBrains Mono',monospace;background:var(--soft);color:var(--accent);padding:4px 9px;border-radius:999px">{{ completedCount }}/{{ totalLessons }} lessons</span>
+                <sc-if value="{{ showStreak }}" hint-placeholder-val="{{ true }}">
+                  <span style="font:600 11px 'JetBrains Mono',monospace;background:rgba(224,138,11,.12);color:var(--amber);padding:4px 9px;border-radius:999px">🔥 {{ streak }}-day streak</span>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+          <button onClick="{{ continueOnClick }}" style="margin-top:18px;width:100%;border:none;border-radius:14px;background:var(--accent);color:#fff;font:700 15px 'Space Grotesk',sans-serif;padding:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 12px 24px -12px var(--accent)">
+            {{ continueLabel }} <span style="font-size:17px">→</span>
+          </button>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin:24px 4px 12px">
+          <span style="font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)">Course</span>
+          <div style="flex:1;height:1px;background:var(--line)"></div>
+        </div>
+
+        <sc-for list="{{ modules }}" as="m" hint-placeholder-count="4">
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:20px;margin-bottom:14px;overflow:hidden;box-shadow:0 10px 24px -24px rgba(0,0,0,.5)">
+            <div style="display:flex;align-items:center;gap:12px;padding:16px 16px 13px">
+              <div style="flex:none;width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font:700 15px 'Space Grotesk',sans-serif; {{ m.badgeDyn }}">{{ m.badgeText }}</div>
+              <div style="flex:1;min-width:0">
+                <div style="font:700 15px/1.2 'Space Grotesk',sans-serif">{{ m.title }}</div>
+                <div style="font-size:12px;color:var(--muted);margin-top:2px">{{ m.sub }}</div>
+              </div>
+            </div>
+            <div style="height:5px;background:var(--line2);margin:0 16px;border-radius:99px;overflow:hidden">
+              <div style="height:100%;border-radius:99px;background:var(--accent);width:{{ m.pct }}%;transition:width .6s ease"></div>
+            </div>
+            <div style="padding:8px 8px 10px">
+              <sc-for list="{{ m.lessons }}" as="L" hint-placeholder-count="2">
+                <button onClick="{{ L.onClick }}" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;padding:11px 10px;border-radius:13px;cursor:pointer; {{ L.rowDyn }}">
+                  <span style="flex:none">{{ L.statusEl }}</span>
+                  <span style="flex:1;min-width:0">
+                    <span style="display:block;font:600 14px/1.25 'Plus Jakarta Sans';color:var(--ink)">{{ L.title }}</span>
+                    <span style="display:block;font-size:12px;color:var(--faint);margin-top:2px">{{ L.meta }}</span>
+                  </span>
+                  <span style="flex:none;color:var(--faint);font-size:18px">›</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showLesson }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:18px 18px 132px; {{ appear }}">
+        <sc-for list="{{ lessonView }}" as="b" hint-placeholder-count="5">
+          <sc-if value="{{ b.isP }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:15.5px;line-height:1.62;color:#33312a;margin-bottom:15px">{{ b.text }}</p>
+          </sc-if>
+          <sc-if value="{{ b.isH }}" hint-placeholder-val="{{ false }}">
+            <h3 style="font:700 17px/1.3 'Space Grotesk',sans-serif;margin:22px 0 11px">{{ b.text }}</h3>
+          </sc-if>
+          <sc-if value="{{ b.isCode }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#FBFAF6;border:1px solid var(--line);border-radius:15px;margin-bottom:16px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:7px;padding:9px 13px;border-bottom:1px solid var(--line2)">
+                <span style="width:9px;height:9px;border-radius:99px;background:var(--bad);opacity:.5"></span>
+                <span style="width:9px;height:9px;border-radius:99px;background:var(--amber);opacity:.55"></span>
+                <span style="width:9px;height:9px;border-radius:99px;background:var(--good);opacity:.5"></span>
+                <span style="margin-left:auto;font:500 11px 'JetBrains Mono',monospace;color:var(--faint)">{{ b.label }}</span>
+              </div>
+              <pre style="margin:0;padding:14px 15px;overflow-x:auto;font:500 13px/1.7 'JetBrains Mono',monospace"><code>{{ b.el }}</code></pre>
+            </div>
+          </sc-if>
+          <sc-if value="{{ b.isNote }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:11px;background:var(--soft);border-radius:14px;padding:14px 15px;margin-bottom:16px">
+              <span style="flex:none;font-size:16px">💡</span>
+              <p style="font-size:14px;line-height:1.55;color:#3a3550">{{ b.text }}</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ b.isTree }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--card);border:1px solid var(--line);border-radius:15px;margin-bottom:16px;overflow:hidden">
+              <div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line2)">
+                <span style="font:700 12px 'Space Grotesk',sans-serif;color:var(--accent)">⊞ Explore the structure</span>
+                <span style="font-size:11px;color:var(--faint);margin-left:auto">tap rows to fold</span>
+              </div>
+              <div style="padding:8px 6px">{{ b.el }}</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ b.isQuiz }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;margin:6px 0 16px;box-shadow:0 10px 24px -24px rgba(0,0,0,.5)">
+              <div style="font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:9px">Knowledge check</div>
+              <p style="font:600 15.5px/1.4 'Space Grotesk',sans-serif;margin-bottom:13px">{{ b.q }}</p>
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <sc-for list="{{ b.options }}" as="o" hint-placeholder-count="3">
+                  <button onClick="{{ o.onClick }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:13px 14px;border-radius:12px;font:500 14px 'Plus Jakarta Sans';cursor:pointer;transition:all .15s; {{ o.dyn }}">
+                    <span style="flex:none;width:20px;text-align:center;font-weight:700">{{ o.mark }}</span>
+                    <span style="flex:1">{{ o.label }}</span>
+                  </button>
+                </sc-for>
+              </div>
+              <sc-if value="{{ b.answered }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:12px;padding:12px 14px;border-radius:12px;font-size:13.5px;line-height:1.5; {{ b.fbDyn }}">
+                  <strong>{{ b.fbHead }}</strong> {{ b.explain }}
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </sc-for>
+
+        <button onClick="{{ completeOnClick }}" style="margin-top:8px;width:100%;border:none;border-radius:14px;font:700 15px 'Space Grotesk',sans-serif;padding:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px; {{ completeDyn }}">
+          {{ completeLabel }}
+        </button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showPlay }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:8px 16px 124px; {{ appear }}">
+        <h2 style="font:700 21px/1.15 'Space Grotesk',sans-serif">Playground</h2>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:5px;line-height:1.5">Write JSON and watch it come alive. Pick a challenge or free-build.</p>
+
+        <div style="display:flex;gap:8px;overflow-x:auto;padding:14px 2px 4px;margin:0 -2px">
+          <sc-for list="{{ challenges }}" as="c" hint-placeholder-count="3">
+            <button onClick="{{ c.onClick }}" style="flex:none;white-space:nowrap;padding:9px 14px;border-radius:999px;font:600 13px 'Plus Jakarta Sans';cursor:pointer;transition:all .15s; {{ c.dyn }}">{{ c.title }}</button>
+          </sc-for>
+        </div>
+
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:8px">
+          <div style="font:600 11px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:7px">Your task</div>
+          <p style="font-size:14.5px;line-height:1.5;color:#33312a">{{ chPrompt }}</p>
+          <sc-if value="{{ hasReqs }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:7px;margin-top:13px">
+              <sc-for list="{{ reqs }}" as="r" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:9px;font-size:13.5px;transition:all .2s; {{ r.dyn }}">
+                  <span style="flex:none;width:19px;height:19px;border-radius:99px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700; {{ r.markDyn }}">{{ r.mark }}</span>
+                  {{ r.label }}
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="background:#1E1C28;border-radius:16px;margin-top:14px;overflow:hidden;box-shadow:0 18px 34px -26px rgba(0,0,0,.7)">
+          <div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.08)">
+            <span style="width:10px;height:10px;border-radius:99px;background:#FF5F57"></span>
+            <span style="width:10px;height:10px;border-radius:99px;background:#FEBC2E"></span>
+            <span style="width:10px;height:10px;border-radius:99px;background:#28C840"></span>
+            <span style="margin-left:auto;font:500 11px 'JetBrains Mono',monospace;color:rgba(255,255,255,.45)">editor.json</span>
+          </div>
+          <textarea value="{{ editorVal }}" onInput="{{ editorOnInput }}" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" wrap="off" style="display:block;width:100%;min-height:172px;resize:vertical;border:none;outline:none;background:transparent;color:#EDEBF5;padding:14px 15px;font:500 13.5px/1.7 'JetBrains Mono',monospace;tab-size:2"></textarea>
+          <div style="display:flex;gap:8px;padding:11px 13px;border-top:1px solid rgba(255,255,255,.08)">
+            <button onClick="{{ onFormat }}" style="font:600 12px 'JetBrains Mono',monospace;color:#EDEBF5;background:rgba(255,255,255,.08);border:none;border-radius:9px;padding:8px 13px;cursor:pointer">⤷ Format</button>
+            <button onClick="{{ onReset }}" style="font:600 12px 'JetBrains Mono',monospace;color:rgba(255,255,255,.7);background:rgba(255,255,255,.05);border:none;border-radius:9px;padding:8px 13px;cursor:pointer">↺ Reset</button>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:9px;margin-top:12px;padding:12px 14px;border-radius:13px;font:600 13.5px 'JetBrains Mono',monospace; {{ validDyn }}">
+          <span style="font-size:15px">{{ validIcon }}</span>{{ validText }}
+        </div>
+
+        <sc-if value="{{ valid }}" hint-placeholder-val="{{ false }}">
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:15px;margin-top:14px;overflow:hidden">
+            <div style="display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line2)">
+              <span style="font:700 12px 'Space Grotesk',sans-serif;color:var(--accent)">⊞ Live tree</span>
+              <span style="font-size:11px;color:var(--faint);margin-left:auto">your data, parsed</span>
+            </div>
+            <div style="padding:8px 6px;max-height:280px;overflow:auto">{{ treeEl }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ allPass }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:14px;padding:16px;border-radius:15px;background:color-mix(in srgb,var(--good) 12%,#fff);border:1px solid color-mix(in srgb,var(--good) 35%,transparent);display:flex;align-items:center;gap:12px;animation:popIn .4s ease both">
+            <span style="font-size:26px">🎉</span>
+            <div>
+              <div style="font:700 15px 'Space Grotesk',sans-serif;color:#0a7a55">Challenge complete!</div>
+              <div style="font-size:13px;color:#0a7a55;opacity:.85;margin-top:2px">Every requirement is green. Try the next one.</div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showYou }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:8px 16px 124px; {{ appear }}">
+        <div style="background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px 20px;text-align:center;box-shadow:0 14px 30px -26px rgba(0,0,0,.5)">
+          <div style="position:relative;width:128px;height:128px;margin:0 auto">
+            <svg width="128" height="128" viewBox="0 0 128 128">
+              <circle cx="64" cy="64" r="54" fill="none" stroke="var(--line)" stroke-width="12"></circle>
+              <circle cx="64" cy="64" r="54" fill="none" stroke="var(--accent)" stroke-width="12" stroke-linecap="round" transform="rotate(-90 64 64)" stroke-dasharray="{{ bigC }}" stroke-dashoffset="{{ bigOff }}" style="transition:stroke-dashoffset .8s cubic-bezier(.3,.8,.3,1)"></circle>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font:700 34px/1 'Space Grotesk',sans-serif">{{ percent }}%</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:3px">complete</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:20px">
+            <div style="flex:1;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px">
+              <div style="font:700 22px 'Space Grotesk',sans-serif;color:var(--accent)">{{ xp }}</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px">total XP</div>
+            </div>
+            <div style="flex:1;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px">
+              <div style="font:700 22px 'Space Grotesk',sans-serif">{{ completedCount }}<span style="font-size:14px;color:var(--faint)">/{{ totalLessons }}</span></div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px">lessons</div>
+            </div>
+            <div style="flex:1;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:13px">
+              <div style="font:700 22px 'Space Grotesk',sans-serif;color:var(--amber)">{{ badgeCount }}</div>
+              <div style="font-size:11px;color:var(--muted);margin-top:2px">badges</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin:24px 4px 12px">
+          <span style="font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)">Module progress</span>
+          <div style="flex:1;height:1px;background:var(--line)"></div>
+        </div>
+
+        <sc-for list="{{ modules }}" as="m" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px 15px;margin-bottom:11px">
+            <div style="flex:none;width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font:700 14px 'Space Grotesk',sans-serif; {{ m.badgeDyn }}">{{ m.badgeText }}</div>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px">
+                <span style="font:600 14px 'Plus Jakarta Sans'">{{ m.title }}</span>
+                <span style="font:600 12px 'JetBrains Mono',monospace;color:var(--faint)">{{ m.pct }}%</span>
+              </div>
+              <div style="height:6px;background:var(--line2);border-radius:99px;overflow:hidden;margin-top:8px">
+                <div style="height:100%;border-radius:99px;background:var(--accent);width:{{ m.pct }}%;transition:width .6s ease"></div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+
+        <button onClick="{{ onResetProgress }}" style="margin-top:14px;width:100%;background:none;border:1px solid var(--line);border-radius:13px;color:var(--muted);font:600 13px 'Plus Jakarta Sans';padding:13px;cursor:pointer">Reset all progress</button>
+      </div>
+    </sc-if>
+  </div>
+
+  <nav style="flex:none;display:flex;background:var(--card);border-top:1px solid var(--line);padding:9px 8px calc(9px + env(safe-area-inset-bottom));z-index:4">
+    <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="3">
+      <button onClick="{{ n.onClick }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;padding:6px 0;cursor:pointer;transition:color .15s; {{ n.dyn }}">
+        <span style="display:flex">{{ n.icon }}</span>
+        <span style="font:600 11px 'Plus Jakarta Sans'">{{ n.label }}</span>
+      </button>
+    </sc-for>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:480,&quot;height&quot;:900},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#2563EB&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#6B4DFF&quot;,&quot;#0E9F6E&quot;,&quot;#E0513B&quot;,&quot;#2563EB&quot;,&quot;#D4368A&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;showStreak&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  state = {
+    tab: 'learn', screen: 'home', lessonId: 'l1',
+    completed: {}, quiz: {}, collapsed: {},
+    editor: '', challengeId: 'ch1',
+  };
+
+  componentDidMount() {
+    this.setState({ editor: this.challenges()['ch1'].starter });
+    try {
+      const s = JSON.parse(localStorage.getItem('jsoncourse_v1') || '{}');
+      const patch = {};
+      if (s.completed && typeof s.completed === 'object') patch.completed = s.completed;
+      if (s.quiz && typeof s.quiz === 'object') patch.quiz = s.quiz;
+      if (Object.keys(patch).length) this.setState(patch);
+    } catch (e) {}
+  }
+  // Persist progress. Pass the next completed/quiz values explicitly so we never
+  // read stale state before a setState has committed.
+  persist(next) {
+    const completed = next && next.completed || this.state.completed;
+    const quiz = next && next.quiz || this.state.quiz;
+    try { localStorage.setItem('jsoncourse_v1', JSON.stringify({ completed, quiz })); } catch (e) {}
+  }
+  toTop() { if (this.scrollEl) this.scrollEl.scrollTop = 0; }
+
+  // ---------- data ----------
+  course() {
+    const c = (s) => s; // raw json strings
+    return [
+      { id: 'm1', title: 'Meet JSON', lessons: [
+        { id: 'l1', title: 'What is JSON?', mins: 3, blocks: [
+          { t: 'p', text: 'JSON stands for JavaScript Object Notation. It is a lightweight way to store and share data, written as plain text that both people and computers can read.' },
+          { t: 'p', text: 'It became popular because the rules are tiny and almost every programming language can read and write it. When two programs need to exchange data, they very often speak JSON.' },
+          { t: 'h', text: 'What it looks like' },
+          { t: 'code', label: 'person.json', code: c('{\n  "name": "Ada",\n  "age": 36,\n  "isLearning": true\n}') },
+          { t: 'note', text: 'JSON is just text. You can open it in any editor, copy it, paste it into a message, or send it across the internet.' },
+          { t: 'quiz', q: 'What is JSON mainly used for?', options: ['Styling web pages', 'Storing and sharing data', 'Running animations'], answer: 1, explain: 'JSON is a data format — it carries information between programs, it does not style or animate anything.' },
+        ]},
+        { id: 'l2', title: 'Where JSON lives', mins: 3, blocks: [
+          { t: 'p', text: 'Once you start looking, JSON is everywhere. When an app loads your profile, fetches the weather, or saves your settings, the data behind the scenes is usually JSON.' },
+          { t: 'h', text: 'A reply from a weather API' },
+          { t: 'code', label: 'weather.json', code: c('{\n  "city": "Nairobi",\n  "tempC": 24,\n  "conditions": "Partly cloudy",\n  "isDay": true\n}') },
+          { t: 'p', text: 'The program that asked for the weather reads this text, pulls out the values it needs, and shows them on screen.' },
+          { t: 'note', text: 'Config files (settings for tools and apps) are very often JSON too — like the package.json in a project.' },
+          { t: 'quiz', q: 'Which of these commonly uses JSON?', options: ['Sending data between apps and servers', 'Choosing a font colour', 'Bolding text in a document'], answer: 0, explain: 'APIs and apps exchange data as JSON. Fonts and bold text are presentation concerns, handled elsewhere.' },
+        ]},
+      ]},
+      { id: 'm2', title: 'The Building Blocks', lessons: [
+        { id: 'l3', title: 'Objects { }', mins: 4, blocks: [
+          { t: 'p', text: 'An object is a collection of key/value pairs wrapped in curly braces. It is how you describe one thing using labelled pieces of information.' },
+          { t: 'h', text: 'Anatomy of an object' },
+          { t: 'code', label: 'book.json', code: c('{\n  "title": "Dune",\n  "pages": 412\n}') },
+          { t: 'p', text: 'Every key is a string in double quotes, followed by a colon, then its value. Pairs are separated by commas. Here the keys are "title" and "pages".' },
+          { t: 'tree', data: { title: 'Dune', pages: 412, hardcover: false } },
+          { t: 'quiz', q: 'In a pair like "pages": 412, what is "pages"?', options: ['The value', 'The key (the label)', 'A comment'], answer: 1, explain: 'The part before the colon is the key — the label that names the value 412.' },
+        ]},
+        { id: 'l4', title: 'Arrays [ ]', mins: 4, blocks: [
+          { t: 'p', text: 'An array is an ordered list of values wrapped in square brackets. Use it when you have many of something rather than one labelled thing.' },
+          { t: 'code', label: 'colors.json', code: c('["red", "green", "blue"]') },
+          { t: 'p', text: 'Arrays can hold any kind of value — including objects. A list of objects is one of the most common shapes you will meet.' },
+          { t: 'code', label: 'team.json', code: c('[\n  { "name": "Ada", "role": "dev" },\n  { "name": "Linus", "role": "ops" }\n]') },
+          { t: 'tree', data: ['apples', 'pears', 'mangoes'] },
+          { t: 'quiz', q: 'Which brackets create an array?', options: ['{ } curly braces', '[ ] square brackets', '( ) parentheses'], answer: 1, explain: 'Square brackets [ ] make an ordered list. Curly braces { } make an object.' },
+        ]},
+        { id: 'l5', title: 'Values & types', mins: 4, blocks: [
+          { t: 'p', text: 'A JSON value can be one of six things: a string, a number, true/false (a boolean), null, an object, or an array.' },
+          { t: 'code', label: 'types.json', code: c('{\n  "text": "hello",\n  "count": 7,\n  "isReady": true,\n  "nickname": null\n}') },
+          { t: 'note', text: 'Only strings get double quotes. Numbers, true, false and null are written plain — no quotes. "7" is a string; 7 is a number.' },
+          { t: 'quiz', q: 'Is \'hello\' (with single quotes) valid JSON?', options: ['Yes, quotes are quotes', 'No — JSON strings need double quotes', 'Only inside arrays'], answer: 1, explain: 'JSON requires double quotes for every string. Single quotes are not allowed.' },
+        ]},
+      ]},
+      { id: 'm3', title: 'Putting It Together', lessons: [
+        { id: 'l6', title: 'Nesting data', mins: 4, blocks: [
+          { t: 'p', text: 'Real data has structure. Because a value can itself be an object or an array, you can nest them to describe richer things.' },
+          { t: 'code', label: 'profile.json', code: c('{\n  "name": "Ada",\n  "address": {\n    "city": "Nairobi",\n    "zip": "00100"\n  },\n  "hobbies": ["code", "chess"]\n}') },
+          { t: 'p', text: 'Here "address" is an object inside an object, and "hobbies" is an array. Tap through the tree below to see how it nests.' },
+          { t: 'tree', data: { name: 'Ada', address: { city: 'Nairobi', zip: '00100' }, hobbies: ['code', 'chess'] } },
+          { t: 'quiz', q: 'Can an object contain another object?', options: ['No, only flat data', 'Yes — values can be objects or arrays', 'Only arrays can nest'], answer: 1, explain: 'Any value can be an object or array, so you can nest as deep as your data needs.' },
+        ]},
+        { id: 'l7', title: 'Avoid common mistakes', mins: 4, blocks: [
+          { t: 'p', text: 'Most JSON errors are tiny typos. Knowing the usual suspects saves a lot of head-scratching.' },
+          { t: 'h', text: 'Spot the problems' },
+          { t: 'code', label: 'broken.txt', code: c('{\n  name: "Ada",\n  "age": 36,\n}') },
+          { t: 'p', text: 'Two issues: the key name is missing its double quotes, and there is a trailing comma after the last pair. Both break JSON.' },
+          { t: 'code', label: 'fixed.json', code: c('{\n  "name": "Ada",\n  "age": 36\n}') },
+          { t: 'note', text: 'Remember: double-quote every key and string, no trailing comma after the last item, and JSON has no comments.' },
+          { t: 'quiz', q: 'Which is NOT allowed in JSON?', options: ['A trailing comma after the last item', 'Numbers without quotes', 'Arrays of objects'], answer: 0, explain: 'A comma after the final item is invalid. Numbers stay unquoted, and arrays of objects are fine.' },
+        ]},
+      ]},
+      { id: 'm4', title: 'Practice', lessons: [
+        { id: 'l8', title: 'Playground challenge', mins: 6, isPlayground: true },
+      ]},
+    ];
+  }
+
+  flat() {
+    const out = [];
+    this.course().forEach(m => m.lessons.forEach(L => out.push({ ...L, moduleId: m.id, moduleTitle: m.title })));
+    return out;
+  }
+
+  challenges() {
+    const isObj = v => v && typeof v === 'object' && !Array.isArray(v);
+    return {
+      ch1: { title: 'Describe a book', prompt: 'Build a JSON object that describes a book. It needs a title (string), a number of pages (number), and whether it is in stock (boolean).',
+        starter: '{\n  "title": "Dune",\n  "pages": "412"\n}',
+        reqs: [
+          { label: 'It is a JSON object', test: v => isObj(v) },
+          { label: '"title" is a string', test: v => isObj(v) && typeof v.title === 'string' },
+          { label: '"pages" is a number', test: v => isObj(v) && typeof v.pages === 'number' },
+          { label: '"inStock" is a boolean', test: v => isObj(v) && typeof v.inStock === 'boolean' },
+        ] },
+      ch2: { title: 'Make a playlist', prompt: 'Create an object with a "name" (string) and a "songs" array holding at least 2 songs, where every song is a string.',
+        starter: '{\n  "name": "Focus",\n  "songs": "Weightless"\n}',
+        reqs: [
+          { label: 'It is a JSON object', test: v => isObj(v) },
+          { label: '"name" is a string', test: v => isObj(v) && typeof v.name === 'string' },
+          { label: '"songs" is an array', test: v => isObj(v) && Array.isArray(v.songs) },
+          { label: 'It has at least 2 songs', test: v => isObj(v) && Array.isArray(v.songs) && v.songs.length >= 2 },
+          { label: 'Every song is a string', test: v => isObj(v) && Array.isArray(v.songs) && v.songs.length > 0 && v.songs.every(s => typeof s === 'string') },
+        ] },
+      ch3: { title: 'Free build', prompt: 'No rules here — type any JSON you like and watch the live tree update. Try nesting an object inside an array.',
+        starter: '{\n  "user": "ada",\n  "skills": ["json", "code"],\n  "active": true\n}',
+        reqs: [] },
+    };
+  }
+
+  // ---------- syntax highlighting ----------
+  C() { return { key: 'var(--accent)', str: '#0E8F63', num: '#D5602B', lit: '#B26A00', punct: '#9A9587', txt: '#3a382f' }; }
+  span(k, t, color, weight) { return React.createElement('span', { key: k, style: { color, fontWeight: weight || 400 } }, t); }
+  hl(src) {
+    const C = this.C();
+    const re = /("(?:\\.|[^"\\])*")(\s*:)?|(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)|\b(true|false|null)\b|([{}\[\],])|([^\S\n]+)|(\n)|(.)/g;
+    const out = []; let m, i = 0;
+    while ((m = re.exec(src))) {
+      if (m[1] !== undefined) {
+        if (m[2]) { out.push(this.span(i++, m[1], C.key, 600)); out.push(this.span(i++, m[2], C.punct)); }
+        else out.push(this.span(i++, m[1], C.str));
+      } else if (m[3] !== undefined) out.push(this.span(i++, m[3], C.num, 600));
+      else if (m[4] !== undefined) out.push(this.span(i++, m[4], C.lit, 600));
+      else if (m[5] !== undefined) out.push(this.span(i++, m[5], C.punct));
+      else out.push(this.span(i++, m[0], C.txt));
+    }
+    return out;
+  }
+
+  // ---------- tree ----------
+  toggle(path) { this.setState(s => ({ collapsed: { ...s.collapsed, [path]: !s.collapsed[path] } })); }
+  walk(rows, label, value, path, depth, isRoot) {
+    const C = this.C();
+    const expandable = value && typeof value === 'object';
+    const pad = 6 + depth * 16;
+    const keyColor = (typeof label === 'number') ? C.punct : C.key;
+    if (expandable) {
+      const isArr = Array.isArray(value);
+      const keys = isArr ? value.map((_, i) => i) : Object.keys(value);
+      const collapsed = !!this.state.collapsed[path];
+      const preview = isArr ? '[ ' + keys.length + ' ]' : '{ ' + keys.length + ' }';
+      rows.push(React.createElement('div', { key: path, onClick: () => this.toggle(path),
+        style: { display: 'flex', alignItems: 'center', gap: 6, padding: '4px 8px', paddingLeft: pad, cursor: 'pointer', borderRadius: 7, userSelect: 'none' } },
+        React.createElement('span', { key: 'c', style: { color: C.punct, fontSize: 9, width: 9, display: 'inline-block' } }, collapsed ? '▶' : '▼'),
+        !isRoot && React.createElement('span', { key: 'k', style: { color: keyColor, fontWeight: 600 } }, String(label)),
+        !isRoot && React.createElement('span', { key: 'co', style: { color: C.punct } }, ':'),
+        React.createElement('span', { key: 'p', style: { color: C.punct, fontSize: 12 } }, preview)
+      ));
+      if (!collapsed) keys.forEach(k => this.walk(rows, k, value[k], path + '.' + k, depth + 1, false));
+    } else {
+      let disp, color;
+      if (typeof value === 'string') { disp = '"' + value + '"'; color = C.str; }
+      else if (typeof value === 'number') { disp = String(value); color = C.num; }
+      else if (typeof value === 'boolean') { disp = String(value); color = C.lit; }
+      else { disp = 'null'; color = C.lit; }
+      rows.push(React.createElement('div', { key: path, style: { display: 'flex', gap: 6, padding: '4px 8px', paddingLeft: pad + 15 } },
+        React.createElement('span', { key: 'k', style: { color: keyColor, fontWeight: 600 } }, String(label)),
+        React.createElement('span', { key: 'co', style: { color: C.punct } }, ':'),
+        React.createElement('span', { key: 'v', style: { color } }, disp)
+      ));
+    }
+  }
+  tree(value) {
+    const rows = [];
+    this.walk(rows, 'root', value, 'root', 0, true);
+    return React.createElement('div', { style: { fontFamily: "'JetBrains Mono', monospace", fontSize: 13, lineHeight: 1.4 } }, rows);
+  }
+
+  // ---------- nav handlers ----------
+  setTab(tab) { this.setState({ tab, screen: 'home' }); this.toTop(); }
+  openLesson(id) {
+    const L = this.flat().find(x => x.id === id);
+    if (L && L.isPlayground) { this.setState({ tab: 'play', screen: 'home' }); this.toTop(); return; }
+    this.setState({ tab: 'learn', screen: 'lesson', lessonId: id }); this.toTop();
+  }
+  back() { this.setState({ screen: 'home' }); this.toTop(); }
+  complete(id) {
+    const completed = { ...this.state.completed, [id]: true };
+    this.persist({ completed });
+    const flat = this.flat();
+    const idx = flat.findIndex(x => x.id === id);
+    const next = flat[idx + 1];
+    this.setState({ completed });
+    if (next) this.openLesson(next.id);
+    else { this.setState({ tab: 'you', screen: 'home' }); this.toTop(); }
+  }
+  selectQuiz(lessonId, bi, idx) {
+    const key = lessonId + ':' + bi;
+    if (this.state.quiz[key] !== undefined) return;
+    const quiz = { ...this.state.quiz, [key]: idx };
+    this.persist({ quiz });
+    this.setState({ quiz });
+  }
+  setChallenge(id) { this.setState({ challengeId: id, editor: this.challenges()[id].starter }); }
+  formatEditor() { try { const v = JSON.parse(this.state.editor); this.setState({ editor: JSON.stringify(v, null, 2) }); } catch (e) {} }
+  resetEditor() { this.setState({ editor: this.challenges()[this.state.challengeId].starter }); }
+  resetProgress() { this.persist({ completed: {}, quiz: {} }); this.setState({ completed: {}, quiz: {} }); }
+
+  icon(name, sw) {
+    const p = {
+      learn: ['M22 10L12 5 2 10l10 5 10-5z', 'M6 12v5c0 1.2 2.7 3 6 3s6-1.8 6-3v-5'],
+      play: ['M9 8l-4 4 4 4', 'M15 8l4 4-4 4', 'M13 6l-2 12'],
+      you: ['M3 3v18h18', 'M7 13l3-3 3 3 4-6'],
+    }[name];
+    return React.createElement('svg', { width: 23, height: 23, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: sw || 2, strokeLinecap: 'round', strokeLinejoin: 'round' },
+      p.map((d, i) => React.createElement('path', { key: i, d })));
+  }
+  statusEl(state, num) {
+    if (state === 'done') return React.createElement('span', { style: { display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, borderRadius: 99, background: 'var(--accent)', color: '#fff', fontSize: 15, fontWeight: 700 } }, '✓');
+    if (state === 'current') return React.createElement('span', { style: { display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, borderRadius: 99, background: 'var(--soft)', color: 'var(--accent)', border: '2px solid var(--accent)', fontSize: 11 } }, '▶');
+    return React.createElement('span', { style: { display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, borderRadius: 99, background: 'var(--paper)', color: 'var(--faint)', border: '1.5px solid var(--line)', fontSize: 13, fontWeight: 600, fontFamily: "'JetBrains Mono',monospace" } }, String(num));
+  }
+
+  renderVals() {
+    const rm = this.props.reduceMotion;
+    const accent = this.props.accentColor || '#6B4DFF';
+    const accentVar = '--accent:' + accent + ';--soft:color-mix(in srgb,' + accent + ' 14%,#fff)';
+    const appear = rm ? '' : 'animation:slideUp .5s cubic-bezier(.2,.7,.2,1) both';
+
+    const flat = this.flat();
+    const total = flat.length;
+    const done = flat.filter(L => this.state.completed[L.id]).length;
+    const percent = Math.round((done / total) * 100);
+    const xp = done * 60;
+    const firstIncomplete = flat.find(L => !this.state.completed[L.id]) || flat[flat.length - 1];
+
+    const ringC = 2 * Math.PI * 35;
+    const bigC = 2 * Math.PI * 54;
+
+    // modules (home + progress)
+    const modules = this.course().map((m, mi) => {
+      const dn = m.lessons.filter(L => this.state.completed[L.id]).length;
+      const pct = Math.round((dn / m.lessons.length) * 100);
+      const earned = dn === m.lessons.length;
+      const badgeDyn = earned
+        ? 'background:var(--accent);color:#fff'
+        : 'background:var(--soft);color:var(--accent)';
+      return {
+        id: m.id, title: m.title, pct, earned,
+        sub: dn + ' of ' + m.lessons.length + ' lessons' + (earned ? ' · done ✓' : ''),
+        badgeText: earned ? '✓' : String(mi + 1),
+        badgeDyn,
+        lessons: m.lessons.map((L, li) => {
+          const isDone = !!this.state.completed[L.id];
+          const isCurrent = L.id === firstIncomplete.id;
+          const st = isDone ? 'done' : (isCurrent ? 'current' : 'todo');
+          return {
+            id: L.id, title: L.title,
+            meta: (L.isPlayground ? 'Interactive · ' : '') + L.mins + ' min' + (isDone ? ' · completed' : (isCurrent ? ' · up next' : '')),
+            onClick: () => this.openLesson(L.id),
+            statusEl: this.statusEl(st, li + 1),
+            rowDyn: isCurrent ? 'background:var(--soft)' : '',
+          };
+        }),
+      };
+    });
+    const badgeCount = modules.filter(m => m.earned).length;
+
+    // lesson view
+    const lesson = flat.find(x => x.id === this.state.lessonId) || flat[0];
+    const modIndex = this.course().findIndex(m => m.id === lesson.moduleId);
+    const mod = this.course()[modIndex];
+    const posInMod = mod.lessons.findIndex(L => L.id === lesson.id);
+    const lessonView = (lesson.blocks || []).map((b, bi) => {
+      const item = { isP: false, isH: false, isCode: false, isNote: false, isTree: false, isQuiz: false };
+      if (b.t === 'p') { item.isP = true; item.text = b.text; }
+      else if (b.t === 'h') { item.isH = true; item.text = b.text; }
+      else if (b.t === 'note') { item.isNote = true; item.text = b.text; }
+      else if (b.t === 'code') { item.isCode = true; item.label = b.label || 'json'; item.el = this.hl(b.code); }
+      else if (b.t === 'tree') { item.isTree = true; item.el = this.tree(b.data); }
+      else if (b.t === 'quiz') {
+        item.isQuiz = true; item.q = b.q;
+        const key = lesson.id + ':' + bi;
+        const sel = this.state.quiz[key];
+        const answered = sel !== undefined;
+        item.answered = answered;
+        const correct = sel === b.answer;
+        item.fbHead = correct ? 'Correct!' : 'Not quite.';
+        item.explain = b.explain;
+        item.fbDyn = correct
+          ? 'background:color-mix(in srgb,var(--good) 12%,#fff);color:#0a7a55'
+          : 'background:color-mix(in srgb,var(--bad) 12%,#fff);color:#a8351f';
+        item.options = b.options.map((opt, oi) => {
+          let dyn = 'background:var(--card);border:1.5px solid var(--line);color:var(--ink)', mark = String.fromCharCode(65 + oi);
+          if (answered) {
+            if (oi === b.answer) { dyn = 'background:color-mix(in srgb,var(--good) 12%,#fff);border:1.5px solid var(--good);color:#0a7a55'; mark = '✓'; }
+            else if (oi === sel) { dyn = 'background:color-mix(in srgb,var(--bad) 10%,#fff);border:1.5px solid var(--bad);color:#a8351f'; mark = '✕'; }
+            else { dyn = 'background:var(--card);border:1.5px solid var(--line);color:var(--faint);opacity:.6'; }
+          }
+          return { label: opt, mark, dyn, onClick: () => this.selectQuiz(lesson.id, bi, oi) };
+        });
+      }
+      return item;
+    });
+
+    const lessonIdx = flat.findIndex(x => x.id === lesson.id);
+    const hasNext = lessonIdx < total - 1;
+    const lessonDone = !!this.state.completed[lesson.id];
+    const completeLabel = lessonDone
+      ? (hasNext ? 'Completed ✓ · Continue →' : 'Completed ✓ · Finish 🎉')
+      : (hasNext ? 'Mark complete & continue →' : 'Complete · Finish course 🎉');
+    const completeDyn = lessonDone
+      ? 'background:var(--card);border:1.5px solid var(--accent);color:var(--accent)'
+      : 'background:var(--accent);border:none;color:#fff;box-shadow:0 12px 24px -12px var(--accent)';
+
+    // playground
+    const ch = this.challenges()[this.state.challengeId];
+    let parsed, parseOk = false, parseErr = '';
+    try { parsed = JSON.parse(this.state.editor); parseOk = true; }
+    catch (e) { parseErr = e.message.replace(/^JSON\.parse:\s*/, ''); }
+    const reqs = ch.reqs.map(r => {
+      let pass = false;
+      try { pass = parseOk && !!r.test(parsed); } catch (e) { pass = false; }
+      return {
+        label: r.label, mark: pass ? '✓' : '',
+        dyn: pass ? 'color:var(--ink);font-weight:600' : 'color:var(--muted)',
+        markDyn: pass ? 'background:var(--good);color:#fff' : 'background:var(--line);color:var(--faint)',
+      };
+    });
+    const allPass = ch.reqs.length > 0 && reqs.every(r => r.mark === '✓');
+    const validDyn = parseOk
+      ? 'background:color-mix(in srgb,var(--good) 10%,#fff);color:#0a7a55;border:1px solid color-mix(in srgb,var(--good) 30%,transparent)'
+      : 'background:color-mix(in srgb,var(--bad) 9%,#fff);color:#a8351f;border:1px solid color-mix(in srgb,var(--bad) 30%,transparent)';
+
+    const challenges = Object.keys(this.challenges()).map(id => ({
+      id, title: this.challenges()[id].title,
+      onClick: () => this.setChallenge(id),
+      dyn: id === this.state.challengeId
+        ? 'background:var(--accent);color:#fff;border:1.5px solid var(--accent)'
+        : 'background:var(--card);color:var(--ink);border:1.5px solid var(--line)',
+    }));
+
+    const navDefs = [
+      { key: 'learn', label: 'Learn', tab: 'learn' },
+      { key: 'play', label: 'Practice', tab: 'play' },
+      { key: 'you', label: 'Progress', tab: 'you' },
+    ];
+    const navItems = navDefs.map(n => ({
+      label: n.label, icon: this.icon(n.key),
+      onClick: () => this.setTab(n.tab),
+      dyn: this.state.tab === n.tab ? 'color:var(--accent)' : 'color:var(--faint)',
+    }));
+
+    const topTitle = this.state.tab === 'play' ? 'Practice' : this.state.tab === 'you' ? 'Progress' : 'JSON Course';
+
+    return {
+      accentVar, appear,
+      showLesson: this.state.screen === 'lesson',
+      showMain: this.state.screen !== 'lesson',
+      showHome: this.state.tab === 'learn' && this.state.screen === 'home',
+      showPlay: this.state.tab === 'play' && this.state.screen !== 'lesson',
+      showYou: this.state.tab === 'you' && this.state.screen !== 'lesson',
+      // home / stats
+      percent, xp, completedCount: done, totalLessons: total, badgeCount,
+      ringC, ringOff: ringC * (1 - percent / 100),
+      bigC, bigOff: bigC * (1 - percent / 100),
+      progressLine: done === 0 ? 'Start your first lesson — it takes 3 minutes.' : (done === total ? 'You finished every lesson. Nice work!' : 'Keep going — you are making great progress.'),
+      streak: Math.max(1, done),
+      showStreak: this.props.showStreak !== false,
+      continueLabel: done === 0 ? 'Start learning' : (done === total ? 'Review course' : 'Continue: ' + firstIncomplete.title),
+      continueOnClick: () => this.openLesson(firstIncomplete.id),
+      modules,
+      topTitle,
+      // lesson
+      lessonModuleLabel: 'Module ' + (modIndex + 1) + ' · ' + mod.title,
+      lessonTitle: lesson.title,
+      lessonPos: (posInMod + 1) + '/' + mod.lessons.length,
+      lessonView,
+      completeLabel, completeDyn,
+      completeOnClick: () => this.complete(lesson.id),
+      backOnClick: () => this.back(),
+      // playground
+      challenges,
+      chPrompt: ch.prompt,
+      hasReqs: ch.reqs.length > 0,
+      reqs,
+      editorVal: this.state.editor,
+      editorOnInput: (e) => this.setState({ editor: e.target.value }),
+      onFormat: () => this.formatEditor(),
+      onReset: () => this.resetEditor(),
+      valid: parseOk,
+      validIcon: parseOk ? '✓' : '✕',
+      validText: parseOk ? 'Valid JSON' : (parseErr || 'Not valid JSON yet'),
+      validDyn,
+      treeEl: parseOk ? this.tree(parsed) : null,
+      allPass,
+      // nav / progress
+      navItems,
+      onResetProgress: () => this.resetProgress(),
+      scrollRef: (el) => { this.scrollEl = el; },
+    };
+  }
+}
+</script>
+</body>
+</html>

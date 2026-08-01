@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "2026-08-01",
+  "products": [
+    {
+      "code": "LAB-LNX-101",
+      "title": "Linux Command-Line Essentials",
+      "summary": "Use a clean Linux terminal to navigate a filesystem, manage files, inspect text, understand permissions and complete practical command-line tasks.",
+      "availability": "launch-pilot",
+      "delivery": "browser-terminal",
+      "durationMinutes": 45,
+      "level": "beginner",
+      "networkPolicy": "restricted",
+      "publicSsh": false,
+      "objectives": [
+        "Navigate a Linux filesystem safely",
+        "Create, inspect and organise files and directories",
+        "Use basic text and search commands",
+        "Recognise least-privilege file permission concepts"
+      ],
+      "entitlement": {
+        "maxConcurrentSessionsPerLearner": 1,
+        "idleTimeoutMinutes": 10,
+        "sessionTimeoutMinutes": 45,
+        "cleanupRequired": true
+      },
+      "checkout": {
+        "status": "preparing",
+        "providers": ["payfast", "paypal"],
+        "activation": "verified-webhook-only"
+      }
+    }
+  ]
+}

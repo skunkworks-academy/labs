@@ -66,6 +66,75 @@
         "Calculate total and ordinary usable hosts",
         "Identify /26 network, host and broadcast boundaries"
       ]
+    },
+    {
+      "code": "LAB-REM-201",
+      "title": "REMnux Triage & Memory Forensics",
+      "summary": "Use a harmless simulated investigation to practise analysis boundaries, static triage, evidence provenance and memory-forensics correlation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/remnux-triage-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-isolated-vm",
+        "untrustedSampleExecution": "disabled"
+      },
+      "objectives": [
+        "Establish an authorised and isolated analysis boundary",
+        "Record a reproducible static-triage baseline",
+        "Treat artefacts as leads that require corroboration",
+        "Correlate process, socket and timeline records from a memory-forensics view"
+      ]
+    },
+    {
+      "code": "LAB-FLR-201",
+      "title": "FLARE VM Analysis Workbench",
+      "summary": "Learn the safe Windows reverse-engineering workbench lifecycle: managed VM, snapshot, evidence provenance, telemetry correlation and reset.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/flarevm-workbench-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-isolated-windows-vm",
+        "untrustedSampleExecution": "disabled"
+      },
+      "objectives": [
+        "Explain the disposable-VM and snapshot model",
+        "Capture static PE-style evidence with provenance",
+        "Read pre-recorded process, filesystem and network telemetry as a timeline",
+        "Reset an analysis session to known-good state"
+      ]
+    },
+    {
+      "code": "LAB-KAL-201",
+      "title": "Kali Linux Evidence & Network Forensics",
+      "summary": "Practise a read-only evidence workflow, disk-image triage and offline PCAP reasoning without live scanning or target interaction.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/kali-forensics-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-read-only-forensic-vm",
+        "liveScanning": "disabled"
+      },
+      "objectives": [
+        "Preserve authority, integrity and read-only handling boundaries",
+        "Record hash, partition and file-inventory observations",
+        "Analyse a stored PCAP offline and preserve the filter used",
+        "Distinguish forensic examination from live enumeration"
+      ]
     }
   ]
 }

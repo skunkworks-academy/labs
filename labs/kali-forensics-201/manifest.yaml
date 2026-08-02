@@ -1,0 +1,35 @@
+schemaVersion: 1
+code: LAB-KAL-201
+title: Kali Linux Evidence & Network Forensics
+status: live
+delivery: interactive-web-lab
+durationMinutes: 55
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  syntheticFixturesOnly: true
+  liveScanning: disabled
+  publicNetwork: forbidden
+  futureRuntime: instructor-managed-read-only-forensic-vm
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Start an evidence examination with authority, integrity controls and a validated read-only workflow.
+  - Record hash, partition and file-inventory observations from a disk-image triage sequence.
+  - Analyse a stored PCAP offline and preserve the filter used to obtain a result.
+  - Distinguish forensic examination from live scanning or unauthorised access.
+evidence:
+  checkpoints:
+    - evidence-preservation-check
+    - disk-triage-note
+    - offline-pcap-reasoning-check
+    - six-question-safety-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-KAL-201
+  data_classification: public-learning-content
+  cost_tier: none

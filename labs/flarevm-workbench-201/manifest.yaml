@@ -1,0 +1,35 @@
+schemaVersion: 1
+code: LAB-FLR-201
+title: FLARE VM Analysis Workbench
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  syntheticFixturesOnly: true
+  untrustedSampleExecution: disabled
+  publicNetwork: forbidden
+  futureRuntime: instructor-managed-isolated-windows-vm
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain why a Windows reverse-engineering workbench must be a disposable virtual machine.
+  - Capture static PE-style observations with hash, tool provenance and clear fact-versus-hypothesis notes.
+  - Interpret pre-recorded process, filesystem and synthetic network telemetry as a correlated timeline.
+  - Close an exercise by preserving authorised output and resetting to a known-good snapshot.
+evidence:
+  checkpoints:
+    - managed-vm-boundary-check
+    - static-evidence-provenance-check
+    - telemetry-timeline-check
+    - six-question-safety-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-FLR-201
+  data_classification: public-learning-content
+  cost_tier: none

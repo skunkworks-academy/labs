@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A safe, hands-on Skunkworks Academy REMnux lab for static triage, memory-forensics reasoning and evidence-preserving malware analysis workflows.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/remnux-triage-201/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="REMnux Triage & Memory Forensics | Interactive Lab">
+  <meta property="og:description" content="Practice evidence-preserving static and memory triage using a harmless simulated investigation fixture.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/remnux-triage-201/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="REMnux Triage & Memory Forensics | Interactive Lab">
+  <meta name="twitter:description" content="A safety-first malware analysis lab using synthetic evidence and simulated tool output.">
+  <title>REMnux Triage & Memory Forensics | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../analysis-toolkit-labs.css">
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.07.04" data-skunkworks-global-nav="v3"></script>
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "REMnux Triage & Memory Forensics",
+    "description": "A safety-first, self-paced lab that teaches static triage, evidence preservation and memory-forensics reasoning with simulated data.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/remnux-triage-201/",
+    "educationalLevel": "Intermediate",
+    "inLanguage": "en",
+    "timeRequired": "PT55M",
+    "isAccessibleForFree": true,
+    "teaches": ["analysis-environment safety", "static triage", "evidence provenance", "memory-forensics correlation"]
+  }
+  </script>
+</head>
+<body data-repo="labs" data-domain="labs.skunkworksacademy.com" data-lab-code="LAB-REM-201">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-REM-201 · Malware analysis &amp; DFIR</p>
+          <h1 id="page-title">REMnux triage: read the evidence before you run anything.</h1>
+          <p class="hero__lead">Build disciplined analysis habits with a harmless training fixture: preserve provenance, triage static indicators and correlate memory artefacts without treating one clue as proof.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">55 minutes · Intermediate · Browser-only simulation · No real malware or live network activity</p>
+        </div>
+        <aside class="environment-card" aria-label="REMnux lab environment summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>analysis-environment.status</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Safe by design</p>
+            <h2>Analysis workflow, not an execution sandbox.</h2>
+            <p>This learning version uses deliberately invented output. A future runtime is restricted to an instructor-managed, isolated VM with approved fixtures only.</p>
+            <dl class="environment-facts">
+              <div><dt>Fixture</dt><dd>Synthetic only</dd></div>
+              <div><dt>Network</dt><dd>None required</dd></div>
+              <div><dt>Runtime</dt><dd>Not enabled</dd></div>
+              <div><dt>Evidence</dt><dd>Local record</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div>
+          <p class="eyebrow eyebrow--blue">Lab summary</p>
+          <h2 id="objectives-title">Use REMnux concepts to build an evidence-led first response.</h2>
+        </div>
+        <ul>
+          <li><span aria-hidden="true">01</span><div>Define an authorised, isolated analysis boundary before interacting with any unknown artefact.</div></li>
+          <li><span aria-hidden="true">02</span><div>Record a repeatable static-triage baseline: provenance, hash, file type and visible strings.</div></li>
+          <li><span aria-hidden="true">03</span><div>Use process and network-memory records as correlated evidence, not as a verdict by themselves.</div></li>
+          <li><span aria-hidden="true">04</span><div>Produce a concise, reviewable investigation note and a local learning record.</div></li>
+        </ul>
+      </section>
+
+      <aside class="safety-notice" aria-labelledby="safety-title">
+        <div class="safety-notice__icon" aria-hidden="true">!</div>
+        <div>
+          <h2 id="safety-title">Authorised, synthetic and offline</h2>
+          <p>All case names, hashes, domains, IP addresses and output below are invented training data. Do not run unknown files, connect a test VM to the public internet, or analyse evidence you are not authorised to handle. Escalate real incidents through your organisation’s incident-response process.</p>
+        </div>
+      </aside>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive REMnux triage lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><p class="eyebrow eyebrow--blue">Your progress</p><strong id="progressText">0 of 4 completed</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="safety"><span class="step-icon" data-step-number="1">1</span><span><b>Set boundaries</b><small>Scope and isolation</small></span></li>
+            <li data-progress-step="static"><span class="step-icon" data-step-number="2">2</span><span><b>Triage safely</b><small>Hash, type, strings</small></span></li>
+            <li data-progress-step="memory"><span class="step-icon" data-step-number="3">3</span><span><b>Correlate memory</b><small>Process + network</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Check understanding</b><small>Six questions</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not a verified credential or case record.</p>
+          <button class="text-button" type="button" id="resetProgress">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="safety-module-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="safety-module-title">Start with an analysis boundary.</h2><p>REMnux is a Linux toolkit for malware analysis and reverse engineering. The toolset helps an analyst work consistently; it does not remove the need for lawful authority, isolation, evidence handling or review.</p></div></header>
+            <div class="concept-grid">
+              <article class="concept-card"><p class="concept-card__kicker">Authority</p><strong>Know the case scope.</strong><p>Use only supplied training fixtures or evidence covered by a documented authorisation.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Isolation</p><strong>Default deny networking.</strong><p>Do not use bridged networking or a host workstation as an analysis target.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Recovery</p><strong>Return to known good.</strong><p>Record the fixture version and use an approved snapshot or disposable workspace.</p></article>
+            </div>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Safety checkpoint</p><h3>Choose the correct starting state.</h3></div><span class="activity-pill">Before analysis</span></div>
+              <fieldset class="choice-fieldset" data-checkpoint="safety" data-answer="isolated" data-success="Correct. Establish authority, capture the fixture reference, start from a clean snapshot and keep the analysis network restricted by default." data-retry="Not yet. A convenient setup is not automatically a safe investigation boundary. Revisit authority, isolation and recoverability.">
+                <legend>Which environment is appropriate for an Academy-provided unknown training artefact?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="safety" value="host">Open it on the normal workstation so endpoint security can decide whether it is safe.</label>
+                  <label><input type="radio" name="safety" value="isolated">Use an authorised, disposable VM with a clean snapshot, approved fixture and networking restricted by default.</label>
+                  <label><input type="radio" name="safety" value="bridged">Use a bridge to the office network so the artefact behaves normally.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="safety">Check boundary</button></div>
+              <p class="feedback" id="safetyFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="static-module-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="static-module-title">Triage static facts before interpretation.</h2><p>For an approved fixture, record what you observed and how you observed it. The following is simulated output from a harmless training blob; it is not a sample to download or execute.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Simulated tool output</p><h3>Record facts in a repeatable order.</h3></div><span class="activity-pill">Synthetic fixture</span></div>
+              <div class="evidence-grid">
+                <div class="terminal" aria-label="Simulated REMnux static triage terminal output"><pre><span class="prompt">analyst@remnux:~/case-mx104$</span> sha256sum triage-fixture.bin
+<span class="output">8b3e1d4c2f7a0c0d1ed8d8260ac1437621a6e64d9a43fb05c4e94050fb8d1f21  triage-fixture.bin</span>
+<span class="prompt">analyst@remnux:~/case-mx104$</span> file triage-fixture.bin
+<span class="output">triage-fixture.bin: data</span>
+<span class="prompt">analyst@remnux:~/case-mx104$</span> strings -a -n 8 triage-fixture.bin | head
+<span class="output">LAB-REM-201 synthetic training fixture
+analysis.training.invalid
+evidence-first-not-execution</span>
+<span class="comment"># Output intentionally contains no live endpoint or executable payload.</span></pre></div>
+                <aside class="evidence-note"><h4>What this establishes</h4><ul><li>The hash identifies this exact fixture version.</li><li><code>file</code> reports a broad type, not intent.</li><li>Visible strings are leads that require context and correlation.</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="static" data-answer="baseline" data-success="Correct. A useful first note preserves the fixture identity and repeatable observations before drawing conclusions from a string or label." data-retry="Not yet. The correct first action is not to execute, submit to an uncontrolled service or declare a verdict from one string.">
+                <legend>What is the best next entry in the analyst’s evidence note?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="static" value="verdict">The word ‘analysis’ proves this file is malicious.</label>
+                  <label><input type="radio" name="static" value="baseline">The fixture hash, tool command, file-type output and selected strings were captured; each item is a lead, not a conclusion.</label>
+                  <label><input type="radio" name="static" value="execute">Run the fixture to see whether its contents are useful.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="static">Check triage note</button></div>
+              <p class="feedback" id="staticFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="memory-module-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="memory-module-title">Correlate memory artefacts; do not jump to a verdict.</h2><p>Memory-forensics outputs become valuable when they are related to the same timeline, process ancestry and case context. This example uses an entirely fabricated memory image summary.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Simulated Volatility-style output</p><h3>Turn process and socket rows into a question.</h3></div><span class="activity-pill">No memory image supplied</span></div>
+              <div class="evidence-grid">
+                <div class="terminal" aria-label="Simulated memory forensics output"><pre><span class="prompt">analyst@remnux:~/case-mx104$</span> vol.py -f academy-memory.raw windows.pslist.PsList
+<span class="output">PID   PPID  ImageFileName          CreateTime
+884   604   explorer.exe            2026-08-02 09:11:04
+2116  884   evidence-viewer.exe     2026-08-02 09:16:20
+3892  2116  update-helper.exe       2026-08-02 09:16:25</span>
+<span class="prompt">analyst@remnux:~/case-mx104$</span> vol.py -f academy-memory.raw windows.netscan.NetScan
+<span class="output">Offset   Proto LocalAddr        ForeignAddr          State       Pid
+0x...    TCP   10.10.10.20:49712  198.51.100.21:443  ESTABLISHED 3892</span>
+<span class="comment"># 198.51.100.0/24 and .invalid are documentation-only training indicators here.</span></pre></div>
+                <aside class="evidence-note"><h4>Ask before concluding</h4><ul><li>Which parent process created the child?</li><li>Which module, command line and timeline records corroborate it?</li><li>Does the case design explain the test-network address?</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="memory" data-answer="correlate" data-success="Correct. Preserve the process and connection rows, then correlate them with parentage, command-line, module and case-context evidence. A single row is not a malware verdict." data-retry="Not yet. Do not delete evidence, reconnect an analysis VM or label a process malicious solely from a connection row.">
+                <legend>What is the defensible analyst action for PID 3892?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="memory" value="delete">Delete the process from the image because the remote address is unfamiliar.</label>
+                  <label><input type="radio" name="memory" value="verdict">State that it is malware because it has a TCP connection.</label>
+                  <label><input type="radio" name="memory" value="correlate">Preserve the rows and correlate PID 3892 with parentage, command-line, modules, timeline and the stated training-network context.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="memory">Check correlation</button></div>
+              <p class="feedback" id="memoryFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all six questions. A score of five or more marks this browser-only lab as complete.</p></div></header>
+            <form id="assessmentForm" data-pass-score="5">
+              <p class="assessment-intro">This checks investigative reasoning and safety principles, not tool memorisation.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="hash" data-explanation="A cryptographic hash ties observations to a specific fixture version."><legend>1. Which record most directly identifies the exact file version analysed?</legend><div class="choice-list"><label><input type="radio" name="q1" value="hash">The SHA-256 hash</label><label><input type="radio" name="q1" value="name">The filename alone</label><label><input type="radio" name="q1" value="colour">The terminal theme colour</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="restrict" data-explanation="Unknown artefacts should begin in an authorised, disposable and restricted environment."><legend>2. What is the default network posture for an analysis VM containing an unknown fixture?</legend><div class="choice-list"><label><input type="radio" name="q2" value="bridge">Bridge it to the office network.</label><label><input type="radio" name="q2" value="restrict">Restrict it by default and allow only documented, approved lab services.</label><label><input type="radio" name="q2" value="wifi">Connect it to public Wi-Fi.</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="lead" data-explanation="File type and strings are observations that need corroboration."><legend>3. A readable string in a file is best described as:</legend><div class="choice-list"><label><input type="radio" name="q3" value="lead">A lead that requires context and correlation</label><label><input type="radio" name="q3" value="proof">Conclusive proof of intent</label><label><input type="radio" name="q3" value="execute">A reason to execute the file</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="parent" data-explanation="Process parentage connects a child process to its launching context."><legend>4. Which data point best helps place a suspicious process row into context?</legend><div class="choice-list"><label><input type="radio" name="q4" value="parent">Parent process, command line and timeline context</label><label><input type="radio" name="q4" value="wallpaper">Desktop wallpaper</label><label><input type="radio" name="q4" value="reboot">Rebooting the source system</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="synthetic" data-explanation="The page explicitly labels its fixture and output as synthetic training material."><legend>5. What does the address <code>198.51.100.21</code> represent in this lab?</legend><div class="choice-list"><label><input type="radio" name="q5" value="synthetic">A documentation-only indicator inside simulated training output</label><label><input type="radio" name="q5" value="target">A host to investigate over the public internet</label><label><input type="radio" name="q5" value="customer">A customer production system</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="local" data-explanation="This page stores progress locally and does not issue a verified credential or incident report."><legend>6. What does the printable record from this page prove?</legend><div class="choice-list"><label><input type="radio" name="q6" value="local">Local learning progress only</label><label><input type="radio" name="q6" value="cert">A verified professional certification</label><label><input type="radio" name="q6" value="report">A court-ready incident report</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div>
+              <div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>Record your name after you complete the safety, static-triage, memory-correlation and knowledge-check checkpoints. This is a personal record; it is not an accredited certificate or verified badge.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>REMnux Triage &amp; Memory Forensics</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the self-paced safety-first learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-REM-201 · 55 minutes · Browser-only simulated evidence</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, practical competence, attendance, evidence custody or incident-response authority.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="https://docs.remnux.org/">REMnux documentation</a> · <a href="./instructor-guide.md">Instructor guide</a></p></div></footer>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A full-length Skunkworks Academy lab on evidence-led Wireshark packet review, DNS, TCP handshakes and safe display-filter reasoning.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/pcap-investigation-201/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Wireshark PCAP Investigation | Interactive Lab">
+  <meta property="og:description" content="Read a synthetic capture timeline, use display-filter reasoning and write an evidence-led finding.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/pcap-investigation-201/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Wireshark PCAP Investigation | Interactive Lab">
+  <meta name="twitter:description" content="A safe, full-length browser-only packet investigation workbook.">
+  <title>Wireshark PCAP Investigation | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../it-foundations-labs.css">
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Wireshark PCAP Investigation",
+    "description": "An intermediate self-paced lab that teaches safe packet-timeline reading, DNS and TCP interpretation, display-filter reasoning and evidence notes.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/pcap-investigation-201/",
+    "educationalLevel": "Intermediate",
+    "inLanguage": "en",
+    "timeRequired": "PT60M",
+    "isAccessibleForFree": true,
+    "teaches": ["Wireshark", "PCAP review", "Display filters", "TCP handshake", "DNS", "Evidence handling"]
+  }
+  </script>
+</head>
+<body data-lab-code="LAB-NET-201">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-NET-201 · Network analysis</p>
+          <h1 id="page-title">Wireshark PCAP investigation - read before you conclude.</h1>
+          <p class="hero__lead">A packet timeline is evidence, not a story by itself. Learn how to find the DNS question, TCP conversation and normal close in a compact synthetic trace - then write what the trace does and does not show.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">Estimated time: 60 minutes · Stored synthetic trace · No live capture, scanning or target interaction</p>
+        </div>
+        <aside class="environment-card" aria-label="Synthetic PCAP case summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>capture: case-nt-17</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Evidence workflow</p>
+            <h2>Scope → timeline → filter → observation → corroboration</h2>
+            <p>Practice packet interpretation without receiving a downloadable capture or access to a live interface.</p>
+            <dl class="environment-facts">
+              <div><dt>Traffic</dt><dd>Synthetic only</dd></div>
+              <div><dt>DNS</dt><dd>Name question/answer</dd></div>
+              <div><dt>TCP</dt><dd>Handshake and close</dd></div>
+              <div><dt>Action</dt><dd>Observe, do not probe</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Make every finding reproducible, proportionate and within scope.</h2></div>
+        <ul>
+          <li><span>01</span><div><strong>Read the timeline.</strong><br>Identify a DNS lookup, three-way TCP handshake, encrypted-session initiation and ordinary connection close.</div></li>
+          <li><span>02</span><div><strong>Use filters as questions.</strong><br>A display filter narrows the current view; it does not change the capture or prove what a user intended.</div></li>
+          <li><span>03</span><div><strong>Write a defensible note.</strong><br>Record packet/time range, filter, observation and the authorised source of corroboration.</div></li>
+        </ul>
+      </section>
+
+      <section class="safety-notice" aria-labelledby="safety-title">
+        <span class="safety-notice__icon" aria-hidden="true">!</span>
+        <div><h2 id="safety-title">Training boundary: no live capture or active network work</h2><p>The trace below is fictional and stored as text. This lab does not provide a PCAP, touch a network interface, send a packet, scan a host or authorise any traffic interception. Use packet-analysis tools only with documented authority and privacy controls.</p></div>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive Wireshark PCAP investigation lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><span>Your progress</span><strong id="progressText">0 of 4 completed</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="model"><span class="step-icon" data-step-number="1">1</span><span><b>Evidence model</b><small>Scope and observations</small></span></li>
+            <li data-progress-step="timeline"><span class="step-icon" data-step-number="2">2</span><span><b>Packet timeline</b><small>Read the flow</small></span></li>
+            <li data-progress-step="triage"><span class="step-icon" data-step-number="3">3</span><span><b>Filter reasoning</b><small>Record the question</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Knowledge check</b><small>Make a finding</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not sent to Skunkworks Academy.</p>
+          <button class="text-button" id="resetProgress" type="button">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="model-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="model-title">Start with scope, authority and a question.</h2><p>Good packet review begins before a filter is typed. You should know who authorised the collection, what systems/time period are in scope, and the question you are trying to answer.</p></div></header>
+            <div class="concept-grid">
+              <article class="concept-card"><p class="concept-card__kicker">Capture versus display</p><strong>Display filters change the view, not the stored evidence.</strong><p>They help a reviewer focus on relevant packets. They are not a network control and do not modify packet contents.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Observation versus conclusion</p><strong>A connection is not an attribution.</strong><p>Packet data can support a factual observation such as “a client attempted a TLS session at this time.” It does not establish intent alone.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Corroboration</p><strong>Ask an authorised owner for related logs.</strong><p>Endpoint, proxy, asset and change records may explain a session. Do not turn a browser workbook into a live investigation.</p></article>
+            </div>
+            <div class="callout"><strong>Evidence note template:</strong> “Question: [what am I checking?]. Filter: [what narrowed the view?]. Observation: [what exact packet/time shows it?]. Limit: [what cannot be concluded?]. Next: [authorised source of corroboration].”</div>
+            <fieldset class="choice-fieldset" data-checkpoint="model" data-answer="scope" data-success="Correct. The reviewer needs authority, scope and a question before interpreting a trace. A filter is a viewing aid, not a conclusion." data-retry="Review the evidence model: an observed packet flow needs scope and context before it becomes a finding.">
+              <legend>Which statement best describes a responsible PCAP-review workflow?</legend>
+              <div class="choice-list">
+                <label><input type="radio" name="model" value="scope">Start with authorised scope and a question, record the filter and evidence, then seek appropriate corroboration.</label>
+                <label><input type="radio" name="model" value="scan">Use anything seen in the trace as a reason to scan or contact external systems.</label>
+              </div>
+            </fieldset>
+            <div class="checkpoint-actions"><button class="button button--soft" type="button" data-checkpoint-action data-checkpoint="model">Check evidence model</button></div>
+            <p class="feedback" id="modelFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="module" aria-labelledby="timeline-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="timeline-title">Read a compact packet timeline.</h2><p>This fictional sequence starts with a name lookup and shows a normal TCP setup, an encrypted-session start and a close. The values are documentation-only training data.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Synthetic packet summary</p><h3>Find the conversation without inventing a verdict.</h3></div><span class="activity-pill">Stored text only</span></div>
+              <div class="table-scroll">
+                <table class="trace-table">
+                  <thead><tr><th>No.</th><th>Time</th><th>Source</th><th>Destination</th><th>Protocol</th><th>Info</th></tr></thead>
+                  <tbody>
+                    <tr><td>14</td><td>10:03:14.112</td><td>10.20.8.74</td><td>10.20.8.53</td><td><strong>DNS</strong></td><td>Standard query A telemetry.training.example</td></tr>
+                    <tr><td>15</td><td>10:03:14.126</td><td>10.20.8.53</td><td>10.20.8.74</td><td><strong>DNS</strong></td><td>Response A 198.51.100.44</td></tr>
+                    <tr><td>16</td><td>10:03:14.133</td><td>10.20.8.74:51142</td><td>198.51.100.44:443</td><td><strong>TCP</strong></td><td>SYN</td></tr>
+                    <tr><td>17</td><td>10:03:14.151</td><td>198.51.100.44:443</td><td>10.20.8.74:51142</td><td><strong>TCP</strong></td><td>SYN, ACK</td></tr>
+                    <tr><td>18</td><td>10:03:14.152</td><td>10.20.8.74:51142</td><td>198.51.100.44:443</td><td><strong>TCP</strong></td><td>ACK</td></tr>
+                    <tr><td>19</td><td>10:03:14.159</td><td>10.20.8.74</td><td>198.51.100.44</td><td><strong>TLS</strong></td><td>Client Hello</td></tr>
+                    <tr><td>24</td><td>10:03:16.900</td><td>10.20.8.74:51142</td><td>198.51.100.44:443</td><td><strong>TCP</strong></td><td>FIN, ACK</td></tr>
+                    <tr><td>25</td><td>10:03:16.918</td><td>198.51.100.44:443</td><td>10.20.8.74:51142</td><td><strong>TCP</strong></td><td>ACK</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="data-strip"><span class="data-tag">Client: 10.20.8.74</span><span class="data-tag">Resolver: 10.20.8.53</span><span class="data-tag">Destination: 198.51.100.44</span><span class="data-tag data-tag--safe">Documentation-only range</span></div>
+              <fieldset class="choice-fieldset" data-checkpoint="timeline" data-answer="three-way" data-success="Correct. Packets 16, 17 and 18 form the TCP three-way handshake. The later Client Hello shows an encrypted-session attempt, not a conclusion about user intent or content." data-retry="Read the TCP flags in time order. A handshake is SYN, SYN-ACK and ACK.">
+                <legend>Which packets establish the TCP connection in this trace?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="timeline" value="three-way">Packets 16, 17 and 18: SYN, SYN-ACK, ACK</label>
+                  <label><input type="radio" name="timeline" value="dns">Packets 14 and 15: the DNS query and response</label>
+                  <label><input type="radio" name="timeline" value="close">Packets 24 and 25: the close sequence</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="timeline">Check packet interpretation</button></div>
+              <p class="feedback" id="timelineFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="triage-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="triage-title">Turn the case into a reproducible review question.</h2><p>The security team wants to understand the small client conversation, not to label a destination or reach it. A targeted display filter helps focus the stored evidence before an authorised owner correlates more data.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Evidence-led filter exercise</p><h3>Record how you narrowed the view and what remains unknown.</h3></div><span class="activity-pill">No live investigation</span></div>
+              <div class="case-grid">
+                <div class="case-file">
+                  <h4>Review question</h4>
+                  <p>“What DNS and TCP packets belong to the fictional client 10.20.8.74 during the 10:03 window?”</p>
+                  <p>A suitable display-filter concept is:</p>
+                  <div class="terminal"><pre><span class="output">ip.addr == 10.20.8.74 and (dns or tcp.port == 443)</span></pre></div>
+                  <p>It narrows the current view to the client and the protocols relevant to the stated question. It does not prove why the session happened or whether the destination is harmful.</p>
+                </div>
+                <aside class="evidence-note"><h4>Reproducible note</h4><ul><li>Time range: 10:03:14 to 10:03:17.</li><li>Filter: record exact syntax or clear logic.</li><li>Observation: packets 14-25 show DNS, TCP and TLS setup/close.</li><li>Next: authorised proxy, endpoint or asset-owner correlation.</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="triage" data-answer="correlate" data-success="Correct. A narrow display filter, time range and packet observation create a reproducible note. The next step is authorised correlation, not scanning or contacting the documentation-only address." data-retry="Not yet. The trace permits a factual observation, but no external target interaction or attribution.">
+                <legend>What is the best next action after identifying this conversation in the synthetic trace?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="triage" value="correlate">Record the time range, filter and observation, then ask the authorised asset/proxy/endpoint owner to correlate relevant logs.</label>
+                  <label><input type="radio" name="triage" value="scan">Scan 198.51.100.44 to see what service responds.</label>
+                  <label><input type="radio" name="triage" value="attribution">Declare that the connection establishes malicious intent without other evidence.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="triage">Check triage decision</button></div>
+              <p class="feedback" id="triageFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all seven questions. A score of six or higher marks this browser-only lab as complete.</p></div></header>
+            <form id="assessmentForm" data-pass-score="6">
+              <p class="assessment-intro">The assessment checks evidence-led packet-review reasoning. It does not grant permission for live packet capture or network action.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="handshake" data-explanation="SYN, SYN-ACK and ACK are the normal TCP three-way connection setup."><legend>1. Which sequence represents the ordinary TCP three-way handshake?</legend><div class="choice-list"><label><input type="radio" name="q1" value="handshake">SYN, SYN-ACK, ACK</label><label><input type="radio" name="q1" value="dns">Query, response, close</label><label><input type="radio" name="q1" value="fin">FIN, FIN-ACK, reset</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="name-answer" data-explanation="A DNS response answers the name-resolution question; it does not prove successful application access."><legend>2. What does the DNS response in the trace establish?</legend><div class="choice-list"><label><input type="radio" name="q2" value="name-answer">The resolver returned an address for the queried name</label><label><input type="radio" name="q2" value="content">The client viewed specific website content</label><label><input type="radio" name="q2" value="intent">The user's intent or motive</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="display" data-explanation="A display filter changes the subset you see in the packet viewer; it does not alter stored packet data."><legend>3. What does a Wireshark display filter do?</legend><div class="choice-list"><label><input type="radio" name="q3" value="display">Narrows the packets shown for a review question</label><label><input type="radio" name="q3" value="delete">Deletes unneeded packets from the capture</label><label><input type="radio" name="q3" value="block">Blocks traffic on the network</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="record" data-explanation="A record of timeframe, filter and exact observation makes review repeatable and auditable."><legend>4. Which detail belongs in a defensible packet-review note?</legend><div class="choice-list"><label><input type="radio" name="q4" value="record">Time range, filter and packet observation</label><label><input type="radio" name="q4" value="guess">An unsupported guess about the user</label><label><input type="radio" name="q4" value="password">A request for user passwords</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="correlation" data-explanation="A destination or connection should be correlated with authorised sources before drawing an incident conclusion."><legend>5. What is a connection to a destination address best described as before context is added?</legend><div class="choice-list"><label><input type="radio" name="q5" value="correlation">An observation that needs correlation</label><label><input type="radio" name="q5" value="conviction">Proof of wrongdoing</label><label><input type="radio" name="q5" value="permission">Permission to contact the destination</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="owner" data-explanation="The next step is authorised log/asset correlation, not a live scan or target interaction."><legend>6. After making a factual observation, what is the appropriate follow-up in a governed environment?</legend><div class="choice-list"><label><input type="radio" name="q6" value="owner">Ask the authorised owner to correlate relevant logs</label><label><input type="radio" name="q6" value="scan">Scan any endpoint named in the trace</label><label><input type="radio" name="q6" value="share">Publish the trace to unrelated people</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="synthetic" data-explanation="This lab uses stored synthetic records and documentation-only values."><legend>7. What kind of traffic is available in this lab?</legend><div class="choice-list"><label><input type="radio" name="q7" value="synthetic">Stored synthetic training trace only</label><label><input type="radio" name="q7" value="live">A live capture from the learner network</label><label><input type="radio" name="q7" value="target">A target range that must be scanned</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div>
+              <div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>After completing the checkpoints and assessment, record your name for a printable personal learning record. It is not a forensic report, a verified credential or authorisation for packet capture.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>Wireshark PCAP Investigation</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the browser-only learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-NET-201 · 60 minutes · Synthetic packet timeline</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, practical competence, packet-capture authority or an incident finding.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="./instructor-guide.md">Instructor guide</a> · <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChWorkDisplayFilterSection.html">Wireshark display filters</a></p></div></footer>
+</body>
+</html>

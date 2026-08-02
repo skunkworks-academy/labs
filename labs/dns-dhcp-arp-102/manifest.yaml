@@ -1,0 +1,34 @@
+schemaVersion: 1
+code: LAB-NET-102
+title: DNS, DHCP, ARP and Packet Flow
+status: live
+delivery: interactive-web-lab
+durationMinutes: 55
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  liveTargets: forbidden
+  packetCapture: synthetic-only
+  learnerDataCollection: none
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain the distinct jobs of DHCP, DNS and ARP in a normal client connection.
+  - Read a small packet-flow trace in the order it occurred.
+  - Identify whether an address-assignment, name-resolution, local-delivery or routing symptom is most likely.
+  - Select a safe first troubleshooting check without scanning or changing production systems.
+evidence:
+  checkpoints:
+    - packet-flow-order
+    - dns-dhcp-arp-triage
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-NET-102
+  data_classification: public-learning-content
+  cost_tier: none

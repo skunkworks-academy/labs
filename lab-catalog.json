@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "catalogVersion": "2026-08-02",
+  "catalogVersion": "2026-08-02.1",
   "products": [
     {
       "code": "LAB-LNX-101",
@@ -134,6 +134,96 @@
         "Record hash, partition and file-inventory observations",
         "Analyse a stored PCAP offline and preserve the filter used",
         "Distinguish forensic examination from live enumeration"
+      ]
+    },
+    {
+      "code": "LAB-NET-102",
+      "title": "DNS, DHCP, ARP and Packet Flow",
+      "summary": "Follow a client connection from configuration to name resolution and local next-hop delivery using safe, synthetic packet traces.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/dns-dhcp-arp-102/",
+      "objectives": [
+        "Explain the distinct responsibilities of DHCP, DNS and ARP",
+        "Read a client packet-flow trace in dependency order",
+        "Identify the earliest missing dependency in a troubleshooting case",
+        "Select an authorised, evidence-led first check"
+      ]
+    },
+    {
+      "code": "LAB-SYS-102",
+      "title": "Linux Files, Permissions and Processes",
+      "summary": "Apply least-privilege Linux access reasoning and evidence-led service triage with simulated terminal output.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/linux-admin-102/",
+      "objectives": [
+        "Interpret Linux ownership and rwx permission notation",
+        "Apply least privilege to a shared service configuration",
+        "Read process, service and journal evidence before changing state",
+        "Choose an approved escalation path for a service issue"
+      ]
+    },
+    {
+      "code": "LAB-SEC-101",
+      "title": "Phishing and Email Header Triage",
+      "summary": "Practise safe first-pass phishing triage with synthetic headers, authentication signals, preservation and reporting decisions.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/phishing-triage-101/",
+      "objectives": [
+        "Separate a message claim from header and authentication evidence",
+        "Interpret SPF, DKIM and DMARC results as contextual signals",
+        "Choose a safe report, preserve and escalation path",
+        "Write a concise evidence-led triage note"
+      ]
+    },
+    {
+      "code": "LAB-NET-201",
+      "title": "Wireshark PCAP Investigation",
+      "summary": "Read a synthetic capture timeline, identify DNS and TCP events, use display-filter reasoning and document a defensible observation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/pcap-investigation-201/",
+      "objectives": [
+        "Identify a DNS exchange, TCP handshake and connection close",
+        "Use display-filter logic to answer a bounded review question",
+        "Separate packet observations from incident conclusions",
+        "Record reproducible evidence and authorised follow-up"
+      ]
+    },
+    {
+      "code": "LAB-ID-101",
+      "title": "Entra ID, MFA and Conditional Access",
+      "summary": "Design least-privilege identity controls and a staged Conditional Access rollout in a fictional browser-only tenant.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/entra-identity-101/",
+      "objectives": [
+        "Distinguish users, groups, roles, MFA and Conditional Access",
+        "Apply least-privilege assignment to a representative support case",
+        "Plan a policy pilot, monitoring and recovery sequence",
+        "Account for governed emergency access in tenant resilience"
       ]
     }
   ]

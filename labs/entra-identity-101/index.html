@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A full-length Skunkworks Academy simulation lab on Entra ID, MFA, least privilege and Conditional Access rollout planning.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/entra-identity-101/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Entra ID, MFA and Conditional Access | Interactive Lab">
+  <meta property="og:description" content="Design least-privilege identity controls and a safe Conditional Access rollout in a browser-only tenant simulation.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/entra-identity-101/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Entra ID, MFA and Conditional Access | Interactive Lab">
+  <meta name="twitter:description" content="A full-length Microsoft identity and access design workbook.">
+  <title>Entra ID, MFA and Conditional Access | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../it-foundations-labs.css">
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Entra ID, MFA and Conditional Access",
+    "description": "A self-paced identity design lab that teaches Entra users, groups, roles, authentication methods, MFA and safe Conditional Access rollout planning.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/entra-identity-101/",
+    "educationalLevel": "Beginner to Intermediate",
+    "inLanguage": "en",
+    "timeRequired": "PT60M",
+    "isAccessibleForFree": true,
+    "teaches": ["Microsoft Entra ID", "MFA", "Conditional Access", "Least privilege", "Emergency access"]
+  }
+  </script>
+</head>
+<body data-lab-code="LAB-ID-101">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-ID-101 · Cloud and identity foundations</p>
+          <h1 id="page-title">Entra ID, MFA and Conditional Access - design for safe access and recovery.</h1>
+          <p class="hero__lead">Identity controls work best when each has a clear purpose: groups scale assignment, roles limit administrative power, MFA strengthens sign-in and Conditional Access applies well-tested conditions without locking out the people who must recover the tenant.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">Estimated time: 60 minutes · Browser-only tenant simulation · No sign-in, tenant data or policy changes</p>
+        </div>
+        <aside class="environment-card" aria-label="Fictional Entra identity design case summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>tenant: academy-training</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Identity design sequence</p>
+            <h2>Identity → group → least-privilege role → MFA → staged policy</h2>
+            <p>Use a fictional tenant to explain the control objective before touching a production directory.</p>
+            <dl class="environment-facts">
+              <div><dt>Users</dt><dd>Named identities</dd></div>
+              <div><dt>Groups</dt><dd>Scalable assignment</dd></div>
+              <div><dt>Roles</dt><dd>Administrative scope</dd></div>
+              <div><dt>Policies</dt><dd>Simulation only</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Match the control to the risk, then roll it out with proof and recovery.</h2></div>
+        <ul>
+          <li><span>01</span><div><strong>Separate identity-control concepts.</strong><br>Users, groups, roles, authentication methods and Conditional Access controls solve different problems.</div></li>
+          <li><span>02</span><div><strong>Apply least privilege.</strong><br>Use group-based assignment and a task-specific role instead of giving broad permanent administrative access.</div></li>
+          <li><span>03</span><div><strong>Plan a safe policy rollout.</strong><br>Pilot or report on impact, monitor results, retain governed emergency access and expand through change control.</div></li>
+        </ul>
+      </section>
+
+      <section class="safety-notice" aria-labelledby="safety-title">
+        <span class="safety-notice__icon" aria-hidden="true">!</span>
+        <div><h2 id="safety-title">Training boundary: no live tenant changes</h2><p>This is a fictional tenant design exercise. It does not request Microsoft credentials, query a directory or configure MFA, roles or Conditional Access. Use documented authority, current Microsoft guidance and a formal rollback/recovery plan before changing a production tenant.</p></div>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive Entra identity and Conditional Access lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><span>Your progress</span><strong id="progressText">0 of 4 completed</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="model"><span class="step-icon" data-step-number="1">1</span><span><b>Control model</b><small>Match identity controls</small></span></li>
+            <li data-progress-step="privilege"><span class="step-icon" data-step-number="2">2</span><span><b>Least privilege</b><small>Scope access deliberately</small></span></li>
+            <li data-progress-step="rollout"><span class="step-icon" data-step-number="3">3</span><span><b>Policy rollout</b><small>Pilot, monitor, recover</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Knowledge check</b><small>Apply safe governance</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not sent to Skunkworks Academy.</p>
+          <button class="text-button" id="resetProgress" type="button">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="model-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="model-title">Give each identity control a specific job.</h2><p>A good access design avoids using one broad control everywhere. Work from the resource, user population and risk, then choose the smallest control that achieves the intended outcome.</p></div></header>
+            <div class="concept-grid">
+              <article class="concept-card"><p class="concept-card__kicker">Identity and group</p><strong>A user is an identity; a group makes assignment manageable.</strong><p>Groups support scalable entitlement management and lifecycle actions. They do not automatically give an administrative capability.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Directory role</p><strong>A role grants administrative capabilities.</strong><p>Choose the minimum role that matches an approved task. A high-privilege role is not a convenience setting for routine work.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">MFA and policy</p><strong>MFA strengthens sign-in; Conditional Access applies conditions.</strong><p>Conditional Access can evaluate user, app, device, risk or location signals and apply an access decision in scope.</p></article>
+            </div>
+            <div class="role-map" aria-label="Identity-control relationship">
+              <div><b>Student group</b><p>Assign learner access to Academy resources through a managed learner group.</p></div>
+              <div><b>Support role</b><p>Grant narrowly scoped administration only to approved support personnel with a real operational duty.</p></div>
+              <div><b>Access policy</b><p>Evaluate named conditions and require an appropriate grant control after a tested rollout.</p></div>
+            </div>
+            <fieldset class="choice-fieldset" data-checkpoint="model" data-answer="separate" data-success="Correct. Groups, roles, MFA and Conditional Access work together, but they have different control objectives." data-retry="Review the control model: a group is not a role, and an MFA method is not a Conditional Access policy.">
+              <legend>Which statement best describes a sound identity design?</legend>
+              <div class="choice-list">
+                <label><input type="radio" name="model" value="separate">Use groups for scalable assignment, least-privilege roles for administration, and well-scoped authentication and access controls.</label>
+                <label><input type="radio" name="model" value="global">Give every user a broad administrative role so policy management is simpler.</label>
+              </div>
+            </fieldset>
+            <div class="checkpoint-actions"><button class="button button--soft" type="button" data-checkpoint-action data-checkpoint="model">Check control model</button></div>
+            <p class="feedback" id="modelFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="module" aria-labelledby="privilege-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="privilege-title">Design access for a fictional Academy support case.</h2><p>The training tenant has learners, instructors and a support coordinator. The coordinator needs to manage membership of an approved learning-access group, not take ownership of every directory control.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Fictional tenant scenario</p><h3>Grant the smallest useful capability.</h3></div><span class="activity-pill">Simulation only</span></div>
+              <div class="case-grid">
+                <div class="case-file">
+                  <h4>Role and assignment map</h4>
+                  <table class="lab-table"><thead><tr><th>Persona</th><th>Regular access need</th><th>Administration need</th></tr></thead><tbody>
+                    <tr><td>Learner</td><td>Course and lab resources through Learners group</td><td>None</td></tr>
+                    <tr><td>Instructor</td><td>Course authoring resources through Instructors group</td><td>Only the approved learning-content task</td></tr>
+                    <tr><td>Support coordinator</td><td>Support portal access</td><td>Managed learning-group membership under an approved, limited role/scope</td></tr>
+                    <tr><td>Emergency access</td><td>Not for routine operations</td><td>Governed recovery procedure, monitoring and current-policy validation</td></tr>
+                  </tbody></table>
+                </div>
+                <aside class="evidence-note"><h4>Least-privilege questions</h4><ul><li>Is a group assignment enough?</li><li>Which exact administrative task is approved?</li><li>Can a narrower role or scope meet it?</li><li>Who reviews the assignment and when?</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="privilege" data-answer="scoped" data-success="Correct. Normal resource access belongs in managed groups, while an approved coordinator receives only the narrow administrative capability needed for the defined group-management duty. A broad Global Administrator assignment is not justified here." data-retry="Not yet. The scenario needs scalable group access plus a small, approved administrative scope - not universal directory administration.">
+                <legend>Which design is the most appropriate for the support coordinator?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="privilege" value="scoped">Use the managed support and learning groups for normal access, then assign the smallest approved group-management role or scope needed for the coordinator's specific duty.</label>
+                  <label><input type="radio" name="privilege" value="global">Assign Global Administrator permanently because the coordinator may help anyone one day.</label>
+                  <label><input type="radio" name="privilege" value="shared">Give the coordinator a shared administrator account so actions are faster.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="privilege">Check least-privilege design</button></div>
+              <p class="feedback" id="privilegeFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="rollout-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="rollout-title">Plan a Conditional Access rollout that can be observed and recovered.</h2><p>A policy can improve security and still create a major outage if it is broad, untested or has no recovery plan. Treat it as a governed production change, not a checkbox.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Fictional policy proposal</p><h3>Require stronger sign-in for a high-value training-administration app.</h3></div><span class="activity-pill">No policy is created</span></div>
+              <ul class="policy-list">
+                <li><span>1</span><div><strong>Define:</strong> document the app, target group, intended authentication control, expected exceptions and business owner.</div></li>
+                <li><span>2</span><div><strong>Validate recovery:</strong> review governed emergency-access accounts and exclusion/monitoring requirements against current Microsoft and organisation policy.</div></li>
+                <li><span>3</span><div><strong>Pilot or report:</strong> start with a defined test population or report-only evaluation so impact appears before blocking users.</div></li>
+                <li><span>4</span><div><strong>Monitor and expand:</strong> review sign-in impact, support outcomes and rollback plan under change control before broadening scope.</div></li>
+              </ul>
+              <div class="callout callout--caution"><strong>Emergency access is a resilience control, not a bypass for everyday work.</strong> Microsoft publishes current guidance for governed, monitored emergency accounts. Validate the design in your tenant before deploying a policy that could restrict sign-in.</div>
+              <fieldset class="choice-fieldset" data-checkpoint="rollout" data-answer="pilot" data-success="Correct. A safe rollout defines scope, validates recovery, pilots or reports on impact, monitors results and expands through change control. This avoids a tenant-wide lockout caused by an untested condition." data-retry="Not yet. A tenant-wide enforcement with no pilot, monitoring or recovery validation is a lockout risk.">
+                <legend>What is the most responsible first implementation sequence?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="rollout" value="pilot">Define scope and recovery, use a pilot or report-only stage, monitor sign-in impact, then expand through approved change control.</label>
+                  <label><input type="radio" name="rollout" value="all-users">Enable a blocking policy for all users immediately and solve exceptions after complaints arrive.</label>
+                  <label><input type="radio" name="rollout" value="disable">Disable every access control until all users have new devices.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="rollout">Check rollout plan</button></div>
+              <p class="feedback" id="rolloutFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all seven questions. A score of six or higher marks this browser-only lab as complete.</p></div></header>
+            <form id="assessmentForm" data-pass-score="6">
+              <p class="assessment-intro">This assessment checks identity-governance reasoning. It does not configure or validate a real Microsoft Entra tenant.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="group" data-explanation="A managed group enables scalable resource assignment and user lifecycle control."><legend>1. Which construct is best suited to scalable assignment of ordinary learner access?</legend><div class="choice-list"><label><input type="radio" name="q1" value="group">A managed group</label><label><input type="radio" name="q1" value="global">A Global Administrator role for every learner</label><label><input type="radio" name="q1" value="shared">One shared privileged account</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="least" data-explanation="Administrative capability should be limited to the approved task and smallest suitable scope."><legend>2. How should a routine administrative need be assigned?</legend><div class="choice-list"><label><input type="radio" name="q2" value="least">Use the least-privilege role and scope that meets the defined task</label><label><input type="radio" name="q2" value="highest">Use the broadest role so it works in every scenario</label><label><input type="radio" name="q2" value="anonymous">Avoid recording an accountable identity</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="mfa" data-explanation="An authentication method and MFA strengthen how a user proves a sign-in."><legend>3. What control primarily strengthens authentication at sign-in?</legend><div class="choice-list"><label><input type="radio" name="q3" value="mfa">An appropriate MFA/authentication method</label><label><input type="radio" name="q3" value="group">A group name by itself</label><label><input type="radio" name="q3" value="portal">A portal bookmark</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="ca" data-explanation="Conditional Access evaluates scoped conditions and applies an access decision/control."><legend>4. What does Conditional Access primarily provide?</legend><div class="choice-list"><label><input type="radio" name="q4" value="ca">A conditional access decision for a scoped sign-in</label><label><input type="radio" name="q4" value="password">A permanent user password</label><label><input type="radio" name="q4" value="certificate">An automatically issued certification badge</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="pilot" data-explanation="Pilot or report-only evaluation plus monitoring reveals impact before broad enforcement."><legend>5. What rollout pattern reduces Conditional Access lockout risk?</legend><div class="choice-list"><label><input type="radio" name="q5" value="pilot">Pilot or report-only evaluation, monitoring and controlled expansion</label><label><input type="radio" name="q5" value="tenantwide">Immediate untested tenant-wide enforcement</label><label><input type="radio" name="q5" value="ignore">Ignore sign-in impact until after rollout</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="emergency" data-explanation="Governed, monitored emergency access helps a tenant recover when normal administrative sign-in is blocked."><legend>6. Why must a policy design account for emergency access?</legend><div class="choice-list"><label><input type="radio" name="q6" value="emergency">To preserve a governed recovery path if normal administrator access is blocked</label><label><input type="radio" name="q6" value="shortcut">To give daily users an easy way around policies</label><label><input type="radio" name="q6" value="share">To allow shared personal credentials</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="change" data-explanation="Real tenant work requires authority, current guidance, impact review and a change/recovery plan."><legend>7. What is required before a real tenant policy is changed?</legend><div class="choice-list"><label><input type="radio" name="q7" value="change">Authorised tenant review, current guidance and governed change/recovery planning</label><label><input type="radio" name="q7" value="browser">Completing this browser workbook alone</label><label><input type="radio" name="q7" value="trial">Trying it first on every production user</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div>
+              <div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>After completing the checkpoints and assessment, record your name for a printable personal learning record. It is not a Microsoft certification, a tenant design approval or an authorisation to change identity controls.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>Entra ID, MFA and Conditional Access</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the browser-only learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-ID-101 · 60 minutes · Fictional tenant design</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, Microsoft certification, tenant access, policy approval or practical administrative competence.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="./instructor-guide.md">Instructor guide</a> · <a href="https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access">Conditional Access planning</a></p></div></footer>
+</body>
+</html>

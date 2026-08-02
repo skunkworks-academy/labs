@@ -23,6 +23,7 @@ const requiredFiles = [
   "labs/ipv4-subnetting-101/instructor-guide.md",
   "labs/analysis-toolkit-labs.css",
   "labs/analysis-toolkit-labs.js",
+  "labs/it-foundations-labs.css",
   "labs/remnux-triage-201/index.html",
   "labs/remnux-triage-201/README.md",
   "labs/remnux-triage-201/manifest.yaml",
@@ -35,7 +36,27 @@ const requiredFiles = [
   "labs/kali-forensics-201/README.md",
   "labs/kali-forensics-201/manifest.yaml",
   "labs/kali-forensics-201/instructor-guide.md",
-  "docs/malware-analysis-lab-runtime.md"
+  "docs/malware-analysis-lab-runtime.md",
+  "labs/dns-dhcp-arp-102/index.html",
+  "labs/dns-dhcp-arp-102/README.md",
+  "labs/dns-dhcp-arp-102/manifest.yaml",
+  "labs/dns-dhcp-arp-102/instructor-guide.md",
+  "labs/linux-admin-102/index.html",
+  "labs/linux-admin-102/README.md",
+  "labs/linux-admin-102/manifest.yaml",
+  "labs/linux-admin-102/instructor-guide.md",
+  "labs/phishing-triage-101/index.html",
+  "labs/phishing-triage-101/README.md",
+  "labs/phishing-triage-101/manifest.yaml",
+  "labs/phishing-triage-101/instructor-guide.md",
+  "labs/pcap-investigation-201/index.html",
+  "labs/pcap-investigation-201/README.md",
+  "labs/pcap-investigation-201/manifest.yaml",
+  "labs/pcap-investigation-201/instructor-guide.md",
+  "labs/entra-identity-101/index.html",
+  "labs/entra-identity-101/README.md",
+  "labs/entra-identity-101/manifest.yaml",
+  "labs/entra-identity-101/instructor-guide.md"
 ];
 
 const analysisLabs = [
@@ -56,6 +77,44 @@ const analysisLabs = [
     page: "labs/kali-forensics-201/index.html",
     manifest: "labs/kali-forensics-201/manifest.yaml",
     safetyMarker: "liveScanning: disabled"
+  }
+];
+
+const foundationLabs = [
+  {
+    code: "LAB-NET-102",
+    page: "labs/dns-dhcp-arp-102/index.html",
+    manifest: "labs/dns-dhcp-arp-102/manifest.yaml",
+    path: "/labs/dns-dhcp-arp-102/",
+    safetyMarker: "packetCapture: synthetic-only"
+  },
+  {
+    code: "LAB-SYS-102",
+    page: "labs/linux-admin-102/index.html",
+    manifest: "labs/linux-admin-102/manifest.yaml",
+    path: "/labs/linux-admin-102/",
+    safetyMarker: "interactiveShell: simulated-only"
+  },
+  {
+    code: "LAB-SEC-101",
+    page: "labs/phishing-triage-101/index.html",
+    manifest: "labs/phishing-triage-101/manifest.yaml",
+    path: "/labs/phishing-triage-101/",
+    safetyMarker: "messageFixtures: synthetic-only"
+  },
+  {
+    code: "LAB-NET-201",
+    page: "labs/pcap-investigation-201/index.html",
+    manifest: "labs/pcap-investigation-201/manifest.yaml",
+    path: "/labs/pcap-investigation-201/",
+    safetyMarker: "liveCapture: disabled"
+  },
+  {
+    code: "LAB-ID-101",
+    page: "labs/entra-identity-101/index.html",
+    manifest: "labs/entra-identity-101/manifest.yaml",
+    path: "/labs/entra-identity-101/",
+    safetyMarker: "liveTenantAccess: disabled"
   }
 ];
 
@@ -102,7 +161,7 @@ if (existsSync("catalog/labs.json")) {
       }
       ids.add(lab.id);
     }
-    for (const expectedId of ["LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
+    for (const expectedId of ["LAB-NET-102", "LAB-SYS-102", "LAB-SEC-101", "LAB-NET-201", "LAB-ID-101", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
       if (!ids.has(expectedId)) {
         errors.push(`catalog/labs.json is missing expected lab: ${expectedId}`);
       }
@@ -148,7 +207,7 @@ if (existsSync("lab-catalog.json")) {
         }
       }
 
-      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101", "LAB-NET-101", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
+      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101", "LAB-NET-101", "LAB-NET-102", "LAB-SYS-102", "LAB-SEC-101", "LAB-NET-201", "LAB-ID-101", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
         if (!productCodes.has(expectedCode)) {
           errors.push(`Launch product manifest is missing expected product: ${expectedCode}`);
         }
@@ -180,6 +239,11 @@ if (existsSync("index.html")) {
     "LAB-LNX-101",
     "LAB-DAT-101",
     "LAB-NET-101",
+    "LAB-NET-102",
+    "LAB-SYS-102",
+    "LAB-SEC-101",
+    "LAB-NET-201",
+    "LAB-ID-101",
     "LAB-REM-201",
     "LAB-FLR-201",
     "LAB-KAL-201",
@@ -217,6 +281,42 @@ for (const lab of analysisLabs) {
       if (!manifest.includes(expected)) {
         errors.push(`${lab.manifest} is missing expected safety metadata: ${expected}`);
       }
+    }
+  }
+}
+
+for (const lab of foundationLabs) {
+  if (existsSync(lab.page)) {
+    const page = readFileSync(lab.page, "utf8");
+    for (const expected of [
+      'data-skunkworks-head="mandatory-v1"',
+      'data-lab-code="' + lab.code + '"',
+      "../it-foundations-labs.css",
+      "../analysis-toolkit-labs.js",
+      'id="assessmentForm"',
+      'id="completion"',
+      "Local learning record only"
+    ]) {
+      if (!page.includes(expected)) {
+        errors.push(lab.page + " is missing expected content: " + expected);
+      }
+    }
+  }
+  if (existsSync(lab.manifest)) {
+    const manifest = readFileSync(lab.manifest, "utf8");
+    for (const expected of ["code: " + lab.code, "environment: browser-only-simulation", "publicNetwork: forbidden", lab.safetyMarker]) {
+      if (!manifest.includes(expected)) {
+        errors.push(lab.manifest + " is missing expected safety metadata: " + expected);
+      }
+    }
+  }
+}
+
+if (existsSync("sitemap.xml")) {
+  const sitemap = readFileSync("sitemap.xml", "utf8");
+  for (const lab of foundationLabs) {
+    if (!sitemap.includes("https://labs.skunkworksacademy.com" + lab.path)) {
+      errors.push("sitemap.xml is missing expected lab: " + lab.path);
     }
   }
 }

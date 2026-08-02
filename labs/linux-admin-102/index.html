@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A full-length Skunkworks Academy lab on Linux files, ownership, permissions, processes, services and evidence-led triage.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/linux-admin-102/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Linux Files, Permissions and Processes | Interactive Lab">
+  <meta property="og:description" content="Practise Linux administration reasoning with simulated terminal evidence and no host-side command execution.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/linux-admin-102/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux Files, Permissions and Processes | Interactive Lab">
+  <meta name="twitter:description" content="A safe, full-length Linux administration workbook.">
+  <title>Linux Files, Permissions and Processes | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../it-foundations-labs.css">
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Linux Files, Permissions and Processes",
+    "description": "A self-paced Linux administration lab that teaches ownership, file permissions, process evidence, service status and journal triage.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/linux-admin-102/",
+    "educationalLevel": "Beginner to Intermediate",
+    "inLanguage": "en",
+    "timeRequired": "PT60M",
+    "isAccessibleForFree": true,
+    "teaches": ["Linux permissions", "File ownership", "Processes", "systemd", "Operational triage"]
+  }
+  </script>
+</head>
+<body data-lab-code="LAB-SYS-102">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-SYS-102 · Linux administration</p>
+          <h1 id="page-title">Linux operations - observe before you alter.</h1>
+          <p class="hero__lead">A safe administrator understands who owns a file, who needs access, what a service manager reports and which log entries belong to the incident before reaching for a restart or a broad permission change.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">Estimated time: 60 minutes · Browser-only simulated terminal · No command runs on your device</p>
+        </div>
+        <aside class="environment-card" aria-label="Simulated Linux operations case">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>ops: app-api-02</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Operations sequence</p>
+            <h2>Ownership → service state → journal context → approved action</h2>
+            <p>Use fictional terminal output to distinguish observation, inference and authorised change.</p>
+            <dl class="environment-facts">
+              <div><dt>Permissions</dt><dd>Owner, group, other</dd></div>
+              <div><dt>Service</dt><dd>Unit-manager state</dd></div>
+              <div><dt>Logs</dt><dd>Timestamped context</dd></div>
+              <div><dt>Scope</dt><dd>Simulation only</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Protect availability and evidence with intentional access and methodical triage.</h2></div>
+        <ul>
+          <li><span>01</span><div><strong>Read permissions with ownership.</strong><br>Use the owner, group and rwx model together; a numeric mode is not a complete access design.</div></li>
+          <li><span>02</span><div><strong>Separate process and service evidence.</strong><br>Understand what a process listing, unit status and journal entry each add to a case.</div></li>
+          <li><span>03</span><div><strong>Make an authorised next move.</strong><br>Preserve evidence, follow the runbook and escalate when change authority is not yours.</div></li>
+        </ul>
+      </section>
+
+      <section class="safety-notice" aria-labelledby="safety-title">
+        <span class="safety-notice__icon" aria-hidden="true">!</span>
+        <div><h2 id="safety-title">Training boundary: simulated command output only</h2><p>Nothing on this page opens a shell, reads a host, changes permissions, restarts a service or collects device information. The examples are fictional. Never copy an operational action into a production system without approved scope, backup and change control.</p></div>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive Linux administration lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><span>Your progress</span><strong id="progressText">0 of 4 completed</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="model"><span class="step-icon" data-step-number="1">1</span><span><b>Access model</b><small>Read owner and mode</small></span></li>
+            <li data-progress-step="permissions"><span class="step-icon" data-step-number="2">2</span><span><b>Permission case</b><small>Apply least privilege</small></span></li>
+            <li data-progress-step="service"><span class="step-icon" data-step-number="3">3</span><span><b>Service triage</b><small>Preserve evidence first</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Knowledge check</b><small>Apply the workflow</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not sent to Skunkworks Academy.</p>
+          <button class="text-button" id="resetProgress" type="button">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="access-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="access-title">Model file access as a deliberate decision.</h2><p>A long permission string means little until you know who owns the object, what group is intended to operate it and whether everyone else should have any access.</p></div></header>
+            <div class="concept-grid">
+              <article class="concept-card"><p class="concept-card__kicker">Owner</p><strong>The first permission triplet belongs to the file owner.</strong><p>For a protected configuration, an administrative owner often controls changes. The correct owner depends on the approved operating model.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Group</p><strong>The second triplet serves a defined operational group.</strong><p>Use a group when approved support or service accounts need access without making the file broadly accessible.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">Other</p><strong>The final triplet applies to everyone else.</strong><p>World-readable or world-writable access is rarely the default for application secrets or service configuration.</p></article>
+            </div>
+            <div class="role-map" aria-label="Example permission interpretation">
+              <div><b>rwx</b><p>Read, write and execute are separate. A file and a directory have different execution semantics.</p></div>
+              <div><b>640</b><p>Illustrative: owner read/write, group read, no access for other. It must match the approved use case.</p></div>
+              <div><b>Ownership</b><p>Mode alone is insufficient. Pair an intentional user and group with the smallest required permission set.</p></div>
+            </div>
+            <fieldset class="choice-fieldset" data-checkpoint="model" data-answer="context" data-success="Correct. File access is an ownership-and-permission decision, not a hunt for the most permissive numeric mode." data-retry="Review the access model: a mode must be read together with intended owner, group and workload.">
+              <legend>Which principle should guide a file-access decision?</legend>
+              <div class="choice-list">
+                <label><input type="radio" name="model" value="context">Choose ownership and the minimum required owner/group/other access for the intended workload.</label>
+                <label><input type="radio" name="model" value="universal">Use the most permissive mode so future users will never face an access issue.</label>
+              </div>
+            </fieldset>
+            <div class="checkpoint-actions"><button class="button button--soft" type="button" data-checkpoint-action data-checkpoint="model">Check access model</button></div>
+            <p class="feedback" id="modelFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="module" aria-labelledby="permissions-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="permissions-title">Resolve a shared-service permission request.</h2><p>The developer needs the running service to read a configuration file. The request is not an instruction to make the file writable by every account.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Simulated terminal evidence</p><h3>Identify the least-privilege design goal.</h3></div><span class="activity-pill">No shell access</span></div>
+              <div class="evidence-grid">
+                <div class="terminal" aria-label="Simulated file ownership and permissions output"><pre><span class="prompt">ops@app-api-02:~$</span> ls -l /srv/academy-api/config/app.env
+<span class="output">-rw------- 1 root root 486 Aug 02 08:14 /srv/academy-api/config/app.env</span>
+<span class="prompt">ops@app-api-02:~$</span> id academy-api
+<span class="output">uid=1024(academy-api) gid=2050(appops) groups=2050(appops)</span>
+<span class="comment"># Service must read the file. Only approved operations staff should maintain it.</span></pre></div>
+                <aside class="evidence-note"><h4>Decision constraints</h4><ul><li>Do not expose secrets through broad “other” permissions.</li><li>Do not give a runtime account write access just because it needs to read.</li><li>Use the approved service group and change-control process.</li></ul></aside>
+              </div>
+              <div class="metric-grid"><div class="metric"><b>Owner</b><span>Controls administrative writes</span></div><div class="metric"><b>Group</b><span>Defines approved runtime/ops read access</span></div><div class="metric"><b>Other</b><span>Should not gain unnecessary visibility</span></div></div>
+              <fieldset class="choice-fieldset" data-checkpoint="permissions" data-answer="owner-group" data-success="Correct. An intentional owner plus approved application-operations group with read-only group access is the defensible design goal. The exact production implementation must follow the team's runbook." data-retry="Not yet. The request is to enable controlled service reading, not to make the file public or writable by all accounts.">
+                <legend>Which recommendation best fits the stated access need?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="permissions" value="owner-group">Keep an administrative owner, assign the approved app-operations group and grant only the service's required read access; keep other users out.</label>
+                  <label><input type="radio" name="permissions" value="world-write">Make the file world-writable so the service and every user can update it.</label>
+                  <label><input type="radio" name="permissions" value="runtime-owner">Make the runtime service account the unrestricted owner so it can modify configuration at any time.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="permissions">Check permission decision</button></div>
+              <p class="feedback" id="permissionsFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="service-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="service-title">Triage a service without destroying the useful context.</h2><p>A restart might become necessary, but it should not be the first reflex. Read the manager state, preserve relevant logs and follow the authorised path.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Simulated service record</p><h3>Turn state and logs into a safe next action.</h3></div><span class="activity-pill">Fictional incident</span></div>
+              <div class="evidence-grid">
+                <div class="terminal" aria-label="Simulated systemd status and journal output"><pre><span class="prompt">ops@app-api-02:~$</span> systemctl status academy-api.service
+<span class="output">● academy-api.service - Academy API
+   Loaded: loaded; enabled
+   Active: failed (Result: exit-code) since 09:14:26
+   Process: 8821 ExecStart=/usr/local/bin/academy-api (code=exited, status=1)</span>
+<span class="prompt">ops@app-api-02:~$</span> journalctl -u academy-api.service --since "09:10"
+<span class="output">09:14:26 academy-api[8821]: configuration validation failed: required value unavailable
+09:14:26 systemd[1]: academy-api.service: Failed with result 'exit-code'.</span>
+<span class="comment"># Do not infer the cause or change configuration from this small excerpt alone.</span></pre></div>
+                <aside class="evidence-note"><h4>Evidence first</h4><ul><li>Record the unit state and timestamp.</li><li>Keep the relevant journal excerpt with the incident ticket.</li><li>Check the approved runbook and ownership before a restart or configuration change.</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="service" data-answer="evidence-first" data-success="Correct. Preserve the status and log evidence, correlate it with the service owner and follow the approved runbook. A restart may be a later authorised action, not an evidence substitute." data-retry="Not yet. Broad permission changes or repeated restarts can obscure the condition and violate change control.">
+                <legend>What is the most defensible next action for this simulated incident?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="service" value="evidence-first">Record the status and relevant logs, correlate with the service owner and follow the approved runbook or escalation route.</label>
+                  <label><input type="radio" name="service" value="restart-loop">Restart the service repeatedly until it appears active.</label>
+                  <label><input type="radio" name="service" value="permission-broad">Make all configuration files writable to remove possible access errors.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="service">Check triage decision</button></div>
+              <p class="feedback" id="serviceFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all seven questions. A score of six or higher marks this browser-only lab as complete.</p></div></header>
+            <form id="assessmentForm" data-pass-score="6">
+              <p class="assessment-intro">The assessment checks safe operations reasoning. It does not authorise a learner to change a system.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="owner-group-other" data-explanation="Linux evaluates the matching permission class in the owner, group, other model."><legend>1. Which order represents the three ordinary permission classes in a Linux mode?</legend><div class="choice-list"><label><input type="radio" name="q1" value="owner-group-other">Owner, group, then other</label><label><input type="radio" name="q1" value="group-owner-other">Group, owner, then other</label><label><input type="radio" name="q1" value="service-user-root">Service, user, then root</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="least-privilege" data-explanation="An intentional owner/group design gives the smallest required access without universal write permissions."><legend>2. What is the best default design goal for a service configuration containing sensitive values?</legend><div class="choice-list"><label><input type="radio" name="q2" value="least-privilege">Deliberate owner and group with only the access each workload needs</label><label><input type="radio" name="q2" value="world-write">World-write so support never encounters an access error</label><label><input type="radio" name="q2" value="anonymous">Anonymous access because the service is internal</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="unit-status" data-explanation="systemctl status provides unit-manager state and recent context."><legend>3. Which source is designed to show a systemd unit's manager state?</legend><div class="choice-list"><label><input type="radio" name="q3" value="unit-status">systemctl status</label><label><input type="radio" name="q3" value="browser">A web browser history</label><label><input type="radio" name="q3" value="file-mode">A file mode alone</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="journal" data-explanation="journalctl -u narrows log review to a named service unit."><legend>4. Which evidence source focuses a log review on one service unit?</legend><div class="choice-list"><label><input type="radio" name="q4" value="journal">journalctl -u followed by the service name</label><label><input type="radio" name="q4" value="chmod">A chmod change</label><label><input type="radio" name="q4" value="grep-only">A guess based on a process name</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="process" data-explanation="A process listing is a point-in-time observation of processes and attributes."><legend>5. What does a process listing primarily contribute to an investigation?</legend><div class="choice-list"><label><input type="radio" name="q5" value="process">Point-in-time process information</label><label><input type="radio" name="q5" value="policy">A complete authorisation policy</label><label><input type="radio" name="q5" value="fix">A guaranteed remediation action</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="preserve" data-explanation="Preserving state and log observations supports diagnosis, change control and auditability."><legend>6. Before a service-state change, what should an operator normally do within the approved process?</legend><div class="choice-list"><label><input type="radio" name="q6" value="preserve">Record relevant status and log evidence</label><label><input type="radio" name="q6" value="wipe">Remove logs to clear disk space</label><label><input type="radio" name="q6" value="bypass">Bypass the change procedure</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="runbook" data-explanation="A production action needs local authority, runbook context and appropriate escalation."><legend>7. What is the appropriate learner response when the next production change is outside their authority?</legend><div class="choice-list"><label><input type="radio" name="q7" value="runbook">Follow the approved runbook and escalation route</label><label><input type="radio" name="q7" value="root">Attempt a privileged change without approval</label><label><input type="radio" name="q7" value="disable">Disable controls until the service works</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div>
+              <div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>After completing the checkpoints and assessment, record your name for a printable personal learning record. It is not a change record, an accredited certificate or evidence of administrative authorisation.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>Linux Files, Permissions and Processes</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the browser-only learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-SYS-102 · 60 minutes · Simulated Linux operations evidence</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, practical competence, change authority or access to a Linux environment.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="./instructor-guide.md">Instructor guide</a> · <a href="https://www.freedesktop.org/software/systemd/man/latest/">systemd documentation</a></p></div></footer>
+</body>
+</html>

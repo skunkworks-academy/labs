@@ -1,0 +1,34 @@
+schemaVersion: 1
+code: LAB-SEC-101
+title: Phishing and Email Header Triage
+status: live
+delivery: interactive-web-lab
+durationMinutes: 55
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  externalLinks: non-clickable-training-indicators-only
+  messageFixtures: synthetic-only
+  attachmentHandling: no-downloads
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Separate message claims from the authentication and routing evidence in an email header.
+  - Interpret simplified SPF, DKIM and DMARC outcomes as signals, not standalone proof.
+  - Recognise unsafe handling actions and use a safe reporting and containment path.
+  - Write a concise triage note with confidence, evidence and next action.
+evidence:
+  checkpoints:
+    - header-evidence-check
+    - safe-disposition-check
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-SEC-101
+  data_classification: public-learning-content
+  cost_tier: none

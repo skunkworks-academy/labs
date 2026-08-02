@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A full-length Skunkworks Academy lab on safe phishing and email-header triage using synthetic evidence only.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/phishing-triage-101/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Phishing and Email Header Triage | Interactive Lab">
+  <meta property="og:description" content="Learn to preserve, assess and safely report a suspicious email without opening a link or attachment.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/phishing-triage-101/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Phishing and Email Header Triage | Interactive Lab">
+  <meta name="twitter:description" content="A safety-first browser-only phishing-triage workbook.">
+  <title>Phishing and Email Header Triage | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../it-foundations-labs.css">
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Phishing and Email Header Triage",
+    "description": "A self-paced safety-first lab that teaches email header evidence, authentication signals and a defensible phishing-reporting workflow.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/phishing-triage-101/",
+    "educationalLevel": "Beginner",
+    "inLanguage": "en",
+    "timeRequired": "PT55M",
+    "isAccessibleForFree": true,
+    "teaches": ["Phishing triage", "Email headers", "SPF", "DKIM", "DMARC", "Security reporting"]
+  }
+  </script>
+</head>
+<body data-lab-code="LAB-SEC-101">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-SEC-101 · Cyber defence foundations</p>
+          <h1 id="page-title">Phishing triage - trust evidence, not urgency.</h1>
+          <p class="hero__lead">A message can look familiar, sound urgent and still need careful handling. Learn how to preserve it, read the evidence it carries and report it without opening a link, attachment or external site.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">Estimated time: 55 minutes · Browser-only synthetic message · No active links, attachments or external investigations</p>
+        </div>
+        <aside class="environment-card" aria-label="Synthetic phishing triage case summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>case: message-204</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Triage sequence</p>
+            <h2>Preserve → inspect evidence → report → escalate if interaction occurred</h2>
+            <p>Assess a fictional message without treating any one field as conclusive proof.</p>
+            <dl class="environment-facts">
+              <div><dt>Fixture</dt><dd>Synthetic only</dd></div>
+              <div><dt>Headers</dt><dd>Selectable text</dd></div>
+              <div><dt>Handling</dt><dd>No click, no open</dd></div>
+              <div><dt>Outcome</dt><dd>Evidence-led triage</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Turn a suspicious-email reaction into a reliable, reportable workflow.</h2></div>
+        <ul>
+          <li><span>01</span><div><strong>Separate claim from evidence.</strong><br>A familiar display name or urgent wording is a claim; routing and authentication outcomes are evidence to assess in context.</div></li>
+          <li><span>02</span><div><strong>Interpret authentication signals.</strong><br>Use simplified SPF, DKIM and DMARC results as indicators, not a one-line verdict on a message.</div></li>
+          <li><span>03</span><div><strong>Choose the safe disposition.</strong><br>Preserve and report through the approved route, then escalate according to whether interaction occurred.</div></li>
+        </ul>
+      </section>
+
+      <section class="safety-notice" aria-labelledby="safety-title">
+        <span class="safety-notice__icon" aria-hidden="true">!</span>
+        <div><h2 id="safety-title">Training boundary: do not open or investigate external content</h2><p>This lab contains fictional headers and non-routable training identifiers. No link or attachment is provided. In a real workplace, use the approved report-phishing capability or security channel; do not reply, forward externally, click or open a suspicious attachment to “test” it.</p></div>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive phishing and email-header triage lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><span>Your progress</span><strong id="progressText">0 of 4 completed</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="model"><span class="step-icon" data-step-number="1">1</span><span><b>Triage model</b><small>Preserve and assess</small></span></li>
+            <li data-progress-step="header"><span class="step-icon" data-step-number="2">2</span><span><b>Header evidence</b><small>Read signals in context</small></span></li>
+            <li data-progress-step="disposition"><span class="step-icon" data-step-number="3">3</span><span><b>Disposition</b><small>Report and escalate</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Knowledge check</b><small>Apply safe handling</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not sent to Skunkworks Academy.</p>
+          <button class="text-button" id="resetProgress" type="button">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="model-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="model-title">Build the safe first-pass habit.</h2><p>Header analysis is useful only when it is paired with controlled handling. The first objective is not to prove a global attribution; it is to preserve the message and give the right team a usable report.</p></div></header>
+            <div class="decision-grid">
+              <article class="decision-card"><h4>Do preserve</h4><p>The message, headers, recipient context, time and any user-reported interaction. Use the organisation's approved reporting route.</p></article>
+              <article class="decision-card"><h4>Do not “confirm” by clicking</h4><p>Opening a link or attachment can create harm, trigger tracking or alter the evidence. A learner does not need to reproduce an incident.</p></article>
+              <article class="decision-card"><h4>Do read authentication results</h4><p>SPF, DKIM and DMARC add evidence. Consider their alignment and the delivery path alongside the message claim.</p></article>
+              <article class="decision-card"><h4>Do escalate a confirmed interaction</h4><p>A click, credential submission or attachment execution changes the incident path and requires the approved security response.</p></article>
+            </div>
+            <div class="callout"><strong>Three-line triage note:</strong> scope and claim; evidence observed; recommended next action. This turns the report into something a service desk or security analyst can act on.</div>
+            <fieldset class="choice-fieldset" data-checkpoint="model" data-answer="preserve" data-success="Correct. Safe triage preserves the message, avoids interaction and routes evidence through an approved reporting path." data-retry="Review the boundary: a suspicious message is not a laboratory target for a learner.">
+              <legend>Which is the safest first-pass handling approach?</legend>
+              <div class="choice-list">
+                <label><input type="radio" name="model" value="preserve">Preserve the message and report it through the approved channel without clicking, replying or opening attachments.</label>
+                <label><input type="radio" name="model" value="test">Open the link in a private browser window to see whether it asks for a password.</label>
+              </div>
+            </fieldset>
+            <div class="checkpoint-actions"><button class="button button--soft" type="button" data-checkpoint-action data-checkpoint="model">Check triage model</button></div>
+            <p class="feedback" id="modelFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="module" aria-labelledby="header-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="header-title">Read a header as a set of clues.</h2><p>The display name and subject set a story. The following fictional header summary helps you evaluate whether the mail path and authentication evidence support that story.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Synthetic email fixture</p><h3>Document what the header supports - and what it does not.</h3></div><span class="activity-pill">No live message</span></div>
+              <div class="header-block" aria-label="Fictional email header summary"><pre><span class="key">From:</span> <span class="value">Skunkworks Academy Finance &lt;finance@skunkworksacademy.training&gt;</span>
+<span class="key">Subject:</span> <span class="value">Action required: payroll profile review</span>
+<span class="key">Return-Path:</span> <span class="flag">&lt;notices@training-notice.example&gt;</span>
+<span class="key">Authentication-Results:</span> <span class="value">mx.training.example;</span>
+  <span class="flag">spf=fail</span> smtp.mailfrom=training-notice.example;
+  <span class="flag">dkim=none</span>;
+  <span class="flag">dmarc=fail</span> header.from=skunkworksacademy.training
+<span class="key">Received:</span> <span class="value">from relay.training.example (192.0.2.18)</span>
+<span class="key">Body claim:</span> <span class="flag">“Review your profile using the secure portal link below.”</span>
+<span class="key">Lab note:</span> <span class="value">No link is provided; all identifiers are fictional training values.</span></pre></div>
+              <div class="case-grid">
+                <div class="case-file"><h4>Evidence reading guide</h4><ul><li>A display name and From header are not proof of the sender's identity.</li><li>The return path differs from the visible From domain in this fixture.</li><li>SPF fail, no DKIM signature and DMARC fail are relevant signals that should be retained in the report.</li><li>These signals support a cautious disposition; they do not let a learner make a criminal attribution.</li></ul></div>
+                <aside class="evidence-note"><h4>Report-ready facts</h4><ul><li>Message subject and time received.</li><li>Visible From and return path.</li><li>Authentication result summary.</li><li>Whether the recipient interacted.</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="header" data-answer="record" data-success="Correct. Capture the visible claim and the authentication/routing results, then report the suspicious message through the approved route. The evidence supports concern without requiring a learner to click or investigate externally." data-retry="Not yet. A safe triage note records evidence and routes it to the authorised team; it does not require opening the claimed portal or naming an attacker.">
+                <legend>What is the best first-pass analyst conclusion for this synthetic message?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="header" value="record">Record the From/return-path mismatch and the failed authentication signals, preserve the message and use the approved reporting workflow.</label>
+                  <label><input type="radio" name="header" value="open">Open the claimed portal to determine whether the request is real.</label>
+                  <label><input type="radio" name="header" value="attribution">State with certainty who sent the message based only on the header summary.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="header">Check header triage</button></div>
+              <p class="feedback" id="headerFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="disposition-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="disposition-title">Choose the safe disposition and escalation boundary.</h2><p>What the recipient did matters. A message that is only reported follows one path; a confirmed click, credential entry or attachment execution needs incident escalation.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Case update</p><h3>The recipient has not clicked, replied or opened an attachment.</h3></div><span class="activity-pill">No interaction reported</span></div>
+              <ul class="policy-list">
+                <li><span>1</span><div><strong>Report:</strong> use the organisation's approved report-phishing action or security channel.</div></li>
+                <li><span>2</span><div><strong>Preserve:</strong> keep the original message and header evidence available to the authorised reviewer.</div></li>
+                <li><span>3</span><div><strong>Inform:</strong> advise the recipient not to click, reply, forward externally or open any attachment.</div></li>
+                <li><span>4</span><div><strong>Escalate if interaction emerges:</strong> follow the incident-response playbook if a user reports a click, credential entry or execution.</div></li>
+              </ul>
+              <fieldset class="choice-fieldset" data-checkpoint="disposition" data-answer="report-preserve" data-success="Correct. Report and preserve the message, advise no further interaction and use the incident path if the user later reports a click or credential entry." data-retry="Not yet. A learner should not delete the evidence, reply to the sender or test the message.">
+                <legend>What is the appropriate disposition for this reported, non-interacted-with message?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="disposition" value="report-preserve">Report through the approved channel, preserve the message and tell the recipient not to interact; escalate under the incident process if interaction is confirmed.</label>
+                  <label><input type="radio" name="disposition" value="reply">Reply to the sender from a personal address to verify the payroll request.</label>
+                  <label><input type="radio" name="disposition" value="delete-only">Delete it immediately without preserving or reporting the evidence.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="disposition">Check disposition</button></div>
+              <p class="feedback" id="dispositionFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all seven questions. A score of six or higher marks this browser-only lab as complete.</p></div></header>
+            <form id="assessmentForm" data-pass-score="6">
+              <p class="assessment-intro">This assessment rewards safe, documented decisions. It does not determine whether a real-world email is malicious.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="report" data-explanation="Preserve and report through the approved process rather than spreading or interacting with the message."><legend>1. What is the safest first action for a suspicious message in an organisation?</legend><div class="choice-list"><label><input type="radio" name="q1" value="report">Preserve and report it through the approved channel</label><label><input type="radio" name="q1" value="open">Open every attachment to confirm its contents</label><label><input type="radio" name="q1" value="reply">Reply to the sender for verification</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="signals" data-explanation="SPF, DKIM and DMARC add relevant authentication evidence, but are evaluated in context."><legend>2. How should SPF, DKIM and DMARC outcomes be used in a first-pass triage?</legend><div class="choice-list"><label><input type="radio" name="q2" value="signals">As authentication signals considered with the full message context</label><label><input type="radio" name="q2" value="guarantee">As an automatic guarantee that a message is harmless</label><label><input type="radio" name="q2" value="ignore">They should always be ignored</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="no-open" data-explanation="Opening a link or attachment to test it can create harm and is outside a learner's safe handling boundary."><legend>3. What should a learner do with a suspicious link or attachment during this workflow?</legend><div class="choice-list"><label><input type="radio" name="q3" value="no-open">Do not open it; use the approved reporting path</label><label><input type="radio" name="q3" value="sandbox-personal">Open it in a personal browser to see the destination</label><label><input type="radio" name="q3" value="forward">Forward it to contacts for a second opinion</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="display" data-explanation="A display name can be chosen by the sender and is not authentication proof."><legend>4. What does a familiar display name prove about an email sender?</legend><div class="choice-list"><label><input type="radio" name="q4" value="display">It is a message claim, not proof of identity</label><label><input type="radio" name="q4" value="proof">It proves the message came from that organisation</label><label><input type="radio" name="q4" value="dmarc">It proves DMARC passed</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="note" data-explanation="A helpful triage note states scope, evidence, confidence and an actionable next step."><legend>5. What makes a triage note useful to the next analyst?</legend><div class="choice-list"><label><input type="radio" name="q5" value="note">Evidence observed, confidence and recommended next action</label><label><input type="radio" name="q5" value="rumour">A rumour about who might have sent it</label><label><input type="radio" name="q5" value="click">A screenshot after opening the link</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="incident" data-explanation="Interaction changes the risk. Follow the organisation's incident-response procedure."><legend>6. What should happen if a user reports that they entered credentials after clicking?</legend><div class="choice-list"><label><input type="radio" name="q6" value="incident">Escalate through the approved incident-response process</label><label><input type="radio" name="q6" value="hide">Hide the interaction to avoid embarrassment</label><label><input type="radio" name="q6" value="wait">Wait for more messages before informing anyone</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="synthetic" data-explanation="The lab's addresses and domains are documentation-only synthetic values, not external targets."><legend>7. What is the correct treatment of the addresses and domains in this lab fixture?</legend><div class="choice-list"><label><input type="radio" name="q7" value="synthetic">Treat them as synthetic training indicators only</label><label><input type="radio" name="q7" value="investigate">Search and visit them on the public internet</label><label><input type="radio" name="q7" value="customer">Assume they belong to a customer</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div>
+              <div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>After completing the checkpoints and assessment, record your name for a printable personal learning record. It is not a forensic finding, a verified security credential or an authority to investigate external content.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>Phishing and Email Header Triage</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the browser-only learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-SEC-101 · 55 minutes · Synthetic email evidence</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, professional competence, incident authority or a real-world email verdict.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="./instructor-guide.md">Instructor guide</a> · <a href="https://www.cisa.gov/news-events/directives/bod-18-01-enhance-email-and-web-security">Email-security reference</a></p></div></footer>
+</body>
+</html>

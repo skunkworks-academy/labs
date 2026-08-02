@@ -1,0 +1,34 @@
+schemaVersion: 1
+code: LAB-NET-201
+title: Wireshark PCAP Investigation
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  packetCapture: synthetic-only
+  liveCapture: disabled
+  activeScanning: disabled
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Read a synthetic capture timeline without making claims beyond the evidence.
+  - Identify a TCP three-way handshake, a DNS query and a connection close.
+  - Use safe display-filter reasoning to narrow a packet-review question.
+  - Preserve timestamps, filters and observations in an evidence-led triage note.
+evidence:
+  checkpoints:
+    - packet-flow-interpreter
+    - evidence-led-triage
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-NET-201
+  data_classification: public-learning-content
+  cost_tier: none

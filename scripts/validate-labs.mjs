@@ -56,7 +56,27 @@ const requiredFiles = [
   "labs/entra-identity-101/index.html",
   "labs/entra-identity-101/README.md",
   "labs/entra-identity-101/manifest.yaml",
-  "labs/entra-identity-101/instructor-guide.md"
+  "labs/entra-identity-101/instructor-guide.md",
+  "labs/cloud-foundations-101/index.html",
+  "labs/cloud-foundations-101/README.md",
+  "labs/cloud-foundations-101/manifest.yaml",
+  "labs/cloud-foundations-101/instructor-guide.md",
+  "labs/azure-landing-zone-101/index.html",
+  "labs/azure-landing-zone-101/README.md",
+  "labs/azure-landing-zone-101/manifest.yaml",
+  "labs/azure-landing-zone-101/instructor-guide.md",
+  "labs/gcp-iam-finops-101/index.html",
+  "labs/gcp-iam-finops-101/README.md",
+  "labs/gcp-iam-finops-101/manifest.yaml",
+  "labs/gcp-iam-finops-101/instructor-guide.md",
+  "labs/git-secure-collaboration-101/index.html",
+  "labs/git-secure-collaboration-101/README.md",
+  "labs/git-secure-collaboration-101/manifest.yaml",
+  "labs/git-secure-collaboration-101/instructor-guide.md",
+  "labs/sql-analysts-102/index.html",
+  "labs/sql-analysts-102/README.md",
+  "labs/sql-analysts-102/manifest.yaml",
+  "labs/sql-analysts-102/instructor-guide.md"
 ];
 
 const analysisLabs = [
@@ -115,6 +135,41 @@ const foundationLabs = [
     manifest: "labs/entra-identity-101/manifest.yaml",
     path: "/labs/entra-identity-101/",
     safetyMarker: "liveTenantAccess: disabled"
+  },
+  {
+    code: "LAB-CLD-101",
+    page: "labs/cloud-foundations-101/index.html",
+    manifest: "labs/cloud-foundations-101/manifest.yaml",
+    path: "/labs/cloud-foundations-101/",
+    safetyMarker: "liveCloudAccess: disabled"
+  },
+  {
+    code: "LAB-AZ-101",
+    page: "labs/azure-landing-zone-101/index.html",
+    manifest: "labs/azure-landing-zone-101/manifest.yaml",
+    path: "/labs/azure-landing-zone-101/",
+    safetyMarker: "liveTenantAccess: disabled"
+  },
+  {
+    code: "LAB-GCP-101",
+    page: "labs/gcp-iam-finops-101/index.html",
+    manifest: "labs/gcp-iam-finops-101/manifest.yaml",
+    path: "/labs/gcp-iam-finops-101/",
+    safetyMarker: "liveProjectAccess: disabled"
+  },
+  {
+    code: "LAB-DEV-101",
+    page: "labs/git-secure-collaboration-101/index.html",
+    manifest: "labs/git-secure-collaboration-101/manifest.yaml",
+    path: "/labs/git-secure-collaboration-101/",
+    safetyMarker: "repositoryAccess: disabled"
+  },
+  {
+    code: "LAB-DAT-102",
+    page: "labs/sql-analysts-102/index.html",
+    manifest: "labs/sql-analysts-102/manifest.yaml",
+    path: "/labs/sql-analysts-102/",
+    safetyMarker: "liveDatabaseAccess: disabled"
   }
 ];
 
@@ -161,7 +216,7 @@ if (existsSync("catalog/labs.json")) {
       }
       ids.add(lab.id);
     }
-    for (const expectedId of ["LAB-NET-102", "LAB-SYS-102", "LAB-SEC-101", "LAB-NET-201", "LAB-ID-101", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
+    for (const expectedId of ["LAB-NET-102", "LAB-SYS-102", "LAB-SEC-101", "LAB-NET-201", "LAB-ID-101", "LAB-CLD-101", "LAB-AZ-101", "LAB-GCP-101", "LAB-DEV-101", "LAB-DAT-102", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
       if (!ids.has(expectedId)) {
         errors.push(`catalog/labs.json is missing expected lab: ${expectedId}`);
       }
@@ -207,7 +262,7 @@ if (existsSync("lab-catalog.json")) {
         }
       }
 
-      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101", "LAB-NET-101", "LAB-NET-102", "LAB-SYS-102", "LAB-SEC-101", "LAB-NET-201", "LAB-ID-101", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
+      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101", "LAB-NET-101", "LAB-NET-102", "LAB-SYS-102", "LAB-SEC-101", "LAB-NET-201", "LAB-ID-101", "LAB-CLD-101", "LAB-AZ-101", "LAB-GCP-101", "LAB-DEV-101", "LAB-DAT-102", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
         if (!productCodes.has(expectedCode)) {
           errors.push(`Launch product manifest is missing expected product: ${expectedCode}`);
         }
@@ -244,6 +299,11 @@ if (existsSync("index.html")) {
     "LAB-SEC-101",
     "LAB-NET-201",
     "LAB-ID-101",
+    "LAB-CLD-101",
+    "LAB-AZ-101",
+    "LAB-GCP-101",
+    "LAB-DEV-101",
+    "LAB-DAT-102",
     "LAB-REM-201",
     "LAB-FLR-201",
     "LAB-KAL-201",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "catalogVersion": "2026-08-02.1",
+  "catalogVersion": "2026-08-02.2",
   "products": [
     {
       "code": "LAB-LNX-101",
@@ -224,6 +224,96 @@
         "Apply least-privilege assignment to a representative support case",
         "Plan a policy pilot, monitoring and recovery sequence",
         "Account for governed emergency access in tenant resilience"
+      ]
+    },
+    {
+      "code": "LAB-CLD-101",
+      "title": "Cloud Foundations and Shared Responsibility",
+      "summary": "Choose an appropriate cloud service model, map ownership and design identity, recovery and cost guardrails without a live cloud account.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/cloud-foundations-101/",
+      "objectives": [
+        "Choose IaaS, PaaS or SaaS from workload control requirements",
+        "Map shared responsibility for data, identity, configuration and operations",
+        "Design launch guardrails for environments, recovery, monitoring and cost ownership",
+        "Explain why real cloud changes require approved authority and a recovery plan"
+      ]
+    },
+    {
+      "code": "LAB-AZ-101",
+      "title": "Azure Landing Zone Essentials",
+      "summary": "Design an Azure workload landing path using management groups, subscriptions, RBAC, Azure Policy and operating guardrails in a browser-only simulation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/azure-landing-zone-101/",
+      "objectives": [
+        "Explain the governance roles of management groups, subscriptions, resource groups and resources",
+        "Distinguish Azure RBAC from Azure Policy",
+        "Design a workload onboarding path with ownership, cost, operational and recovery guardrails",
+        "Identify approvals and least-privilege requirements for a real Azure change"
+      ]
+    },
+    {
+      "code": "LAB-GCP-101",
+      "title": "Google Cloud IAM and FinOps Guardrails",
+      "summary": "Design a Google Cloud resource hierarchy, least-privilege access, labels, budgets and cost-response guardrails using a browser-only simulation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/gcp-iam-finops-101/",
+      "objectives": [
+        "Explain the Google Cloud organisation, folder and project hierarchy",
+        "Apply least-privilege IAM using named principals, narrow roles and explicit scope",
+        "Describe credential risks from broad roles, shared accounts and long-lived copied keys",
+        "Build a FinOps plan with labels, budgets, threshold notifications and response"
+      ]
+    },
+    {
+      "code": "LAB-DEV-101",
+      "title": "Git, GitHub and Secure Collaboration",
+      "summary": "Create a safe software change path with branches, commits, pull requests, reviews, protected default branches and secret-safe workflows.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/git-secure-collaboration-101/",
+      "objectives": [
+        "Explain branches, commits, pull requests, reviews and merges",
+        "Prepare reviewable change evidence with validation, risk and rollback information",
+        "Describe how protected branches/rulesets and required checks support safe integration",
+        "Apply a safe response to suspected credential exposure"
+      ]
+    },
+    {
+      "code": "LAB-DAT-102",
+      "title": "SQL for Analysts",
+      "summary": "Turn a bounded business question into safe SQL selection, filters, joins and aggregate interpretation with synthetic data only.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/sql-analysts-102/",
+      "objectives": [
+        "Translate a question into minimal field and filter design",
+        "Explain table relationships and use a documented join key",
+        "Apply grouping/aggregate reasoning and state the limits of a result",
+        "Follow data minimisation and approved access practices"
       ]
     }
   ]

@@ -1,0 +1,36 @@
+schemaVersion: 1
+code: LAB-DEV-101
+title: Git, GitHub and Secure Collaboration
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerRepositoryCredentials: false
+safety:
+  publicNetwork: forbidden
+  repositoryAccess: disabled
+  gitExecution: disabled
+  secretSubmission: forbidden
+  branchChanges: simulated-only
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain the purposes of branches, commits, pull requests, reviews and merges.
+  - Prepare a reviewable change with clear intent, validation evidence, risk and rollback information.
+  - Describe how protected branches/rulesets and required checks support safe default-branch integration.
+  - Apply a safe response to suspected credential exposure.
+evidence:
+  checkpoints:
+    - focused-branch-workflow
+    - pull-request-evidence-review
+    - default-branch-and-secret-protection
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-DEV-101
+  data_classification: public-learning-content
+  cost_tier: none

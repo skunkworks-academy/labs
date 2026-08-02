@@ -1,0 +1,36 @@
+schemaVersion: 1
+code: LAB-DAT-102
+title: SQL for Analysts
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerDatabaseCredentials: false
+safety:
+  publicNetwork: forbidden
+  liveDatabaseAccess: disabled
+  queryExecution: disabled
+  personalData: synthetic-only
+  sqlInput: disabled
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Translate a bounded business question into a minimal field and filter design.
+  - Explain table relationships and use a documented key when joining records.
+  - Apply grouping and aggregate reasoning, then state the limitations of the result.
+  - Follow data minimisation, approved access and safe application-query practices.
+evidence:
+  checkpoints:
+    - minimal-query-design
+    - documented-join-relationship
+    - aggregate-interpretation-boundary
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-DAT-102
+  data_classification: public-learning-content
+  cost_tier: none

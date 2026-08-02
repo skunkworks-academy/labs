@@ -29,6 +29,24 @@
         "providers": ["payfast", "paypal"],
         "activation": "verified-webhook-only"
       }
+    },
+    {
+      "code": "LAB-DAT-101",
+      "title": "Bits, Bytes & Binary Fundamentals",
+      "summary": "Build a practical mental model of digital data with binary switches, bit-to-byte conversion challenges, data-rate examples and a short knowledge check.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 25,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/bits-and-bytes-101/",
+      "objectives": [
+        "Explain the relationship between bits and bytes",
+        "Read an eight-bit binary value",
+        "Convert bits to bytes and bytes to bits",
+        "Distinguish data-rate and storage-unit notation"
+      ]
     }
   ]
 }

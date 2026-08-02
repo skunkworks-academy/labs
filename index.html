@@ -154,6 +154,7 @@
     .notice p { margin: 0; font-size: .93rem; }
 
     .catalog { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 0; overflow: hidden; border: 1px solid var(--steel); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
+    .catalog + .catalog { margin-top: 18px; }
     .catalog-main { padding: 30px; }
     .catalog-code { display: inline-block; margin-bottom: 10px; color: var(--blue); font-family: "IBM Plex Mono", monospace; font-size: .82rem; font-weight: 600; }
     .catalog h3 { font-size: 1.7rem; line-height: 1.1; }
@@ -270,8 +271,8 @@
         <div class="section-heading">
           <div class="orange-rule" aria-hidden="true"></div>
           <p class="eyebrow">Launch catalogue</p>
-          <h2 id="catalogue-title">Start with one controlled lab, then expand with confidence.</h2>
-          <p>We are launching the smallest useful environment first: an isolated Linux terminal. It validates the complete learner journey before higher-cost cloud sandboxes are introduced.</p>
+          <h2 id="catalogue-title">Start with strong fundamentals, then expand with confidence.</h2>
+          <p>Use the self-paced data foundations lab immediately, then move into the controlled Linux terminal pilot. This keeps the learning journey practical while more advanced cloud sandboxes are introduced deliberately.</p>
         </div>
         <div class="catalog" id="labCard" aria-live="polite">
           <div class="catalog-main">
@@ -283,6 +284,18 @@
           <div class="catalog-aside">
             <div><small>Access model</small><strong>Invitation-only launch pilot</strong></div>
             <a class="button" href="mailto:training@skunkworks.africa?subject=LAB-LNX-101%20Launch%20Pilot&body=Please%20send%20me%20the%20LAB-LNX-101%20pilot%20access%20details.">Request pilot access</a>
+          </div>
+        </div>
+        <div class="catalog" aria-label="Available self-paced foundations lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-DAT-101</span>
+            <h3>Bits, Bytes &amp; Binary Fundamentals</h3>
+            <p>Build a practical mental model of digital data with binary switches, bit-to-byte conversion challenges, data-rate examples and a short knowledge check.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">25 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No sign-in</span></div>
+          </div>
+          <div class="catalog-aside">
+            <div><small>Access model</small><strong>Available now</strong></div>
+            <a class="button" href="/labs/bits-and-bytes-101/">Start self-paced lab</a>
           </div>
         </div>
       </section>

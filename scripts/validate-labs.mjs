@@ -10,7 +10,12 @@ const requiredFiles = [
   "assets/icons/favicon-white.png",
   "assets/icons/apple-touch-icon.png",
   "assets/icons/icon-192.png",
-  "assets/icons/icon-512.png"
+  "assets/icons/icon-512.png",
+  "labs/bits-and-bytes-101/index.html",
+  "labs/bits-and-bytes-101/lab.css",
+  "labs/bits-and-bytes-101/lab.js",
+  "labs/bits-and-bytes-101/manifest.yaml",
+  "labs/bits-and-bytes-101/instructor-guide.md"
 ];
 
 const errors = [];
@@ -72,8 +77,13 @@ if (existsSync("lab-catalog.json")) {
     }
 
     if (Array.isArray(manifest.products)) {
+      const productCodes = new Set();
       for (const product of manifest.products) {
         requireFields(product, ["code", "title", "summary", "availability", "delivery", "durationMinutes", "level"], "Launch product");
+        if (productCodes.has(product.code)) {
+          errors.push(`Launch product code is duplicated: ${product.code ?? "unknown"}`);
+        }
+        productCodes.add(product.code);
         if (!Number.isFinite(product.durationMinutes) || product.durationMinutes <= 0) {
           errors.push(`Launch product has an invalid durationMinutes value: ${product.code ?? "unknown"}`);
         }
@@ -87,6 +97,12 @@ if (existsSync("lab-catalog.json")) {
           if (!Array.isArray(product.checkout.providers) || product.checkout.providers.length === 0) {
             errors.push(`Launch product checkout must list at least one provider: ${product.code ?? "unknown"}`);
           }
+        }
+      }
+
+      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101"]) {
+        if (!productCodes.has(expectedCode)) {
+          errors.push(`Launch product manifest is missing expected product: ${expectedCode}`);
         }
       }
     }
@@ -114,6 +130,7 @@ if (existsSync("index.html")) {
     "data-skunkworks-head=\"mandatory-v1\"",
     "/lab-catalog.json",
     "LAB-LNX-101",
+    "LAB-DAT-101",
     "Launch catalogue",
     "/site.webmanifest",
     "/assets/icons/favicon-black.png",

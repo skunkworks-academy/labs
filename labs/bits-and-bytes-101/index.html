@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A hands-on Skunkworks Academy lab for understanding bits, bytes, binary values, data-rate notation and digital storage units.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Bits, Bytes &amp; Binary Fundamentals | Interactive Lab">
+  <meta property="og:description" content="Build an accurate mental model of digital data through interactive binary, byte and conversion exercises.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bits, Bytes &amp; Binary Fundamentals | Interactive Lab">
+  <meta name="twitter:description" content="A practical Skunkworks Academy lab for digital data foundations.">
+  <title>Bits, Bytes &amp; Binary Fundamentals | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./lab.css">
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.07.04" data-skunkworks-global-nav="v3"></script>
+  <script defer src="./lab.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Bits, Bytes & Binary Fundamentals",
+    "description": "An interactive, self-paced lab that teaches bits, bytes, binary values, data-rate notation and storage-unit prefixes from first principles.",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "Skunkworks Academy",
+      "url": "https://skunkworksacademy.com/"
+    },
+    "url": "https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/",
+    "educationalLevel": "Beginner",
+    "inLanguage": "en",
+    "timeRequired": "PT25M",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "Bits and bytes",
+      "Binary representation",
+      "Bit and byte conversion",
+      "Data-rate notation",
+      "Decimal and binary storage prefixes"
+    ]
+  }
+  </script>
+</head>
+<body data-repo="labs" data-domain="labs.skunkworksacademy.com">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow">LAB-DAT-101 · Digital foundations</p>
+          <h1 id="page-title">Bits, bytes and binary - made practical.</h1>
+          <p class="hero__lead">Use the switches, solve the conversions and test your understanding. By the end, you will know why a byte has eight bits and when a capital <strong>B</strong> changes the meaning of a measurement.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">Estimated time: 25 minutes · No sign-in or cloud environment required</p>
+        </div>
+
+        <aside class="byte-hero-card" aria-label="Key bit and byte relationship">
+          <p class="byte-hero-card__label">The key relationship</p>
+          <div class="hero-byte" aria-label="One byte equals eight bits">
+            <span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span><span>0</span>
+          </div>
+          <p class="byte-hero-card__equation">1 byte = 8 bits</p>
+          <dl class="hero-facts">
+            <div><dt>bit</dt><dd>One on/off value: 0 or 1</dd></div>
+            <div><dt>byte</dt><dd>A group of eight bits</dd></div>
+            <div><dt>2<sup>8</sup></dt><dd>256 possible byte values</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="lab-summary" id="objectives" aria-labelledby="objectives-title">
+        <div>
+          <p class="eyebrow eyebrow--blue">Lab summary</p>
+          <h2 id="objectives-title">Build a usable mental model of digital data.</h2>
+        </div>
+        <ul class="objectives-list">
+          <li><span aria-hidden="true">01</span> Explain the difference between a bit and a byte.</li>
+          <li><span aria-hidden="true">02</span> Read an eight-bit binary value and calculate its decimal value.</li>
+          <li><span aria-hidden="true">03</span> Convert bits to bytes and bytes to bits accurately.</li>
+          <li><span aria-hidden="true">04</span> Distinguish data rates, storage units, <code>kB</code> and <code>KiB</code>.</li>
+        </ul>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive Bits and Bytes lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head">
+            <p class="eyebrow eyebrow--blue">Your progress</p>
+            <strong id="progressText">0 of 4 completed</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-step-id="byte"><span class="step-icon">1</span><span><b>Build a byte</b><small>Binary switches</small></span></li>
+            <li data-step-id="conversion"><span class="step-icon">2</span><span><b>Convert values</b><small>Bits and bytes</small></span></li>
+            <li data-step-id="units"><span class="step-icon">3</span><span><b>Read units</b><small>Speed and storage</small></span></li>
+            <li data-step-id="assessment"><span class="step-icon">4</span><span><b>Check understanding</b><small>Mini assessment</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is saved only in this browser. It is not a verified credential.</p>
+          <button class="text-button" type="button" id="resetProgress">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="module-byte-title">
+            <header class="module__header">
+              <p class="module__number">Module 1</p>
+              <div><h2 id="module-byte-title">Build a byte from eight switches.</h2><p>A bit is the smallest unit of digital data. It can be off (<code>0</code>) or on (<code>1</code>). A byte is simply eight of those bits together.</p></div>
+            </header>
+
+            <div class="concept-grid">
+              <article class="concept-card concept-card--bit"><p class="concept-card__kicker">Bit</p><strong>0 or 1</strong><p>Think of one bit as one light switch: it has two possible states.</p></article>
+              <article class="concept-card concept-card--byte"><p class="concept-card__kicker">Byte</p><strong>8 bits</strong><p>Eight switches make a byte. Each position has a different value.</p></article>
+              <article class="concept-card concept-card--value"><p class="concept-card__kicker">Byte range</p><strong>0-255</strong><p>Eight bits can represent 256 distinct values: 0 through 255.</p></article>
+            </div>
+
+            <article class="activity-card" aria-labelledby="byte-builder-title">
+              <div class="activity-card__head">
+                <div><p class="activity-label">Interactive switch builder</p><h3 id="byte-builder-title">Make the target number.</h3></div>
+                <button class="small-button" type="button" id="newByteTarget">New target</button>
+              </div>
+              <p id="byteTarget" class="challenge-prompt">Set the switches to make <strong>178</strong> in decimal. Use the values above each switch to decide which bits must be on.</p>
+
+              <div class="byte-builder" role="group" aria-label="Eight bit byte builder">
+                <div class="bit-control"><span>128</span><button type="button" class="bit-toggle" data-bit-index="0" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>64</span><button type="button" class="bit-toggle" data-bit-index="1" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>32</span><button type="button" class="bit-toggle" data-bit-index="2" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>16</span><button type="button" class="bit-toggle" data-bit-index="3" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>8</span><button type="button" class="bit-toggle" data-bit-index="4" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>4</span><button type="button" class="bit-toggle" data-bit-index="5" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>2</span><button type="button" class="bit-toggle" data-bit-index="6" aria-pressed="false"><b>0</b><small>off</small></button></div>
+                <div class="bit-control"><span>1</span><button type="button" class="bit-toggle" data-bit-index="7" aria-pressed="false"><b>0</b><small>off</small></button></div>
+              </div>
+
+              <div class="byte-readout" aria-live="polite">
+                <div><span>Binary</span><output id="bitString">00000000</output></div>
+                <div><span>Decimal</span><output id="decimalValue">0</output></div>
+                <div><span>Calculation</span><output id="bitCalculation">No active bits</output></div>
+              </div>
+              <div class="activity-actions"><button class="button button--primary" type="button" id="checkByteTarget">Check my byte</button><button class="button button--quiet" type="button" id="resetByte">Reset switches</button></div>
+              <p class="feedback" id="byteFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-conversion-title">
+            <header class="module__header">
+              <p class="module__number">Module 2</p>
+              <div><h2 id="module-conversion-title">Convert without guessing.</h2><p>The relationship never changes: divide by eight to convert bits to bytes; multiply by eight to convert bytes to bits.</p></div>
+            </header>
+
+            <div class="formula-row" aria-label="Conversion formulas">
+              <article><span>Bits to bytes</span><strong>bits <b>&divide;</b> 8 = bytes</strong></article>
+              <article><span>Bytes to bits</span><strong>bytes <b>&times;</b> 8 = bits</strong></article>
+            </div>
+
+            <article class="activity-card conversion-card" aria-labelledby="conversion-title">
+              <div class="activity-card__head">
+                <div><p class="activity-label">Conversion challenge <span id="conversionPosition">1 of 3</span></p><h3 id="conversion-title">Show the working, then check it.</h3></div>
+                <button class="small-button" type="button" id="nextConversion">Next challenge</button>
+              </div>
+              <p class="challenge-prompt" id="conversionPrompt">512 bits equals how many bytes?</p>
+              <div class="answer-line">
+                <label for="conversionAnswer">Your answer <span id="conversionUnit">in bytes</span></label>
+                <div><input id="conversionAnswer" type="number" min="0" step="any" inputmode="decimal" autocomplete="off"><button class="button button--primary" type="button" id="checkConversion">Check answer</button></div>
+              </div>
+              <button class="text-button" type="button" id="showWorking">Show the calculation</button>
+              <p class="working" id="conversionWorking" hidden></p>
+              <p class="feedback" id="conversionFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-units-title">
+            <header class="module__header">
+              <p class="module__number">Module 3</p>
+              <div><h2 id="module-units-title">Read the small symbols that change the meaning.</h2><p>A lower-case <code>b</code> means bit; an upper-case <code>B</code> means byte. That difference matters when comparing a connection speed with a file size.</p></div>
+            </header>
+
+            <div class="notation-grid">
+              <article><span class="notation-mark">b</span><div><h3>bit</h3><p>Used for data rates, for example <strong>100 Mbps</strong>.</p></div></article>
+              <article><span class="notation-mark notation-mark--blue">B</span><div><h3>byte</h3><p>Used for file sizes, for example <strong>100 MB</strong>.</p></div></article>
+              <article><span class="notation-mark notation-mark--orange">8:1</span><div><h3>Relationship</h3><p><strong>100 Mbps</strong> is at most <strong>12.5 MB/s</strong> before overhead.</p></div></article>
+            </div>
+
+            <article class="calculator-card" aria-labelledby="rate-calculator-title">
+              <div><p class="activity-label">Quick calculator</p><h3 id="rate-calculator-title">Convert a connection rate to a theoretical file-transfer rate.</h3><p>Enter megabits per second (Mbps). The calculator divides by eight to show megabytes per second (MB/s), before protocol and storage overhead.</p></div>
+              <label for="mbpsInput">Connection rate in Mbps<input id="mbpsInput" type="number" min="0" step="any" inputmode="decimal" value="100"></label>
+              <output class="rate-output" id="mbpsResult" aria-live="polite">12.5 MB/s</output>
+            </article>
+
+            <article class="activity-card" aria-labelledby="units-check-title">
+              <div class="activity-card__head"><div><p class="activity-label">Notation check</p><h3 id="units-check-title">Choose the precise interpretation.</h3></div></div>
+              <div class="units-questions">
+                <fieldset>
+                  <legend>A 160 Mbps connection has an ideal maximum transfer rate closest to:</legend>
+                  <label><input type="radio" name="speedQuestion" value="160"> 160 MB/s</label>
+                  <label><input type="radio" name="speedQuestion" value="20"> 20 MB/s</label>
+                  <label><input type="radio" name="speedQuestion" value="1.6"> 1.6 MB/s</label>
+                </fieldset>
+                <fieldset>
+                  <legend>Is the statement “1 KB always means exactly 1,024 bytes” precise?</legend>
+                  <label><input type="radio" name="prefixQuestion" value="true"> Yes</label>
+                  <label><input type="radio" name="prefixQuestion" value="false"> No</label>
+                </fieldset>
+              </div>
+              <p class="prefix-note"><strong>Important distinction:</strong> decimal <code>kB</code> is 1,000 bytes, while binary <code>KiB</code> is 1,024 bytes. Some products use the labels inconsistently, so read the documentation and context.</p>
+              <button class="button button--primary" type="button" id="checkUnits">Check interpretations</button>
+              <p class="feedback" id="unitsFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-assessment-title">
+            <header class="module__header">
+              <p class="module__number">Module 4</p>
+              <div><h2 id="module-assessment-title">Prove the foundations are in place.</h2><p>Score at least four of five questions to complete this short lab. You can review and retry as often as you need.</p></div>
+            </header>
+
+            <form class="assessment-card" id="assessmentForm" novalidate>
+              <fieldset class="quiz-question" data-question="q1">
+                <legend><span>1</span> How many bits make one byte?</legend>
+                <label><input type="radio" name="q1" value="4"> 4</label><label><input type="radio" name="q1" value="8"> 8</label><label><input type="radio" name="q1" value="16"> 16</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q2">
+                <legend><span>2</span> 96 bits equals:</legend>
+                <label><input type="radio" name="q2" value="12bytes"> 12 bytes</label><label><input type="radio" name="q2" value="96bytes"> 96 bytes</label><label><input type="radio" name="q2" value="768bytes"> 768 bytes</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q3">
+                <legend><span>3</span> 4 bytes equals:</legend>
+                <label><input type="radio" name="q3" value="4bits"> 4 bits</label><label><input type="radio" name="q3" value="8bits"> 8 bits</label><label><input type="radio" name="q3" value="32bits"> 32 bits</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q4">
+                <legend><span>4</span> Which notation is correct?</legend>
+                <label><input type="radio" name="q4" value="wrong"> Lower-case <code>b</code> means byte; upper-case <code>B</code> means bit.</label><label><input type="radio" name="q4" value="right"> Lower-case <code>b</code> means bit; upper-case <code>B</code> means byte.</label><label><input type="radio" name="q4" value="same"> <code>b</code> and <code>B</code> mean the same thing.</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q5">
+                <legend><span>5</span> Which label unambiguously means 1,024 bytes?</legend>
+                <label><input type="radio" name="q5" value="kb"> kB</label><label><input type="radio" name="q5" value="kib"> KiB</label><label><input type="radio" name="q5" value="mb"> MB</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <div class="assessment-actions"><button class="button button--primary" type="submit">Mark my answers</button><span id="assessmentScore" aria-live="polite"></span></div>
+            </form>
+            <p class="feedback" id="assessmentFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="completion-panel" id="completion" hidden aria-labelledby="completion-title">
+            <div class="completion-panel__head"><p class="eyebrow eyebrow--blue">Lab complete</p><h2 id="completion-title">You have built the digital-data foundation.</h2><p>Make a personal completion record below. It stays in your browser unless you print or save it.</p></div>
+            <div class="completion-controls"><label for="learnerName">Your name for the record<input id="learnerName" type="text" maxlength="80" autocomplete="name" placeholder="Learner name"></label><button class="button button--secondary-dark" type="button" id="updateCompletionName">Update record</button></div>
+            <article class="completion-record" id="completionRecord">
+              <div><span class="record-code">LAB-DAT-101</span><h3>Bits, Bytes &amp; Binary Fundamentals</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the self-paced interactive lab on this device.</p></div>
+              <dl><div><dt>Topics</dt><dd>Binary, bit/byte conversion, data-rate notation, storage prefixes</dd></div><div><dt>Format</dt><dd>Self-paced practice</dd></div><div><dt>Issued</dt><dd id="completionDate">Today</dd></div></dl>
+              <p class="record-disclaimer">This is a local learning record, not an accredited certificate, verified assessment or digital badge.</p>
+            </article>
+            <button class="button button--primary" type="button" id="printCompletion">Print or save as PDF</button>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer__inner"><div><strong>Skunkworks Academy Labs</strong><p>Practice the fundamentals. Build durable technical capability.</p></div><nav aria-label="Footer navigation"><a href="/">All labs</a><a href="https://portal.skunkworksacademy.com/">Learner portal</a><a href="mailto:training@skunkworks.africa?subject=LAB-DAT-101%20support">Lab support</a></nav></div>
+  </footer>
+</body>
+</html>

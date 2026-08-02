@@ -1,5 +1,19 @@
 [
   {
+    "id": "LAB-DAT-101",
+    "title": "Bits, Bytes & Binary Fundamentals",
+    "track": "Digital Foundations",
+    "level": "Beginner",
+    "durationMinutes": 25,
+    "status": "available",
+    "summary": "Interactive self-paced lab for understanding binary values, bit and byte conversion, data rates and storage-prefix notation.",
+    "accessMode": "Interactive self-paced lab",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/",
+    "badge": "Digital Data Foundations",
+    "tags": ["Digital Literacy", "Binary", "Bits", "Bytes", "Data Fundamentals"]
+  },
+  {
     "id": "AST-101",
     "title": "Asterisk PBX Foundations Lab",
     "track": "VoIP & PBX",

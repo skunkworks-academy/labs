@@ -14,6 +14,20 @@
     "tags": ["Digital Literacy", "Binary", "Bits", "Bytes", "Data Fundamentals"]
   },
   {
+    "id": "LAB-NET-101",
+    "title": "IPv4 Subnetting Foundations",
+    "track": "Networking",
+    "level": "Beginner",
+    "durationMinutes": 35,
+    "status": "available",
+    "summary": "Interactive self-paced lab for understanding IPv4 address structure, CIDR masks, /26 subnetting, subnet boundaries and usable-host calculations.",
+    "accessMode": "Interactive self-paced lab",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://labs.skunkworksacademy.com/labs/ipv4-subnetting-101/",
+    "badge": "IPv4 Subnetting Foundations",
+    "tags": ["Networking", "TCP/IP", "IPv4", "CIDR", "Subnetting", "CCNA", "Network+"]
+  },
+  {
     "id": "AST-101",
     "title": "Asterisk PBX Foundations Lab",
     "track": "VoIP & PBX",

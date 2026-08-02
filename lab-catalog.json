@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "catalogVersion": "2026-08-01",
+  "catalogVersion": "2026-08-02",
   "products": [
     {
       "code": "LAB-LNX-101",
@@ -46,6 +46,25 @@
         "Read an eight-bit binary value",
         "Convert bits to bytes and bytes to bits",
         "Distinguish data-rate and storage-unit notation"
+      ]
+    },
+    {
+      "code": "LAB-NET-101",
+      "title": "IPv4 Subnetting Foundations",
+      "summary": "Turn IPv4 bits, CIDR masks and /26 subnet boundaries into practical network calculations with a visual subnetting lab.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 35,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/ipv4-subnetting-101/",
+      "objectives": [
+        "Explain why IPv4 addresses use 32 bits and four octets",
+        "Interpret subnet-mask 1s as network bits and 0s as host bits",
+        "Relate /24 through /30 to decimal and binary subnet masks",
+        "Calculate total and ordinary usable hosts",
+        "Identify /26 network, host and broadcast boundaries"
       ]
     }
   ]

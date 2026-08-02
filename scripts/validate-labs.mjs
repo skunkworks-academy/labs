@@ -15,7 +15,12 @@ const requiredFiles = [
   "labs/bits-and-bytes-101/lab.css",
   "labs/bits-and-bytes-101/lab.js",
   "labs/bits-and-bytes-101/manifest.yaml",
-  "labs/bits-and-bytes-101/instructor-guide.md"
+  "labs/bits-and-bytes-101/instructor-guide.md",
+  "labs/ipv4-subnetting-101/index.html",
+  "labs/ipv4-subnetting-101/lab.css",
+  "labs/ipv4-subnetting-101/lab.js",
+  "labs/ipv4-subnetting-101/manifest.yaml",
+  "labs/ipv4-subnetting-101/instructor-guide.md"
 ];
 
 const errors = [];
@@ -100,7 +105,7 @@ if (existsSync("lab-catalog.json")) {
         }
       }
 
-      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101"]) {
+      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101", "LAB-NET-101"]) {
         if (!productCodes.has(expectedCode)) {
           errors.push(`Launch product manifest is missing expected product: ${expectedCode}`);
         }
@@ -131,6 +136,7 @@ if (existsSync("index.html")) {
     "/lab-catalog.json",
     "LAB-LNX-101",
     "LAB-DAT-101",
+    "LAB-NET-101",
     "Launch catalogue",
     "/site.webmanifest",
     "/assets/icons/favicon-black.png",

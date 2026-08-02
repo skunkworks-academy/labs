@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A safety-first Skunkworks Academy FLARE VM lab for Windows malware-analysis workflow, static evidence capture and controlled telemetry interpretation.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/flarevm-workbench-201/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="FLARE VM Analysis Workbench | Interactive Lab">
+  <meta property="og:description" content="Learn a disciplined Windows malware-analysis workflow with simulated tool output and no live sample execution.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/flarevm-workbench-201/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="FLARE VM Analysis Workbench | Interactive Lab">
+  <meta name="twitter:description" content="A safety-first Windows analysis workflow lab using synthetic evidence.">
+  <title>FLARE VM Analysis Workbench | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../analysis-toolkit-labs.css">
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.07.04" data-skunkworks-global-nav="v3"></script>
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "FLARE VM Analysis Workbench",
+    "description": "A safety-first lab for planning a Windows reverse-engineering workbench, capturing static evidence and interpreting pre-recorded telemetry.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/flarevm-workbench-201/",
+    "educationalLevel": "Intermediate",
+    "inLanguage": "en",
+    "timeRequired": "PT60M",
+    "isAccessibleForFree": true,
+    "teaches": ["safe Windows analysis setup", "static PE evidence capture", "process and network telemetry correlation", "VM recovery controls"]
+  }
+  </script>
+</head>
+<body data-repo="labs" data-domain="labs.skunkworksacademy.com" data-lab-code="LAB-FLR-201">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home"><img src="/assets/icons/favicon-white.png" alt="" width="38" height="38"><span><strong>Skunkworks Academy</strong><small>Practical labs</small></span></a>
+      <nav aria-label="Lab navigation"><a href="/">All labs</a><a href="#lab">Start lab</a><a href="#completion">Completion record</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-FLR-201 · Malware analysis &amp; reverse engineering</p>
+          <h1 id="page-title">FLARE VM: make the Windows workbench safe before it becomes powerful.</h1>
+          <p class="hero__lead">Learn the analysis workflow that matters around a Windows reverse-engineering toolkit: reproducible images, snapshot discipline, static evidence capture and careful reading of pre-recorded telemetry.</p>
+          <div class="hero__actions"><a class="button button--primary" href="#lab">Begin the lab</a><a class="button button--secondary" href="#objectives">What you will learn</a></div>
+          <p class="hero__note">60 minutes · Intermediate · Browser-only simulation · Installation and live execution are deliberately out of scope</p>
+        </div>
+        <aside class="environment-card" aria-label="FLARE VM lab environment summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>win-analysis-workbench.status</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Safe by design</p>
+            <h2>Windows tooling belongs inside a disposable VM.</h2>
+            <p>FLARE VM is designed for a virtual machine. The public lesson models its workflow with synthetic artefacts; a future hands-on image must be built and operated by the Academy control plane.</p>
+            <dl class="environment-facts"><div><dt>Fixture</dt><dd>Synthetic only</dd></div><div><dt>Network</dt><dd>None required</dd></div><div><dt>Runtime</dt><dd>Not enabled</dd></div><div><dt>Reset</dt><dd>Snapshot model</dd></dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Design a Windows analysis workbench that can be trusted and reset.</h2></div>
+        <ul>
+          <li><span aria-hidden="true">01</span><div>Explain why a VM, a known-good snapshot and restricted networking are baseline controls.</div></li>
+          <li><span aria-hidden="true">02</span><div>Capture PE metadata, strings and tool provenance before any dynamic interpretation.</div></li>
+          <li><span aria-hidden="true">03</span><div>Read process, file and simulated-network telemetry as a correlated timeline.</div></li>
+          <li><span aria-hidden="true">04</span><div>Define the stop, preserve and reset actions that return an analysis workstation to known-good state.</div></li>
+        </ul>
+      </section>
+
+      <aside class="safety-notice" aria-labelledby="safety-title"><div class="safety-notice__icon" aria-hidden="true">!</div><div><h2 id="safety-title">Do not turn off protections on a personal or production device</h2><p>FLARE VM’s upstream installer is intended only for a VM and may alter host protections during installation. This Academy lab does not ask learners to install it, download a script, disable endpoint protection or execute a sample. Use only an Academy-approved, staff-managed image when a live lab is released.</p></div></aside>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive FLARE VM analysis workbench lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><p class="eyebrow eyebrow--blue">Your progress</p><strong id="progressText">0 of 4 completed</strong></div><div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="safety"><span class="step-icon" data-step-number="1">1</span><span><b>Prepare the VM</b><small>Snapshot + isolation</small></span></li>
+            <li data-progress-step="static"><span class="step-icon" data-step-number="2">2</span><span><b>Capture static facts</b><small>Headers + strings</small></span></li>
+            <li data-progress-step="telemetry"><span class="step-icon" data-step-number="3">3</span><span><b>Read telemetry</b><small>Timeline + context</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Check understanding</b><small>Six questions</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not a verified credential or a malware-analysis report.</p><button class="text-button" type="button" id="resetProgress">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="safety-module-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="safety-module-title">Build for repeatability, not convenience.</h2><p>A good Windows analysis environment has a documented image version, a recovery point, restricted networking and a clear scope for any supplied training artefact. The upstream FLARE VM project explicitly states that it should only be installed on a VM.</p></div></header>
+            <div class="concept-grid"><article class="concept-card"><p class="concept-card__kicker">Immutable base</p><strong>Build once, verify often.</strong><p>Staff own the baseline and package updates; learners receive a constrained session.</p></article><article class="concept-card"><p class="concept-card__kicker">Snapshot</p><strong>Recover after every run.</strong><p>A clean point exists before installation, fixtures or analysis activity.</p></article><article class="concept-card"><p class="concept-card__kicker">Network policy</p><strong>Host-only by default.</strong><p>Do not bridge an analysis image to an office or home network.</p></article></div>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Safety checkpoint</p><h3>Choose the appropriate lab image workflow.</h3></div><span class="activity-pill">Before tooling</span></div>
+              <fieldset class="choice-fieldset" data-checkpoint="safety" data-answer="managed" data-success="Correct. A staff-managed, disposable VM with a verified snapshot and restricted network gives the lab a recoverable operating boundary." data-retry="Not yet. FLARE VM is not a general workstation setup. Select the workflow that preserves separation and recovery.">
+                <legend>Which option correctly prepares an Academy Windows analysis lab?</legend>
+                <div class="choice-list"><label><input type="radio" name="safety" value="laptop">Install the toolkit on a learner’s everyday laptop and depend on the normal network firewall.</label><label><input type="radio" name="safety" value="managed">Use an instructor-managed disposable VM, record the approved image version, take a clean snapshot and keep networking restricted by default.</label><label><input type="radio" name="safety" value="server">Install it on a shared production Windows server so the tools are always available.</label></div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="safety">Check workbench plan</button></div><p class="feedback" id="safetyFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="static-module-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="static-module-title">Capture static facts before dynamic assumptions.</h2><p>Tools such as PE viewers and string decoders make an analyst faster, but their output still needs provenance. This is pre-recorded, fabricated output from a non-executable classroom fixture.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Simulated workbench output</p><h3>Document what each tool saw.</h3></div><span class="activity-pill">No executable included</span></div>
+              <div class="evidence-grid">
+                <div class="terminal" aria-label="Simulated FLARE VM static analysis output"><pre><span class="prompt">PS C:\\Lab\\case-w201&gt;</span> Get-FileHash .\\training-fixture.bin -Algorithm SHA256
+<span class="output">SHA256  2CF61588E274319B5AD78DD1A0F558A208EFCE141FCB3A56B6EEDABE234C5971</span>
+<span class="prompt">PE viewer &gt;</span> <span class="output">Format: Portable Executable-style training record (simulated)
+Architecture: x86
+Sections: .text, .rdata, .data
+Imports shown: KERNEL32.DLL, USER32.DLL</span>
+<span class="prompt">String decoder &gt;</span> <span class="output">LAB-FLR-201 / synthetic fixture / no payload
+telemetry.training.invalid / LabEvidence\\config.json</span>
+<span class="comment"># This page neither supplies nor runs an executable.</span></pre></div>
+                <aside class="evidence-note"><h4>Preserve with the output</h4><ul><li>Case ID, fixture filename and hash</li><li>Tool name and version</li><li>Exact output and analyst timestamp</li><li>Interpretation separated from observed fact</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="static" data-answer="provenance" data-success="Correct. Tool output becomes useful evidence when the fixture identity, tool context and analyst observation are preserved together." data-retry="Not yet. Static metadata is useful, but it does not justify execution or a certainty claim by itself.">
+                <legend>Which note is most suitable for the case record?</legend>
+                <div class="choice-list"><label><input type="radio" name="static" value="provenance">Record the hash, tool/version, observed header and decoded-string output; label any behavioural interpretation as a hypothesis.</label><label><input type="radio" name="static" value="malware">The PE-style label proves the fixture is malware.</label><label><input type="radio" name="static" value="upload">Upload the fixture to an uncontrolled public service for a faster answer.</label></div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="static">Check evidence note</button></div><p class="feedback" id="staticFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="telemetry-module-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="telemetry-module-title">Read telemetry as a timeline, not a movie.</h2><p>In a production lab, any dynamic work requires a controlled test environment. Here, you read a pre-recorded synthetic timeline rather than executing anything.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Pre-recorded simulation</p><h3>Connect process, filesystem and network events.</h3></div><span class="activity-pill">Synthetic telemetry</span></div>
+              <div class="evidence-grid">
+                <div class="terminal" aria-label="Simulated FLARE VM telemetry"><pre><span class="output">09:30:14  explorer.exe (1180) → lab-fixture.exe (4220)
+09:30:15  lab-fixture.exe (4220) CreateFile C:\\Users\\student\\AppData\\Local\\LabEvidence\\config.json
+09:30:16  FakeNet-style record: DNS telemetry.training.invalid
+09:30:16  FakeNet-style record: HTTP GET /checkin → synthetic response
+09:30:18  analyst action: capture logs, stop session, revert snapshot</span>
+<span class="comment"># Domain and response are classroom-only. No public connection was made.</span></pre></div>
+                <aside class="evidence-note"><h4>Good next questions</h4><ul><li>What launched the process?</li><li>Which files were read or written?</li><li>Which request corresponds to which PID?</li><li>Which observation needs another source before a conclusion?</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="telemetry" data-answer="timeline" data-success="Correct. Preserve the process tree and associated file/network records, document the lab’s synthetic network context, then stop and revert the disposable session." data-retry="Not yet. Do not reconnect a lab to the public internet, declare intent from a single event or leave a contaminated VM running.">
+                <legend>What is the appropriate conclusion from this simulated output?</legend>
+                <div class="choice-list"><label><input type="radio" name="telemetry" value="timeline">It is a timeline that should be preserved and correlated with the fixture, tool configuration and case scope before any conclusion.</label><label><input type="radio" name="telemetry" value="internet">The VM should be connected to the public internet to test the domain.</label><label><input type="radio" name="telemetry" value="proof">The HTTP line proves a real-world compromise.</label></div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="telemetry">Check telemetry reading</button></div><p class="feedback" id="telemetryFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all six questions. A score of five or more completes this browser-only learning lab.</p></div></header>
+            <form id="assessmentForm" data-pass-score="5">
+              <p class="assessment-intro">Focus on safe, repeatable Windows analysis practices rather than executing a sample.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="vm" data-explanation="The FLARE VM project explicitly limits installation to a virtual machine."><legend>1. Where should FLARE VM be installed?</legend><div class="choice-list"><label><input type="radio" name="q1" value="vm">Inside a virtual machine</label><label><input type="radio" name="q1" value="host">On a personal everyday workstation</label><label><input type="radio" name="q1" value="server">On a production server</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="snapshot" data-explanation="A clean snapshot creates a recovery point before the environment changes."><legend>2. Why record a clean VM snapshot?</legend><div class="choice-list"><label><input type="radio" name="q2" value="snapshot">To return the lab to a known-good state</label><label><input type="radio" name="q2" value="speed">To make public internet access faster</label><label><input type="radio" name="q2" value="license">To bypass software licensing</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="hash" data-explanation="Hashes help prove which exact fixture was observed."><legend>3. Which item anchors static output to an exact fixture version?</legend><div class="choice-list"><label><input type="radio" name="q3" value="hash">A cryptographic hash</label><label><input type="radio" name="q3" value="desktop">The desktop background</label><label><input type="radio" name="q3" value="shortcut">A taskbar shortcut</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="context" data-explanation="Tool output gains meaning only with provenance and corroboration."><legend>4. A PE viewer listing imports is:</legend><div class="choice-list"><label><input type="radio" name="q4" value="context">A fact to record and interpret in context</label><label><input type="radio" name="q4" value="verdict">Automatic proof of maliciousness</label><label><input type="radio" name="q4" value="safe">Proof that a file is safe</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="restricted" data-explanation="Analysis images should not be joined to a trusted office or home network by default."><legend>5. What is the preferred default network posture after a controlled image is prepared?</legend><div class="choice-list"><label><input type="radio" name="q5" value="restricted">Restricted or host-only, with only documented lab services allowed</label><label><input type="radio" name="q5" value="bridged">Bridged to the office network</label><label><input type="radio" name="q5" value="public">Public Wi-Fi with no firewall</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="reset" data-explanation="A safe exercise ends by preserving permitted output and returning the environment to known-good state."><legend>6. What closes a controlled dynamic-analysis exercise?</legend><div class="choice-list"><label><input type="radio" name="q6" value="reset">Preserve authorised evidence, stop the session and revert/reset the VM</label><label><input type="radio" name="q6" value="leave">Leave the VM running for the next learner</label><label><input type="radio" name="q6" value="share">Copy it onto a production endpoint</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div><div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>Record your name after completing the safety, static-evidence, telemetry and knowledge-check checkpoints. This is a personal record; it is not a verified credential or production approval.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>FLARE VM Analysis Workbench</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the self-paced safety-first learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-FLR-201 · 60 minutes · Browser-only synthetic evidence</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, product installation, practical competence, malware handling authority or incident-response approval.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="https://github.com/mandiant/flare-vm">FLARE VM project</a> · <a href="./instructor-guide.md">Instructor guide</a></p></div></footer>
+</body>
+</html>

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "catalogVersion": "2026-08-01",
+  "catalogVersion": "2026-08-02",
   "products": [
     {
       "code": "LAB-LNX-101",
@@ -29,6 +29,112 @@
         "providers": ["payfast", "paypal"],
         "activation": "verified-webhook-only"
       }
+    },
+    {
+      "code": "LAB-DAT-101",
+      "title": "Bits, Bytes & Binary Fundamentals",
+      "summary": "Build a practical mental model of digital data with binary switches, bit-to-byte conversion challenges, data-rate examples and a short knowledge check.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 25,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/bits-and-bytes-101/",
+      "objectives": [
+        "Explain the relationship between bits and bytes",
+        "Read an eight-bit binary value",
+        "Convert bits to bytes and bytes to bits",
+        "Distinguish data-rate and storage-unit notation"
+      ]
+    },
+    {
+      "code": "LAB-NET-101",
+      "title": "IPv4 Subnetting Foundations",
+      "summary": "Turn IPv4 bits, CIDR masks and /26 subnet boundaries into practical network calculations with a visual subnetting lab.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 35,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/ipv4-subnetting-101/",
+      "objectives": [
+        "Explain why IPv4 addresses use 32 bits and four octets",
+        "Interpret subnet-mask 1s as network bits and 0s as host bits",
+        "Relate /24 through /30 to decimal and binary subnet masks",
+        "Calculate total and ordinary usable hosts",
+        "Identify /26 network, host and broadcast boundaries"
+      ]
+    },
+    {
+      "code": "LAB-REM-201",
+      "title": "REMnux Triage & Memory Forensics",
+      "summary": "Use a harmless simulated investigation to practise analysis boundaries, static triage, evidence provenance and memory-forensics correlation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/remnux-triage-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-isolated-vm",
+        "untrustedSampleExecution": "disabled"
+      },
+      "objectives": [
+        "Establish an authorised and isolated analysis boundary",
+        "Record a reproducible static-triage baseline",
+        "Treat artefacts as leads that require corroboration",
+        "Correlate process, socket and timeline records from a memory-forensics view"
+      ]
+    },
+    {
+      "code": "LAB-FLR-201",
+      "title": "FLARE VM Analysis Workbench",
+      "summary": "Learn the safe Windows reverse-engineering workbench lifecycle: managed VM, snapshot, evidence provenance, telemetry correlation and reset.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/flarevm-workbench-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-isolated-windows-vm",
+        "untrustedSampleExecution": "disabled"
+      },
+      "objectives": [
+        "Explain the disposable-VM and snapshot model",
+        "Capture static PE-style evidence with provenance",
+        "Read pre-recorded process, filesystem and network telemetry as a timeline",
+        "Reset an analysis session to known-good state"
+      ]
+    },
+    {
+      "code": "LAB-KAL-201",
+      "title": "Kali Linux Evidence & Network Forensics",
+      "summary": "Practise a read-only evidence workflow, disk-image triage and offline PCAP reasoning without live scanning or target interaction.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/kali-forensics-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-read-only-forensic-vm",
+        "liveScanning": "disabled"
+      },
+      "objectives": [
+        "Preserve authority, integrity and read-only handling boundaries",
+        "Record hash, partition and file-inventory observations",
+        "Analyse a stored PCAP offline and preserve the filter used",
+        "Distinguish forensic examination from live enumeration"
+      ]
     }
   ]
 }

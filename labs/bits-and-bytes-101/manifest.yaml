@@ -1,0 +1,30 @@
+schemaVersion: 1
+code: LAB-DAT-101
+title: Bits, Bytes & Binary Fundamentals
+status: live
+delivery: interactive-web-lab
+durationMinutes: 25
+environment: browser-only
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain the relationship between bits and bytes.
+  - Build and read an eight-bit binary value.
+  - Convert bits to bytes and bytes to bits.
+  - Distinguish b from B and kB from KiB.
+evidence:
+  checkpoints:
+    - byte-switch-builder
+    - bit-byte-conversion
+    - data-rate-and-prefix-notation
+    - five-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-DAT-101
+  data_classification: public-learning-content
+  cost_tier: none

@@ -1,0 +1,32 @@
+schemaVersion: 1
+code: LAB-NET-101
+title: IPv4 Subnetting Foundations
+status: live
+delivery: interactive-web-lab
+durationMinutes: 35
+environment: browser-only
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain how four 8-bit octets form a 32-bit IPv4 address.
+  - Interpret subnet-mask 1s as network bits and 0s as host bits.
+  - Relate common CIDR prefixes to binary and decimal subnet masks.
+  - Calculate total and ordinary usable hosts from host bits.
+  - Identify the network, usable host range and broadcast address for a /26 subnet.
+evidence:
+  checkpoints:
+    - ipv4-structure-check
+    - subnet-mask-meaning
+    - slash-26-boundary-check
+    - usable-host-calculation
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-NET-101
+  data_classification: public-learning-content
+  cost_tier: none

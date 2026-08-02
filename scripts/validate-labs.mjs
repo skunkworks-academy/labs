@@ -10,7 +10,53 @@ const requiredFiles = [
   "assets/icons/favicon-white.png",
   "assets/icons/apple-touch-icon.png",
   "assets/icons/icon-192.png",
-  "assets/icons/icon-512.png"
+  "assets/icons/icon-512.png",
+  "labs/bits-and-bytes-101/index.html",
+  "labs/bits-and-bytes-101/lab.css",
+  "labs/bits-and-bytes-101/lab.js",
+  "labs/bits-and-bytes-101/manifest.yaml",
+  "labs/bits-and-bytes-101/instructor-guide.md",
+  "labs/ipv4-subnetting-101/index.html",
+  "labs/ipv4-subnetting-101/lab.css",
+  "labs/ipv4-subnetting-101/lab.js",
+  "labs/ipv4-subnetting-101/manifest.yaml",
+  "labs/ipv4-subnetting-101/instructor-guide.md",
+  "labs/analysis-toolkit-labs.css",
+  "labs/analysis-toolkit-labs.js",
+  "labs/remnux-triage-201/index.html",
+  "labs/remnux-triage-201/README.md",
+  "labs/remnux-triage-201/manifest.yaml",
+  "labs/remnux-triage-201/instructor-guide.md",
+  "labs/flarevm-workbench-201/index.html",
+  "labs/flarevm-workbench-201/README.md",
+  "labs/flarevm-workbench-201/manifest.yaml",
+  "labs/flarevm-workbench-201/instructor-guide.md",
+  "labs/kali-forensics-201/index.html",
+  "labs/kali-forensics-201/README.md",
+  "labs/kali-forensics-201/manifest.yaml",
+  "labs/kali-forensics-201/instructor-guide.md",
+  "docs/malware-analysis-lab-runtime.md"
+];
+
+const analysisLabs = [
+  {
+    code: "LAB-REM-201",
+    page: "labs/remnux-triage-201/index.html",
+    manifest: "labs/remnux-triage-201/manifest.yaml",
+    safetyMarker: "untrustedSampleExecution: disabled"
+  },
+  {
+    code: "LAB-FLR-201",
+    page: "labs/flarevm-workbench-201/index.html",
+    manifest: "labs/flarevm-workbench-201/manifest.yaml",
+    safetyMarker: "untrustedSampleExecution: disabled"
+  },
+  {
+    code: "LAB-KAL-201",
+    page: "labs/kali-forensics-201/index.html",
+    manifest: "labs/kali-forensics-201/manifest.yaml",
+    safetyMarker: "liveScanning: disabled"
+  }
 ];
 
 const errors = [];
@@ -48,10 +94,17 @@ if (existsSync("catalog/labs.json")) {
   }
 
   if (Array.isArray(labs)) {
+    const ids = new Set();
     for (const lab of labs) {
       requireFields(lab, ["id", "title", "track", "level", "durationMinutes", "status", "summary"], "Catalogue lab record");
       if (!Number.isFinite(lab.durationMinutes) || lab.durationMinutes <= 0) {
         errors.push(`Catalogue lab record has an invalid durationMinutes value: ${lab.id ?? "unknown"}`);
+      }
+      ids.add(lab.id);
+    }
+    for (const expectedId of ["LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
+      if (!ids.has(expectedId)) {
+        errors.push(`catalog/labs.json is missing expected lab: ${expectedId}`);
       }
     }
   }
@@ -72,8 +125,13 @@ if (existsSync("lab-catalog.json")) {
     }
 
     if (Array.isArray(manifest.products)) {
+      const productCodes = new Set();
       for (const product of manifest.products) {
         requireFields(product, ["code", "title", "summary", "availability", "delivery", "durationMinutes", "level"], "Launch product");
+        if (productCodes.has(product.code)) {
+          errors.push(`Launch product code is duplicated: ${product.code ?? "unknown"}`);
+        }
+        productCodes.add(product.code);
         if (!Number.isFinite(product.durationMinutes) || product.durationMinutes <= 0) {
           errors.push(`Launch product has an invalid durationMinutes value: ${product.code ?? "unknown"}`);
         }
@@ -87,6 +145,12 @@ if (existsSync("lab-catalog.json")) {
           if (!Array.isArray(product.checkout.providers) || product.checkout.providers.length === 0) {
             errors.push(`Launch product checkout must list at least one provider: ${product.code ?? "unknown"}`);
           }
+        }
+      }
+
+      for (const expectedCode of ["LAB-LNX-101", "LAB-DAT-101", "LAB-NET-101", "LAB-REM-201", "LAB-FLR-201", "LAB-KAL-201"]) {
+        if (!productCodes.has(expectedCode)) {
+          errors.push(`Launch product manifest is missing expected product: ${expectedCode}`);
         }
       }
     }
@@ -114,6 +178,11 @@ if (existsSync("index.html")) {
     "data-skunkworks-head=\"mandatory-v1\"",
     "/lab-catalog.json",
     "LAB-LNX-101",
+    "LAB-DAT-101",
+    "LAB-NET-101",
+    "LAB-REM-201",
+    "LAB-FLR-201",
+    "LAB-KAL-201",
     "Launch catalogue",
     "/site.webmanifest",
     "/assets/icons/favicon-black.png",
@@ -121,6 +190,33 @@ if (existsSync("index.html")) {
   ]) {
     if (!html.includes(expected)) {
       errors.push(`index.html is missing expected content: ${expected}`);
+    }
+  }
+}
+
+for (const lab of analysisLabs) {
+  if (existsSync(lab.page)) {
+    const page = readFileSync(lab.page, "utf8");
+    for (const expected of [
+      'data-skunkworks-head="mandatory-v1"',
+      `data-lab-code="${lab.code}"`,
+      "../analysis-toolkit-labs.css",
+      "../analysis-toolkit-labs.js",
+      "Synthetic",
+      "id=\"assessmentForm\"",
+      "id=\"completion\""
+    ]) {
+      if (!page.includes(expected)) {
+        errors.push(`${lab.page} is missing expected content: ${expected}`);
+      }
+    }
+  }
+  if (existsSync(lab.manifest)) {
+    const manifest = readFileSync(lab.manifest, "utf8");
+    for (const expected of [`code: ${lab.code}`, "environment: browser-only-simulation", "publicNetwork: forbidden", lab.safetyMarker]) {
+      if (!manifest.includes(expected)) {
+        errors.push(`${lab.manifest} is missing expected safety metadata: ${expected}`);
+      }
     }
   }
 }

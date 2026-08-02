@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A safety-first Skunkworks Academy Kali Linux lab for evidence preservation, offline disk triage and PCAP analysis using synthetic forensic artefacts.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/kali-forensics-201/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Kali Linux Evidence & Network Forensics | Interactive Lab">
+  <meta property="og:description" content="Practice offline evidence handling, disk triage and PCAP interpretation with harmless simulated forensic output.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/kali-forensics-201/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kali Linux Evidence & Network Forensics | Interactive Lab">
+  <meta name="twitter:description" content="A forensic toolkit lab—not a live penetration-testing exercise.">
+  <title>Kali Linux Evidence & Network Forensics | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../analysis-toolkit-labs.css">
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.07.04" data-skunkworks-global-nav="v3"></script>
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Kali Linux Evidence & Network Forensics",
+    "description": "A self-paced lab for evidence preservation, read-only disk triage and offline network-capture analysis using synthetic artefacts.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/kali-forensics-201/",
+    "educationalLevel": "Intermediate",
+    "inLanguage": "en",
+    "timeRequired": "PT55M",
+    "isAccessibleForFree": true,
+    "teaches": ["evidence integrity", "read-only forensic workflow", "disk-triage reasoning", "offline PCAP analysis"]
+  }
+  </script>
+</head>
+<body data-repo="labs" data-domain="labs.skunkworksacademy.com" data-lab-code="LAB-KAL-201">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header"><div class="container site-header__inner"><a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home"><img src="/assets/icons/favicon-white.png" alt="" width="38" height="38"><span><strong>Skunkworks Academy</strong><small>Practical labs</small></span></a><nav aria-label="Lab navigation"><a href="/">All labs</a><a href="#lab">Start lab</a><a href="#completion">Completion record</a></nav></div></header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-KAL-201 · Digital forensics &amp; incident response</p>
+          <h1 id="page-title">Kali forensic tooling: preserve first, inspect second.</h1>
+          <p class="hero__lead">Use the forensic side of Kali Linux deliberately: protect evidence integrity, inspect an offline disk-image inventory and interpret a captured network trace without touching a live target.</p>
+          <div class="hero__actions"><a class="button button--primary" href="#lab">Begin the lab</a><a class="button button--secondary" href="#objectives">What you will learn</a></div>
+          <p class="hero__note">55 minutes · Intermediate · Browser-only simulation · Offline forensic workflow, not a penetration-testing exercise</p>
+        </div>
+        <aside class="environment-card" aria-label="Kali forensic lab environment summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>forensic-workflow.status</div>
+          <div class="environment-card__content"><p class="environment-card__kicker">Safe by design</p><h2>Evidence is handled read-only and offline.</h2><p>The live lesson uses invented tool output. A future VM lab will supply fixed, synthetic disk and PCAP fixtures through an isolated session—not a target network.</p><dl class="environment-facts"><div><dt>Media</dt><dd>Synthetic only</dd></div><div><dt>Network</dt><dd>Offline PCAP</dd></div><div><dt>Scanning</dt><dd>Not included</dd></div><div><dt>Runtime</dt><dd>Not enabled</dd></dl></div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Treat every artefact as evidence before it becomes a data source.</h2></div>
+        <ul><li><span aria-hidden="true">01</span><div>Choose a workflow that reduces unintended writes and records the evidence-handling boundary.</div></li><li><span aria-hidden="true">02</span><div>Use hash, partition and file-list observations to build a repeatable disk-image triage note.</div></li><li><span aria-hidden="true">03</span><div>Inspect a PCAP offline and preserve the exact filter or query used to locate an event.</div></li><li><span aria-hidden="true">04</span><div>Differentiate forensic examination from live enumeration, scanning or unauthorised access.</div></li></ul>
+      </section>
+
+      <aside class="safety-notice" aria-labelledby="safety-title"><div class="safety-notice__icon" aria-hidden="true">!</div><div><h2 id="safety-title">Forensics is not permission to access systems</h2><p>This lab does not perform live scanning, interception, acquisition or account access. Use it only to learn evidence-preserving reasoning with synthetic fixtures. Real-world forensic work needs documented legal authority, validated procedures, appropriate write protection and an organisation-approved chain of custody.</p></div></aside>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive Kali forensics toolkit lab">
+        <aside class="progress-card" aria-label="Lab progress"><div class="progress-card__head"><p class="eyebrow eyebrow--blue">Your progress</p><strong id="progressText">0 of 4 completed</strong></div><div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div><ol class="progress-steps"><li data-progress-step="safety"><span class="step-icon" data-step-number="1">1</span><span><b>Protect evidence</b><small>Read-only workflow</small></span></li><li data-progress-step="disk"><span class="step-icon" data-step-number="2">2</span><span><b>Triage disk facts</b><small>Hash + inventory</small></span></li><li data-progress-step="pcap"><span class="step-icon" data-step-number="3">3</span><span><b>Read a PCAP</b><small>Offline filtering</small></span></li><li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Check understanding</b><small>Six questions</small></span></li></ol><p class="progress-card__note">Progress is stored only in this browser. It is not a verified credential or legal evidence record.</p><button class="text-button" type="button" id="resetProgress">Reset local progress</button></aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="safety-module-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="safety-module-title">Preserve evidence before you explore it.</h2><p>Kali Linux Live includes a forensic mode intended to avoid touching internal disks or automatically mounting removable media. That feature is useful, but practitioners must still validate their tools and procedures for the specific evidence, legal setting and engagement.</p></div></header>
+            <div class="concept-grid"><article class="concept-card"><p class="concept-card__kicker">Authority</p><strong>Know who owns the evidence.</strong><p>Record case scope, source, operator and approved purpose before examining a real artefact.</p></article><article class="concept-card"><p class="concept-card__kicker">Integrity</p><strong>Hash before and after.</strong><p>Capture the acquisition or supplied-fixture identity and record the tool/result used.</p></article><article class="concept-card"><p class="concept-card__kicker">Read only</p><strong>Prevent unintended writes.</strong><p>Use a validated workflow that does not auto-mount or alter evidence media.</p></article></div>
+            <article class="activity-card"><div class="activity-card__head"><div><p class="activity-label">Safety checkpoint</p><h3>Choose the evidence-preserving start.</h3></div><span class="activity-pill">Before examination</span></div>
+              <fieldset class="choice-fieldset" data-checkpoint="safety" data-answer="readonly" data-success="Correct. Authorisation, a documented chain of custody and a validated read-only workflow come before exploratory commands." data-retry="Not yet. Convenience actions, automatic mounting and live scans can alter evidence or exceed authority."><legend>Which choice best protects a supplied evidence artefact?</legend><div class="choice-list"><label><input type="radio" name="safety" value="browse">Plug it into a normal workstation and browse files immediately.</label><label><input type="radio" name="safety" value="readonly">Record authority and case details, validate a read-only workflow and work from an approved forensic image or synthetic fixture.</label><label><input type="radio" name="safety" value="scan">Run a live network scan to find where it came from.</label></div></fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="safety">Check evidence plan</button></div><p class="feedback" id="safetyFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="disk-module-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="disk-module-title">Build an offline disk-image inventory.</h2><p>Use a repeatable observation sequence: fixture identity, partition structure, then file-system inventory. The command transcript below is artificial and included only to teach the method.</p></div></header>
+            <article class="activity-card"><div class="activity-card__head"><div><p class="activity-label">Simulated disk-triage output</p><h3>Observe without changing the fixture.</h3></div><span class="activity-pill">Synthetic raw image</span></div>
+              <div class="evidence-grid"><div class="terminal" aria-label="Simulated Kali disk image triage output"><pre><span class="prompt">analyst@kali:~/case-k201$</span> sha256sum case-disk.raw
+<span class="output">9f6e2cb20e79cb76445fc3f0bcdbd4d5c4535094e810581631eb18b6319fe503  case-disk.raw</span>
+<span class="prompt">analyst@kali:~/case-k201$</span> mmls case-disk.raw
+<span class="output">Slot  Start       End         Length      Description
+000:  Meta        0000000000  0000000000  0000000001  Safety Table
+001:  000:000     0000002048  0000206847  0000204800  Synthetic NTFS data</span>
+<span class="prompt">analyst@kali:~/case-k201$</span> fls -o 2048 case-disk.raw
+<span class="output">r/r  271:  LabEvidence/incident-notes.txt
+r/r  279:  LabEvidence/README-training-only.txt</span>
+<span class="comment"># No image is supplied by this web page; values are invented for learning.</span></pre></div><aside class="evidence-note"><h4>Preserve the method</h4><ul><li>Fixture ID and SHA-256</li><li>Tool command and relevant offset</li><li>Observed partition/file records</li><li>Any assumption or limitation</li></ul></aside></div>
+              <fieldset class="choice-fieldset" data-checkpoint="disk" data-answer="inventory" data-success="Correct. The hash and exact tool observations create a repeatable, reviewable inventory before anyone interprets the contents." data-retry="Not yet. Do not alter, open-for-editing or treat a filename as a conclusion without preserving the examination context."><legend>What is the correct triage note after this transcript?</legend><div class="choice-list"><label><input type="radio" name="disk" value="inventory">Record the image hash, the <code>mmls</code> partition observation, the <code>fls</code> offset and the listed paths as observed facts.</label><label><input type="radio" name="disk" value="change">Mount the image read/write to see whether the notes change.</label><label><input type="radio" name="disk" value="delete">Delete the file list to keep the evidence private.</label></div></fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="disk">Check disk-triage note</button></div><p class="feedback" id="diskFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="pcap-module-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="pcap-module-title">Filter an offline network capture.</h2><p>A stored PCAP is evidence, not a licence to probe the systems named in it. Preserve the capture identity, the query used and the resulting rows so another analyst can reproduce your observation.</p></div></header>
+            <article class="activity-card"><div class="activity-card__head"><div><p class="activity-label">Simulated offline PCAP output</p><h3>Document your filter and its limits.</h3></div><span class="activity-pill">No live capture</span></div>
+              <div class="evidence-grid"><div class="terminal" aria-label="Simulated Kali tshark output"><pre><span class="prompt">analyst@kali:~/case-k201$</span> tshark -r case-traffic.pcapng -Y 'dns || http.request'
+<span class="output">09:42:12  10.10.20.15 → 10.10.20.53  DNS  Standard query A telemetry.training.invalid
+09:42:13  10.10.20.15 → 198.51.100.21 HTTP GET /checkin</span>
+<span class="prompt">analyst@kali:~/case-k201$</span> sha256sum case-traffic.pcapng
+<span class="output">218748df0f8cc0793c49cf47bcf537472f6e0d6871f28f6aef91611ff7b1c526  case-traffic.pcapng</span>
+<span class="comment"># .invalid and 198.51.100.0/24 are documentation-only values in this synthetic exercise.</span></pre></div><aside class="evidence-note"><h4>Stay offline</h4><ul><li>Read the capture; do not contact the shown host.</li><li>Record the filter verbatim.</li><li>Correlate event time, host and process context where authorised.</li></ul></aside></div>
+              <fieldset class="choice-fieldset" data-checkpoint="pcap" data-answer="reproduce" data-success="Correct. The defensible result is the capture hash, exact offline filter, rows returned and a stated limitation—not a live follow-up connection." data-retry="Not yet. A PCAP can inform an investigation, but it is not permission to scan or contact an address shown inside it."><legend>What is the correct follow-up to this offline PCAP observation?</legend><div class="choice-list"><label><input type="radio" name="pcap" value="reproduce">Record the PCAP hash, the exact filter and the observed rows; correlate through authorised case data only.</label><label><input type="radio" name="pcap" value="scan">Scan the displayed IP from the Kali VM.</label><label><input type="radio" name="pcap" value="browser">Open the domain in a normal browser to check it.</label></div></fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="pcap">Check PCAP reasoning</button></div><p class="feedback" id="pcapFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="assessment-title">Knowledge check</h2><p>Answer all six questions. A score of five or more completes this browser-only learning lab.</p></div></header>
+            <form id="assessmentForm" data-pass-score="5"><p class="assessment-intro">This checks evidence handling and offline-analysis reasoning, not penetration-testing technique.</p><div class="quiz-stack">
+              <fieldset class="quiz-question" data-quiz-answer="authority" data-explanation="Forensic examination needs documented authority and scope before technical work begins."><legend>1. What belongs before an evidence examination starts?</legend><div class="choice-list"><label><input type="radio" name="q1" value="authority">Documented authority, scope and evidence-handling procedure</label><label><input type="radio" name="q1" value="scan">A live scan of all nearby systems</label><label><input type="radio" name="q1" value="upload">Uploading the artefact to a public file host</label></div><p class="question-feedback"></p></fieldset>
+              <fieldset class="quiz-question" data-quiz-answer="forensic" data-explanation="Kali’s forensic-mode behaviour is intended to avoid touching internal media or automatically mounting removable media."><legend>2. Why is Kali Live forensic mode relevant to an evidence workflow?</legend><div class="choice-list"><label><input type="radio" name="q2" value="forensic">It is designed to avoid automatic interaction with internal and removable media</label><label><input type="radio" name="q2" value="speed">It makes a scan run faster</label><label><input type="radio" name="q2" value="credentials">It reveals saved passwords automatically</label></div><p class="question-feedback"></p></fieldset>
+              <fieldset class="quiz-question" data-quiz-answer="hash" data-explanation="A hash lets another analyst verify that the same data was examined."><legend>3. What does a SHA-256 value help establish for a supplied fixture?</legend><div class="choice-list"><label><input type="radio" name="q3" value="hash">The exact data version that was examined</label><label><input type="radio" name="q3" value="name">The owner’s identity</label><label><input type="radio" name="q3" value="intent">The author’s intent</label></div><p class="question-feedback"></p></fieldset>
+              <fieldset class="quiz-question" data-quiz-answer="offset" data-explanation="The offset makes file-system observations reproducible against the image structure."><legend>4. Why record the offset used with a file-list command?</legend><div class="choice-list"><label><input type="radio" name="q4" value="offset">So the file-system observation can be reproduced against the same image layout</label><label><input type="radio" name="q4" value="colour">To change the command output colour</label><label><input type="radio" name="q4" value="delete">To delete the partition safely</label></div><p class="question-feedback"></p></fieldset>
+              <fieldset class="quiz-question" data-quiz-answer="offline" data-explanation="A network capture should be read as recorded evidence unless authorised investigative procedures say otherwise."><legend>5. What should you do with an IP address found inside a training PCAP?</legend><div class="choice-list"><label><input type="radio" name="q5" value="offline">Keep the analysis offline and record the filter and observation</label><label><input type="radio" name="q5" value="probe">Probe it directly to obtain more data</label><label><input type="radio" name="q5" value="contact">Contact it from a personal device</label></div><p class="question-feedback"></p></fieldset>
+              <fieldset class="quiz-question" data-quiz-answer="local" data-explanation="This page creates a local learning record only, not a forensic report or credential."><legend>6. What does this lab’s printable record represent?</legend><div class="choice-list"><label><input type="radio" name="q6" value="local">Local learning progress only</label><label><input type="radio" name="q6" value="evidence">Court-admissible evidence</label><label><input type="radio" name="q6" value="credential">A verified professional credential</label></div><p class="question-feedback"></p></fieldset>
+            </div><div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div><div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div></form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title"><div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div><p>Record your name after completing the evidence, disk-triage, PCAP and knowledge-check checkpoints. This is a personal record; it is not a verified credential or a forensic report.</p><div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div><article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>Kali Linux Evidence &amp; Network Forensics</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the self-paced safety-first learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-KAL-201 · 55 minutes · Browser-only synthetic evidence</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, practical competence, legal authority, evidence integrity or incident-response approval.</p></article></section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="https://www.kali.org/docs/general-use/kali-linux-forensics-mode/">Kali forensic-mode documentation</a> · <a href="./instructor-guide.md">Instructor guide</a></p></div></footer>
+</body>
+</html>

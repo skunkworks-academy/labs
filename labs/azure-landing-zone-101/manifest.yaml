@@ -1,0 +1,36 @@
+schemaVersion: 1
+code: LAB-AZ-101
+title: Azure Landing Zone Essentials
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  liveTenantAccess: disabled
+  subscriptionCreation: disabled
+  policyChanges: simulated-only
+  roleAssignments: simulated-only
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain the governance roles of management groups, subscriptions, resource groups and resources.
+  - Distinguish Azure RBAC from Azure Policy and choose the right control objective.
+  - Design a workload onboarding path with ownership, cost, operational and recovery guardrails.
+  - Identify the approvals and least-privilege requirements for a real Azure change.
+evidence:
+  checkpoints:
+    - workload-boundary-choice
+    - rbac-and-policy-guardrail-design
+    - landing-zone-onboarding-plan
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-AZ-101
+  data_classification: public-learning-content
+  cost_tier: none

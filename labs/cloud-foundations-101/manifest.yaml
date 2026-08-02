@@ -1,0 +1,36 @@
+schemaVersion: 1
+code: LAB-CLD-101
+title: Cloud Foundations and Shared Responsibility
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  liveCloudAccess: disabled
+  billingActions: disabled
+  externalCredentials: disallowed
+  deploymentActions: simulated-only
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Choose an IaaS, PaaS or SaaS starting point by workload control requirements.
+  - Map shared responsibility for infrastructure, data, identity, application configuration and operations.
+  - Define launch guardrails for environments, access, recovery, monitoring and cost ownership.
+  - Explain why real cloud changes require authority and a governed operating plan.
+evidence:
+  checkpoints:
+    - service-model-choice
+    - responsibility-map
+    - cloud-operating-plan
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-CLD-101
+  data_classification: public-learning-content
+  cost_tier: none

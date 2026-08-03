@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "classification": "synthetic-training-data",
+  "engagement": "Northstar Training Services security validation lab",
+  "generatedAt": "2026-08-03T09:00:00+02:00",
+  "assets": [
+    {"host": "web.lab", "address": "10.77.0.20", "services": ["22/tcp ssh", "80/tcp http", "443/tcp https"]},
+    {"host": "wordpress.lab", "address": "10.77.0.30", "services": ["80/tcp http"]},
+    {"host": "drupal.lab", "address": "10.77.0.31", "services": ["80/tcp http"]},
+    {"host": "linux-audit.lab", "address": "10.77.0.40", "services": ["22/tcp ssh"]},
+    {"host": "metasploitable.lab", "address": "10.77.0.50", "services": ["21/tcp ftp", "22/tcp ssh", "80/tcp http"]}
+  ],
+  "openvas": {
+    "task": "northstar-bounded-scan",
+    "profile": "Full and fast - lab constrained",
+    "findings": [
+      {"id": "GVM-SYN-001", "host": "10.77.0.20", "severity": 7.5, "title": "Outdated TLS configuration", "confidence": "medium", "validation": "manual protocol review required"},
+      {"id": "GVM-SYN-002", "host": "10.77.0.50", "severity": 9.8, "title": "Known vulnerable FTP service signature", "confidence": "high", "validation": "confirm service version and isolated exploitability"}
+    ]
+  },
+  "nmap": {
+    "command": "nmap -sV --script safe,default -oA evidence/nmap-baseline 10.77.0.20,30,31,40,50",
+    "hosts": [
+      {"address": "10.77.0.20", "ports": [{"port": 22, "state": "open", "service": "ssh"}, {"port": 80, "state": "open", "service": "http"}, {"port": 443, "state": "open", "service": "https"}]},
+      {"address": "10.77.0.50", "ports": [{"port": 21, "state": "open", "service": "ftp"}, {"port": 22, "state": "open", "service": "ssh"}, {"port": 80, "state": "open", "service": "http"}]}
+    ]
+  },
+  "web": {
+    "burp": [
+      {"request": "GET /api/learners/1001", "test": "replace object identifier with 1002", "expected": "403 or indistinguishable 404", "observed": "403"},
+      {"request": "POST /profile", "test": "add role=admin field", "expected": "ignored or rejected", "observed": "field rejected"}
+    ],
+    "zap": [
+      {"risk": "medium", "confidence": "high", "name": "Missing anti-clickjacking header", "uri": "http://web.lab/"},
+      {"risk": "low", "confidence": "medium", "name": "Cookie without SameSite attribute", "uri": "http://web.lab/login"}
+    ],
+    "nikto": [
+      {"id": "NIK-SYN-001", "message": "X-Frame-Options header is not present", "uri": "http://web.lab/"},
+      {"id": "NIK-SYN-002", "message": "Server banner reveals product family", "uri": "http://web.lab/"}
+    ],
+    "wapiti": [
+      {"category": "Content Security Policy", "level": 1, "path": "/"},
+      {"category": "Secure cookie flag", "level": 1, "path": "/login"}
+    ]
+  },
+  "cms": {
+    "wpscan": {"target": "wordpress.lab", "version": "synthetic-6.x", "plugins": [{"name": "events-calendar", "status": "outdated-lab-fixture"}], "usersEnumerated": false},
+    "droopescan": {"target": "drupal.lab", "cms": "Drupal", "versionConfidence": "medium", "interestingUrls": ["/CHANGELOG.txt", "/user/login"]},
+    "cmsmap": {"target": "cms.lab", "fingerprint": "WordPress-like", "confidence": "low", "requiredValidation": "confirm generator, paths and response behaviour"}
+  },
+  "wireless": {
+    "aircrack": {"capture": "northstar-lab.cap", "ssid": "NORTHSTAR-LAB", "bssid": "02:00:00:77:00:01", "handshake": "present", "liveTraffic": false},
+    "kismet": {"source": "northstar-lab.kismet", "devices": 6, "accessPoints": 2, "clients": 4, "unexpectedSsid": "NORTHSTAR-GUEST-OLD", "liveTraffic": false}
+  },
+  "lynis": {
+    "host": "linux-audit.lab",
+    "hardeningIndex": 67,
+    "warnings": ["SSH password authentication enabled", "Automatic security updates not configured"],
+    "suggestions": ["Review file permissions under /opt/northstar", "Enable central log forwarding"]
+  },
+  "metasploit": {
+    "workspace": "northstar-lab",
+    "target": "10.77.0.50",
+    "moduleType": "exploit",
+    "validationMode": "check-first isolated target",
+    "sessionOpened": true,
+    "evidenceCommand": "id",
+    "evidenceResult": "uid=1001(labsvc) gid=1001(labsvc)",
+    "cleanup": ["exit session", "stop handler", "reset target snapshot", "verify no sessions remain"]
+  }
+}

@@ -74,7 +74,7 @@ const config = {
       items: [
         {to: '/labs/api-description/', label: 'API Description Labs', position: 'left'},
         {to: '/labs/api-description/capstone/', label: 'Capstone', position: 'left'},
-        {href: '/labs/bits-and-bytes-101/', label: 'Existing Labs', position: 'left'},
+        {href: 'https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/', label: 'Existing Labs', position: 'left'},
         {href: 'https://portal.skunkworksacademy.com/', label: 'Portal', position: 'right'},
         {href: 'https://github.com/skunkworks-academy/labs', label: 'GitHub', position: 'right'},
       ],

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+  xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:ord="https://labs.skunkworksacademy.com/ns/orders/v1">
+  <env:Header/>
+  <env:Body>
+    <ord:CreateOrderResponse>
+      <ord:orderId>ORD-90571</ord:orderId>
+      <ord:status>accepted</ord:status>
+      <ord:correlationId>0e89a2d7-94c2-4b53-962e-4eb9bc2dcf61</ord:correlationId>
+    </ord:CreateOrderResponse>
+  </env:Body>
+</env:Envelope>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="https://labs.skunkworksacademy.com/ns/wadl/v1"
+  targetNamespace="https://labs.skunkworksacademy.com/ns/wadl/v1"
+  elementFormDefault="qualified">
+  <xs:element name="LearnerCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="displayName" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="countryCode" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Learner">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="id" type="xs:string"/>
+        <xs:element name="displayName" type="xs:string"/>
+        <xs:element name="email" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LearnerList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tns:Learner" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,67 @@
+---
+title: Practical technical labs
+hide_table_of_contents: true
+---
+
+import Link from '@docusaurus/Link';
+
+<section className="hero-api">
+  <p className="eyebrow">Skunkworks Academy · API security and integration</p>
+  <h1>Read the contract. Map the attack surface. Test with evidence.</h1>
+  <p>Five original, browser-based labs for SOAP, Swagger/OpenAPI, GraphQL, WSDL and WADL. Each lab uses fictional services, synthetic data and an authorised-testing workflow.</p>
+  <div className="hero-actions">
+    <Link to="/labs/api-description/">Start the API description track</Link>
+    <Link to="/labs/api-description/capstone/">Open the capstone</Link>
+  </div>
+</section>
+
+<div className="orange-rule"></div>
+
+## API description lab track
+
+<div className="lab-grid">
+  <Link className="lab-card" to="/labs/api-description/soap/">
+    <code>LAB-API-101</code>
+    <h3>SOAP Message & Schema Analysis</h3>
+    <p>Trace envelopes, namespaces, headers, bodies, faults and XSD constraints before defining a safe test charter.</p>
+    <span>60 minutes · Foundation to intermediate →</span>
+  </Link>
+  <Link className="lab-card" to="/labs/api-description/openapi/">
+    <code>LAB-API-102</code>
+    <h3>Swagger / OpenAPI Contract Review</h3>
+    <p>Map paths, operations, parameters, request bodies, responses and security schemes from an OpenAPI description.</p>
+    <span>75 minutes · Intermediate →</span>
+  </Link>
+  <Link className="lab-card" to="/labs/api-description/graphql/">
+    <code>LAB-API-103</code>
+    <h3>GraphQL Schema & Query Security</h3>
+    <p>Use schema-first reasoning to minimise queries and identify object-level authorisation, depth and data-exposure tests.</p>
+    <span>75 minutes · Intermediate →</span>
+  </Link>
+  <Link className="lab-card" to="/labs/api-description/wsdl/">
+    <code>LAB-API-104</code>
+    <h3>WSDL Service Contract Mapping</h3>
+    <p>Separate abstract interface definitions from concrete bindings, services and endpoints in a WSDL 2.0 contract.</p>
+    <span>60 minutes · Intermediate →</span>
+  </Link>
+  <Link className="lab-card" to="/labs/api-description/wadl/">
+    <code>LAB-API-105</code>
+    <h3>WADL Legacy API Discovery</h3>
+    <p>Extract resources, methods, parameters and representations from a legacy WADL description and assess migration risk.</p>
+    <span>60 minutes · Intermediate →</span>
+  </Link>
+  <Link className="lab-card" to="/labs/api-description/capstone/">
+    <code>LAB-API-190</code>
+    <h3>API Contract Reconnaissance Capstone</h3>
+    <p>Compare all five formats and produce a defensible, prioritised API test plan with evidence requirements.</p>
+    <span>90 minutes · Applied assessment →</span>
+  </Link>
+</div>
+
+## Safe delivery model
+
+These labs do not require a live production endpoint. Learners inspect local fixtures, create test cases and record evidence. Any active testing must be performed only against a system explicitly included in a written authorisation and rules-of-engagement document.
+
+## Existing practical labs
+
+The Docusaurus site preserves the existing browser labs during deployment. Continue with [Bits, Bytes & Binary](/labs/bits-and-bytes-101/), [IPv4 Subnetting](/labs/ipv4-subnetting-101/), [Wireshark PCAP Investigation](/labs/pcap-investigation-201/) or [Entra ID, MFA & Conditional Access](/labs/entra-identity-101/).

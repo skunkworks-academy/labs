@@ -1,0 +1,51 @@
+engagement: Northstar Training Services security validation lab
+classification: synthetic-training-data
+owner: Skunkworks Academy
+validity:
+  timezone: Africa/Johannesburg
+  start: instructor-assigned
+  end: instructor-assigned
+network:
+  cidr: 10.77.0.0/24
+  permitted_hosts:
+    - name: scanner.lab
+      address: 10.77.0.5
+      role: learner workstation
+    - name: web.lab
+      address: 10.77.0.20
+      role: resettable vulnerable web application
+    - name: wordpress.lab
+      address: 10.77.0.30
+      role: resettable WordPress target
+    - name: drupal.lab
+      address: 10.77.0.31
+      role: resettable Drupal target
+    - name: linux-audit.lab
+      address: 10.77.0.40
+      role: Linux audit target
+    - name: metasploitable.lab
+      address: 10.77.0.50
+      role: isolated vulnerability validation target
+wireless:
+  ssid: NORTHSTAR-LAB
+  capture_mode: instructor-provided-offline-fixture
+  live_capture: prohibited-unless-instructor-controlled
+constraints:
+  maximum_concurrent_scan_tasks: 2
+  maximum_web_requests_per_second: 5
+  credential_attacks: prohibited
+  denial_of_service: prohibited
+  persistence: prohibited
+  lateral_movement: prohibited
+  public_network_scanning: prohibited
+  destructive_modules: prohibited
+  wireless_deauthentication: prohibited
+  data_exfiltration: prohibited
+required_controls:
+  - record tool version and system time
+  - save exact commands and profiles
+  - collect raw output before interpretation
+  - validate findings with a second evidence source
+  - stop scans at the end of the assigned window
+  - close sessions and reset vulnerable targets
+  - redact credentials and personal data from reports

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+  xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:err="https://labs.skunkworksacademy.com/ns/errors/v1">
+  <env:Body>
+    <env:Fault>
+      <env:Code><env:Value>env:Sender</env:Value></env:Code>
+      <env:Reason><env:Text xml:lang="en">The order request is invalid.</env:Text></env:Reason>
+      <env:Detail>
+        <err:ValidationFault>
+          <err:correlationId>0e89a2d7-94c2-4b53-962e-4eb9bc2dcf61</err:correlationId>
+          <err:field>quantity</err:field>
+          <err:message>Quantity must be between 1 and 50.</err:message>
+          <err:internalHandler>Northstar.Orders.CreateOrderHandler</err:internalHandler>
+        </err:ValidationFault>
+      </env:Detail>
+    </env:Fault>
+  </env:Body>
+</env:Envelope>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:description
+  xmlns:wsdl="http://www.w3.org/ns/wsdl"
+  xmlns:wsoap="http://www.w3.org/ns/wsdl/soap"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="https://labs.skunkworksacademy.com/ns/training-service/v2"
+  targetNamespace="https://labs.skunkworksacademy.com/ns/training-service/v2">
+
+  <wsdl:types>
+    <xs:schema targetNamespace="https://labs.skunkworksacademy.com/ns/training-service/v2" elementFormDefault="qualified">
+      <xs:element name="GetCourseRequest">
+        <xs:complexType><xs:sequence>
+          <xs:element name="courseCode" type="xs:string"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+      <xs:element name="GetCourseResponse">
+        <xs:complexType><xs:sequence>
+          <xs:element name="courseCode" type="xs:string"/>
+          <xs:element name="title" type="xs:string"/>
+          <xs:element name="status" type="xs:string"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+      <xs:element name="ServiceFault">
+        <xs:complexType><xs:sequence>
+          <xs:element name="correlationId" type="xs:string"/>
+          <xs:element name="message" type="xs:string"/>
+        </xs:sequence></xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+
+  <wsdl:interface name="TrainingInterface">
+    <wsdl:operation
+      name="GetCourse"
+      pattern="http://www.w3.org/ns/wsdl/in-out"
+      style="http://www.w3.org/ns/wsdl/style/iri">
+      <wsdl:input element="tns:GetCourseRequest"/>
+      <wsdl:output element="tns:GetCourseResponse"/>
+      <wsdl:outfault ref="tns:ServiceFault"/>
+    </wsdl:operation>
+    <wsdl:fault name="ServiceFault" element="tns:ServiceFault"/>
+  </wsdl:interface>
+
+  <wsdl:binding
+    name="TrainingSoapBinding"
+    interface="tns:TrainingInterface"
+    type="http://www.w3.org/ns/wsdl/soap"
+    wsoap:protocol="http://www.w3.org/2003/05/soap/bindings/HTTP/">
+    <wsdl:operation ref="tns:GetCourse" wsoap:action="https://northstar.invalid/actions/GetCourse"/>
+  </wsdl:binding>
+
+  <wsdl:service name="TrainingService" interface="tns:TrainingInterface">
+    <wsdl:endpoint
+      name="ProductionEndpoint"
+      binding="tns:TrainingSoapBinding"
+      address="https://soap.northstar.invalid/training/v2"/>
+    <wsdl:endpoint
+      name="LegacyTestEndpoint"
+      binding="tns:TrainingSoapBinding"
+      address="https://soap-test.northstar.invalid/training/v2"/>
+  </wsdl:service>
+</wsdl:description>

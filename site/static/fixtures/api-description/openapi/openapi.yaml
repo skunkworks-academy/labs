@@ -1,0 +1,209 @@
+openapi: 3.1.2
+info:
+  title: Northstar Learner API
+  version: 1.4.0
+  summary: Synthetic API contract for Skunkworks Academy labs
+  description: >-
+    Fictional learner-management API. No live service or credential is associated
+    with this description.
+servers:
+  - url: https://api.northstar.invalid/v1
+    description: Synthetic training endpoint
+security:
+  - oauth2: [learners.read]
+tags:
+  - name: Learners
+  - name: Enrolments
+paths:
+  /learners:
+    get:
+      tags: [Learners]
+      operationId: listLearners
+      summary: List learners visible to the caller
+      parameters:
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Cursor'
+      responses:
+        '200':
+          description: Learner page
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LearnerPage'
+        '401': {$ref: '#/components/responses/Unauthorised'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+    post:
+      tags: [Learners]
+      operationId: createLearner
+      security:
+        - oauth2: [learners.write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LearnerCreate'
+      responses:
+        '201':
+          description: Learner created
+          headers:
+            Location:
+              schema: {type: string, format: uri-reference}
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Learner'}
+        '400': {$ref: '#/components/responses/Problem'}
+        '401': {$ref: '#/components/responses/Unauthorised'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+  /learners/{learnerId}:
+    parameters:
+      - name: learnerId
+        in: path
+        required: true
+        description: Stable learner identifier
+        schema:
+          type: string
+          pattern: '^lrn_[a-z0-9]{12}$'
+    get:
+      tags: [Learners]
+      operationId: getLearner
+      responses:
+        '200':
+          description: Learner record
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Learner'}
+        '401': {$ref: '#/components/responses/Unauthorised'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+        '404': {$ref: '#/components/responses/Problem'}
+  /learners/{learnerId}/enrolments:
+    get:
+      tags: [Enrolments]
+      operationId: listLearnerEnrolments
+      parameters:
+        - name: learnerId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^lrn_[a-z0-9]{12}$'
+      responses:
+        '200':
+          description: Enrolments for an authorised learner scope
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100
+                items: {$ref: '#/components/schemas/Enrolment'}
+        '401': {$ref: '#/components/responses/Unauthorised'}
+        '403': {$ref: '#/components/responses/Forbidden'}
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorisation-code flow for approved clients
+      flows:
+        authorizationCode:
+          authorizationUrl: https://identity.northstar.invalid/oauth2/authorize
+          tokenUrl: https://identity.northstar.invalid/oauth2/token
+          scopes:
+            learners.read: Read learner records within the caller's authorised tenant
+            learners.write: Create learner records within the caller's authorised tenant
+  parameters:
+    PageSize:
+      name: pageSize
+      in: query
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    Cursor:
+      name: cursor
+      in: query
+      schema:
+        type: [string, 'null']
+        maxLength: 256
+  schemas:
+    LearnerCreate:
+      type: object
+      additionalProperties: false
+      required: [displayName, email, countryCode]
+      properties:
+        displayName:
+          type: string
+          minLength: 2
+          maxLength: 120
+        email:
+          type: string
+          format: email
+        countryCode:
+          type: string
+          pattern: '^[A-Z]{2}$'
+        temporaryPassword:
+          type: string
+          minLength: 14
+          maxLength: 128
+          writeOnly: true
+    Learner:
+      allOf:
+        - $ref: '#/components/schemas/LearnerCreate'
+        - type: object
+          required: [id, createdAt]
+          properties:
+            id:
+              type: string
+              pattern: '^lrn_[a-z0-9]{12}$'
+              readOnly: true
+            createdAt:
+              type: string
+              format: date-time
+              readOnly: true
+            billingEmail:
+              type: [string, 'null']
+              format: email
+              description: Restricted to finance and authorised operations roles
+              readOnly: true
+    Enrolment:
+      type: object
+      additionalProperties: false
+      required: [courseCode, status, progressPercent]
+      properties:
+        courseCode: {type: string, maxLength: 32}
+        status: {type: string, enum: [active, completed, withdrawn]}
+        progressPercent: {type: integer, minimum: 0, maximum: 100}
+    LearnerPage:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          maxItems: 100
+          items: {$ref: '#/components/schemas/Learner'}
+        nextCursor:
+          type: [string, 'null']
+    Problem:
+      type: object
+      required: [type, title, status, correlationId]
+      properties:
+        type: {type: string, format: uri-reference}
+        title: {type: string, maxLength: 160}
+        status: {type: integer, minimum: 400, maximum: 599}
+        correlationId: {type: string, format: uuid}
+  responses:
+    Problem:
+      description: Problem detail
+      content:
+        application/problem+json:
+          schema: {$ref: '#/components/schemas/Problem'}
+    Unauthorised:
+      description: Authentication is required or invalid
+      content:
+        application/problem+json:
+          schema: {$ref: '#/components/schemas/Problem'}
+    Forbidden:
+      description: Authenticated caller lacks the required authorisation
+      content:
+        application/problem+json:
+          schema: {$ref: '#/components/schemas/Problem'}

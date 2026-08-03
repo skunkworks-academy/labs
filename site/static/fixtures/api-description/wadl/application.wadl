@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application
+  xmlns="http://wadl.dev.java.net/2009/02"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="https://labs.skunkworksacademy.com/ns/wadl/v1">
+  <doc title="Northstar Legacy Learner API">Synthetic WADL fixture for authorised training.</doc>
+  <grammars>
+    <include href="schemas/learner.xsd"/>
+  </grammars>
+  <resources base="https://legacy-api.northstar.invalid/v1/">
+    <resource path="learners">
+      <method name="GET" id="listLearners">
+        <request>
+          <param name="page" style="query" type="xs:positiveInteger" default="1"/>
+          <param name="pageSize" style="query" type="xs:positiveInteger" default="25"/>
+          <param name="X-Correlation-ID" style="header" type="xs:string" required="false"/>
+        </request>
+        <response status="200">
+          <representation mediaType="application/xml" element="tns:LearnerList"/>
+          <representation mediaType="application/json"/>
+        </response>
+      </method>
+      <method name="POST" id="createLearner">
+        <request>
+          <representation mediaType="application/xml" element="tns:LearnerCreate"/>
+        </request>
+        <response status="201">
+          <representation mediaType="application/xml" element="tns:Learner"/>
+        </response>
+        <response status="400 409">
+          <representation mediaType="application/problem+json"/>
+        </response>
+      </method>
+      <resource path="{learnerId}">
+        <param name="learnerId" style="template" type="xs:string" required="true"/>
+        <method name="GET" id="getLearner">
+          <response status="200">
+            <representation mediaType="application/xml" element="tns:Learner"/>
+          </response>
+          <response status="404">
+            <representation mediaType="application/problem+json"/>
+          </response>
+        </method>
+        <resource path="enrolments">
+          <method name="GET" id="listEnrolments">
+            <request>
+              <param name="status" style="query" type="xs:string" required="false"/>
+            </request>
+            <response status="200">
+              <representation mediaType="application/json"/>
+            </response>
+          </method>
+        </resource>
+      </resource>
+    </resource>
+  </resources>
+</application>

@@ -1,18 +1,20 @@
 {
   "name": "@skunkworks-academy/labs-site",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Docusaurus site for Skunkworks Academy practical labs.",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "validate:security": "node scripts/validate-security-tools.mjs",
     "build": "docusaurus build",
-    "build:deploy": "npm run build && node scripts/overlay-legacy.mjs",
+    "build:deploy": "npm run validate:security && npm run build && node scripts/overlay-legacy.mjs",
     "serve": "docusaurus serve",
     "clear": "docusaurus clear"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
+    "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",

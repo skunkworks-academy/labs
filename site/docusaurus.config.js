@@ -94,7 +94,7 @@ const config = {
     ],
   ],
   themeConfig: {
-    image: 'https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png',
+    image: '/favicon.ico',
     metadata: [
       {name: 'description', content: 'Skunkworks Academy guided labs for APIs, vulnerability scanning, web security, CMS assessment, wireless analysis, Linux auditing and controlled exploitation.'},
       {name: 'keywords', content: 'API labs, SOAP, OpenAPI, GraphQL, OpenVAS, Nmap NSE, Burp Suite, OWASP ZAP, Nikto, Wapiti, WPScan, Aircrack-ng, Kismet, Lynis, Metasploit, cybersecurity training'},
@@ -106,11 +106,6 @@ const config = {
     },
     navbar: {
       title: 'Skunkworks Academy Labs',
-      logo: {
-        alt: 'Skunkworks Academy',
-        src: 'https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png',
-        srcDark: 'https://raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-white.png',
-      },
       items: [
         {to: '/labs/security-tools/', label: 'Security Tool Labs', position: 'left'},
         {to: '/labs/api-description/', label: 'API Description Labs', position: 'left'},

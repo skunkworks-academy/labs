@@ -1,0 +1,34 @@
+schemaVersion: 1
+code: LAB-SYS-102
+title: Linux Files, Permissions and Processes
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  interactiveShell: simulated-only
+  hostAlteration: forbidden
+  privilegedCommands: not-executed
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Interpret Linux file ownership and rwx permission notation.
+  - Apply least privilege to a shared application file without using world-writable access.
+  - Read process, service and journal output as evidence before taking action.
+  - Select a proportionate, documented first response to a service issue.
+evidence:
+  checkpoints:
+    - permission-decision
+    - service-triage
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-SYS-102
+  data_classification: public-learning-content
+  cost_tier: none

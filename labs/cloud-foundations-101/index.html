@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A full-length Skunkworks Academy lab on cloud service models, shared responsibility, resilience and governed cloud decisions.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/cloud-foundations-101/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="Cloud Foundations &amp; Shared Responsibility | Interactive Lab">
+  <meta property="og:description" content="Choose IaaS, PaaS or SaaS deliberately, then assign cloud responsibilities and guardrails in a browser-only simulation.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/cloud-foundations-101/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cloud Foundations &amp; Shared Responsibility | Interactive Lab">
+  <meta name="twitter:description" content="A 60-minute cloud architecture and governance workbook.">
+  <title>Cloud Foundations | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../it-foundations-labs.css">
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Cloud Foundations and Shared Responsibility",
+    "description": "A self-paced cloud foundations lab that teaches service models, shared responsibility, resilience and governed cloud decision making.",
+    "provider": {"@type": "EducationalOrganization", "name": "Skunkworks Academy", "url": "https://skunkworksacademy.com/"},
+    "url": "https://labs.skunkworksacademy.com/labs/cloud-foundations-101/",
+    "educationalLevel": "Beginner",
+    "inLanguage": "en",
+    "timeRequired": "PT60M",
+    "isAccessibleForFree": true,
+    "teaches": ["IaaS", "PaaS", "SaaS", "shared responsibility", "resilience", "cloud governance"]
+  }
+  </script>
+</head>
+<body data-lab-code="LAB-CLD-101">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation"><a href="/">All labs</a><a href="#lab">Start lab</a><a href="#completion">Completion record</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-CLD-101 · Cloud foundations</p>
+          <h1 id="page-title">Cloud foundations and shared responsibility - choose the service, own the outcome.</h1>
+          <p class="hero__lead">Cloud is not a transfer of accountability. A provider runs defined parts of a service; your organisation still owns its data, identities, configuration, workload choices and operating decisions. This lab makes those boundaries visible before you use a real cloud account.</p>
+          <div class="hero__actions"><a class="button button--primary" href="#lab">Begin the lab</a><a class="button button--secondary" href="#objectives">What you will learn</a></div>
+          <p class="hero__note">Estimated time: 60 minutes · Browser-only architecture simulation · No cloud sign-in, billing action or deployment</p>
+        </div>
+        <aside class="environment-card" aria-label="Fictional cloud learning platform summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>scenario: academy-learning-platform</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Decision sequence</p>
+            <h2>Outcome → service model → responsibilities → guardrails → recovery</h2>
+            <p>A fictional learner portal is used to make a defensible design choice without creating any cloud resources.</p>
+            <dl class="environment-facts"><div><dt>Workload</dt><dd>Learning portal</dd></div><div><dt>Data</dt><dd>Learner records</dd></div><div><dt>Risk</dt><dd>Access and availability</dd></div><div><dt>Mode</dt><dd>Simulation only</dd></div></dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Start with the outcome, then make the ownership boundaries explicit.</h2></div>
+        <ul>
+          <li><span>01</span><div><strong>Choose an appropriate service model.</strong><br>Compare IaaS, PaaS and SaaS by the control you genuinely need, not by the most technical option.</div></li>
+          <li><span>02</span><div><strong>Assign responsibility accurately.</strong><br>Separate what a provider operates from what the customer must configure, monitor and govern.</div></li>
+          <li><span>03</span><div><strong>Design for an operating reality.</strong><br>Use identity, data classification, backups, monitoring, cost controls and recovery objectives as first-class design inputs.</div></li>
+        </ul>
+      </section>
+
+      <section class="safety-notice" aria-labelledby="safety-title"><span class="safety-notice__icon" aria-hidden="true">!</span><div><h2 id="safety-title">Training boundary: no cloud environment is created</h2><p>This workbook uses invented organisations, workload facts and costs. It does not authenticate to Azure, Google Cloud, AWS or another provider; it cannot deploy a resource, activate a subscription or create a bill. Before acting in a real environment, confirm authority, data classification, cloud policy, budget ownership and a reviewed change plan.</p></div></section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive cloud foundations lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><span>Your progress</span><strong id="progressText">0 of 4 completed</strong></div><div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="service-model"><span class="step-icon" data-step-number="1">1</span><span><b>Service model</b><small>Match control to need</small></span></li>
+            <li data-progress-step="responsibility"><span class="step-icon" data-step-number="2">2</span><span><b>Responsibility</b><small>Assign ownership</small></span></li>
+            <li data-progress-step="governance"><span class="step-icon" data-step-number="3">3</span><span><b>Guardrails</b><small>Plan the operation</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="4">4</span><span><b>Knowledge check</b><small>Apply the model</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not sent to Skunkworks Academy.</p><button class="text-button" id="resetProgress" type="button">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="service-model-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="service-model-title">Choose a service model by the capability you need to operate.</h2><p>Service models do not describe good, better and best. They describe how much of the computing stack a customer operates. An IaaS design leaves more operating-system and runtime control with the customer; PaaS removes more platform administration; SaaS provides a finished application whose business configuration remains the customer’s responsibility.</p></div></header>
+            <div class="concept-grid">
+              <article class="concept-card"><p class="concept-card__kicker">IaaS</p><strong>Control virtual machines, networks and operating systems.</strong><p>Use when a workload needs deliberate infrastructure configuration or a legacy dependency. That flexibility also brings patching, hardening, monitoring and lifecycle responsibility.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">PaaS</p><strong>Deploy an application without operating the underlying servers.</strong><p>Use when the organisation can focus on code, data, configuration and identity rather than maintaining an operating system and runtime platform.</p></article>
+              <article class="concept-card"><p class="concept-card__kicker">SaaS</p><strong>Consume a managed application as a service.</strong><p>Use when a supported business capability already exists. You still govern users, roles, data retention, integrations and secure configuration.</p></article>
+            </div>
+            <div class="callout"><strong>Decision rule:</strong> ask what the team must control to meet a documented functional, security or integration requirement. Do not choose IaaS simply because it feels familiar, or SaaS simply because it is quick to procure.</div>
+            <fieldset class="choice-fieldset" data-checkpoint="service-model" data-answer="paas" data-success="Correct. A managed application platform can remove server administration while the team retains ownership of application code, data, configuration and access design." data-retry="Review the operating boundary. The scenario does not need the team to operate an OS, but it does need to deploy and manage its own application.">
+              <legend>A team is building a custom learner portal. It needs to deploy its own application and control its data and identity integration, but it has no requirement to administer virtual-machine operating systems. Which starting model is most appropriate to evaluate?</legend>
+              <div class="choice-list"><label><input type="radio" name="service-model" value="paas">A managed application platform (PaaS)</label><label><input type="radio" name="service-model" value="iaas">IaaS only, because every application needs a manually patched server</label><label><input type="radio" name="service-model" value="saas">A generic SaaS application, even if it cannot meet the required custom workflow</label></div>
+            </fieldset>
+            <div class="checkpoint-actions"><button class="button button--soft" type="button" data-checkpoint-action data-checkpoint="service-model">Check service-model choice</button></div><p class="feedback" id="service-modelFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="module" aria-labelledby="responsibility-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="responsibility-title">Shared responsibility is a map of work, not a transfer of risk.</h2><p>The exact boundary varies by provider and service. However, customers commonly retain responsibility for data, access decisions, application logic, safe configurations and regulatory duties. A cloud provider may operate a physical facility and an underlying managed service without knowing whether your users should have administrator rights or whether your data-retention setting matches policy.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Fictional workload</p><h3>Academy Learning Hub stores learner profiles and completion records.</h3></div><span class="activity-pill">Architecture reasoning</span></div>
+              <div class="case-grid">
+                <div class="case-file"><h4>Potential responsibility map</h4><table class="lab-table"><thead><tr><th>Area</th><th>Provider typically operates</th><th>Customer must govern</th></tr></thead><tbody><tr><td>Physical infrastructure</td><td>Data-centre facilities and core hardware</td><td>Supplier due diligence and service choice</td></tr><tr><td>Managed application platform</td><td>Defined platform service availability and maintenance</td><td>Application deployment, settings and lifecycle</td></tr><tr><td>Identity</td><td>Service capability</td><td>Who receives access, least privilege, MFA and review</td></tr><tr><td>Data</td><td>Storage durability within service commitments</td><td>Classification, access, retention, backup and legal obligations</td></tr></tbody></table></div>
+                <aside class="evidence-note" aria-labelledby="cloud-responsibility-questions"><h4 id="cloud-responsibility-questions">Questions before launch</h4><ul><li>What data is stored and who may access it?</li><li>Which configuration makes the service private or public?</li><li>What evidence proves backups and recovery work?</li><li>Who owns the budget and incident escalation?</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="responsibility" data-answer="customer" data-success="Correct. A provider can offer identity features, but the customer must decide who is authorised, how privilege is assigned and how access is reviewed." data-retry="Not yet. A cloud identity feature does not decide which individual should have access to the Academy’s learner data.">
+                <legend>Which responsibility remains with the Academy when it uses a managed cloud application platform?</legend>
+                <div class="choice-list"><label><input type="radio" name="responsibility" value="customer">Define access roles, protect learner data, review configuration and operate the application responsibly.</label><label><input type="radio" name="responsibility" value="provider">Assume the provider decides which staff members should access learner records.</label><label><input type="radio" name="responsibility" value="none">Treat managed hosting as removing the need for data, identity and incident governance.</label></div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="responsibility">Check responsibility map</button></div><p class="feedback" id="responsibilityFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="governance-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="governance-title">Turn a cloud design into an operating model.</h2><p>A useful architecture includes more than a diagram. It names the environment boundaries, data sensitivity, identity model, recovery objective, monitoring route, cost owner and escalation path. These are the guardrails that make a service repeatable, auditable and recoverable as it grows.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Design review</p><h3>Prepare a launch checklist for the fictional learner portal.</h3></div><span class="activity-pill">No deployment</span></div>
+              <ul class="policy-list"><li><span>1</span><div><strong>Classify and isolate:</strong> distinguish development, test and production; document the data type and prohibit production data in unapproved environments.</div></li><li><span>2</span><div><strong>Control access:</strong> use named identities, least privilege, MFA where required and periodic review. Do not share administrator credentials.</div></li><li><span>3</span><div><strong>Observe and recover:</strong> define logs, alerts, backup/restore evidence, recovery targets and who is called when the service fails.</div></li><li><span>4</span><div><strong>Own the cost:</strong> establish tags or labels, a budget owner, threshold notifications and a decision path for unexpected spend.</div></li></ul>
+              <fieldset class="choice-fieldset" data-checkpoint="governance" data-answer="operating" data-success="Correct. A credible cloud launch includes identity, data, monitoring, recovery and cost ownership - not only a deployment diagram." data-retry="Review the launch checklist. A provider account and an architecture drawing do not create an operating model by themselves.">
+                <legend>Which plan best turns the portal design into a governed service?</legend>
+                <div class="choice-list"><label><input type="radio" name="governance" value="operating">Separate environments, define access and data rules, test recovery, route alerts and assign a budget owner before launch.</label><label><input type="radio" name="governance" value="diagram">Publish a diagram and postpone monitoring, backups and budget decisions until the first incident.</label><label><input type="radio" name="governance" value="shared">Use one shared owner account so every team member can change any resource quickly.</label></div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="governance">Check operating plan</button></div><p class="feedback" id="governanceFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module assessment" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Knowledge check</p><div><h2 id="assessment-title">Apply the cloud model to a real decision.</h2><p>Answer all seven questions. The purpose is reasoning: what must be designed, owned and verified before a real deployment occurs.</p></div></header>
+            <form id="assessmentForm" data-pass-score="6">
+              <div class="quiz-grid">
+                <fieldset class="quiz-question" data-quiz-answer="model" data-explanation="A service model describes the portion of the computing stack the customer needs to operate."><legend>1. What is the best starting point for choosing IaaS, PaaS or SaaS?</legend><div class="choice-list"><label><input type="radio" name="q1" value="model">The documented capability and control the workload requires</label><label><input type="radio" name="q1" value="trend">Which option is most fashionable</label><label><input type="radio" name="q1" value="default">Always choose the lowest-level service</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="paas" data-explanation="PaaS typically lets a team deploy and manage its application without administering the underlying servers."><legend>2. Which model normally reduces routine operating-system administration for a custom application team?</legend><div class="choice-list"><label><input type="radio" name="q2" value="paas">PaaS</label><label><input type="radio" name="q2" value="iaas">IaaS by definition</label><label><input type="radio" name="q2" value="none">None; all services require customers to patch provider servers</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="access" data-explanation="Customers retain responsibility for identity, authorisation and access review even when a provider supplies identity features."><legend>3. Who decides whether a support coordinator may access learner records?</legend><div class="choice-list"><label><input type="radio" name="q3" value="access">The customer organisation under its authorised access policy</label><label><input type="radio" name="q3" value="provider">The cloud provider automatically</label><label><input type="radio" name="q3" value="public">Anyone who knows the application URL</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="data" data-explanation="Managed storage does not decide the data classification, retention or permitted access for a customer workload."><legend>4. Which responsibility remains important for managed cloud storage?</legend><div class="choice-list"><label><input type="radio" name="q4" value="data">Data classification, access and retention decisions</label><label><input type="radio" name="q4" value="ignore">Ignoring data handling because storage is managed</label><label><input type="radio" name="q4" value="password">Sharing a common administrator password</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="recover" data-explanation="Recovery evidence and an escalation path must be designed and verified before an incident, not invented while the service is unavailable."><legend>5. What should be established before production launch?</legend><div class="choice-list"><label><input type="radio" name="q5" value="recover">Monitoring, recovery evidence and an escalation path</label><label><input type="radio" name="q5" value="wait">Only a brand-colour palette</label><label><input type="radio" name="q5" value="guess">A promise to decide during an outage</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="budget" data-explanation="Budgets and labels/tags create accountability and visibility; they are part of responsible cloud operation."><legend>6. Why assign tags or labels and a budget owner?</legend><div class="choice-list"><label><input type="radio" name="q6" value="budget">To make cost attribution, review and escalation possible</label><label><input type="radio" name="q6" value="optional">To avoid documenting resource ownership</label><label><input type="radio" name="q6" value="free">To guarantee that cloud services are free</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="authority" data-explanation="A browser workbook does not give authority to change cloud resources; real changes require approved access and a governed plan."><legend>7. What must be true before applying this design in a real cloud tenant?</legend><div class="choice-list"><label><input type="radio" name="q7" value="authority">Authorised access, current provider guidance and an approved change/recovery plan</label><label><input type="radio" name="q7" value="browser">Completion of this browser lab alone</label><label><input type="radio" name="q7" value="trial">A production experiment with no owner or rollback</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div><div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>After completing the checkpoints and assessment, record your name for a printable personal learning record. It is not a cloud certification, a deployment approval, an account entitlement or evidence that a live workload has been configured.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>Cloud Foundations and Shared Responsibility</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the browser-only learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-CLD-101 · 60 minutes · Fictional cloud architecture</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, cloud certification, production authority, billing entitlement or practical cloud-administration competence.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="./instructor-guide.md">Instructor guide</a> · <a href="https://csrc.nist.gov/pubs/sp/800/145/final">NIST cloud definition</a></p></div></footer>
+</body>
+</html>

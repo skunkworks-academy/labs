@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "2026-08-03.1",
+  "track": "API Description and Discovery",
+  "labs": [
+    {"code":"LAB-API-101","title":"SOAP Message & Schema Analysis","durationMinutes":60,"level":"foundation-to-intermediate","path":"/labs/api-description/soap/"},
+    {"code":"LAB-API-102","title":"Swagger / OpenAPI Contract Review","durationMinutes":75,"level":"intermediate","path":"/labs/api-description/openapi/"},
+    {"code":"LAB-API-103","title":"GraphQL Schema & Query Security","durationMinutes":75,"level":"intermediate","path":"/labs/api-description/graphql/"},
+    {"code":"LAB-API-104","title":"WSDL Service Contract Mapping","durationMinutes":60,"level":"intermediate","path":"/labs/api-description/wsdl/"},
+    {"code":"LAB-API-105","title":"WADL Legacy API Discovery","durationMinutes":60,"level":"intermediate","path":"/labs/api-description/wadl/"},
+    {"code":"LAB-API-190","title":"API Contract Reconnaissance Capstone","durationMinutes":90,"level":"applied-intermediate","path":"/labs/api-description/capstone/"}
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "data": {
+    "learner": {
+      "id": "lrn_7fg2p4r9w1xq",
+      "displayName": "Amina Demo",
+      "billingEmail": null,
+      "adminNotes": null,
+      "enrolments": {
+        "nodes": [
+          {
+            "id": "enr_20260803_01",
+            "status": "ACTIVE",
+            "progressPercent": 45,
+            "course": {
+              "code": "LAB-API-103",
+              "title": "GraphQL Schema & Query Security",
+              "instructor": null
+            }
+          }
+        ],
+        "pageInfo": {"endCursor": null, "hasNextPage": false}
+      }
+    }
+  },
+  "errors": [
+    {
+      "message": "Field access denied.",
+      "path": ["learner", "billingEmail"],
+      "extensions": {
+        "code": "FORBIDDEN",
+        "correlationId": "714ee489-7c76-4ba7-8228-f54d4f13cad0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+"Synthetic Northstar training schema. No live endpoint is associated with it."
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  learner(id: ID!): Learner
+  learners(first: Int = 25, after: String): LearnerConnection!
+}
+
+type Mutation {
+  updateLearnerProfile(input: LearnerProfileInput!): Learner!
+}
+
+type Learner {
+  id: ID!
+  displayName: String!
+  billingEmail: String
+  adminNotes: String
+  enrolments(first: Int = 20, after: String): EnrolmentConnection!
+}
+
+type Enrolment {
+  id: ID!
+  status: EnrolmentStatus!
+  progressPercent: Int!
+  course: Course!
+}
+
+type Course {
+  code: ID!
+  title: String!
+  instructor: Instructor
+}
+
+type Instructor {
+  id: ID!
+  displayName: String!
+  email: String!
+}
+
+type LearnerConnection {
+  nodes: [Learner!]!
+  pageInfo: PageInfo!
+}
+
+type EnrolmentConnection {
+  nodes: [Enrolment!]!
+  pageInfo: PageInfo!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+}
+
+input LearnerProfileInput {
+  learnerId: ID!
+  displayName: String
+  billingEmail: String
+}
+
+enum EnrolmentStatus {
+  ACTIVE
+  COMPLETED
+  WITHDRAWN
+}

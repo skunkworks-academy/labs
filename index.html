@@ -1,74 +1,492 @@
 <!doctype html>
 <html lang="en-ZA">
 <head>
-  <meta charset="utf-8" data-skunkworks-head="mandatory-v1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Skunkworks Academy Labs | Secure Hands-On Lab Environments</title>
-  <meta name="description" content="Skunkworks Academy Labs provides secure on-demand virtual labs, cloud sandboxes, guided exercises, evidence capture, and practical technical learning environments." />
-  <meta name="author" content="Skunkworks Academy" />
-  <meta name="publisher" content="Skunkworks Academy" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="theme-color" content="#0B1020" />
-  <meta name="color-scheme" content="dark light" />
-  <link rel="canonical" href="https://labs.skunkworksacademy.com/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Skunkworks Academy Labs" />
-  <meta property="og:title" content="Skunkworks Academy Labs | Secure Hands-On Lab Environments" />
-  <meta property="og:description" content="Launch guided technical labs, cloud sandboxes, and practical learning environments for Academy learners, instructors, and partner cohorts." />
-  <meta property="og:url" content="https://labs.skunkworksacademy.com/" />
-  <meta property="og:image" content="https://labs.skunkworksacademy.com/assets/og-labs.jpg" />
-  <meta property="og:image:alt" content="Skunkworks Academy Labs secure virtual lab platform" />
-  <meta property="og:locale" content="en_ZA" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Skunkworks Academy Labs | Secure Hands-On Lab Environments" />
-  <meta name="twitter:description" content="Secure on-demand virtual labs and technical training environments from Skunkworks Academy." />
-  <meta name="twitter:image" content="https://labs.skunkworksacademy.com/assets/og-labs.jpg" />
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
-  <link rel="preconnect" href="https://skunkworksacademy.com" />
-  <link rel="dns-prefetch" href="//github.com" />
-  <link rel="stylesheet" href="/assets/css/site.css?v=2026.06.26" />
-  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.06.26"></script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"EducationalOrganization","name":"Skunkworks Academy","url":"https://skunkworksacademy.com/","sameAs":["https://www.skunkworks.africa/","https://github.com/skunkworks-academy"],"department":{"@type":"EducationalOrganization","name":"Skunkworks Academy Labs","url":"https://labs.skunkworksacademy.com/","description":"Secure on-demand virtual labs, cloud sandboxes, guided exercises, evidence capture, and technical training environments."}}</script>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Skunkworks Academy Labs provides time-bound, browser-based technical practice environments for practical IT learning.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy">
+  <meta property="og:title" content="Skunkworks Academy Labs | Practical technical environments">
+  <meta property="og:description" content="Time-bound browser labs for practical IT learning, with secure access and verifiable skills evidence.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Skunkworks Academy Labs">
+  <meta name="twitter:description" content="Practical technical environments for skills development.">
+  <title>Skunkworks Academy Labs | Practical technical environments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://skunkworksacademy.com/assets/academy-global.css?v=2026.06.24" data-skunkworks-global-style="v1">
+  <link rel="sitemap" type="application/xml" title="Skunkworks Academy Labs sitemap" href="/sitemap.xml">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11284592923"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11284592923');
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"EducationalOrganization",
+    "name":"Skunkworks Academy Labs",
+    "url":"https://labs.skunkworksacademy.com/",
+    "parentOrganization":{"@type":"EducationalOrganization","name":"Skunkworks Academy","url":"https://skunkworksacademy.com/"},
+    "description":"Time-bound browser labs for practical technology learning."
+  }
+  </script>
+  <style>
+    :root {
+      --ink: #03033A;
+      --blue: #1E6BD0;
+      --orange: #F24208;
+      --white: #FFFFFF;
+      --off-white: #F7F9FC;
+      --graphite: #15171A;
+      --steel: #D8DEE8;
+      --slate: #5A6472;
+      --success: #117A4A;
+      --radius: 18px;
+      --shadow: 0 18px 48px rgba(3, 3, 58, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--graphite);
+      background: var(--off-white);
+      font-family: "Open Sans", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button { font: inherit; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      top: 12px;
+      left: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: var(--white);
+      background: var(--ink);
+      transform: translateY(-180%);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+      color: var(--white);
+      background: rgba(3, 3, 58, .97);
+      backdrop-filter: blur(14px);
+    }
+    .nav-wrap { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--white); text-decoration: none; }
+    .brand img { width: 38px; height: 38px; object-fit: contain; }
+    .brand-copy { display: grid; line-height: 1.05; }
+    .brand-copy strong { font-size: .98rem; letter-spacing: .01em; }
+    .brand-copy span { margin-top: 4px; color: #C8DDF8; font-size: .72rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .nav-toggle { display: none; min-width: 44px; min-height: 44px; border: 1px solid rgba(255,255,255,.35); border-radius: 8px; color: var(--white); background: transparent; }
+    .main-nav { display: flex; align-items: center; gap: 4px; }
+    .main-nav a { padding: 9px 10px; border-radius: 7px; color: #D6E5F9; text-decoration: none; font-size: .9rem; font-weight: 700; }
+    .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--white); background: rgba(30,107,208,.42); }
+
+    .hero { color: var(--white); background: linear-gradient(118deg, var(--ink) 0%, #0B195D 61%, #164B98 100%); }
+    .hero .container { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr); align-items: center; gap: 44px; padding-block: 82px 70px; }
+    .eyebrow { margin: 0 0 14px; color: #9FC7FF; font-size: .76rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3 { margin: 0; font-family: Inter, Arial, sans-serif; color: var(--ink); letter-spacing: -.035em; }
+    .hero h1 { max-width: 760px; color: var(--white); font-size: clamp(2.7rem, 6.6vw, 5.6rem); font-weight: 900; line-height: .98; }
+    .hero .lead { max-width: 700px; margin: 22px 0 0; color: #E4EEFB; font-size: clamp(1.05rem, 1.85vw, 1.35rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 11px 17px; border: 1px solid currentColor; border-radius: 8px; text-decoration: none; font-weight: 800; transition: transform .16s ease, background .16s ease; }
+    .button:hover { transform: translateY(-1px); }
+    .button-primary { border-color: var(--blue); color: var(--white); background: var(--blue); }
+    .button-primary:hover { background: #1759AF; }
+    .button-secondary { color: var(--white); background: transparent; }
+    .button-secondary:hover { background: rgba(255,255,255,.1); }
+
+    .lab-status { border-radius: var(--radius); padding: 24px; color: var(--graphite); background: var(--white); box-shadow: 0 20px 48px rgba(0,0,0,.22); }
+    .status-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 15px; border-bottom: 1px solid var(--steel); }
+    .status-code { font-family: "IBM Plex Mono", monospace; color: var(--blue); font-size: .79rem; font-weight: 600; }
+    .status-tag { padding: 4px 8px; border-radius: 999px; color: #075531; background: #E6F7EE; font-size: .74rem; font-weight: 800; }
+    .lab-status h2 { margin-top: 17px; font-size: 1.55rem; line-height: 1.08; }
+    .lab-status p { margin: 10px 0 18px; color: var(--slate); font-size: .93rem; }
+    .fact-list { display: grid; gap: 9px; padding: 0; margin: 0; list-style: none; font-size: .87rem; }
+    .fact-list li { display: flex; align-items: baseline; gap: 10px; }
+    .fact-list b { min-width: 87px; color: var(--ink); }
+    .terminal { margin-top: 21px; padding: 14px; border-radius: 10px; color: #DDEBFF; background: #10152E; font-family: "IBM Plex Mono", monospace; font-size: .78rem; line-height: 1.7; }
+    .terminal .prompt { color: #78B7FF; }
+    .terminal .pass { color: #82E6B3; }
+
+    main { padding-block: 68px 0; }
+    .section { padding-bottom: 68px; }
+    .section-heading { max-width: 740px; margin-bottom: 26px; }
+    .section-heading h2 { font-size: clamp(2rem, 4vw, 3.15rem); line-height: 1.04; }
+    .section-heading p:not(.eyebrow) { color: var(--slate); font-size: 1.04rem; }
+    .orange-rule { width: 64px; height: 4px; margin: 0 0 17px; background: var(--orange); }
+
+    .notice { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; border: 1px solid #BAD4F7; border-radius: 12px; color: #123159; background: #EEF6FF; }
+    .notice strong { color: var(--ink); }
+    .notice p { margin: 0; font-size: .93rem; }
+
+    .catalog { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 0; overflow: hidden; border: 1px solid var(--steel); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow); }
+    .catalog + .catalog { margin-top: 18px; }
+    .catalog-main { padding: 30px; }
+    .catalog-code { display: inline-block; margin-bottom: 10px; color: var(--blue); font-family: "IBM Plex Mono", monospace; font-size: .82rem; font-weight: 600; }
+    .catalog h3 { font-size: 1.7rem; line-height: 1.1; }
+    .catalog p { max-width: 720px; margin: 12px 0 0; color: var(--slate); }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .chip { padding: 6px 9px; border: 1px solid var(--steel); border-radius: 999px; color: var(--ink); background: var(--off-white); font-size: .76rem; font-weight: 800; }
+    .catalog-aside { display: grid; align-content: space-between; gap: 20px; padding: 30px; color: var(--white); background: var(--ink); }
+    .catalog-aside small { display: block; color: #BBD7FE; font-size: .75rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .catalog-aside strong { display: block; margin-top: 8px; font-family: Inter, Arial, sans-serif; font-size: 1.28rem; line-height: 1.1; }
+    .catalog-aside a { color: var(--white); }
+    .catalog-aside .button { width: 100%; color: var(--white); background: var(--blue); border-color: var(--blue); }
+
+    .grid-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { padding: 25px; border: 1px solid var(--steel); border-radius: 14px; background: var(--white); }
+    .card h3 { font-size: 1.2rem; }
+    .card p { margin: 10px 0 0; color: var(--slate); }
+    .step-number { display: grid; width: 30px; height: 30px; margin-bottom: 16px; place-items: center; border-radius: 6px; color: var(--white); background: var(--blue); font-family: "IBM Plex Mono", monospace; font-size: .83rem; font-weight: 600; }
+
+    .launch-band { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; padding: 32px; border-radius: var(--radius); color: var(--white); background: var(--ink); }
+    .launch-band h2 { color: var(--white); font-size: clamp(1.75rem, 3.4vw, 2.65rem); }
+    .launch-band p { max-width: 740px; margin: 10px 0 0; color: #D5E5FA; }
+    .launch-band .button { color: var(--white); background: var(--blue); border-color: var(--blue); white-space: nowrap; }
+
+    .faq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .faq details { padding: 18px 20px; border: 1px solid var(--steel); border-radius: 12px; background: var(--white); }
+    .faq summary { cursor: pointer; color: var(--ink); font-weight: 800; }
+    .faq p { margin: 12px 0 0; color: var(--slate); }
+
+    footer { margin-top: 6px; padding-block: 34px; color: #D9E7FA; background: var(--ink); }
+    .footer-wrap { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+    .footer-wrap p { margin: 5px 0 0; color: #B8CDEB; font-size: .9rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 15px; }
+    .footer-links a { color: var(--white); font-size: .9rem; font-weight: 700; }
+
+    @media (max-width: 860px) {
+      .hero .container, .catalog, .launch-band { grid-template-columns: 1fr; }
+      .hero .container { padding-block: 56px; gap: 32px; }
+      .grid-three { grid-template-columns: 1fr; }
+      .catalog-aside { min-height: 190px; }
+      .launch-band .button { width: 100%; }
+      .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .main-nav { display: none; position: absolute; top: 72px; right: 20px; left: 20px; padding: 10px; border: 1px solid rgba(255,255,255,.24); border-radius: 10px; background: var(--ink); box-shadow: var(--shadow); }
+      .main-nav.open { display: grid; }
+      .main-nav a { padding: 12px; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .brand-copy strong { font-size: .88rem; }
+      .brand-copy span { font-size: .65rem; }
+      .hero h1 { font-size: clamp(2.45rem, 13vw, 4rem); }
+      main { padding-top: 48px; }
+      .catalog-main, .catalog-aside, .launch-band { padding: 24px; }
+      .footer-wrap { display: grid; }
+      .faq { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.07.04" data-skunkworks-global-nav="v3"></script>
 </head>
-<body>
-  <main id="main-content">
-    <section class="labs-shell labs-hero" aria-labelledby="hero-title">
-      <div>
-        <div class="labs-eyebrow">Secure technical labs</div>
-        <h1 id="hero-title">Launch practical labs, not just theory.</h1>
-        <p class="labs-lead">Browser-ready lab environments, guided technical exercises, and evidence-driven learning workflows for Skunkworks Academy learners, instructors, and partner cohorts.</p>
-        <div class="labs-actions" aria-label="Primary lab actions">
-          <a class="labs-button labs-button-primary" href="#labs">Browse labs</a>
-          <a class="labs-button" href="https://portal.skunkworksacademy.com/">Open learner portal</a>
-          <a class="labs-button" href="https://github.com/skunkworks-academy/labs-guides" target="_blank" rel="noopener">View lab guides</a>
+<body data-repo="labs" data-domain="labs.skunkworksacademy.com">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span class="brand-copy"><strong>Skunkworks Academy</strong><span>Practical labs</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+      <nav class="main-nav" id="primaryNav" aria-label="Primary navigation">
+        <a href="https://skunkworksacademy.com/">Home</a>
+        <a href="https://skunkworksacademy.com/self-paced/">Courses</a>
+        <a href="https://portal.skunkworksacademy.com/">Portal</a>
+        <a href="/" aria-current="page">Labs</a>
+        <a href="#help">Help</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div>
+          <p class="eyebrow">On-demand technical practice</p>
+          <h1 id="hero-title">Practical labs built for real technical capability.</h1>
+          <p class="lead">Use focused browser labs to practise technology skills, complete guided checkpoints and build evidence that belongs in a portfolio - not just a completion record.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#pilot">Join the launch pilot</a>
+            <a class="button button-secondary" href="#catalogue">View the first lab</a>
+          </div>
         </div>
-        <div class="labs-pill-row" aria-label="Platform controls"><span class="labs-pill">MFA-aware access</span><span class="labs-pill">Guided exercises</span><span class="labs-pill">Evidence capture</span><span class="labs-pill">Partner-ready delivery</span></div>
+        <aside class="lab-status" aria-label="First lab summary">
+          <div class="status-row"><span class="status-code">LAB-LNX-101</span><span class="status-tag">Launch pilot</span></div>
+          <h2>Linux Command-Line Essentials</h2>
+          <p>A 45-minute browser terminal session for practical command-line confidence.</p>
+          <ul class="fact-list">
+            <li><b>Access</b><span>Browser terminal</span></li>
+            <li><b>Duration</b><span>45 minutes</span></li>
+            <li><b>Network</b><span>Restricted by default</span></li>
+            <li><b>Evidence</b><span>Task checkpoints</span></li>
+          </ul>
+          <div class="terminal" aria-label="Example lab terminal output"><span class="prompt">learner@lab</span>:~$ pwd<br>/home/learner<br><span class="prompt">learner@lab</span>:~$ lab-check files<br><span class="pass">checkpoint: passed</span></div>
+        </aside>
       </div>
-      <aside class="labs-panel" aria-label="Labs summary">
-        <div class="labs-panel-header"><h2>Lab catalogue status</h2><span class="labs-live-dot">Live</span></div>
-        <div class="labs-metric"><strong id="metricTotal">0</strong><span>Total lab records</span></div>
-        <div class="labs-metric"><strong id="metricAvailable">0</strong><span>Available now</span></div>
-        <div class="labs-metric"><strong id="metricTracks">0</strong><span>Learning tracks</span></div>
-        <div class="labs-metric"><strong id="metricMinutes">0</strong><span>Guided lab minutes</span></div>
-        <p class="labs-panel-note">Catalogue data is loaded from <code>catalog/labs.json</code> so new labs can be added without redesigning the landing page.</p>
-      </aside>
     </section>
-    <section class="labs-shell labs-section" aria-labelledby="capabilities-title">
-      <div class="labs-section-head"><div><div class="labs-eyebrow">Platform model</div><h2 id="capabilities-title" class="labs-section-title">Built for delivery, governance, and scale.</h2></div><p>The Labs site follows the Academy global navigation and theme standard while keeping the catalogue portable for GitHub Pages, LMS, and portal workflows.</p></div>
-      <div class="labs-info-grid"><article class="labs-info-card"><b>01</b><h3>Secure access</h3><p>Orient learners through portal access, MFA, session controls, credential handling, and acceptable-use expectations before they enter a lab.</p></article><article class="labs-info-card"><b>02</b><h3>Guided execution</h3><p>Each lab card maps to a guide, track, level, duration, and badge outcome so instructors can brief delegates consistently.</p></article><article class="labs-info-card"><b>03</b><h3>Evidence-first learning</h3><p>Labs are structured for screenshots, outputs, command evidence, and assessment artifacts that support practical skills validation.</p></article><article class="labs-info-card"><b>04</b><h3>Partner enablement</h3><p>Catalogue-driven delivery supports IBM, Microsoft, Cisco, EC-Council, open-source, and custom Skunkworks Academy cohorts.</p></article></div>
-    </section>
-    <section class="labs-shell labs-section" id="labs" aria-labelledby="labs-title">
-      <div class="labs-section-head"><div><div class="labs-eyebrow">Catalogue</div><h2 id="labs-title" class="labs-section-title">Available labs</h2></div><p>Search by title, track, tag, provider, badge, or lab ID. Update <code>catalog/labs.json</code> to add, retire, or promote labs.</p></div>
-      <div class="labs-toolbar" aria-label="Catalogue filters"><input id="searchInput" type="search" placeholder="Search by title, track, tag, badge or lab ID..." autocomplete="off" /><select id="trackFilter" aria-label="Filter by track"><option value="">All tracks</option></select><select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option value="available">Available</option><option value="draft">Draft</option><option value="planned">Planned</option></select><button class="labs-reset" id="resetFilters" type="button">Reset filters</button></div>
-      <p class="labs-result-note" id="resultNote" aria-live="polite">Loading catalogue...</p><div id="labGrid" class="labs-grid" aria-live="polite"></div>
-    </section>
-    <section class="labs-shell labs-section" aria-labelledby="journey-title"><div class="labs-section-head"><div><div class="labs-eyebrow">Learner journey</div><h2 id="journey-title" class="labs-section-title">From access request to assessed evidence.</h2></div></div><div class="labs-flow-grid"><article class="labs-flow"><span class="labs-step">1</span><h3>Request access</h3><p>Learners enter through the Academy portal or an instructor-managed cohort workflow.</p></article><article class="labs-flow"><span class="labs-step">2</span><h3>Launch environment</h3><p>The lab record points to the correct guide, access mode, duration, and supporting repository.</p></article><article class="labs-flow"><span class="labs-step">3</span><h3>Complete tasks</h3><p>Delegates execute guided scenarios, capture command output, and validate expected results.</p></article><article class="labs-flow"><span class="labs-step">4</span><h3>Submit evidence</h3><p>Evidence can feed instructor review, badging, learner records, and practical assessment reporting.</p></article></div></section>
-    <section class="labs-shell labs-section"><div class="labs-callout"><div><h2>Need a custom lab track?</h2><p>Build a practical path for Asterisk, Linux, cloud, cybersecurity, IBM middleware, DataPower, API Connect, Microsoft, or partner-specific delivery.</p></div><a class="labs-button labs-button-primary" href="mailto:training@skunkworks.africa?subject=Skunkworks%20Academy%20custom%20lab%20track">Request lab design</a></div></section>
+
+    <div class="container">
+      <section class="section" aria-labelledby="safe-access-title">
+        <div class="notice">
+          <div aria-hidden="true">i</div>
+          <p><strong>Self-service checkout is being commissioned.</strong> The public site does not collect card details. PayFast and PayPal will be enabled only through hosted checkout pages and only after server-verified payment confirmation.</p>
+        </div>
+      </section>
+
+      <section class="section" id="catalogue" aria-labelledby="catalogue-title">
+        <div class="section-heading">
+          <div class="orange-rule" aria-hidden="true"></div>
+          <p class="eyebrow">Launch catalogue</p>
+          <h2 id="catalogue-title">Build core IT confidence, then apply it in governed cloud, delivery and security work.</h2>
+          <p>Start with digital, networking, Linux, email-security and identity foundations that run immediately in the browser. Continue into cloud governance, secure collaboration and data analysis, then build disciplined malware-analysis and forensic reasoning with synthetic evidence. Controlled runtime VMs are introduced only after identity, isolation, evidence-handling and cleanup controls are proven.</p>
+        </div>
+        <div class="catalog" id="labCard" aria-live="polite">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-LNX-101</span>
+            <h3>Linux Command-Line Essentials</h3>
+            <p>Use a clean Linux terminal to navigate a filesystem, manage files, inspect text, understand permissions and complete practical command-line tasks.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">45 minutes</span><span class="chip">Browser terminal</span><span class="chip">No public SSH</span></div>
+          </div>
+          <div class="catalog-aside">
+            <div><small>Access model</small><strong>Invitation-only launch pilot</strong></div>
+            <a class="button" href="mailto:training@skunkworks.africa?subject=LAB-LNX-101%20Launch%20Pilot&body=Please%20send%20me%20the%20LAB-LNX-101%20pilot%20access%20details.">Request pilot access</a>
+          </div>
+        </div>
+        <div class="catalog" aria-label="Available self-paced foundations lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-DAT-101</span>
+            <h3>Bits, Bytes &amp; Binary Fundamentals</h3>
+            <p>Build a practical mental model of digital data with binary switches, bit-to-byte conversion challenges, data-rate examples and a short knowledge check.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">25 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No sign-in</span></div>
+          </div>
+          <div class="catalog-aside">
+            <div><small>Access model</small><strong>Available now</strong></div>
+            <a class="button" href="/labs/bits-and-bytes-101/">Start self-paced lab</a>
+          </div>
+        </div>
+        <div class="catalog" aria-label="Available self-paced IPv4 subnetting lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-NET-101</span>
+            <h3>IPv4 Subnetting Foundations</h3>
+            <p>See exactly how 32-bit IPv4 addresses, binary subnet masks and CIDR prefixes determine a network, host range and broadcast address. Includes a visual /26 breakdown and usable-host calculations.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">35 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No sign-in</span></div>
+          </div>
+          <div class="catalog-aside">
+            <div><small>Access model</small><strong>Available now</strong></div>
+            <a class="button" href="/labs/ipv4-subnetting-101/">Start subnetting lab</a>
+          </div>
+        </div>
+        <div class="catalog" aria-label="Available DNS DHCP ARP and packet flow lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-NET-102</span>
+            <h3>DNS, DHCP, ARP &amp; Packet Flow</h3>
+            <p>Follow a client connection from configuration to name resolution and local next-hop delivery. Use synthetic packet traces to choose the earliest safe troubleshooting check.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">55 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">Synthetic traces</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/dns-dhcp-arp-102/">Start network-services lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Linux files permissions and processes lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-SYS-102</span>
+            <h3>Linux Files, Permissions &amp; Processes</h3>
+            <p>Practise least-privilege access reasoning and service triage with simulated terminal output. Understand when to preserve evidence and follow an approved runbook.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner to intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No shell access</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/linux-admin-102/">Start Linux operations lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available phishing and email header triage lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-SEC-101</span>
+            <h3>Phishing &amp; Email Header Triage</h3>
+            <p>Use a safety-first, synthetic case to distinguish message claims from header evidence, interpret authentication signals and select the right report-and-preserve decision.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">55 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No active links</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/phishing-triage-101/">Start phishing-triage lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Wireshark PCAP investigation lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-NET-201</span>
+            <h3>Wireshark PCAP Investigation</h3>
+            <p>Read an evidence-led synthetic packet timeline, identify DNS and TCP events, apply display-filter reasoning and document a defensible observation.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No live capture</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/pcap-investigation-201/">Start PCAP investigation lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Entra ID MFA and Conditional Access lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-ID-101</span>
+            <h3>Entra ID, MFA &amp; Conditional Access</h3>
+            <p>Design a least-privilege identity model, manage groups and roles, and plan a Conditional Access rollout with pilot, monitoring and recovery safeguards.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner to intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No tenant access</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/entra-identity-101/">Start identity lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available cloud foundations and shared responsibility lab">
+          <div class="catalog-main"><span class="catalog-code">LAB-CLD-101</span><h3>Cloud Foundations &amp; Shared Responsibility</h3><p>Choose IaaS, PaaS or SaaS deliberately, map customer and provider responsibilities, then design identity, recovery and cost guardrails for a fictional learner platform.</p><div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No cloud sign-in</span></div></div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/cloud-foundations-101/">Start cloud foundations lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Azure Landing Zone Essentials lab">
+          <div class="catalog-main"><span class="catalog-code">LAB-AZ-101</span><h3>Azure Landing Zone Essentials</h3><p>Place a workload in a governed Azure hierarchy and apply subscriptions, RBAC, Azure Policy, tags, logs and operating controls without touching a live tenant.</p><div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner to intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No tenant access</span></div></div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/azure-landing-zone-101/">Start Azure landing zone lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Google Cloud IAM and FinOps guardrails lab">
+          <div class="catalog-main"><span class="catalog-code">LAB-GCP-101</span><h3>Google Cloud IAM &amp; FinOps Guardrails</h3><p>Structure an accountable Google Cloud project, grant least-privilege access and use labels, budgets and response plans to make cloud spending governable.</p><div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner to intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No billing access</span></div></div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/gcp-iam-finops-101/">Start Google Cloud lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Git GitHub secure collaboration lab">
+          <div class="catalog-main"><span class="catalog-code">LAB-DEV-101</span><h3>Git, GitHub &amp; Secure Collaboration</h3><p>Make software changes reviewable and recoverable using branches, commits, pull requests, protected main branches, required checks and secret-safe workflows.</p><div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner to intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No repository access</span></div></div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/git-secure-collaboration-101/">Start secure collaboration lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available SQL for analysts lab">
+          <div class="catalog-main"><span class="catalog-code">LAB-DAT-102</span><h3>SQL for Analysts</h3><p>Turn a bounded question into minimal selection, filters, documented joins and careful aggregate interpretation using an invented Academy reporting dataset.</p><div class="chip-row" aria-label="Lab attributes"><span class="chip">Beginner to intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No database access</span></div></div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/sql-analysts-102/">Start SQL analysis lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available REMnux malware analysis and memory forensics lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-REM-201</span>
+            <h3>REMnux Triage &amp; Memory Forensics</h3>
+            <p>Build an evidence-led analysis workflow with synthetic static and memory-forensics output: establish a safe boundary, preserve facts and correlate artefacts before concluding.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Intermediate</span><span class="chip">55 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">Synthetic evidence</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/remnux-triage-201/">Start REMnux lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available FLARE VM Windows analysis workbench lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-FLR-201</span>
+            <h3>FLARE VM Analysis Workbench</h3>
+            <p>Learn the safe Windows analysis-workbench lifecycle: managed VM, snapshot, static evidence provenance, synthetic telemetry correlation and controlled reset.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Intermediate</span><span class="chip">60 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">No live execution</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/flarevm-workbench-201/">Start FLARE VM lab</a></div>
+        </div>
+        <div class="catalog" aria-label="Available Kali Linux evidence and network forensics lab">
+          <div class="catalog-main">
+            <span class="catalog-code">LAB-KAL-201</span>
+            <h3>Kali Linux Evidence &amp; Network Forensics</h3>
+            <p>Practise a read-only evidence workflow, disk-image triage and offline PCAP interpretation without live scanning, target interaction or external networking.</p>
+            <div class="chip-row" aria-label="Lab attributes"><span class="chip">Intermediate</span><span class="chip">55 minutes</span><span class="chip">Interactive browser lab</span><span class="chip">Offline workflow</span></div>
+          </div>
+          <div class="catalog-aside"><div><small>Access model</small><strong>Available now</strong></div><a class="button" href="/labs/kali-forensics-201/">Start Kali forensics lab</a></div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="journey-title">
+        <div class="section-heading">
+          <p class="eyebrow">Purchase-to-practice model</p>
+          <h2 id="journey-title">A simple learner journey with the right control points.</h2>
+        </div>
+        <div class="grid-three">
+          <article class="card"><div class="step-number">01</div><h3>Sign in and select</h3><p>Use the Academy identity to select a lab and the required duration. Learners never receive a shared cloud credential.</p></article>
+          <article class="card"><div class="step-number">02</div><h3>Pay through a trusted provider</h3><p>PayFast supports ZAR card payments; PayPal supports international checkout. The browser is never the authority for activation.</p></article>
+          <article class="card"><div class="step-number">03</div><h3>Launch a time-bound environment</h3><p>A verified entitlement claims a clean browser session. Idle timeout, expiry and cleanup protect the learner, the platform and the budget.</p></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="practice-title">
+        <div class="section-heading">
+          <p class="eyebrow">Designed for delivery</p>
+          <h2 id="practice-title">Useful to a learner, manageable for an instructor, safe for the platform.</h2>
+        </div>
+        <div class="grid-three">
+          <article class="card"><h3>Guided, not generic</h3><p>Every lab has clear outcomes, a task sequence, evidence checkpoints and reset criteria so practical time maps to a recognised skill.</p></article>
+          <article class="card"><h3>Private by default</h3><p>Lab runners use private networking, short-lived access and restricted outbound paths. The first lab exposes no Google Cloud console or public SSH/RDP endpoint.</p></article>
+          <article class="card"><h3>Built to scale deliberately</h3><p>Pre-warmed slots make common labs fast to launch. Separate project-per-learner cloud labs are introduced only after cost, isolation and cleanup controls are proven.</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="pilot" aria-labelledby="pilot-title">
+        <div class="launch-band">
+          <div>
+            <h2 id="pilot-title">Help shape the first Labs release.</h2>
+            <p>Pilot participants receive a guided Linux lab, completion feedback and a direct route to report usability or environment issues. This lets the first paid release meet the standard required for wider Academy delivery.</p>
+          </div>
+          <a class="button" href="mailto:training@skunkworks.africa?subject=Skunkworks%20Academy%20Labs%20Pilot&body=I%20would%20like%20to%20join%20the%20Skunkworks%20Academy%20Labs%20launch%20pilot.">Join the pilot</a>
+        </div>
+      </section>
+
+      <section class="section" id="help" aria-labelledby="help-title">
+        <div class="section-heading"><p class="eyebrow">Help and readiness</p><h2 id="help-title">What to expect next.</h2></div>
+        <div class="faq">
+          <details><summary>When will I be able to pay and launch immediately?</summary><p>Immediate self-service access is switched on after PayFast, PayPal, Entra identity and the GCP runner controls have passed production verification. Until then, pilots are issued as managed entitlements.</p></details>
+          <details><summary>Will I receive Google Cloud credentials?</summary><p>No. The first lab is a browser-based Linux environment. Advanced Google Cloud exercises will use constrained, isolated projects only where the learning outcome requires it.</p></details>
+          <details><summary>What happens when a session ends?</summary><p>Sessions expire after their allocated time or an idle period. The runner is terminated or reset, and a reconciliation process checks for resources that were not released as expected.</p></details>
+          <details><summary>How do I request a cohort or instructor-led lab?</summary><p>Email the training team with your technology topic, learner count, target date and required duration. We will recommend a secure, repeatable delivery design.</p></details>
+        </div>
+      </section>
+    </div>
   </main>
-  <footer class="labs-footer"><div class="labs-shell"><span>© <span id="year"></span> Skunkworks Academy. Dream. Design. Deliver.</span><span>Secure labs • Guided evidence • Partner-ready enablement</span></div></footer>
-  <!-- renderLabs is implemented in /assets/js/labs.js and renders catalogue records from catalog/labs.json into #labGrid. -->
-  <script src="/assets/js/labs.js?v=2026.06.26" defer></script>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div><strong>Skunkworks Academy Labs</strong><p>Train smarter. Build faster. Deliver better.</p></div>
+      <nav class="footer-links" aria-label="Footer navigation"><a href="https://skunkworksacademy.com/">Academy home</a><a href="https://portal.skunkworksacademy.com/">Learner portal</a><a href="mailto:training@skunkworks.africa">Training support</a><a href="https://github.com/skunkworks-academy/labs">Repository</a></nav>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.getElementById('primaryNav');
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+      nav?.classList.toggle('open', !isOpen);
+    });
+
+    // The static card is intentionally usable if the catalogue file cannot load.
+    // This refresh keeps published product metadata in one reviewable JSON source.
+    async function refreshCatalogue() {
+      try {
+        const response = await fetch('/lab-catalog.json', { cache: 'no-store' });
+        if (!response.ok) return;
+        const catalogue = await response.json();
+        const lab = catalogue.products?.find((product) => product.code === 'LAB-LNX-101');
+        if (!lab) return;
+        const card = document.getElementById('labCard');
+        const title = card?.querySelector('h3');
+        const description = card?.querySelector('.catalog-main p');
+        const code = card?.querySelector('.catalog-code');
+        if (title) title.textContent = lab.title;
+        if (description) description.textContent = lab.summary;
+        if (code) code.textContent = lab.code;
+      } catch (_) {
+        // Static content remains available, including when a captive portal blocks requests.
+      }
+    }
+    refreshCatalogue();
+  </script>
 </body>
 </html>

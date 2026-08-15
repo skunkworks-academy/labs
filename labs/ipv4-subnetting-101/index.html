@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A hands-on Skunkworks Academy lab for understanding IPv4 addresses, CIDR subnet masks, /26 subnetting and usable-host calculations.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/ipv4-subnetting-101/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="IPv4 Subnetting Foundations | Interactive Lab">
+  <meta property="og:description" content="Turn IPv4 bits, CIDR masks and /26 subnet boundaries into practical network calculations.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/ipv4-subnetting-101/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="IPv4 Subnetting Foundations | Interactive Lab">
+  <meta name="twitter:description" content="A practical Skunkworks Academy lab for TCP/IP and subnetting fundamentals.">
+  <title>IPv4 Subnetting Foundations | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./lab.css">
+  <script defer src="https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.07.04" data-skunkworks-global-nav="v3"></script>
+  <script defer src="./lab.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "IPv4 Subnetting Foundations",
+    "description": "An interactive, self-paced lab that teaches IPv4 address structure, CIDR subnet masks, /26 subnetting and common usable-host calculations.",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "Skunkworks Academy",
+      "url": "https://skunkworksacademy.com/"
+    },
+    "url": "https://labs.skunkworksacademy.com/labs/ipv4-subnetting-101/",
+    "educationalLevel": "Beginner",
+    "inLanguage": "en",
+    "timeRequired": "PT35M",
+    "isAccessibleForFree": true,
+    "teaches": [
+      "IPv4 address structure",
+      "CIDR notation",
+      "Subnet mask binary and decimal relationships",
+      "Network and host bits",
+      "Usable host calculations",
+      "Subnet boundaries"
+    ]
+  }
+  </script>
+</head>
+<body data-repo="labs" data-domain="labs.skunkworksacademy.com">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow">LAB-NET-101 · Networking foundations</p>
+          <h1 id="page-title">IPv4 subnetting - make every bit count.</h1>
+          <p class="hero__lead">See exactly how an IPv4 address becomes a network, a subnet mask separates network and host bits, and a /26 creates 62 ordinary usable host addresses.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the lab</a>
+            <a class="button button--secondary" href="#objectives">What you will learn</a>
+          </div>
+          <p class="hero__note">Estimated time: 35 minutes · Browser-only · Suited to Network+, CCNA, Microsoft networking and general TCP/IP study</p>
+        </div>
+
+        <aside class="subnet-hero-card" aria-label="IPv4 and /26 subnetting visual">
+          <p class="subnet-hero-card__label">IPv4 /26 at a glance</p>
+          <p class="hero-address">192.168.10.77<span>/26</span></p>
+          <div class="hero-bit-row" aria-label="A 32-bit IPv4 address with 26 network bits and 6 host bits">
+            <span class="hero-octet">
+              <b class="network">1</b><b class="network">1</b><b class="network">0</b><b class="network">0</b><b class="network">0</b><b class="network">0</b><b class="network">0</b><b class="network">0</b>
+            </span>
+            <span class="hero-octet">
+              <b class="network">1</b><b class="network">0</b><b class="network">1</b><b class="network">0</b><b class="network">1</b><b class="network">0</b><b class="network">0</b><b class="network">0</b>
+            </span>
+            <span class="hero-octet">
+              <b class="network">0</b><b class="network">0</b><b class="network">0</b><b class="network">0</b><b class="network">1</b><b class="network">0</b><b class="network">1</b><b class="network">0</b>
+            </span>
+            <span class="hero-octet">
+              <b class="network">0</b><b class="network">1</b><b class="host">0</b><b class="host">0</b><b class="host">1</b><b class="host">1</b><b class="host">0</b><b class="host">1</b>
+            </span>
+          </div>
+          <div class="hero-legend"><span><i class="legend-network"></i>26 network bits</span><span><i class="legend-host"></i>6 host bits</span></div>
+          <dl class="hero-facts">
+            <div><dt>32 bits</dt><dd>4 bytes in every IPv4 address</dd></div>
+            <div><dt>64 total</dt><dd>2<sup>6</sup> addresses in a /26</dd></div>
+            <div><dt>62 usable</dt><dd>Ordinary IPv4 LAN-host convention</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="lab-summary" id="objectives" aria-labelledby="objectives-title">
+        <div>
+          <p class="eyebrow eyebrow--blue">Lab summary</p>
+          <h2 id="objectives-title">Turn subnetting rules into a visual model you can reuse.</h2>
+        </div>
+        <ul class="objectives-list">
+          <li><span aria-hidden="true">01</span> Explain why an IPv4 address is 32 bits, arranged as four eight-bit bytes.</li>
+          <li><span aria-hidden="true">02</span> Read a subnet mask: <code>1</code> means network bit; <code>0</code> means host bit.</li>
+          <li><span aria-hidden="true">03</span> Visualise a /26 mask as <code>255.255.255.192</code> and identify its subnet boundaries.</li>
+          <li><span aria-hidden="true">04</span> Calculate total and ordinary usable hosts from the remaining host bits.</li>
+          <li><span aria-hidden="true">05</span> Recognise common masks from /24 through /30.</li>
+        </ul>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive IPv4 subnetting lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head">
+            <p class="eyebrow eyebrow--blue">Your progress</p>
+            <strong id="progressText">0 of 5 completed</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-step-id="structure"><span class="step-icon">1</span><span><b>Read IPv4</b><small>32 bits, 4 bytes</small></span></li>
+            <li data-step-id="mask"><span class="step-icon">2</span><span><b>Read the mask</b><small>1 = network, 0 = host</small></span></li>
+            <li data-step-id="subnet"><span class="step-icon">3</span><span><b>Map a /26</b><small>Network boundaries</small></span></li>
+            <li data-step-id="hosts"><span class="step-icon">4</span><span><b>Count hosts</b><small>2 to the host bits</small></span></li>
+            <li data-step-id="assessment"><span class="step-icon">5</span><span><b>Check understanding</b><small>Mini assessment</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is saved only in this browser. It is not a verified credential.</p>
+          <button class="text-button" type="button" id="resetProgress">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="module-structure-title">
+            <header class="module__header">
+              <p class="module__number">Module 1</p>
+              <div><h2 id="module-structure-title">An IPv4 address is four bytes.</h2><p>A bit is a single <code>0</code> or <code>1</code>. Eight bits make one byte, called an octet in IPv4. Four octets make a 32-bit IPv4 address.</p></div>
+            </header>
+
+            <div class="concept-grid concept-grid--four">
+              <article class="concept-card concept-card--bit"><p class="concept-card__kicker">One bit</p><strong>0 or 1</strong><p>The smallest binary value: off/on, false/true or no/yes.</p></article>
+              <article class="concept-card concept-card--byte"><p class="concept-card__kicker">One octet</p><strong>8 bits</strong><p>An IPv4 octet holds a decimal value from 0 through 255.</p></article>
+              <article class="concept-card concept-card--network"><p class="concept-card__kicker">IPv4 address</p><strong>4 octets</strong><p>Four bytes sit beside each other in dotted-decimal notation.</p></article>
+              <article class="concept-card concept-card--value"><p class="concept-card__kicker">IPv4 size</p><strong>32 bits</strong><p>That gives an IPv4 address its fixed length.</p></article>
+            </div>
+
+            <article class="activity-card" aria-labelledby="ipv4-builder-title">
+              <div class="activity-card__head">
+                <div><p class="activity-label">Visual breakdown</p><h3 id="ipv4-builder-title">Four octets, eight bits each.</h3></div>
+                <span class="activity-pill">192.168.10.77</span>
+              </div>
+              <div class="octet-anatomy" aria-label="IPv4 address with four groups of eight bits">
+                <div><p>Octet 1</p><span>11000000</span><b>192</b></div>
+                <div><p>Octet 2</p><span>10101000</span><b>168</b></div>
+                <div><p>Octet 3</p><span>00001010</span><b>10</b></div>
+                <div><p>Octet 4</p><span>01001101</span><b>77</b></div>
+              </div>
+              <div class="equation-bar"><span>8</span><b>+</b><span>8</span><b>+</b><span>8</span><b>+</b><span>8</span><b>=</b><strong>32 bits</strong></div>
+              <div class="answer-line">
+                <label for="ipv4Answer">How many bits are in every IPv4 address?</label>
+                <div><input id="ipv4Answer" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" placeholder="Enter a number"><button class="button button--primary" type="button" id="checkIpv4">Check answer</button></div>
+              </div>
+              <p class="feedback" id="ipv4Feedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-mask-title">
+            <header class="module__header">
+              <p class="module__number">Module 2</p>
+              <div><h2 id="module-mask-title">A subnet mask labels the address bits.</h2><p>In a normal CIDR mask, leading binary <code>1</code>s identify the network prefix and trailing <code>0</code>s identify the host portion. The slash number tells you how many network bits there are.</p></div>
+            </header>
+
+            <article class="activity-card mask-explorer" aria-labelledby="mask-explorer-title">
+              <div class="activity-card__head">
+                <div><p class="activity-label">Mask explorer</p><h3 id="mask-explorer-title">Choose a common prefix and watch the bits change.</h3></div>
+                <label class="prefix-picker" for="prefixSelector">CIDR prefix
+                  <select id="prefixSelector">
+                    <option value="24">/24</option>
+                    <option value="25">/25</option>
+                    <option value="26" selected>/26</option>
+                    <option value="27">/27</option>
+                    <option value="28">/28</option>
+                    <option value="30">/30</option>
+                  </select>
+                </label>
+              </div>
+              <div class="mask-insight-grid">
+                <div><span>Selected prefix</span><strong id="selectedPrefix">/26</strong></div>
+                <div><span>Network bits</span><strong id="networkBits">26</strong></div>
+                <div><span>Host bits</span><strong id="hostBits">6</strong></div>
+                <div><span>Decimal mask</span><strong id="decimalMask">255.255.255.192</strong></div>
+              </div>
+              <div class="mask-visual-wrap">
+                <p class="mask-visual-label">Binary subnet mask</p>
+                <div class="mask-bit-map" id="maskBitMap" aria-label="Binary subnet mask with network bits and host bits"></div>
+                <div class="mask-legend"><span><i class="legend-network"></i>1 = network bit</span><span><i class="legend-host"></i>0 = host bit</span></div>
+                <p class="binary-output" id="maskBinary">11111111.11111111.11111111.11000000</p>
+              </div>
+              <p class="mask-note">For a /26, the first 26 bits are <code>1</code>s. The remaining 6 bits are <code>0</code>s. The final octet is <code>11000000</code>, which equals <code>192</code> in decimal.</p>
+            </article>
+
+            <article class="activity-card" aria-labelledby="mask-meaning-title">
+              <div class="activity-card__head"><div><p class="activity-label">Meaning check</p><h3 id="mask-meaning-title">What do the mask bits mean?</h3></div></div>
+              <fieldset class="choice-fieldset">
+                <legend>In a conventional IPv4 subnet mask, which statement is correct?</legend>
+                <label><input type="radio" name="maskMeaning" value="network-host"> A <code>1</code> identifies a network bit and a <code>0</code> identifies a host bit.</label>
+                <label><input type="radio" name="maskMeaning" value="host-network"> A <code>1</code> identifies a host bit and a <code>0</code> identifies a network bit.</label>
+                <label><input type="radio" name="maskMeaning" value="address-value"> The bits are the decimal values of the IP address.</label>
+              </fieldset>
+              <button class="button button--primary" type="button" id="checkMaskMeaning">Check interpretation</button>
+              <p class="feedback" id="maskFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-subnet-title">
+            <header class="module__header">
+              <p class="module__number">Module 3</p>
+              <div><h2 id="module-subnet-title">Break down a /26 subnet.</h2><p>A /26 leaves six host bits. Six bits can form 64 combinations, so a /26 contains 64 total addresses. In an ordinary LAN subnet, the all-zero host value is the network address and the all-one host value is the broadcast address.</p></div>
+            </header>
+
+            <article class="subnet-focus-card" aria-labelledby="subnet-focus-title">
+              <div class="subnet-focus-card__head">
+                <div><p class="activity-label">Worked /26 example</p><h3 id="subnet-focus-title">192.168.10.<span id="focusFourth">77</span>/26</h3></div>
+                <label for="fourthOctetInput">Change final octet
+                  <input id="fourthOctetInput" type="number" min="0" max="255" step="1" inputmode="numeric" value="77" autocomplete="off">
+                </label>
+              </div>
+              <div class="subnet-bit-panel">
+                <p><span>IPv4 address</span><strong id="addressBinary">11000000.10101000.00001010.01001101</strong></p>
+                <p><span>/26 mask</span><strong id="maskBinary26">11111111.11111111.11111111.11000000</strong></p>
+                <div class="subnet-bit-diagram" id="subnetBitDiagram" aria-label="IPv4 address bits divided into 26 network bits and 6 host bits"></div>
+                <div class="mask-legend"><span><i class="legend-network"></i>Network portion</span><span><i class="legend-host"></i>Host portion</span></div>
+              </div>
+              <div class="subnet-calculation">
+                <article><span>Mask octet</span><strong>192</strong><small>11000000 in binary</small></article>
+                <article><span>Block size</span><strong>64</strong><small>256 - 192</small></article>
+                <article><span>Matching block</span><strong id="subnetRange">64-127</strong><small>Final-octet range</small></article>
+              </div>
+              <div class="subnet-result-grid">
+                <div><span>Network address</span><strong id="networkAddress">192.168.10.64</strong></div>
+                <div><span>Usable host range</span><strong id="hostRange">192.168.10.65 - 192.168.10.126</strong></div>
+                <div><span>Broadcast address</span><strong id="broadcastAddress">192.168.10.127</strong></div>
+              </div>
+              <p class="working-line" id="subnetWorking">77 falls in the 64-127 block because floor(77 / 64) x 64 = 64.</p>
+              <div class="subnet-block-grid" id="subnetBlocks" aria-label="The four /26 subnets inside a /24"></div>
+            </article>
+
+            <article class="activity-card" aria-labelledby="boundary-title">
+              <div class="activity-card__head"><div><p class="activity-label">Subnet boundary check</p><h3 id="boundary-title">Find the network address.</h3></div></div>
+              <fieldset class="choice-fieldset">
+                <legend id="boundaryQuestionText">For 192.168.10.77/26, what is the network address?</legend>
+                <label><input type="radio" name="boundaryQuestion" value="0"> 192.168.10.0</label>
+                <label><input type="radio" name="boundaryQuestion" value="64"> 192.168.10.64</label>
+                <label><input type="radio" name="boundaryQuestion" value="128"> 192.168.10.128</label>
+                <label><input type="radio" name="boundaryQuestion" value="192"> 192.168.10.192</label>
+              </fieldset>
+              <button class="button button--primary" type="button" id="checkBoundary">Check network address</button>
+              <p class="feedback" id="boundaryFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-hosts-title">
+            <header class="module__header">
+              <p class="module__number">Module 4</p>
+              <div><h2 id="module-hosts-title">Calculate total and usable hosts.</h2><p>Count the host bits, calculate 2 to that power for total addresses, then subtract the network and broadcast addresses for the ordinary IPv4 LAN-host convention.</p></div>
+            </header>
+
+            <div class="formula-row">
+              <article><span>Total addresses</span><strong>2<sup>host bits</sup></strong></article>
+              <article><span>Ordinary usable hosts</span><strong>2<sup>host bits</sup> - 2</strong></article>
+            </div>
+
+            <div class="common-mask-table-wrap" role="region" aria-label="Common IPv4 subnet masks and host counts" tabindex="0">
+              <table class="common-mask-table">
+                <thead><tr><th>Prefix</th><th>Final mask octet</th><th>Decimal mask</th><th>Host bits</th><th>Total</th><th>Usable hosts</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">/24</th><td>00000000</td><td>255.255.255.0</td><td>8</td><td>256</td><td>254</td></tr>
+                  <tr><th scope="row">/25</th><td>10000000</td><td>255.255.255.128</td><td>7</td><td>128</td><td>126</td></tr>
+                  <tr class="table-highlight"><th scope="row">/26</th><td>11000000</td><td>255.255.255.192</td><td>6</td><td>64</td><td>62</td></tr>
+                  <tr><th scope="row">/27</th><td>11100000</td><td>255.255.255.224</td><td>5</td><td>32</td><td>30</td></tr>
+                  <tr><th scope="row">/28</th><td>11110000</td><td>255.255.255.240</td><td>4</td><td>16</td><td>14</td></tr>
+                  <tr><th scope="row">/30</th><td>11111100</td><td>255.255.255.252</td><td>2</td><td>4</td><td>2</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="exception-note"><strong>Important scope:</strong> this lab uses the conventional LAN-host formula. Point-to-point IPv4 links can use /31 under RFC 3021, and /32 is a single-host route; do not blindly subtract two in those cases.</p>
+
+            <article class="activity-card host-challenge-card" aria-labelledby="host-challenge-title">
+              <div class="activity-card__head">
+                <div><p class="activity-label">Host-count challenge <span id="hostChallengePosition">1 of 4</span></p><h3 id="host-challenge-title">Work from host bits to usable hosts.</h3></div>
+                <button class="small-button" type="button" id="nextHostChallenge">New challenge</button>
+              </div>
+              <p class="challenge-prompt" id="hostChallengePrompt">An ordinary /27 subnet has 5 host bits. How many usable host addresses does it have?</p>
+              <div class="answer-line">
+                <label for="hostChallengeAnswer">Your answer <span>number of usable hosts</span></label>
+                <div><input id="hostChallengeAnswer" type="number" min="0" step="1" inputmode="numeric" autocomplete="off"><button class="button button--primary" type="button" id="checkHostChallenge">Check answer</button></div>
+              </div>
+              <button class="text-button" type="button" id="showHostWorking">Show the working</button>
+              <p class="working" id="hostChallengeWorking" hidden></p>
+              <p class="feedback" id="hostFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="module-assessment-title">
+            <header class="module__header">
+              <p class="module__number">Module 5</p>
+              <div><h2 id="module-assessment-title">Prove the subnetting foundation is in place.</h2><p>Score at least six of seven questions to complete the lab. Review the feedback and retry as often as needed.</p></div>
+            </header>
+
+            <form class="assessment-card" id="assessmentForm" novalidate>
+              <fieldset class="quiz-question" data-question="q1">
+                <legend><span>1</span> How many bits are in an IPv4 address?</legend>
+                <label><input type="radio" name="q1" value="16"> 16</label><label><input type="radio" name="q1" value="32"> 32</label><label><input type="radio" name="q1" value="64"> 64</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q2">
+                <legend><span>2</span> In a normal subnet mask, a binary 1 identifies:</legend>
+                <label><input type="radio" name="q2" value="host"> A host bit</label><label><input type="radio" name="q2" value="network"> A network bit</label><label><input type="radio" name="q2" value="broadcast"> A broadcast bit</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q3">
+                <legend><span>3</span> What decimal mask is equivalent to /26?</legend>
+                <label><input type="radio" name="q3" value="128"> 255.255.255.128</label><label><input type="radio" name="q3" value="192"> 255.255.255.192</label><label><input type="radio" name="q3" value="224"> 255.255.255.224</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q4">
+                <legend><span>4</span> How many host bits remain in a /26?</legend>
+                <label><input type="radio" name="q4" value="4"> 4</label><label><input type="radio" name="q4" value="6"> 6</label><label><input type="radio" name="q4" value="26"> 26</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q5">
+                <legend><span>5</span> A /26 has how many total address values?</legend>
+                <label><input type="radio" name="q5" value="32"> 32</label><label><input type="radio" name="q5" value="64"> 64</label><label><input type="radio" name="q5" value="126"> 126</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q6">
+                <legend><span>6</span> Under the ordinary IPv4 LAN-host convention, a /26 has how many usable hosts?</legend>
+                <label><input type="radio" name="q6" value="62"> 62</label><label><input type="radio" name="q6" value="64"> 64</label><label><input type="radio" name="q6" value="126"> 126</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <fieldset class="quiz-question" data-question="q7">
+                <legend><span>7</span> What network contains 192.168.10.77/26?</legend>
+                <label><input type="radio" name="q7" value="0"> 192.168.10.0</label><label><input type="radio" name="q7" value="64"> 192.168.10.64</label><label><input type="radio" name="q7" value="128"> 192.168.10.128</label>
+                <p class="question-feedback" aria-live="polite"></p>
+              </fieldset>
+              <div class="assessment-actions"><button class="button button--primary" type="submit">Mark my answers</button><span id="assessmentScore" aria-live="polite"></span></div>
+            </form>
+            <p class="feedback" id="assessmentFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="completion-panel" id="completion" hidden aria-labelledby="completion-title">
+            <div class="completion-panel__head"><p class="eyebrow eyebrow--blue">Lab complete</p><h2 id="completion-title">You can now read the subnetting model behind a CIDR prefix.</h2><p>Make a personal completion record below. It stays in your browser unless you print or save it.</p></div>
+            <div class="completion-controls"><label for="learnerName">Your name for the record<input id="learnerName" type="text" maxlength="80" autocomplete="name" placeholder="Learner name"></label><button class="button button--secondary-dark" type="button" id="updateCompletionName">Update record</button></div>
+            <article class="completion-record" id="completionRecord">
+              <div><span class="record-code">LAB-NET-101</span><h3>IPv4 Subnetting Foundations</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the self-paced interactive lab on this device.</p></div>
+              <dl><div><dt>Topics</dt><dd>IPv4, subnet masks, CIDR, /26 subnetting, usable hosts</dd></div><div><dt>Format</dt><dd>Self-paced practice</dd></div><div><dt>Issued</dt><dd id="completionDate">Today</dd></div></dl>
+              <p class="record-disclaimer">This is a local learning record, not an accredited certificate, verified assessment or digital badge.</p>
+            </article>
+            <button class="button button--primary" type="button" id="printCompletion">Print or save as PDF</button>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer__inner"><div><strong>Skunkworks Academy Labs</strong><p>Practice the fundamentals. Build durable technical capability.</p></div><nav aria-label="Footer navigation"><a href="/">All labs</a><a href="https://portal.skunkworksacademy.com/">Learner portal</a><a href="mailto:training@skunkworks.africa?subject=LAB-NET-101%20support">Lab support</a></nav></div>
+  </footer>
+</body>
+</html>

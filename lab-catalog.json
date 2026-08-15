@@ -1,0 +1,320 @@
+{
+  "schemaVersion": "1.0",
+  "catalogVersion": "2026-08-02.2",
+  "products": [
+    {
+      "code": "LAB-LNX-101",
+      "title": "Linux Command-Line Essentials",
+      "summary": "Use a clean Linux terminal to navigate a filesystem, manage files, inspect text, understand permissions and complete practical command-line tasks.",
+      "availability": "launch-pilot",
+      "delivery": "browser-terminal",
+      "durationMinutes": 45,
+      "level": "beginner",
+      "networkPolicy": "restricted",
+      "publicSsh": false,
+      "objectives": [
+        "Navigate a Linux filesystem safely",
+        "Create, inspect and organise files and directories",
+        "Use basic text and search commands",
+        "Recognise least-privilege file permission concepts"
+      ],
+      "entitlement": {
+        "maxConcurrentSessionsPerLearner": 1,
+        "idleTimeoutMinutes": 10,
+        "sessionTimeoutMinutes": 45,
+        "cleanupRequired": true
+      },
+      "checkout": {
+        "status": "preparing",
+        "providers": ["payfast", "paypal"],
+        "activation": "verified-webhook-only"
+      }
+    },
+    {
+      "code": "LAB-DAT-101",
+      "title": "Bits, Bytes & Binary Fundamentals",
+      "summary": "Build a practical mental model of digital data with binary switches, bit-to-byte conversion challenges, data-rate examples and a short knowledge check.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 25,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/bits-and-bytes-101/",
+      "objectives": [
+        "Explain the relationship between bits and bytes",
+        "Read an eight-bit binary value",
+        "Convert bits to bytes and bytes to bits",
+        "Distinguish data-rate and storage-unit notation"
+      ]
+    },
+    {
+      "code": "LAB-NET-101",
+      "title": "IPv4 Subnetting Foundations",
+      "summary": "Turn IPv4 bits, CIDR masks and /26 subnet boundaries into practical network calculations with a visual subnetting lab.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 35,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/ipv4-subnetting-101/",
+      "objectives": [
+        "Explain why IPv4 addresses use 32 bits and four octets",
+        "Interpret subnet-mask 1s as network bits and 0s as host bits",
+        "Relate /24 through /30 to decimal and binary subnet masks",
+        "Calculate total and ordinary usable hosts",
+        "Identify /26 network, host and broadcast boundaries"
+      ]
+    },
+    {
+      "code": "LAB-REM-201",
+      "title": "REMnux Triage & Memory Forensics",
+      "summary": "Use a harmless simulated investigation to practise analysis boundaries, static triage, evidence provenance and memory-forensics correlation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/remnux-triage-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-isolated-vm",
+        "untrustedSampleExecution": "disabled"
+      },
+      "objectives": [
+        "Establish an authorised and isolated analysis boundary",
+        "Record a reproducible static-triage baseline",
+        "Treat artefacts as leads that require corroboration",
+        "Correlate process, socket and timeline records from a memory-forensics view"
+      ]
+    },
+    {
+      "code": "LAB-FLR-201",
+      "title": "FLARE VM Analysis Workbench",
+      "summary": "Learn the safe Windows reverse-engineering workbench lifecycle: managed VM, snapshot, evidence provenance, telemetry correlation and reset.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/flarevm-workbench-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-isolated-windows-vm",
+        "untrustedSampleExecution": "disabled"
+      },
+      "objectives": [
+        "Explain the disposable-VM and snapshot model",
+        "Capture static PE-style evidence with provenance",
+        "Read pre-recorded process, filesystem and network telemetry as a timeline",
+        "Reset an analysis session to known-good state"
+      ]
+    },
+    {
+      "code": "LAB-KAL-201",
+      "title": "Kali Linux Evidence & Network Forensics",
+      "summary": "Practise a read-only evidence workflow, disk-image triage and offline PCAP reasoning without live scanning or target interaction.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/kali-forensics-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-read-only-forensic-vm",
+        "liveScanning": "disabled"
+      },
+      "objectives": [
+        "Preserve authority, integrity and read-only handling boundaries",
+        "Record hash, partition and file-inventory observations",
+        "Analyse a stored PCAP offline and preserve the filter used",
+        "Distinguish forensic examination from live enumeration"
+      ]
+    },
+    {
+      "code": "LAB-NET-102",
+      "title": "DNS, DHCP, ARP and Packet Flow",
+      "summary": "Follow a client connection from configuration to name resolution and local next-hop delivery using safe, synthetic packet traces.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/dns-dhcp-arp-102/",
+      "objectives": [
+        "Explain the distinct responsibilities of DHCP, DNS and ARP",
+        "Read a client packet-flow trace in dependency order",
+        "Identify the earliest missing dependency in a troubleshooting case",
+        "Select an authorised, evidence-led first check"
+      ]
+    },
+    {
+      "code": "LAB-SYS-102",
+      "title": "Linux Files, Permissions and Processes",
+      "summary": "Apply least-privilege Linux access reasoning and evidence-led service triage with simulated terminal output.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/linux-admin-102/",
+      "objectives": [
+        "Interpret Linux ownership and rwx permission notation",
+        "Apply least privilege to a shared service configuration",
+        "Read process, service and journal evidence before changing state",
+        "Choose an approved escalation path for a service issue"
+      ]
+    },
+    {
+      "code": "LAB-SEC-101",
+      "title": "Phishing and Email Header Triage",
+      "summary": "Practise safe first-pass phishing triage with synthetic headers, authentication signals, preservation and reporting decisions.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 55,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/phishing-triage-101/",
+      "objectives": [
+        "Separate a message claim from header and authentication evidence",
+        "Interpret SPF, DKIM and DMARC results as contextual signals",
+        "Choose a safe report, preserve and escalation path",
+        "Write a concise evidence-led triage note"
+      ]
+    },
+    {
+      "code": "LAB-NET-201",
+      "title": "Wireshark PCAP Investigation",
+      "summary": "Read a synthetic capture timeline, identify DNS and TCP events, use display-filter reasoning and document a defensible observation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/pcap-investigation-201/",
+      "objectives": [
+        "Identify a DNS exchange, TCP handshake and connection close",
+        "Use display-filter logic to answer a bounded review question",
+        "Separate packet observations from incident conclusions",
+        "Record reproducible evidence and authorised follow-up"
+      ]
+    },
+    {
+      "code": "LAB-ID-101",
+      "title": "Entra ID, MFA and Conditional Access",
+      "summary": "Design least-privilege identity controls and a staged Conditional Access rollout in a fictional browser-only tenant.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/entra-identity-101/",
+      "objectives": [
+        "Distinguish users, groups, roles, MFA and Conditional Access",
+        "Apply least-privilege assignment to a representative support case",
+        "Plan a policy pilot, monitoring and recovery sequence",
+        "Account for governed emergency access in tenant resilience"
+      ]
+    },
+    {
+      "code": "LAB-CLD-101",
+      "title": "Cloud Foundations and Shared Responsibility",
+      "summary": "Choose an appropriate cloud service model, map ownership and design identity, recovery and cost guardrails without a live cloud account.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/cloud-foundations-101/",
+      "objectives": [
+        "Choose IaaS, PaaS or SaaS from workload control requirements",
+        "Map shared responsibility for data, identity, configuration and operations",
+        "Design launch guardrails for environments, recovery, monitoring and cost ownership",
+        "Explain why real cloud changes require approved authority and a recovery plan"
+      ]
+    },
+    {
+      "code": "LAB-AZ-101",
+      "title": "Azure Landing Zone Essentials",
+      "summary": "Design an Azure workload landing path using management groups, subscriptions, RBAC, Azure Policy and operating guardrails in a browser-only simulation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/azure-landing-zone-101/",
+      "objectives": [
+        "Explain the governance roles of management groups, subscriptions, resource groups and resources",
+        "Distinguish Azure RBAC from Azure Policy",
+        "Design a workload onboarding path with ownership, cost, operational and recovery guardrails",
+        "Identify approvals and least-privilege requirements for a real Azure change"
+      ]
+    },
+    {
+      "code": "LAB-GCP-101",
+      "title": "Google Cloud IAM and FinOps Guardrails",
+      "summary": "Design a Google Cloud resource hierarchy, least-privilege access, labels, budgets and cost-response guardrails using a browser-only simulation.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/gcp-iam-finops-101/",
+      "objectives": [
+        "Explain the Google Cloud organisation, folder and project hierarchy",
+        "Apply least-privilege IAM using named principals, narrow roles and explicit scope",
+        "Describe credential risks from broad roles, shared accounts and long-lived copied keys",
+        "Build a FinOps plan with labels, budgets, threshold notifications and response"
+      ]
+    },
+    {
+      "code": "LAB-DEV-101",
+      "title": "Git, GitHub and Secure Collaboration",
+      "summary": "Create a safe software change path with branches, commits, pull requests, reviews, protected default branches and secret-safe workflows.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/git-secure-collaboration-101/",
+      "objectives": [
+        "Explain branches, commits, pull requests, reviews and merges",
+        "Prepare reviewable change evidence with validation, risk and rollback information",
+        "Describe how protected branches/rulesets and required checks support safe integration",
+        "Apply a safe response to suspected credential exposure"
+      ]
+    },
+    {
+      "code": "LAB-DAT-102",
+      "title": "SQL for Analysts",
+      "summary": "Turn a bounded business question into safe SQL selection, filters, joins and aggregate interpretation with synthetic data only.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 60,
+      "level": "beginner-to-intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/sql-analysts-102/",
+      "objectives": [
+        "Translate a question into minimal field and filter design",
+        "Explain table relationships and use a documented join key",
+        "Apply grouping/aggregate reasoning and state the limits of a result",
+        "Follow data minimisation and approved access practices"
+      ]
+    }
+  ]
+}

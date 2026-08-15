@@ -1,0 +1,34 @@
+schemaVersion: 1
+code: LAB-ID-101
+title: Entra ID, MFA and Conditional Access
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  liveTenantAccess: disabled
+  externalIdentityData: disallowed
+  policyChanges: simulated-only
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Distinguish identities, groups, roles, authentication methods and Conditional Access controls.
+  - Apply least privilege to a representative learner, instructor and administrator scenario.
+  - Design an MFA and Conditional Access baseline that includes emergency-access safeguards.
+  - Identify common policy rollout risks and a safe validation sequence.
+evidence:
+  checkpoints:
+    - least-privilege-design
+    - conditional-access-rollout
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-ID-101
+  data_classification: public-learning-content
+  cost_tier: none

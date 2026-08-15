@@ -1,0 +1,36 @@
+schemaVersion: 1
+code: LAB-GCP-101
+title: Google Cloud IAM and FinOps Guardrails
+status: live
+delivery: interactive-web-lab
+durationMinutes: 60
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  publicNetwork: forbidden
+  liveProjectAccess: disabled
+  billingAccess: disabled
+  iamChanges: simulated-only
+  serviceAccountKeys: forbidden
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Explain the Google Cloud organisation, folder and project hierarchy.
+  - Apply least-privilege IAM using named principals, narrow roles and explicit scope.
+  - Describe the credential risks of broad roles, shared accounts and long-lived copied keys.
+  - Build a FinOps plan with labels, budgets, threshold notifications and accountable response.
+evidence:
+  checkpoints:
+    - project-placement-choice
+    - least-privilege-iam-design
+    - budget-response-plan
+    - seven-question-foundation-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-GCP-101
+  data_classification: public-learning-content
+  cost_tier: none

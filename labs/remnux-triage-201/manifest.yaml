@@ -1,0 +1,35 @@
+schemaVersion: 1
+code: LAB-REM-201
+title: REMnux Triage & Memory Forensics
+status: live
+delivery: interactive-web-lab
+durationMinutes: 55
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  syntheticFixturesOnly: true
+  untrustedSampleExecution: disabled
+  publicNetwork: forbidden
+  futureRuntime: instructor-managed-isolated-vm
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Establish an authorised, isolated starting state for an analysis workflow.
+  - Record file provenance, cryptographic hash, broad type and selected static strings.
+  - Treat static indicators as leads that require context and corroboration.
+  - Correlate process, socket, timeline and case-context evidence from a memory-forensics view.
+evidence:
+  checkpoints:
+    - analysis-boundary-check
+    - static-triage-note
+    - memory-correlation-check
+    - six-question-safety-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-REM-201
+  data_classification: public-learning-content
+  cost_tier: none

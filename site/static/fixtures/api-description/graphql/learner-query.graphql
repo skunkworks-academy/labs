@@ -1,0 +1,28 @@
+query LearnerDashboard($learnerId: ID!, $pageSize: Int = 20) {
+  learner(id: $learnerId) {
+    id
+    displayName
+    billingEmail
+    adminNotes
+    enrolments(first: $pageSize) {
+      nodes {
+        id
+        status
+        progressPercent
+        course {
+          code
+          title
+          instructor {
+            id
+            displayName
+            email
+          }
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope
+  xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+  xmlns:ord="https://labs.skunkworksacademy.com/ns/orders/v1"
+  xmlns:auth="https://labs.skunkworksacademy.com/ns/access/v1">
+  <env:Header>
+    <auth:AccessContext env:mustUnderstand="true">
+      <auth:TenantId>tenant-demo-001</auth:TenantId>
+      <auth:PrincipalId>reseller-user-42</auth:PrincipalId>
+      <auth:CorrelationId>0e89a2d7-94c2-4b53-962e-4eb9bc2dcf61</auth:CorrelationId>
+    </auth:AccessContext>
+  </env:Header>
+  <env:Body>
+    <ord:CreateOrderRequest>
+      <ord:resellerReference>RS-2026-00814</ord:resellerReference>
+      <ord:courseCode>LAB-API-102</ord:courseCode>
+      <ord:quantity>8</ord:quantity>
+      <ord:deliveryMode>virtual</ord:deliveryMode>
+    </ord:CreateOrderRequest>
+  </env:Body>
+</env:Envelope>

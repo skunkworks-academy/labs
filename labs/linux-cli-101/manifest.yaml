@@ -1,0 +1,35 @@
+schemaVersion: 1
+code: LAB-LNX-101
+title: Linux Command-Line Essentials
+status: launch-pilot
+delivery: browser-terminal
+durationMinutes: 45
+idleTimeoutMinutes: 10
+maxConcurrentSessionsPerLearner: 1
+template:
+  image: ghcr.io/skunkworks-academy/labs/linux-cli-101:approved-version-required
+  imageDigestRequired: true
+network:
+  publicIp: false
+  publicSsh: false
+  publicRdp: false
+  outboundInternet: deny
+access:
+  gateway: browser-only
+  credentials: ephemeral
+  learnerCloudCredentials: false
+cleanup:
+  strategy: destroy-and-recreate
+  absoluteExpiryRequired: true
+  reconciliationRequired: true
+labels:
+  product_code: LAB-LNX-101
+  data_classification: internal-training
+  cost_tier: low
+evidence:
+  checkpoints:
+    - filesystem-navigation
+    - file-and-directory-operations
+    - text-inspection
+    - permissions-awareness
+  completionRecord: eligible

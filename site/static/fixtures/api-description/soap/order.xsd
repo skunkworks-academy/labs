@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:tns="https://labs.skunkworksacademy.com/ns/orders/v1"
+  targetNamespace="https://labs.skunkworksacademy.com/ns/orders/v1"
+  elementFormDefault="qualified">
+  <xs:simpleType name="ResellerReferenceType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="RS-[0-9]{4}-[0-9]{5}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DeliveryModeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="virtual"/>
+      <xs:enumeration value="instructor-led"/>
+      <xs:enumeration value="hybrid"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CreateOrderRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="resellerReference" type="tns:ResellerReferenceType"/>
+        <xs:element name="courseCode">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:minLength value="3"/>
+              <xs:maxLength value="32"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="quantity">
+          <xs:simpleType>
+            <xs:restriction base="xs:positiveInteger">
+              <xs:minInclusive value="1"/>
+              <xs:maxInclusive value="50"/>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="deliveryMode" type="tns:DeliveryModeType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

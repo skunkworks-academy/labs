@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "track": "Security Scanning and Validation",
+  "status": "available",
+  "delivery": "guided browser documentation with controlled lab targets",
+  "products": [
+    {"code":"LAB-SEC-201","title":"OpenVAS / Greenbone Vulnerability Management","purpose":"Network vulnerability scanning","tool":"OpenVAS / Greenbone Community Edition","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/openvas/"},
+    {"code":"LAB-SEC-202","title":"Nmap NSE Service and Vulnerability Discovery","purpose":"Network vulnerability scanning","tool":"Nmap Scripting Engine","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/nmap-nse/"},
+    {"code":"LAB-WEB-201","title":"Burp Suite Proxy and Manual Validation","purpose":"Web application scanning","tool":"Burp Suite","durationMinutes":90,"level":"Intermediate","route":"/labs/security-tools/burp-suite/"},
+    {"code":"LAB-WEB-202","title":"OWASP ZAP Baseline and Governed Active Scan","purpose":"Web application scanning","tool":"OWASP ZAP","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/owasp-zap/"},
+    {"code":"LAB-WEB-203","title":"Nikto Web Server Misconfiguration Review","purpose":"Web application scanning","tool":"Nikto","durationMinutes":60,"level":"Foundation to Intermediate","route":"/labs/security-tools/nikto/"},
+    {"code":"LAB-WEB-204","title":"Wapiti Black-Box Web Application Scan","purpose":"Web application scanning","tool":"Wapiti","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/wapiti/"},
+    {"code":"LAB-CMS-201","title":"WPScan WordPress Assessment","purpose":"CMS scanning","tool":"WPScan","durationMinutes":60,"level":"Intermediate","route":"/labs/security-tools/wpscan/"},
+    {"code":"LAB-CMS-202","title":"Droopescan Drupal and Joomla Discovery","purpose":"CMS scanning","tool":"Droopescan","durationMinutes":60,"level":"Intermediate","route":"/labs/security-tools/droopescan/"},
+    {"code":"LAB-CMS-203","title":"CMSmap Cross-CMS Fingerprinting","purpose":"CMS scanning","tool":"CMSmap","durationMinutes":60,"level":"Intermediate","route":"/labs/security-tools/cmsmap/"},
+    {"code":"LAB-WIFI-201","title":"Aircrack-ng Offline Capture Analysis","purpose":"Wireless","tool":"Aircrack-ng","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/aircrack-ng/"},
+    {"code":"LAB-WIFI-202","title":"Kismet Passive Wireless Reconnaissance","purpose":"Wireless","tool":"Kismet","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/kismet/"},
+    {"code":"LAB-SYS-201","title":"Lynis Linux Security Audit","purpose":"System auditing","tool":"Lynis","durationMinutes":75,"level":"Intermediate","route":"/labs/security-tools/lynis/"},
+    {"code":"LAB-EXP-301","title":"Metasploit Vulnerability Validation","purpose":"Exploitation and scanning","tool":"Metasploit Framework","durationMinutes":90,"level":"Intermediate to Advanced","route":"/labs/security-tools/metasploit/"},
+    {"code":"LAB-SEC-390","title":"Integrated Security Assessment Capstone","purpose":"Integrated assessment","tool":"Multi-tool","durationMinutes":150,"level":"Applied Intermediate","route":"/labs/security-tools/capstone/"}
+  ]
+}

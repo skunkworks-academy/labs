@@ -41,39 +41,15 @@ jobs:
       - name: Build Docusaurus and overlay existing labs
         run: npm run build:deploy
 
-      - name: Verify dynamic catalogue, favicon and navbar artifacts
-        run: |
-          test -f build/catalog/labs.json
-          test -s build/favicon.ico
-          node - <<'NODE'
-          const fs = require('node:fs');
-          const labs = JSON.parse(fs.readFileSync('build/catalog/labs.json', 'utf8'));
-          if (!Array.isArray(labs)) throw new Error('build/catalog/labs.json must contain an array');
-          const available = labs.filter((lab) => String(lab.status || '').toLowerCase() === 'available');
-          if (!available.length) throw new Error('No available labs found in build/catalog/labs.json');
-          console.log(`Verified ${available.length} available lab record(s) in the deployed catalogue artifact.`);
-          NODE
-          grep -q 'catalog/labs.json' build/index.html
-          grep -q '/favicon.ico' build/index.html
-          if grep -R --include='*.html' -n 'navbar__logo' build; then
-            echo 'Docusaurus navbar logo markup must not be present in published HTML.'
-            exit 1
-          fi
-          if grep -R --include='*.html' -n 'raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png' build; then
-            echo 'Legacy remote navbar icon reference must not be present in published HTML.'
-            exit 1
-          fi
-
-      - name: Enforce canonical Academy shell on every published HTML page
+      - name: Enforce centrally hosted Academy shell on every published HTML page
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import re
 
-          version = '2026.08.15.2'
-          src = f'https://skunkworksacademy.com/assets/academy-navigation.js?v={version}'
-          marker = f'data-skunkworks-global-shell="{version}"'
-          script = f'<script defer src="{src}" {marker}></script>'
+          loader = 'https://www.skunkworksacademy.com/assets/academy-navigation.js'
+          marker = 'data-skunkworks-global-shell="central"'
+          script = f'<script defer src="{loader}" {marker}></script>'
           pages = sorted(Path('build').rglob('*.html'))
           if not pages:
               raise SystemExit('No published HTML pages found in site/build')
@@ -95,19 +71,39 @@ jobs:
               elif '</body>' in html:
                   html = html.replace('</body>', f'  {script}\n</body>', 1)
               else:
-                  raise SystemExit(f'Cannot inject canonical shell into {path}')
+                  raise SystemExit(f'Cannot inject Academy shell loader into {path}')
               path.write_text(html, encoding='utf-8')
 
           failures = []
           for path in pages:
               html = path.read_text(encoding='utf-8', errors='ignore')
-              if html.count(src) != 1 or html.count(marker) != 1:
+              if html.count(loader) != 1 or html.count(marker) != 1:
                   failures.append(str(path))
           if failures:
-              raise SystemExit('Canonical shell verification failed for: ' + ', '.join(failures))
+              raise SystemExit('Central Academy shell verification failed for: ' + ', '.join(failures))
 
-          print(f'Canonical shell {version} verified on {len(pages)} published HTML page(s).')
+          print(f'Central Academy shell loader verified on {len(pages)} published HTML page(s).')
           PY
+
+      - name: Verify dynamic catalogue, favicon and global-shell-only chrome
+        run: |
+          test -f build/catalog/labs.json
+          test -s build/favicon.ico
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const labs = JSON.parse(fs.readFileSync('build/catalog/labs.json', 'utf8'));
+          if (!Array.isArray(labs)) throw new Error('build/catalog/labs.json must contain an array');
+          const available = labs.filter((lab) => String(lab.status || '').toLowerCase() === 'available');
+          if (!available.length) throw new Error('No available labs found in build/catalog/labs.json');
+          console.log(`Verified ${available.length} available lab record(s) in the deployed catalogue artifact.`);
+          NODE
+          grep -q 'catalog/labs.json' build/index.html
+          grep -q '/favicon.ico' build/index.html
+          grep -q 'https://www.skunkworksacademy.com/assets/academy-navigation.js' build/index.html
+          if grep -q 'navbar__inner\|navbar__brand\|footer__links\|footer__bottom' build/index.html; then
+            echo 'Native Docusaurus navbar/footer markup must not be rendered on the Labs landing page.'
+            exit 1
+          fi
 
       - name: Verify custom domain artifact
         run: |
@@ -137,27 +133,30 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify Labs production domain, dynamic catalogue and representative routes
+      - name: Verify Labs production and central Academy shell source
         run: |
-          version='2026.08.15.2'
+          loader_url='https://www.skunkworksacademy.com/assets/academy-navigation.js'
+          shell_url='https://www.skunkworksacademy.com/assets/skunkworks-shell.js'
+
           for attempt in {1..30}; do
             home="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/ || true)"
             legacy="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/ || true)"
             catalogue="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/catalog/labs.json || true)"
+            loader="$(curl --location --fail --silent --show-error --max-time 20 "$loader_url" || true)"
+            shell="$(curl --location --fail --silent --show-error --max-time 20 "$shell_url" || true)"
             favicon_ok=0
             curl --location --fail --silent --show-error --max-time 20 --output /dev/null https://labs.skunkworksacademy.com/favicon.ico && favicon_ok=1 || true
 
-            if printf '%s' "$home" | grep -q "academy-navigation.js?v=${version}" \
-              && printf '%s' "$home" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
-              && printf '%s' "$home" | grep -q "catalog/labs.json" \
-              && printf '%s' "$home" | grep -q "/favicon.ico" \
-              && ! printf '%s' "$home" | grep -q 'navbar__logo' \
-              && ! printf '%s' "$home" | grep -q 'raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png' \
-              && printf '%s' "$legacy" | grep -q "academy-navigation.js?v=${version}" \
-              && printf '%s' "$legacy" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
+            if printf '%s' "$home" | grep -q "$loader_url" \
+              && ! printf '%s' "$home" | grep -Eq 'navbar__inner|navbar__brand|footer__links|footer__bottom' \
+              && printf '%s' "$home" | grep -q 'catalog/labs.json' \
+              && printf '%s' "$legacy" | grep -q "$loader_url" \
               && printf '%s' "$catalogue" | grep -q '"status": "available"' \
+              && printf '%s' "$loader" | grep -q 'skunkworks-shell.js' \
+              && printf '%s' "$shell" | grep -q 'swa-global-shell-nav' \
+              && printf '%s' "$shell" | grep -q 'swa-global-shell-footer' \
               && [ "$favicon_ok" -eq 1 ]; then
-              echo 'Labs production verification succeeded: dynamic catalogue and favicon are live, and Docusaurus navbar logo markup is absent.'
+              echo 'Labs production verification succeeded with centrally sourced Academy navigation and footer.'
               exit 0
             fi
             sleep 10

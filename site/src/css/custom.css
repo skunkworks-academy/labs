@@ -42,10 +42,6 @@ h3 {
   letter-spacing: -0.03em;
 }
 
-.navbar__logo img {
-  border-radius: 0.5rem;
-}
-
 .hero-api {
   margin: -1rem calc(50% - 50vw) 3rem;
   padding: clamp(4rem, 8vw, 7rem) max(1.5rem, calc((100vw - 1180px) / 2));

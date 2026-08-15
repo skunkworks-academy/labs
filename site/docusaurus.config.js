@@ -1,7 +1,6 @@
 const {themes: prismThemes} = require('prism-react-renderer');
 
-const GLOBAL_SHELL_VERSION = '2026.08.15.2';
-const GLOBAL_SHELL_URL = `https://skunkworksacademy.com/assets/academy-navigation.js?v=${GLOBAL_SHELL_VERSION}`;
+const GLOBAL_SHELL_LOADER_URL = 'https://www.skunkworksacademy.com/assets/academy-navigation.js';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -46,9 +45,9 @@ const config = {
     {
       tagName: 'script',
       attributes: {
-        src: GLOBAL_SHELL_URL,
+        src: GLOBAL_SHELL_LOADER_URL,
         defer: 'true',
-        'data-skunkworks-global-shell': GLOBAL_SHELL_VERSION,
+        'data-skunkworks-global-shell': 'central',
       },
     },
   ],
@@ -103,48 +102,6 @@ const config = {
       defaultMode: 'light',
       disableSwitch: false,
       respectPrefersColorScheme: true,
-    },
-    navbar: {
-      title: 'Skunkworks Academy Labs',
-      items: [
-        {to: '/labs/security-tools/', label: 'Security Tool Labs', position: 'left'},
-        {to: '/labs/api-description/', label: 'API Description Labs', position: 'left'},
-        {href: 'https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/', label: 'Existing Labs', position: 'left'},
-        {href: 'https://portal.skunkworksacademy.com/', label: 'Portal', position: 'right'},
-        {href: 'https://github.com/skunkworks-academy/labs', label: 'GitHub', position: 'right'},
-      ],
-    },
-    footer: {
-      style: 'dark',
-      links: [
-        {
-          title: 'Security labs',
-          items: [
-            {label: 'Security Tool Track', to: '/labs/security-tools/'},
-            {label: 'Network Scanning', to: '/labs/security-tools/openvas/'},
-            {label: 'Web Scanning', to: '/labs/security-tools/burp-suite/'},
-            {label: 'Assessment Capstone', to: '/labs/security-tools/capstone/'},
-          ],
-        },
-        {
-          title: 'API labs',
-          items: [
-            {label: 'API Description Track', to: '/labs/api-description/'},
-            {label: 'SOAP', to: '/labs/api-description/soap/'},
-            {label: 'Swagger / OpenAPI', to: '/labs/api-description/openapi/'},
-            {label: 'GraphQL', to: '/labs/api-description/graphql/'},
-          ],
-        },
-        {
-          title: 'Academy',
-          items: [
-            {label: 'Academy Home', href: 'https://skunkworksacademy.com/'},
-            {label: 'Learner Portal', href: 'https://portal.skunkworksacademy.com/'},
-            {label: 'Course Catalogue', href: 'https://catalog.skunkworksacademy.com/'},
-          ],
-        },
-      ],
-      copyright: `© ${new Date().getFullYear()} Skunkworks Academy. Dream. Design. Deliver.`,
     },
     prism: {
       theme: prismThemes.github,

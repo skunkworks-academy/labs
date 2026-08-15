@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: labs-pages-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -24,20 +24,37 @@ jobs:
         working-directory: site
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
+          check-latest: true
+          package-manager-cache: false
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
       - name: Build Docusaurus and overlay existing labs
         run: npm run build:deploy
+
+      - name: Verify dynamic catalogue and favicon artifacts
+        run: |
+          test -f build/catalog/labs.json
+          test -s build/favicon.ico
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const labs = JSON.parse(fs.readFileSync('build/catalog/labs.json', 'utf8'));
+          if (!Array.isArray(labs)) throw new Error('build/catalog/labs.json must contain an array');
+          const available = labs.filter((lab) => String(lab.status || '').toLowerCase() === 'available');
+          if (!available.length) throw new Error('No available labs found in build/catalog/labs.json');
+          console.log(`Verified ${available.length} available lab record(s) in the deployed catalogue artifact.`);
+          NODE
+          grep -q 'catalog/labs.json' build/index.html
+          grep -q '/favicon.ico' build/index.html
 
       - name: Enforce canonical Academy shell on every published HTML page
         run: |
@@ -112,17 +129,25 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Verify Labs production domain and representative routes
+      - name: Verify Labs production domain, dynamic catalogue and representative routes
         run: |
           version='2026.08.15.2'
           for attempt in {1..30}; do
             home="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/ || true)"
             legacy="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/ || true)"
+            catalogue="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/catalog/labs.json || true)"
+            favicon_ok=0
+            curl --location --fail --silent --show-error --max-time 20 --output /dev/null https://labs.skunkworksacademy.com/favicon.ico && favicon_ok=1 || true
+
             if printf '%s' "$home" | grep -q "academy-navigation.js?v=${version}" \
               && printf '%s' "$home" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
+              && printf '%s' "$home" | grep -q "catalog/labs.json" \
+              && printf '%s' "$home" | grep -q "/favicon.ico" \
               && printf '%s' "$legacy" | grep -q "academy-navigation.js?v=${version}" \
-              && printf '%s' "$legacy" | grep -q "data-skunkworks-global-shell=\"${version}\""; then
-              echo 'Labs production verification succeeded on Docusaurus and legacy lab routes.'
+              && printf '%s' "$legacy" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
+              && printf '%s' "$catalogue" | grep -q '"status": "available"' \
+              && [ "$favicon_ok" -eq 1 ]; then
+              echo 'Labs production verification succeeded for dynamic catalogue, favicon, Docusaurus shell and legacy lab route.'
               exit 0
             fi
             sleep 10

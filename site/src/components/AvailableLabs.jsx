@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import './AvailableLabs.css';
 
 function normalise(value) {
   return String(value || '').trim().toLowerCase();

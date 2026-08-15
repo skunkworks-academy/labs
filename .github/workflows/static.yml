@@ -41,7 +41,7 @@ jobs:
       - name: Build Docusaurus and overlay existing labs
         run: npm run build:deploy
 
-      - name: Verify dynamic catalogue and favicon artifacts
+      - name: Verify dynamic catalogue, favicon and navbar artifacts
         run: |
           test -f build/catalog/labs.json
           test -s build/favicon.ico
@@ -55,6 +55,14 @@ jobs:
           NODE
           grep -q 'catalog/labs.json' build/index.html
           grep -q '/favicon.ico' build/index.html
+          if grep -R --include='*.html' -n 'navbar__logo' build; then
+            echo 'Docusaurus navbar logo markup must not be present in published HTML.'
+            exit 1
+          fi
+          if grep -R --include='*.html' -n 'raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png' build; then
+            echo 'Legacy remote navbar icon reference must not be present in published HTML.'
+            exit 1
+          fi
 
       - name: Enforce canonical Academy shell on every published HTML page
         run: |
@@ -143,11 +151,13 @@ jobs:
               && printf '%s' "$home" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
               && printf '%s' "$home" | grep -q "catalog/labs.json" \
               && printf '%s' "$home" | grep -q "/favicon.ico" \
+              && ! printf '%s' "$home" | grep -q 'navbar__logo' \
+              && ! printf '%s' "$home" | grep -q 'raw.githubusercontent.com/skunkworks-academy/.github/refs/heads/main/images/favicon-black.png' \
               && printf '%s' "$legacy" | grep -q "academy-navigation.js?v=${version}" \
               && printf '%s' "$legacy" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
               && printf '%s' "$catalogue" | grep -q '"status": "available"' \
               && [ "$favicon_ok" -eq 1 ]; then
-              echo 'Labs production verification succeeded for dynamic catalogue, favicon, Docusaurus shell and legacy lab route.'
+              echo 'Labs production verification succeeded: dynamic catalogue and favicon are live, and Docusaurus navbar logo markup is absent.'
               exit 0
             fi
             sleep 10

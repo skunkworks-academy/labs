@@ -7,7 +7,7 @@ const GLOBAL_SHELL_URL = `https://skunkworksacademy.com/assets/academy-navigatio
 const config = {
   title: 'Skunkworks Academy Labs',
   tagline: 'Practical, evidence-led technical labs',
-  favicon: '/assets/icons/favicon-black.png',
+  favicon: '/favicon.ico',
   url: 'https://labs.skunkworksacademy.com',
   baseUrl: '/',
   organizationName: 'skunkworks-academy',
@@ -26,6 +26,21 @@ const config = {
         name: 'skunkworks-page-head',
         content: 'mandatory-v1',
         'data-skunkworks-head': 'mandatory-v1',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        href: '/favicon.ico',
+        sizes: 'any',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'shortcut icon',
+        href: '/favicon.ico',
       },
     },
     {

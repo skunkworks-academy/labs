@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: labs-pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -27,14 +27,68 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "24"
+
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+
       - name: Build Docusaurus and overlay existing labs
         run: npm run build:deploy
+
+      - name: Enforce canonical Academy shell on every published HTML page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          version = '2026.08.15.2'
+          src = f'https://skunkworksacademy.com/assets/academy-navigation.js?v={version}'
+          marker = f'data-skunkworks-global-shell="{version}"'
+          script = f'<script defer src="{src}" {marker}></script>'
+          pages = sorted(Path('build').rglob('*.html'))
+          if not pages:
+              raise SystemExit('No published HTML pages found in site/build')
+
+          old_nav = re.compile(
+              r'<script\b[^>]*\bsrc=["\'][^"\']*academy-navigation\.js[^"\']*["\'][^>]*>\s*</script>',
+              re.IGNORECASE | re.DOTALL,
+          )
+          old_loader = re.compile(
+              r'<script\b[^>]*\bsrc=["\'][^"\']*academy-navigation-loader\.js[^"\']*["\'][^>]*>\s*</script>',
+              re.IGNORECASE | re.DOTALL,
+          )
+
+          for path in pages:
+              html = path.read_text(encoding='utf-8', errors='ignore')
+              html = old_loader.sub('', old_nav.sub('', html))
+              if '</head>' in html:
+                  html = html.replace('</head>', f'  {script}\n</head>', 1)
+              elif '</body>' in html:
+                  html = html.replace('</body>', f'  {script}\n</body>', 1)
+              else:
+                  raise SystemExit(f'Cannot inject canonical shell into {path}')
+              path.write_text(html, encoding='utf-8')
+
+          failures = []
+          for path in pages:
+              html = path.read_text(encoding='utf-8', errors='ignore')
+              if html.count(src) != 1 or html.count(marker) != 1:
+                  failures.append(str(path))
+          if failures:
+              raise SystemExit('Canonical shell verification failed for: ' + ', '.join(failures))
+
+          print(f'Canonical shell {version} verified on {len(pages)} published HTML page(s).')
+          PY
+
+      - name: Verify custom domain artifact
+        run: |
+          test -f build/CNAME
+          test "$(tr -d '\r\n' < build/CNAME)" = "labs.skunkworksacademy.com"
+
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
@@ -52,3 +106,26 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  verify-production:
+    if: github.event_name != 'pull_request'
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify Labs production domain and representative routes
+        run: |
+          version='2026.08.15.2'
+          for attempt in {1..30}; do
+            home="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/ || true)"
+            legacy="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/ || true)"
+            if printf '%s' "$home" | grep -q "academy-navigation.js?v=${version}" \
+              && printf '%s' "$home" | grep -q "data-skunkworks-global-shell=\"${version}\"" \
+              && printf '%s' "$legacy" | grep -q "academy-navigation.js?v=${version}" \
+              && printf '%s' "$legacy" | grep -q "data-skunkworks-global-shell=\"${version}\""; then
+              echo 'Labs production verification succeeded on Docusaurus and legacy lab routes.'
+              exit 0
+            fi
+            sleep 10
+          done
+          echo 'Labs production verification failed.'
+          exit 1

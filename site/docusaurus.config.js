@@ -1,5 +1,8 @@
 const {themes: prismThemes} = require('prism-react-renderer');
 
+const GLOBAL_SHELL_VERSION = '2026.08.15.2';
+const GLOBAL_SHELL_URL = `https://skunkworksacademy.com/assets/academy-navigation.js?v=${GLOBAL_SHELL_VERSION}`;
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Skunkworks Academy Labs',
@@ -23,6 +26,14 @@ const config = {
         name: 'skunkworks-page-head',
         content: 'mandatory-v1',
         'data-skunkworks-head': 'mandatory-v1',
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        src: GLOBAL_SHELL_URL,
+        defer: 'true',
+        'data-skunkworks-global-shell': GLOBAL_SHELL_VERSION,
       },
     },
   ],

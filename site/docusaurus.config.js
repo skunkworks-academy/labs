@@ -1,6 +1,6 @@
 const {themes: prismThemes} = require('prism-react-renderer');
 
-const GLOBAL_SHELL_LOADER_URL = 'https://www.skunkworksacademy.com/assets/academy-navigation.js';
+const GLOBAL_SHELL_LOADER_URL = 'https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.08.15.1';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -47,7 +47,7 @@ const config = {
       attributes: {
         src: GLOBAL_SHELL_LOADER_URL,
         defer: 'true',
-        'data-skunkworks-global-shell': 'central',
+        'data-skunkworks-global-nav': 'v10',
       },
     },
   ],

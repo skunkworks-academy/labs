@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "catalogVersion": "2026-08-02.2",
+  "catalogVersion": "2026-08-16.1",
   "products": [
     {
       "code": "LAB-LNX-101",
@@ -134,6 +134,30 @@
         "Record hash, partition and file-inventory observations",
         "Analyse a stored PCAP offline and preserve the filter used",
         "Distinguish forensic examination from live enumeration"
+      ]
+    },
+    {
+      "code": "LAB-OSINT-201",
+      "title": "OSINT Reconnaissance Workbench",
+      "summary": "Practise lawful, passive-first OSINT planning, Recon-ng module selection, synthetic Shodan interpretation, evidence correlation and calibrated reporting without live target interaction.",
+      "availability": "available-now",
+      "delivery": "interactive-web-lab",
+      "durationMinutes": 90,
+      "level": "intermediate",
+      "networkPolicy": "no-runtime-required",
+      "publicSsh": false,
+      "resourceUrl": "/labs/osint-recon-201/",
+      "runtime": {
+        "status": "not-enabled",
+        "futureMode": "instructor-managed-synthetic-data-workbench",
+        "liveTargetQueries": "disabled",
+        "activeScanning": "disabled"
+      },
+      "objectives": [
+        "Define an intelligence requirement, authority boundary, scope and stop conditions before collection",
+        "Select Recon-ng modules by input, output, dependencies and API-key requirements",
+        "Interpret synthetic Recon-ng and Shodan-style observations without overclaiming ownership or vulnerability",
+        "Correlate independent evidence and report observation, inference, confidence and recommended action"
       ]
     },
     {

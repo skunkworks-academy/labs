@@ -1,0 +1,43 @@
+schemaVersion: 1
+code: LAB-OSINT-201
+title: OSINT Reconnaissance Workbench
+status: live
+delivery: interactive-web-lab
+durationMinutes: 90
+environment: browser-only-simulation
+access:
+  signInRequired: false
+  networkRequired: false
+  learnerCloudCredentials: false
+safety:
+  syntheticFixturesOnly: true
+  passiveCollectionOnly: true
+  liveTargetQueries: disabled
+  activeScanning: disabled
+  credentialTesting: disabled
+  personalTargeting: forbidden
+  publicNetwork: forbidden
+  futureRuntime: instructor-managed-synthetic-data-workbench
+progress:
+  storage: browser-local-only
+  verifiedCompletion: false
+learningOutcomes:
+  - Define an OSINT requirement, authority boundary, scope and stop conditions before collecting information.
+  - Select Recon-ng marketplace modules deliberately by input, output, dependencies and API-key requirements.
+  - Interpret synthetic Recon-ng host observations and Shodan-style service records without overclaiming ownership or vulnerability.
+  - Correlate independent public-source evidence and distinguish observation, inference, confidence and recommended action.
+  - Produce a concise, reproducible and privacy-aware OSINT evidence note.
+evidence:
+  checkpoints:
+    - authority-and-scope-check
+    - recon-module-selection-check
+    - synthetic-recon-evidence-check
+    - shodan-interpretation-check
+    - correlation-and-reporting-check
+    - six-question-safety-check
+  completionRecord: local-learning-record-only
+labels:
+  product_code: LAB-OSINT-201
+  course_code: SEC-OSINT-201
+  data_classification: public-learning-content
+  cost_tier: none

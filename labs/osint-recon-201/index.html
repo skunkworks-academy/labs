@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8" data-skunkworks-head="mandatory-v1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A full-length Skunkworks Academy browser lab for lawful, evidence-led OSINT gathering with synthetic Recon-ng and Shodan-style fixtures.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Skunkworks Academy">
+  <meta name="publisher" content="Skunkworks Academy">
+  <meta name="application-name" content="Skunkworks Academy Labs">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#03033A" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+  <link rel="canonical" href="https://labs.skunkworksacademy.com/labs/osint-recon-201/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-black.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-white.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skunkworks Academy Labs">
+  <meta property="og:title" content="OSINT Reconnaissance Workbench | Interactive Lab">
+  <meta property="og:description" content="Practise scoped OSINT planning, Recon-ng module selection, Shodan interpretation and evidence correlation using synthetic fixtures only.">
+  <meta property="og:url" content="https://labs.skunkworksacademy.com/labs/osint-recon-201/">
+  <meta property="og:locale" content="en_ZA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="OSINT Reconnaissance Workbench | Interactive Lab">
+  <meta name="twitter:description" content="A browser-only, safety-first OSINT workbench using synthetic Recon-ng and Shodan-style evidence.">
+  <title>OSINT Reconnaissance Workbench | Skunkworks Academy Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../it-foundations-labs.css">
+  <script defer src="../analysis-toolkit-labs.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Course",
+    "name":"OSINT Reconnaissance Workbench",
+    "description":"A self-paced browser lab for lawful OSINT planning, Recon-ng module selection, Shodan interpretation and evidence correlation using synthetic fixtures only.",
+    "provider":{"@type":"EducationalOrganization","name":"Skunkworks Academy","url":"https://skunkworksacademy.com/"},
+    "url":"https://labs.skunkworksacademy.com/labs/osint-recon-201/",
+    "educationalLevel":"Intermediate",
+    "inLanguage":"en",
+    "timeRequired":"PT90M",
+    "isAccessibleForFree":true,
+    "teaches":["Open-source intelligence","Recon-ng","Shodan","Evidence correlation","Passive reconnaissance","OSINT reporting"]
+  }
+  </script>
+</head>
+<body data-lab-code="LAB-OSINT-201">
+  <a class="skip-link" href="#main">Skip to lab content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="https://skunkworksacademy.com/" aria-label="Skunkworks Academy home">
+        <img src="/assets/icons/favicon-white.png" alt="" width="38" height="38">
+        <span><strong>Skunkworks Academy</strong><small>Practical labs</small></span>
+      </a>
+      <nav aria-label="Lab navigation">
+        <a href="/">All labs</a>
+        <a href="#lab">Start lab</a>
+        <a href="https://catalog.skunkworksacademy.com/courses/open-source-intelligence-gathering">Companion course</a>
+        <a href="#completion">Completion record</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="container hero__grid">
+        <div>
+          <p class="eyebrow">LAB-OSINT-201 · Cybersecurity &amp; intelligence</p>
+          <h1 id="page-title">OSINT reconnaissance - collect less, prove more.</h1>
+          <p class="hero__lead">Practise the analyst workflow behind Recon-ng and Shodan: define authority, select the least intrusive source, preserve provenance, correlate evidence and report only what the data supports.</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#lab">Begin the workbench</a>
+            <a class="button button--secondary" href="#objectives">Review outcomes</a>
+          </div>
+          <p class="hero__note">Estimated time: 90 minutes · Browser-only simulation · Synthetic fixtures · No live target queries, scanning or credential testing</p>
+        </div>
+        <aside class="environment-card" aria-label="OSINT lab boundary summary">
+          <div class="environment-card__bar"><span class="environment-card__dots"><i></i><i></i><i></i></span>case: northwind-learning</div>
+          <div class="environment-card__content">
+            <p class="environment-card__kicker">Analyst sequence</p>
+            <h2>Scope → collect → corroborate → assess confidence → report</h2>
+            <p>The workbench contains invented host, certificate and service observations so you can practise the method without touching a real target.</p>
+            <dl class="environment-facts">
+              <div><dt>Target</dt><dd>Synthetic only</dd></div>
+              <div><dt>Network</dt><dd>Disabled</dd></div>
+              <div><dt>Tools</dt><dd>Simulated evidence</dd></div>
+              <div><dt>Record</dt><dd>Browser-local</dd></div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="summary" id="objectives" aria-labelledby="objectives-title">
+        <div><p class="eyebrow eyebrow--blue">Lab summary</p><h2 id="objectives-title">Turn public-source data into a defensible intelligence record.</h2></div>
+        <ul>
+          <li><span>01</span><div><strong>Define authority before collection.</strong><br>Write the intelligence question, scope, exclusions and stop conditions before choosing a tool.</div></li>
+          <li><span>02</span><div><strong>Use tools deliberately.</strong><br>Select Recon-ng modules and Shodan filters by the evidence needed, not by how much data they can return.</div></li>
+          <li><span>03</span><div><strong>Separate fact from inference.</strong><br>Corroborate important leads, state confidence and record what the evidence does not prove.</div></li>
+        </ul>
+      </section>
+
+      <section class="safety-notice" aria-labelledby="safety-title">
+        <span class="safety-notice__icon" aria-hidden="true">!</span>
+        <div><h2 id="safety-title">Training boundary: synthetic fixtures and passive reasoning only</h2><p>This lab does not authorise reconnaissance against any person, organisation or internet service. Do not convert the examples into live Shodan searches, direct requests, DNS brute forcing, port scans, credential tests or social profiling. In professional work, moving from public-source collection to direct target interaction requires explicit authority and an approved rules-of-engagement change.</p></div>
+      </section>
+
+      <section class="lab-layout" id="lab" aria-label="Interactive OSINT reconnaissance lab">
+        <aside class="progress-card" aria-label="Lab progress">
+          <div class="progress-card__head"><span>Your progress</span><strong id="progressText">0 of 6 completed</strong></div>
+          <div class="progress-track" aria-hidden="true"><span id="progressFill"></span></div>
+          <ol class="progress-steps">
+            <li data-progress-step="scope"><span class="step-icon" data-step-number="1">1</span><span><b>Authority &amp; scope</b><small>Define the question and stop line</small></span></li>
+            <li data-progress-step="module"><span class="step-icon" data-step-number="2">2</span><span><b>Recon-ng selection</b><small>Match input to output</small></span></li>
+            <li data-progress-step="recon"><span class="step-icon" data-step-number="3">3</span><span><b>Host evidence</b><small>Treat rows as leads</small></span></li>
+            <li data-progress-step="shodan"><span class="step-icon" data-step-number="4">4</span><span><b>Shodan evidence</b><small>Read timestamp and linkage</small></span></li>
+            <li data-progress-step="correlation"><span class="step-icon" data-step-number="5">5</span><span><b>Correlation</b><small>Observation, inference, confidence</small></span></li>
+            <li data-progress-step="assessment"><span class="step-icon" data-step-number="6">6</span><span><b>Knowledge check</b><small>Pass 5 of 6</small></span></li>
+          </ol>
+          <p class="progress-card__note">Progress is stored only in this browser. It is not sent to Skunkworks Academy.</p>
+          <button class="text-button" id="resetProgress" type="button">Reset local progress</button>
+        </aside>
+
+        <div class="lab-content">
+          <section class="module" aria-labelledby="scope-title">
+            <header class="module__header"><p class="module__number">Module 1</p><div><h2 id="scope-title">Start with the intelligence requirement - not the tool.</h2><p>Northwind Learning Services has asked for an external attack-surface review. Your task is to identify public-source evidence that may indicate internet-facing services associated with the fictional organisation.</p></div></header>
+            <div class="decision-grid">
+              <article class="decision-card"><h4>Authorised identifiers</h4><p><code>northwind-learning.example</code>, supplied synthetic records and RFC documentation addresses such as <code>192.0.2.0/24</code>.</p></article>
+              <article class="decision-card"><h4>Out of scope</h4><p>Employees' private lives, unrelated domains, credentials, direct service probing and any system not included in the fictional scope.</p></article>
+              <article class="decision-card"><h4>Collection objective</h4><p>Determine which public-source observations are sufficiently linked to the scoped domain to justify internal ownership validation.</p></article>
+              <article class="decision-card"><h4>Stop condition</h4><p>If a secret or unrelated personal data appears, do not test or expand collection. Preserve the minimum reference and escalate through the authorised security process.</p></article>
+            </div>
+            <div class="callout"><strong>Analyst rule:</strong> Public visibility is not a substitute for purpose, scope or authority. Collect the minimum information needed to answer the defined question.</div>
+            <fieldset class="choice-fieldset" data-checkpoint="scope" data-answer="bounded" data-success="Correct. The bounded plan answers the security question with synthetic/passive evidence and defines a stop condition before collection begins." data-retry="Review the authority boundary. The lab does not authorise private-person profiling, active probing or credential testing.">
+              <legend>Which collection plan is appropriate for this lab?</legend>
+              <div class="choice-list">
+                <label><input type="radio" name="scope" value="bounded">Use only the scoped fictional domain and supplied synthetic records; stop and escalate if credentials or unrelated personal data appear.</label>
+                <label><input type="radio" name="scope" value="expand">Search employees' private accounts and relatives to discover more naming patterns.</label>
+                <label><input type="radio" name="scope" value="probe">Actively scan every address that resembles the fictional organisation.</label>
+              </div>
+            </fieldset>
+            <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="scope">Check authority and scope</button></div>
+            <p class="feedback" id="scopeFeedback" aria-live="polite"></p>
+          </section>
+
+          <section class="module" aria-labelledby="module-title">
+            <header class="module__header"><p class="module__number">Module 2</p><div><h2 id="module-title">Choose a Recon-ng module by evidence flow.</h2><p>Recon-ng is modular. A useful module choice starts with the input you possess and the output you need. Marketplace metadata should be reviewed before installation because modules can require dependencies or API keys and can change as upstream services change.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Synthetic marketplace view</p><h3>Your input is a domain. Your desired output is hostname leads.</h3></div><span class="activity-pill">No module executed</span></div>
+              <div class="header-block" aria-label="Synthetic Recon-ng marketplace output"><pre><span class="key">Path</span>                                      <span class="key">Input → Output</span>       <span class="key">Key</span>
+<span class="value">recon/domains-hosts/certificate_transparency</span> <span class="value">domains → hosts</span>       <span class="value">none</span>
+<span class="value">recon/domains-hosts/shodan_hostname</span>          <span class="value">domains → hosts</span>       <span class="flag">shodan_api</span>
+<span class="value">recon/hosts-ports/shodan_ip</span>                  <span class="value">hosts → ports</span>         <span class="flag">shodan_api</span>
+
+<span class="key">Requirement:</span> <span class="value">Generate passive hostname leads from the authorised domain with the least additional dependency.</span></pre></div>
+              <div class="case-grid">
+                <div class="case-file"><h4>Selection checklist</h4><ul><li>Does the module accept the entity you already have?</li><li>Does it produce the entity needed for the next analytical step?</li><li>Does it require an API key or dependency?</li><li>Is the source passive for the authorised use case?</li><li>What will you do if the upstream service changes or fails?</li></ul></div>
+                <aside class="evidence-note"><h4>Useful console habits</h4><ul><li><code>marketplace refresh</code></li><li><code>marketplace search domains-</code></li><li><code>marketplace info ...</code></li><li><code>modules load ...</code></li><li><code>options list</code></li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="module" data-answer="ct" data-success="Correct. For this synthetic requirement, the domain-to-host certificate-transparency module matches the input/output and does not add an API-key dependency." data-retry="Match the current input and desired output first. Do not select a host-to-port module when you have not yet established host leads.">
+                <legend>Which module best matches the stated requirement?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="module" value="ct"><code>recon/domains-hosts/certificate_transparency</code></label>
+                  <label><input type="radio" name="module" value="ports"><code>recon/hosts-ports/shodan_ip</code></label>
+                  <label><input type="radio" name="module" value="all">Install and run every marketplace module without reviewing dependencies.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="module">Check module selection</button></div>
+              <p class="feedback" id="moduleFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="recon-title">
+            <header class="module__header"><p class="module__number">Module 3</p><div><h2 id="recon-title">Treat Recon-ng rows as leads, not truth.</h2><p>The following table represents a fictional Recon-ng workspace after a passive domain-to-host collection step. A stored row means the framework recorded an observation; it does not automatically prove current ownership or exposure.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Synthetic Recon-ng host table</p><h3>Classify what the evidence supports.</h3></div><span class="activity-pill">Workspace: osint-training</span></div>
+              <div class="header-block" aria-label="Synthetic Recon-ng host records"><pre><span class="key">HOST</span>                                      <span class="key">IP_ADDRESS</span>  <span class="key">SOURCE</span>                    <span class="key">NOTE</span>
+<span class="value">portal.northwind-learning.example</span>         <span class="value">192.0.2.24</span>  certificate transparency    current-looking name
+<span class="value">old-lab.northwind-learning.example</span>        <span class="value">192.0.2.88</span>  historical search index      observed 2024
+<span class="flag">unrelated-training.example</span>                 <span class="value">192.0.2.31</span>  copied analyst note          no scoped domain link</pre></div>
+              <div class="case-grid">
+                <div class="case-file"><h4>Evidence assessment</h4><ul><li><strong>portal...</strong> is a stronger lead because the hostname itself matches the scoped domain.</li><li><strong>old-lab...</strong> needs timestamp-aware validation because the source is historical.</li><li><strong>unrelated-training...</strong> has no identity linkage to the scoped domain and should not be attributed.</li></ul></div>
+                <aside class="evidence-note"><h4>Next passive checks</h4><ul><li>approved DNS export;</li><li>certificate record date;</li><li>internal asset register;</li><li>service-owner confirmation.</li></ul></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="recon" data-answer="lead" data-success="Correct. The scoped hostname is a useful lead, but ownership and current exposure still require independent corroboration." data-retry="A Recon-ng row is evidence of an observation, not automatic proof of ownership or vulnerability.">
+                <legend>What is the defensible conclusion about <code>portal.northwind-learning.example</code> at this stage?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="recon" value="lead">It is a scoped hostname lead that should be corroborated before ownership or exposure is asserted.</label>
+                  <label><input type="radio" name="recon" value="owned">The organisation definitely owns and operates it because Recon-ng stored the row.</label>
+                  <label><input type="radio" name="recon" value="vulnerable">The host is vulnerable because an IP address is present.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="recon">Check evidence classification</button></div>
+              <p class="feedback" id="reconFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="shodan-title">
+            <header class="module__header"><p class="module__number">Module 4</p><div><h2 id="shodan-title">Interpret Shodan-style observations with time and identity context.</h2><p>Internet service indexes can help an authorised team understand externally observed services. A record is a time-stamped observation, not proof that the service is still reachable, owned by the organisation or vulnerable.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Synthetic Shodan-style fixture</p><h3>Compare identity linkage before making an attribution.</h3></div><span class="activity-pill">No live API request</span></div>
+              <div class="header-block" aria-label="Synthetic Shodan-style observations"><pre><span class="key">Record A</span>
+  ip_str:    <span class="value">192.0.2.24</span>
+  port:      <span class="value">443</span>
+  hostname:  <span class="value">portal.northwind-learning.example</span>
+  product:   <span class="value">nginx</span>
+  tls_cn:    <span class="value">portal.northwind-learning.example</span>
+  timestamp: <span class="value">2026-08-01T08:15:00Z</span>
+
+<span class="key">Record B</span>
+  ip_str:    <span class="value">192.0.2.31</span>
+  port:      <span class="value">22</span>
+  hostname:  <span class="flag">none</span>
+  product:   <span class="value">OpenSSH</span>
+  org:       <span class="flag">Unrelated Transit Provider</span>
+  timestamp: <span class="flag">2025-12-04T11:04:00Z</span></pre></div>
+              <div class="decision-grid">
+                <article class="decision-card"><h4>Record A</h4><p>Stronger association: scoped hostname and TLS name agree with the Recon-ng lead. Internal ownership still needs confirmation.</p></article>
+                <article class="decision-card"><h4>Record B</h4><p>Weak association: no scoped hostname, unrelated organisation label and older timestamp. Do not force it into the client's asset graph.</p></article>
+                <article class="decision-card"><h4>Banner caution</h4><p><code>nginx</code> or <code>OpenSSH</code> is an observed banner/product hint. It does not establish patch level or vulnerability.</p></article>
+                <article class="decision-card"><h4>Query logic</h4><p>A scoped query concept could narrow by approved hostname and port, for example <code>hostname:northwind-learning.example port:443</code>, but this lab does not execute it.</p></article>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="shodan" data-answer="a" data-success="Correct. Record A has stronger identity linkage, while Record B lacks a defensible relationship to the scoped organisation." data-retry="Compare hostname, certificate naming, organisation context and timestamp. Do not attribute a record merely because it appears beside another record in a fixture.">
+                <legend>Which record has the stronger evidence-based association to the scoped fictional domain?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="shodan" value="a">Record A, because hostname and TLS naming align with the scoped domain and another source.</label>
+                  <label><input type="radio" name="shodan" value="b">Record B, because SSH is automatically more suspicious than HTTPS.</label>
+                  <label><input type="radio" name="shodan" value="both">Both are equally attributable because both use documentation IP addresses.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="shodan">Check Shodan interpretation</button></div>
+              <p class="feedback" id="shodanFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="correlation-title">
+            <header class="module__header"><p class="module__number">Module 5</p><div><h2 id="correlation-title">Build a correlation chain and calibrated finding.</h2><p>OSINT becomes useful when independent evidence sources reinforce or contradict one another. Your report should retain the chain so another analyst can reproduce the reasoning.</p></div></header>
+            <article class="activity-card">
+              <div class="activity-card__head"><div><p class="activity-label">Evidence correlation matrix</p><h3>Follow the strongest synthetic lead.</h3></div><span class="activity-pill">Analyst reasoning</span></div>
+              <div class="header-block" aria-label="Synthetic evidence correlation matrix"><pre><span class="key">SOURCE</span>                   <span class="key">OBSERVATION</span>                                      <span class="key">STATUS</span>
+Recon-ng host table           portal.northwind-learning.example → 192.0.2.24    <span class="value">lead</span>
+Certificate record            TLS name includes portal.northwind-learning.example <span class="value">supports</span>
+Approved DNS export           portal.northwind-learning.example → 192.0.2.24    <span class="value">supports</span>
+Shodan-style record           192.0.2.24:443, matching TLS CN, 2026-08-01       <span class="value">supports</span>
+Internal asset-register stub  owner: Platform Team; service: learner portal      <span class="value">confirms ownership</span></pre></div>
+              <div class="case-grid">
+                <div class="case-file"><h4>Finding draft</h4><p><strong>Observation:</strong> Multiple independent synthetic sources associate <code>portal.northwind-learning.example</code> with <code>192.0.2.24:443</code>.</p><p><strong>Inference:</strong> The service is likely part of the scoped organisation's external attack surface.</p><p><strong>Confidence:</strong> High for ownership because the internal asset-register stub confirms the service; no conclusion is made about vulnerability.</p></div>
+                <aside class="evidence-note"><h4>Recommended action</h4><p>Reconcile the service against the approved external-service baseline: owner, business purpose, TLS configuration, support status, authentication and monitoring.</p><p><strong>Does not prove:</strong> compromise, vulnerability, patch status or malicious activity.</p></aside>
+              </div>
+              <fieldset class="choice-fieldset" data-checkpoint="correlation" data-answer="calibrated" data-success="Correct. The evidence supports a high-confidence ownership association and a validation action, but not a vulnerability claim." data-retry="Keep the claim proportional to the evidence. Exposure observations do not automatically prove vulnerability or compromise.">
+                <legend>Which final statement is best supported by the synthetic evidence?</legend>
+                <div class="choice-list">
+                  <label><input type="radio" name="correlation" value="calibrated">The HTTPS service is high-confidence associated with the scoped organisation; validate it against the external-service security baseline.</label>
+                  <label><input type="radio" name="correlation" value="critical">A critical nginx vulnerability is confirmed because port 443 appears in the service record.</label>
+                  <label><input type="radio" name="correlation" value="breach">The organisation has been breached because multiple sources mention the same host.</label>
+                </div>
+              </fieldset>
+              <div class="checkpoint-actions"><button class="button button--primary" type="button" data-checkpoint-action data-checkpoint="correlation">Check reporting judgement</button></div>
+              <p class="feedback" id="correlationFeedback" aria-live="polite"></p>
+            </article>
+          </section>
+
+          <section class="module" aria-labelledby="assessment-title">
+            <header class="module__header"><p class="module__number">Module 6</p><div><h2 id="assessment-title">Safety and analysis knowledge check</h2><p>Answer all six questions. A score of five or higher completes the knowledge-check checkpoint.</p></div></header>
+            <form id="assessmentForm" data-pass-score="5">
+              <p class="assessment-intro">Choose the answer that best reflects lawful scope, passive-first collection, evidence quality and calibrated reporting.</p>
+              <div class="quiz-stack">
+                <fieldset class="quiz-question" data-quiz-answer="scope" data-explanation="A defined requirement, authority boundary and scope must exist before collection begins."><legend>1. What should happen before selecting a Recon-ng module or Shodan query?</legend><div class="choice-list"><label><input type="radio" name="q1" value="scope">Define the intelligence requirement, authority, scope, exclusions and stop conditions</label><label><input type="radio" name="q1" value="collect">Collect as much data as possible and define the purpose later</label><label><input type="radio" name="q1" value="scan">Scan the target first to identify interesting services</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="metadata" data-explanation="Recon-ng marketplace metadata helps you understand input/output, dependencies, keys and current module expectations before installation or use."><legend>2. Why inspect Recon-ng marketplace information before installing a module?</legend><div class="choice-list"><label><input type="radio" name="q2" value="metadata">To review module purpose, dependencies, required API keys and status</label><label><input type="radio" name="q2" value="bypass">To bypass API authentication</label><label><input type="radio" name="q2" value="disable">To disable evidence logging</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="observation" data-explanation="Internet-service index data is a time-bound observation and needs corroboration before ownership, current exposure or vulnerability is asserted."><legend>3. A Shodan-style record names a product and version. What does that establish by itself?</legend><div class="choice-list"><label><input type="radio" name="q3" value="observation">A service observation that requires validation before stronger claims</label><label><input type="radio" name="q3" value="vulnerability">A confirmed exploitable vulnerability</label><label><input type="radio" name="q3" value="ownership">Definitive organisational ownership</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="escalate" data-explanation="Testing a discovered credential crosses the passive collection boundary; preserve the minimum reference and escalate through the approved security process."><legend>4. What should you do if an authorised public-repository review appears to reveal a credential?</legend><div class="choice-list"><label><input type="radio" name="q4" value="escalate">Do not test it; preserve the minimum reference and escalate through the authorised security process</label><label><input type="radio" name="q4" value="login">Try it once to see whether it works</label><label><input type="radio" name="q4" value="share">Paste it into the general evidence report for convenience</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="separate" data-explanation="A defensible report states what was observed, what was inferred, the confidence level and what remains unproven."><legend>5. Which reporting practice is strongest?</legend><div class="choice-list"><label><input type="radio" name="q5" value="separate">Separate observation, corroboration, inference, confidence and recommended action</label><label><input type="radio" name="q5" value="certain">Write every lead as a confirmed fact</label><label><input type="radio" name="q5" value="severity">Assign critical severity to every indexed service</label></div><p class="question-feedback"></p></fieldset>
+                <fieldset class="quiz-question" data-quiz-answer="authorise" data-explanation="Direct target interaction is a different collection boundary and requires explicit active-testing authority."><legend>6. When should this passive OSINT workflow stop and request additional authorisation?</legend><div class="choice-list"><label><input type="radio" name="q6" value="authorise">When the next step would create direct target interaction outside the approved passive scope</label><label><input type="radio" name="q6" value="never">Never; public information allows unrestricted follow-up</label><label><input type="radio" name="q6" value="after">Only after an exploit attempt fails</label></div><p class="question-feedback"></p></fieldset>
+              </div>
+              <div class="checkpoint-actions"><button class="button button--primary" type="submit">Mark knowledge check</button></div>
+              <div class="assessment-result"><strong id="assessmentScore"></strong><p id="assessmentFeedback" class="feedback" aria-live="polite"></p></div>
+            </form>
+          </section>
+
+          <section class="completion" id="completion" aria-labelledby="completion-title">
+            <div class="completion__head"><div><p class="eyebrow eyebrow--blue">Evidence of learning</p><h2 id="completion-title">Create your local completion record.</h2></div><span class="completion__badge" aria-hidden="true">✓</span></div>
+            <p>After completing the checkpoints and assessment, record your name for a printable personal learning record. This record is not permission to investigate external targets and is not a server-verified credential.</p>
+            <div class="completion-controls"><input id="learnerName" type="text" autocomplete="name" placeholder="Your name"><button class="button button--soft" id="updateCompletionName" type="button">Update record</button><button class="button button--primary" id="printCompletion" type="button">Print / Save PDF</button></div>
+            <article class="completion-record"><p class="completion-record__brand">Skunkworks Academy · Labs</p><h3>OSINT Reconnaissance Workbench</h3><p>This confirms that <strong id="completionLearner">the learner</strong> completed the browser-only learning activities on <strong id="completionDate"></strong>.</p><p class="completion-record__meta">Lab code: LAB-OSINT-201 · 90 minutes · Synthetic Recon-ng and Shodan-style evidence</p><p class="completion-record__disclaimer">Local learning record only. It does not verify identity, professional competence, investigative authority, target ownership or a real-world security finding.</p></article>
+          </section>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer><div class="container"><p>Skunkworks Academy · Train smarter. Build faster. Deliver better.</p><p><a href="./instructor-guide.md">Instructor guide</a> · <a href="https://catalog.skunkworksacademy.com/courses/open-source-intelligence-gathering">SEC-OSINT-201 companion course</a> · <a href="https://github.com/lanmaster53/recon-ng">Recon-ng upstream</a> · <a href="https://developer.shodan.io/api">Shodan API documentation</a></p></div></footer>
+</body>
+</html>

@@ -210,6 +210,20 @@
     "tags": ["Kali Linux", "Digital Forensics", "DFIR", "PCAP", "Disk Forensics", "Evidence Integrity"]
   },
   {
+    "id": "LAB-OSINT-201",
+    "title": "OSINT Reconnaissance Workbench",
+    "track": "Cybersecurity & Threat Intelligence",
+    "level": "Intermediate",
+    "durationMinutes": 90,
+    "status": "available",
+    "summary": "Safety-first interactive OSINT workbench for authority and scope, Recon-ng module selection, synthetic Shodan interpretation, evidence correlation and defensible reporting.",
+    "accessMode": "Interactive self-paced lab",
+    "provider": "Skunkworks Academy",
+    "guideUrl": "https://labs.skunkworksacademy.com/labs/osint-recon-201/",
+    "badge": "OSINT Evidence Workflow",
+    "tags": ["OSINT", "Recon-ng", "Shodan", "Threat Intelligence", "Passive Reconnaissance", "Evidence", "Cybersecurity"]
+  },
+  {
     "id": "AST-101",
     "title": "Asterisk PBX Foundations Lab",
     "track": "VoIP & PBX",

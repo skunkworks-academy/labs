@@ -7,7 +7,7 @@ durationMinutes: 45
 idleTimeoutMinutes: 10
 maxConcurrentSessionsPerLearner: 1
 template:
-  image: ghcr.io/skunkworks-academy/labs/linux-cli-101:approved-version-required
+  image: ghcr.io/skunkworks-academy/labs:linux-cli-101-approved-version-required
   imageDigestRequired: true
 network:
   publicIp: false

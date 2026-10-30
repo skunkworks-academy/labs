@@ -1,0 +1,54 @@
+name: Build OWASP Vulnerable Lab Image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'self-paced/security/skw-owasp-top10-2025/vulnerable-app/**'
+      - '.github/workflows/build-owasp-vulnerable-app.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  attestations: write
+  id-token: write
+
+jobs:
+  registry-governance:
+    uses: skunkworks-academy/academy-validation/.github/workflows/reusable-registry-governance.yml@main
+
+  mirror-approved-base:
+    name: Mirror approved Node base into GHCR
+    needs: registry-governance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to Authoritative Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Import approved upstream base
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker pull node:22-alpine
+          docker tag node:22-alpine ghcr.io/${GITHUB_REPOSITORY,,}:base-node-22-alpine
+          docker push ghcr.io/${GITHUB_REPOSITORY,,}:base-node-22-alpine
+
+      - name: Verify mirrored base
+        shell: bash
+        run: docker buildx imagetools inspect ghcr.io/${GITHUB_REPOSITORY,,}:base-node-22-alpine
+
+  build-publish:
+    needs: mirror-approved-base
+    uses: skunkworks-academy/academy-validation/.github/workflows/reusable-ghcr-build-publish.yml@main
+    with:
+      context: self-paced/security/skw-owasp-top10-2025/vulnerable-app
+      dockerfile: self-paced/security/skw-owasp-top10-2025/vulnerable-app/Dockerfile
+      component: owasp-top10-vulnerable-app
+      platforms: linux/amd64
+      publish_latest: true
+    secrets: inherit

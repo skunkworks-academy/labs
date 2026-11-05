@@ -142,18 +142,73 @@ jobs:
       - name: Verify Labs production and canonical Academy runtime chain
         run: |
           loader_url='https://skunkworksacademy.com/assets/academy-navigation.js?v=2026.08.15.1'
-          ui_url='https://skunkworksacademy.com/assets/skunkworks-ui.js?v=2026.08.15.1'
-          footer_url='https://skunkworksacademy.com/assets/skunkworks-footer.js?v=2026.08.15.1'
+          runtime_url='https://skunkworksacademy.com/assets/academy-navigation-v11.js?v=2026.09.08.3&rev=2026.09.08.4&nav=2026.11.05.2'
+          ui_url='https://skunkworksacademy.com/assets/skunkworks-ui.js?v=2026.09.08.3&rev=2026.11.05.2'
+          footer_url='https://skunkworksacademy.com/assets/skunkworks-footer.js?v=2026.09.08.3&rev=2026.11.05.1'
           css_url='https://skunkworksacademy.com/assets/skunkworks-design-system.css?v=2026.08.15.1'
+          theme_url='https://www.skunkworksacademy.com/assets/academy-brand-theme.css?v=2026.09.08.3&rev=2026.11.05.2'
+
+          # Fail closed if the published scripts construct different asset URLs.
+          chain_matches() {
+            LOADER="$loader" RUNTIME="$runtime" RUNTIME_URL="$runtime_url" UI_URL="$ui_url" FOOTER_URL="$footer_url" THEME_URL="$theme_url" python3 - <<'PY'
+          import os
+          import re
+
+          loader = os.environ['LOADER']
+          runtime = os.environ['RUNTIME']
+          def literal(source, name):
+              match = re.search(r'\bvar\s+' + name + r'\s*=\s*"([^"]+)"\s*;', source)
+              if not match:
+                  raise SystemExit('Missing canonical runtime declaration: ' + name)
+              return match.group(1)
+
+          compact_loader = re.sub(r'\s+', '', loader)
+          compact_runtime = re.sub(r'\s+', '', runtime)
+          expected_expression = 'varprimarySrc=PRIMARY_ROOT+"academy-navigation-v11.js?v="+RUNTIME_VERSION+"&rev="+FOOTER_REVISION+"&nav="+NAVIGATION_REVISION;'
+          assert expected_expression in compact_loader, 'Unknown bootstrap URL construction'
+          loader_root = 'varPRIMARY_ROOT=(isApexAlias||isLocalPreview)?ORIGIN_ROOT+"assets/":CANONICAL_ROOT;'
+          runtime_root = 'varPRIMARY_ROOT=isFirstPartyAssetHost?window.location.origin.replace(/\\/$/,"")+"/assets/":CANONICAL_ROOT;'
+          assert loader_root in compact_loader and runtime_root in compact_runtime, 'Unknown cross-site asset root'
+          theme_root_expression = 'varBRAND_THEME_ROOT=isLocalPreview?PRIMARY_ROOT:"https://www.skunkworksacademy.com/assets/";'
+          assert theme_root_expression in compact_runtime, 'Unknown theme asset root'
+          actual_runtime = literal(loader, 'CANONICAL_ROOT') + 'academy-navigation-v11.js?v=' + literal(loader, 'RUNTIME_VERSION') + '&rev=' + literal(loader, 'FOOTER_REVISION') + '&nav=' + literal(loader, 'NAVIGATION_REVISION')
+          assert actual_runtime == os.environ['RUNTIME_URL'], 'Bootstrap runtime URL differs from verified URL'
+          assert 'varBRAND_THEME_ROOT=isLocalPreview?ORIGIN_ROOT:PUBLIC_ROOT;' in compact_loader, 'Unknown bootstrap theme root'
+          assert 'varhref=BRAND_THEME_ROOT+"assets/academy-brand-theme.css?v="+BRAND_THEME_VERSION+"&rev="+BRAND_THEME_REVISION;' in compact_loader, 'Unknown bootstrap theme URL construction'
+          actual_theme = literal(loader, 'PUBLIC_ROOT') + 'assets/academy-brand-theme.css?v=' + literal(loader, 'BRAND_THEME_VERSION') + '&rev=' + literal(loader, 'BRAND_THEME_REVISION')
+          assert actual_theme == os.environ['THEME_URL'], 'Bootstrap theme URL differs from verified URL'
+          revision_rule = re.search(r'varrevision=file==="skunkworks-footer.js"\?"([^"]+)":file==="skunkworks-ui.js"\|\|file==="academy-brand-theme.css"\?NAVIGATION_REVISION:REVISION;', compact_runtime)
+          assert revision_rule, 'Unknown runtime asset revision rule'
+          assert 'returnroot+file+"?v="+VERSION+"&rev="+revision;' in compact_runtime, 'Unknown runtime asset URL construction'
+          assert 'canonicalUi:assetUrl(CANONICAL_ROOT,"skunkworks-ui.js")' in compact_runtime
+          assert 'canonicalFooter:assetUrl(CANONICAL_ROOT,"skunkworks-footer.js")' in compact_runtime
+          assert 'canonicalTheme:assetUrl(BRAND_THEME_ROOT,"academy-brand-theme.css")' in compact_runtime
+          assert 'varprimarySrc=assetUrl(PRIMARY_ROOT,file);' in compact_runtime and 'script.src=primarySrc;' in compact_runtime
+          assert 'ensureRuntime("skunkworks-ui.js","data-skunkworks-ui","canonical");' in compact_runtime
+          assert 'ensureRuntime("skunkworks-footer.js","data-skunkworks-global-footer","canonical");' in compact_runtime
+          assert 'varprimaryHref=assetUrl(BRAND_THEME_ROOT,"academy-brand-theme.css");' in compact_runtime and 'link.href=primaryHref;' in compact_runtime
+          version = literal(runtime, 'VERSION')
+          navigation = literal(runtime, 'NAVIGATION_REVISION')
+          root = literal(runtime, 'CANONICAL_ROOT')
+          for key, base, file, revision in [
+              ('UI_URL', root, 'skunkworks-ui.js', navigation),
+              ('FOOTER_URL', root, 'skunkworks-footer.js', revision_rule.group(1)),
+              ('THEME_URL', 'https://www.skunkworksacademy.com/assets/', 'academy-brand-theme.css', navigation),
+          ]:
+              assert base + file + '?v=' + version + '&rev=' + revision == os.environ[key], key + ' differs from the runtime URL'
+          PY
+          }
 
           for attempt in {1..30}; do
             home="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/ || true)"
             legacy="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/labs/bits-and-bytes-101/ || true)"
             catalogue="$(curl --location --fail --silent --show-error --max-time 20 https://labs.skunkworksacademy.com/catalog/labs.json || true)"
             loader="$(curl --location --fail --silent --show-error --max-time 20 "$loader_url" || true)"
+            runtime="$(curl --location --fail --silent --show-error --max-time 20 "$runtime_url" || true)"
             ui="$(curl --location --fail --silent --show-error --max-time 20 "$ui_url" || true)"
             footer="$(curl --location --fail --silent --show-error --max-time 20 "$footer_url" || true)"
             css="$(curl --location --fail --silent --show-error --max-time 20 "$css_url" || true)"
+            theme="$(curl --location --fail --silent --show-error --max-time 20 "$theme_url" || true)"
             favicon_ok=0
             curl --location --fail --silent --show-error --max-time 20 --output /dev/null https://labs.skunkworksacademy.com/favicon.ico && favicon_ok=1 || true
 
@@ -164,12 +219,16 @@ jobs:
               && printf '%s' "$legacy" | grep -q 'academy-navigation.js?v=2026.08.15.1' \
               && printf '%s' "$legacy" | grep -q 'data-skunkworks-global-nav="v10"' \
               && printf '%s' "$catalogue" | grep -q '"status": "available"' \
-              && printf '%s' "$loader" | grep -q 'skunkworks-ui.js' \
-              && printf '%s' "$loader" | grep -q 'skunkworks-footer.js' \
-              && printf '%s' "$loader" | grep -q 'skunkworks-design-system.css' \
+              && printf '%s' "$loader" | grep -q 'academy-navigation-v11.js' \
+              && printf '%s' "$loader" | grep -q 'academy-brand-theme.css' \
+              && printf '%s' "$runtime" | grep -q 'skunkworks-ui.js' \
+              && printf '%s' "$runtime" | grep -q 'skunkworks-footer.js' \
+              && printf '%s' "$runtime" | grep -q 'academy-brand-theme.css' \
               && printf '%s' "$ui" | grep -q 'Skunkworks Academy Global UI' \
               && printf '%s' "$footer" | grep -q 'Skunkworks Academy Global Footer' \
-              && printf '%s' "$css" | grep -q 'Skunkworks Academy Global Design System' \
+              && printf '%s' "$css" | grep -q '@import url("./academy-brand-theme.css' \
+              && printf '%s' "$theme" | grep -q 'Skunkworks Academy canonical brand + theme contract' \
+              && chain_matches \
               && [ "$favicon_ok" -eq 1 ]; then
               echo 'Labs production verification succeeded with canonical Academy UI, footer and design system.'
               exit 0
